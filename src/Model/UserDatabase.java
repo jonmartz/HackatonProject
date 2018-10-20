@@ -1,11 +1,13 @@
-package Users;
+package Model;
+
+import Users.User;
 
 import java.sql.*;
 
-public class Model {
+public class UserDatabase implements IModel{
     private Connection connection;
 
-    public Model() {
+    public UserDatabase() {
         try {
             openConnection();
             Statement statement = connection.createStatement();
