@@ -36,7 +36,7 @@ public class UserDatabase implements IModel{
         }
         catch(SQLException e)
         {
-            System.err.println(e);
+            System.err.println(e.getMessage());
         }
     }
 
@@ -60,6 +60,26 @@ public class UserDatabase implements IModel{
                 //System.out.println("user already exists");
             }
         } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+    }
+
+    public void updateUser(String username, String filedToUpdate ,String valueToChange){
+        try {
+            openConnection();
+            Statement statement = connection.createStatement();
+            if(getUser(username) != null){
+                String command = "UPDATE users SET " + filedToUpdate + " = '" + valueToChange + "' WHERE username = '" + username + "';";
+                statement.executeUpdate(command);
+            }
+            else{
+                //the user name isn't exists
+                //System.out.println("user isn't exists");
+            }
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         } finally {
             closeConnection();
