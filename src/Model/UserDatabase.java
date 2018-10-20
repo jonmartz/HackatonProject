@@ -36,7 +36,7 @@ public class UserDatabase implements IModel{
         }
         catch(SQLException e)
         {
-            System.err.println(e);
+            System.err.println(e.getMessage());
         }
     }
 
