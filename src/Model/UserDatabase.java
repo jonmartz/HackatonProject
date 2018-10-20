@@ -57,7 +57,7 @@ public class UserDatabase implements IModel{
             }
             else {
                 // Add user already exists stuff
-                System.out.println("user already exists");
+                //System.out.println("user already exists");
             }
         } catch (SQLException e) {
             e.printStackTrace();

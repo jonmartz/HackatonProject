@@ -1,5 +1,6 @@
 package Controller;
 
+import Users.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -19,6 +20,7 @@ public class SignUpController extends UserController {
     public TextField city;
     public Button signUp;
     public String birthdate;
+    public TextField comments;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -30,28 +32,33 @@ public class SignUpController extends UserController {
             if (username.getText().isEmpty() || password.getText().isEmpty() || birthdate.isEmpty()
                     || firstName.getText().isEmpty() || lastName.getText().isEmpty() || city.getText().isEmpty()) {
                 signUp.setDisable(true);
-            } else signUp.setDisable(false);
+                comments.setText("Please fill all fields");
+            } else {
+                signUp.setDisable(false);
+                comments.setText("");
+            }
         } catch (Exception e) {
             signUp.setDisable(true);
+            comments.setText("Please fill all fields");
         }
     }
 
     public void birthdatePicked() {
         birthdate = birthdatePicker.getValue().toString();
-        System.out.println(birthdate);
         KeyReleased();
     }
 
     public void signUp() {
-        userDatabase.addUser(username.getText(), password.getText(), birthdate, firstName.getText(),
-                lastName.getText(), city.getText());
-        userView.mainMenu();
-        userView.setupController(userDatabase);
-    }
-
-    public void addUser(String username, String password, String birthdate, String firstName,
-                        String lastName, String city) {
-        userDatabase.addUser(username, password, birthdate, firstName, lastName, city);
+        User user = userDatabase.getUser(username.getText());
+        if (user == null) {
+            userDatabase.addUser(username.getText(), password.getText(), birthdate, firstName.getText(),
+                    lastName.getText(), city.getText());
+            userView.mainMenu();
+            userView.setupController(userDatabase);
+        }
+        else {
+            comments.setText("Username already exists!");
+        }
     }
 
     public void mainMenu() {
