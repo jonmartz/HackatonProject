@@ -1,6 +1,6 @@
 package Controller;
 
-import Users.User;
+import Model.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -45,8 +45,9 @@ public class MainMenuController extends UserController {
         User user = userDatabase.getUser(username.getText());
         if (user != null) {
             if (password.getText().equals(user.password)) {
-                // Add transition to user settings here
-                System.out.println("Signed in");
+                userView.settings();
+                userView.loadUser(user);
+                userView.setupController(userDatabase);
             }
             else {
                 comments.setText("Password is incorrect!");

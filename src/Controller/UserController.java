@@ -1,13 +1,14 @@
 package Controller;
 
 import Model.UserDatabase;
-import Users.User;
+import Model.User;
 import View.UserView;
 import javafx.fxml.Initializable;
 
 public abstract class UserController implements Initializable {
     protected UserDatabase userDatabase;
     protected UserView userView;
+    public User user;
 
     public void setUserView(UserView userView) {
         this.userView = userView;

@@ -1,5 +1,3 @@
-package Users;
-
 import Model.UserDatabase;
 import View.UserView;
 import javafx.application.Application;

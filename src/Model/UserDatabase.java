@@ -1,7 +1,5 @@
 package Model;
 
-import Users.User;
-
 import java.sql.*;
 
 public class UserDatabase implements IModel{
@@ -22,7 +20,7 @@ public class UserDatabase implements IModel{
 
     private void openConnection() {
         try {
-            connection = DriverManager.getConnection("jdbc:sqlite:database.db");
+            connection = DriverManager.getConnection("jdbc:sqlite:userDatabase.db");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -66,6 +64,27 @@ public class UserDatabase implements IModel{
         }
     }
 
+    public void updateUser(String username, String field ,String newValue){
+        try {
+            openConnection();
+            Statement statement = connection.createStatement();
+            if(getUser(username) != null){
+                String command = "UPDATE users SET " + field + " = '" + newValue
+                        + "' WHERE username = '" + username + "';";
+                statement.executeUpdate(command);
+            }
+            else{
+                //the user name isn't exists
+                //System.out.println("user isn't exists");
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+    }
+
     public User getUser(String username) {
         try {
             openConnection();
@@ -75,7 +94,7 @@ public class UserDatabase implements IModel{
                 User user = new User();
                 user.username = rs.getString("username");
                 user.password = rs.getString("password");
-                user.birthDate = rs.getString("birthDate");
+                user.birthdate = rs.getString("birthdate");
                 user.firstName = rs.getString("firstName");
                 user.lastName = rs.getString("lastName");
                 user.city = rs.getString("city");
@@ -90,5 +109,42 @@ public class UserDatabase implements IModel{
             closeConnection();
         }
         return null;
+    }
+
+    /**
+     * This function will delete a user from the database
+     * @param username - The username of the user
+     * @param password - The password of the user
+     */
+    public void deleteUser(String username, String password)
+    {
+        User selectedUser=getUser(username); // Get the user
+        //If the user dose not exist
+        if(selectedUser==null)
+        {
+            // TODO: 10/21/2018 Add a text that says that this user dose not exist
+        }
+        else{//If the user does exist
+            if(!selectedUser.password.equals(password)) //If the user gave an incorrect password
+            {
+                // TODO: 10/21/2018 Add a text that says that the password is incorrect
+            }
+            else
+            {
+                openConnection();
+                try {
+                    Statement statement = connection.createStatement();
+                    String command = "delete from users where" +
+                            "username='" + selectedUser.username + "'";
+                    statement.executeUpdate(command);
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                finally {
+                    closeConnection();
+                }
+            }
+        }
     }
 }

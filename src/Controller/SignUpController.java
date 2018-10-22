@@ -1,6 +1,6 @@
 package Controller;
 
-import Users.User;
+import Model.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -23,9 +23,7 @@ public class SignUpController extends UserController {
     public TextField comments;
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-    }
+    public void initialize(URL location, ResourceBundle resources) { }
 
     public void KeyReleased() {
         try {
