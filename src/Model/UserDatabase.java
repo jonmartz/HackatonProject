@@ -7,7 +7,7 @@ import java.sql.*;
  */
 public class UserDatabase implements IModel {
     private Connection connection;
-    public User currentUser;
+    private User currentUser;
 
     /**
      * Constructor. If the userDatabase.db doesn't exist, creates it.

@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -25,7 +26,7 @@ public class SettingsController extends UserController{
     public TextField city;
     public Button saveChanges;
     public String birthdate;
-    public TextField comments; // Problems in user input are shown here
+    public Text comments; // Problems in user input are shown here
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -122,6 +123,7 @@ public class SettingsController extends UserController{
         userView.mainMenu();
         userView.setupController(userDatabase);
     }
+
     public void searchUser()
     {
         userView.searchUser();

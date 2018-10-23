@@ -4,6 +4,7 @@ import Model.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,7 +17,7 @@ public class MainMenuController extends UserController {
     @FXML
     public TextField username;
     public TextField password;
-    public TextField comments; // Problems in user input are shown here
+    public Text comments; // Problems in user input are shown here
     public Button signIn;
 
     @Override

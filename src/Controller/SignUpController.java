@@ -24,7 +24,7 @@ public class SignUpController extends UserController {
     public TextField city;
     public Button signUp;
     public String birthdate;
-    public TextField comments; // Problems in user input are shown here
+    public Text comments; // Problems in user input are shown here
 
     @Override
     public void initialize(URL location, ResourceBundle resources) { }

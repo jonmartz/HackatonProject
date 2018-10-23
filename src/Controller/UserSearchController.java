@@ -67,6 +67,7 @@ public class UserSearchController extends UserController {
         error_message.setVisible(false);
         enter_username_textfield.setText("");
     }
+
     public void displayError(String error){
         username.setVisible(false);
         first_name.setVisible(false);
@@ -130,5 +131,6 @@ public class UserSearchController extends UserController {
     {
         userView.settings();
         userView.setupController(userDatabase);
+        userView.fillFieldsWithUserDetails();
     }
 }
