@@ -91,7 +91,6 @@ public class UserSearchController extends UserController {
     public void searchForUser()
     {
         String username = enter_username_textfield.getText();
-        System.out.println(username);
         if(username.equals(""))
         {
             displayError("Must enter username");
