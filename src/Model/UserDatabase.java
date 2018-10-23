@@ -2,9 +2,16 @@ package Model;
 
 import java.sql.*;
 
+/**
+ * Manages a user database using SQLite, and holds a current user (user that is currently signed in) field.
+ */
 public class UserDatabase implements IModel{
     private Connection connection;
+    public User currentUser;
 
+    /**
+     * Constructor. If the userDatabase.db doesn't exist, creates it.
+     */
     public UserDatabase() {
         try {
             openConnection();
@@ -18,6 +25,9 @@ public class UserDatabase implements IModel{
         }
     }
 
+    /**
+     * Opens a connection with the database.
+     */
     private void openConnection() {
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:userDatabase.db");
@@ -26,6 +36,9 @@ public class UserDatabase implements IModel{
         }
     }
 
+    /**
+     * Closes the connection with the database.
+     */
     private void closeConnection() {
         try
         {
@@ -38,6 +51,15 @@ public class UserDatabase implements IModel{
         }
     }
 
+    /**
+     * Adds a user to the database.
+     * @param username of user
+     * @param password of user
+     * @param birthdate of user
+     * @param firstName of user
+     * @param lastName of user
+     * @param city of user
+     */
     public void addUser(String username, String password, String birthdate, String firstName,
                         String lastName, String city) {
         try {
@@ -64,6 +86,12 @@ public class UserDatabase implements IModel{
         }
     }
 
+    /**
+     * Updates one field of a user
+     * @param username  of user
+     * @param field to update
+     * @param newValue to set on field
+     */
     public void updateUser(String username, String field ,String newValue){
         try {
             openConnection();
@@ -85,6 +113,11 @@ public class UserDatabase implements IModel{
         }
     }
 
+    /**
+     * Returns a user object from the data in the database.
+     * @param username of user
+     * @return user, or null if user doesn't exist.
+     */
     public User getUser(String username) {
         try {
             openConnection();

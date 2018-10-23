@@ -11,6 +11,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for the user settings screen, where the user can update account details or delete the account.
+ */
 public class SettingsController extends UserController {
 
     @FXML
@@ -22,26 +25,34 @@ public class SettingsController extends UserController {
     public TextField city;
     public Button saveChanges;
     public String birthdate;
-    public TextField comments;
+    public TextField comments; // Problems in user input are shown here
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        autofillFields();
     }
 
-    private void autofillFields() {
-        username.setText(user.username);
-        password.setText(user.password);
+    /**
+     * Fills all fields with user details for the user to update his details more easily.
+     */
+    public void fillFieldsWithUserDetails() {
+        username.setText(userDatabase.currentUser.username);
+        password.setText(userDatabase.currentUser.password);
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate localDate = LocalDate.parse(user.birthdate, formatter);
+        LocalDate localDate = LocalDate.parse(userDatabase.currentUser.birthdate, formatter);
         birthdatePicker.setValue(localDate);
 
-        firstName.setText(user.firstName);
-        lastName.setText(user.lastName);
-        city.setText(user.city);
+        firstName.setText(userDatabase.currentUser.firstName);
+        lastName.setText(userDatabase.currentUser.lastName);
+        city.setText(userDatabase.currentUser.city);
+
+        KeyReleased();
     }
 
+    /**
+     * Activates after user types in a text field, in order to enable/disable the sign in button
+     * and write in the comments field.
+     */
     public void KeyReleased() {
         try {
             if (username.getText().isEmpty() || password.getText().isEmpty() || birthdate.isEmpty()
@@ -58,36 +69,55 @@ public class SettingsController extends UserController {
         }
     }
 
+    /**
+     * Updates the birthday string, after a date in the date picker has been picked.
+     */
     public void birthdatePicked() {
         birthdate = birthdatePicker.getValue().toString();
         KeyReleased();
     }
 
+    /**
+     * Saves user's details after he has updated them in the respective text fields.
+     * Username is updated only if the new username is available.
+     */
     public void saveChanges() {
-        if (user.username.equals(username.getText()) || userDatabase.getUser(username.getText()) == null) {
+        User user = userDatabase.currentUser;
+        if (user.username.equals(username.getText())
+                || userDatabase.getUser(username.getText()) == null) {
             if (!user.password.equals(password.getText()))
-                userDatabase.updateUser(user.password,"password",password.getText());
+                userDatabase.updateUser(user.username,"password",password.getText());
             if (!user.birthdate.equals(birthdate))
-                userDatabase.updateUser(user.birthdate,"birthdate",birthdate);
+                userDatabase.updateUser(user.username,"birthdate",birthdate);
             if (!user.firstName.equals(firstName.getText()))
-                userDatabase.updateUser(user.firstName,"firstName",firstName.getText());
+                userDatabase.updateUser(user.username,"firstName",firstName.getText());
             if (!user.lastName.equals(lastName.getText()))
-                userDatabase.updateUser(user.lastName,"lastName",lastName.getText());
+                userDatabase.updateUser(user.username,"lastName",lastName.getText());
             if (!user.city.equals(city.getText()))
-                userDatabase.updateUser(user.city,"city",city.getText());
+                userDatabase.updateUser(user.username,"city",city.getText());
             if (!user.username.equals(username.getText()))
                 userDatabase.updateUser(user.username,"username",username.getText());
-            //userView.mainMenu();
-            //userView.setupController(userDatabase);
+            // update the user pointer in the model to match the saved changes
+            userDatabase.currentUser = userDatabase.getUser(username.getText());
         }
         else {
             comments.setText("Username already exists!");
         }
     }
 
+    /**
+     * Deletes the user.
+     */
+    public void deleteUser() {
+
+    }
+
+    /**
+     * Transitions to the main menu.
+     */
     public void mainMenu() {
+        userDatabase.currentUser = null;
         userView.mainMenu();
         userView.setupController(userDatabase);
-        userView.loadUser(null);
     }
 }

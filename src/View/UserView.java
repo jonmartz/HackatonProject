@@ -1,5 +1,6 @@
 package View;
 
+import Controller.SettingsController;
 import Controller.UserController;
 import Model.UserDatabase;
 import Model.User;
@@ -10,14 +11,33 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Manages the transitions between the different views associated with user account management.
+ */
 public class UserView {
     private Stage stage;
     private FXMLLoader fxmlLoader;
 
+    /**
+     * Constructor
+     * @param stage of view
+     */
     public UserView(Stage stage) {
         this.stage = stage;
     }
 
+    /**
+     * Gets the controller that was initialized after the fxml was loaded, and sets it's model and view pointers.
+     */
+    public void setupController(UserDatabase userDatabase) {
+        UserController controller = fxmlLoader.getController();
+        controller.setUserDatabase(userDatabase);
+        controller.setUserView(this);
+    }
+
+    /**
+     * Transitions to the main menu.
+     */
     public void mainMenu() {
         try {
             fxmlLoader = new FXMLLoader();
@@ -29,6 +49,9 @@ public class UserView {
         }
     }
 
+    /**
+     * Transitions to the sign up screen.
+     */
     public void signUp() {
         try {
             fxmlLoader = new FXMLLoader();
@@ -40,17 +63,9 @@ public class UserView {
         }
     }
 
-    public void setupController(UserDatabase userDatabase) {
-        UserController controller = fxmlLoader.getController();
-        controller.setUserDatabase(userDatabase);
-        controller.setUserView(this);
-    }
-
-    public void loadUser(User user) {
-        UserController controller = fxmlLoader.getController();
-        controller.user = user;
-    }
-
+    /**
+     * Transitions to the user settings screen.
+     */
     public void settings() {
         try {
             fxmlLoader = new FXMLLoader();
@@ -60,5 +75,13 @@ public class UserView {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Fills the user details in the user settings screen.
+     */
+    public void fillFieldsWithUserDetails() {
+        SettingsController settingsController = fxmlLoader.getController();
+        settingsController.fillFieldsWithUserDetails();
     }
 }

@@ -9,6 +9,9 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for the sign up screen, where a new user can create an account.
+ */
 public class SignUpController extends UserController {
 
     @FXML
@@ -20,11 +23,15 @@ public class SignUpController extends UserController {
     public TextField city;
     public Button signUp;
     public String birthdate;
-    public TextField comments;
+    public TextField comments; // Problems in user input are shown here
 
     @Override
     public void initialize(URL location, ResourceBundle resources) { }
 
+    /**
+     * Activates after user types in a text field, in order to enable/disable the sign in button
+     * and write in the comments field.
+     */
     public void KeyReleased() {
         try {
             if (username.getText().isEmpty() || password.getText().isEmpty() || birthdate.isEmpty()
@@ -41,11 +48,17 @@ public class SignUpController extends UserController {
         }
     }
 
+    /**
+     * Updates the birthday string, after a date in the date picker has been picked.
+     */
     public void birthdatePicked() {
         birthdate = birthdatePicker.getValue().toString();
         KeyReleased();
     }
 
+    /**
+     * Creates the new user's account, in case the username is available.
+     */
     public void signUp() {
         User user = userDatabase.getUser(username.getText());
         if (user == null) {
@@ -59,6 +72,9 @@ public class SignUpController extends UserController {
         }
     }
 
+    /**
+     * Transitions to the main menu.
+     */
     public void mainMenu() {
         userView.mainMenu();
         userView.setupController(userDatabase);
