@@ -57,7 +57,7 @@ public class MainMenuController extends UserController {
         User user = userDatabase.getUser(username.getText());
         if (user != null) {
             if (password.getText().equals(user.password)) {
-                userDatabase.currentUser = user;
+                userDatabase.setCurrentUser(user);
                 userView.settings();
                 userView.setupController(userDatabase);
                 userView.fillFieldsWithUserDetails();

@@ -5,7 +5,7 @@ import java.sql.*;
 /**
  * Manages a user database using SQLite, and holds a current user (user that is currently signed in) field.
  */
-public class UserDatabase implements IModel{
+public class UserDatabase implements IModel {
     private Connection connection;
     public User currentUser;
 
@@ -40,25 +40,23 @@ public class UserDatabase implements IModel{
      * Closes the connection with the database.
      */
     private void closeConnection() {
-        try
-        {
-            if(connection != null)
+        try {
+            if (connection != null)
                 connection.close();
-        }
-        catch(SQLException e)
-        {
+        } catch (SQLException e) {
             System.err.println(e);
         }
     }
 
     /**
      * Adds a user to the database.
-     * @param username of user
-     * @param password of user
+     *
+     * @param username  of user
+     * @param password  of user
      * @param birthdate of user
      * @param firstName of user
-     * @param lastName of user
-     * @param city of user
+     * @param lastName  of user
+     * @param city      of user
      */
     public void addUser(String username, String password, String birthdate, String firstName,
                         String lastName, String city) {
@@ -74,8 +72,7 @@ public class UserDatabase implements IModel{
                         "'" + lastName + "', " +
                         "'" + city + "'" + ")";
                 statement.executeUpdate(command);
-            }
-            else {
+            } else {
                 // Add user already exists stuff
                 //System.out.println("user already exists");
             }
@@ -86,27 +83,36 @@ public class UserDatabase implements IModel{
         }
     }
 
+    @Override
+    public void setCurrentUser(User user) {
+        this.currentUser = user;
+    }
+
+    @Override
+    public User getCurrentUser() {
+        return this.currentUser;
+    }
+
     /**
      * Updates one field of a user
-     * @param username  of user
-     * @param field to update
+     *
+     * @param username of user
+     * @param field    to update
      * @param newValue to set on field
      */
-    public void updateUser(String username, String field ,String newValue){
+    public void updateUser(String username, String field, String newValue) {
         try {
             openConnection();
             Statement statement = connection.createStatement();
-            if(getUser(username) != null){
+            if (getUser(username) != null) {
                 String command = "UPDATE users SET " + field + " = '" + newValue
                         + "' WHERE username = '" + username + "';";
                 statement.executeUpdate(command);
-            }
-            else{
+            } else {
                 //the user name isn't exists
                 //System.out.println("user isn't exists");
             }
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             closeConnection();
@@ -115,6 +121,7 @@ public class UserDatabase implements IModel{
 
     /**
      * Returns a user object from the data in the database.
+     *
      * @param username of user
      * @return user, or null if user doesn't exist.
      */
@@ -122,7 +129,7 @@ public class UserDatabase implements IModel{
         try {
             openConnection();
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("select * from users where username='"+username+"'");
+            ResultSet rs = statement.executeQuery("select * from users where username='" + username + "'");
             if (rs.next()) {
                 User user = new User();
                 user.username = rs.getString("username");
@@ -132,8 +139,7 @@ public class UserDatabase implements IModel{
                 user.lastName = rs.getString("lastName");
                 user.city = rs.getString("city");
                 return user;
-            }
-            else {
+            } else {
                 // Add user not found stuff
             }
         } catch (SQLException e) {
@@ -146,38 +152,28 @@ public class UserDatabase implements IModel{
 
     /**
      * This function will delete a user from the database
+     *
      * @param username - The username of the user
-     * @param password - The password of the user
      */
-    public void deleteUser(String username, String password)
-    {
-        User selectedUser=getUser(username); // Get the user
+    public void deleteUser(String username) {
+        User selectedUser = getUser(username); // Get the user
         //If the user dose not exist
-        if(selectedUser==null)
-        {
+        if (selectedUser == null) {
             // TODO: 10/21/2018 Add a text that says that this user dose not exist
-        }
-        else{//If the user does exist
-            if(!selectedUser.password.equals(password)) //If the user gave an incorrect password
-            {
-                // TODO: 10/21/2018 Add a text that says that the password is incorrect
-            }
-            else
-            {
-                openConnection();
-                try {
-                    Statement statement = connection.createStatement();
-                    String command = "delete from users where" +
-                            "username='" + selectedUser.username + "'";
-                    statement.executeUpdate(command);
+        } else {
+            openConnection();
+            try {
+                Statement statement = connection.createStatement();
+                String command = "delete from users where " +
+                        "username='" + selectedUser.username + "'";
+                statement.executeUpdate(command);
 
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-                finally {
-                    closeConnection();
-                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                closeConnection();
             }
         }
     }
 }
+

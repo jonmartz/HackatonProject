@@ -14,7 +14,7 @@ import java.util.ResourceBundle;
 /**
  * Controller for the user settings screen, where the user can update account details or delete the account.
  */
-public class SettingsController extends UserController {
+public class SettingsController extends UserController{
 
     @FXML
     public TextField username;
@@ -35,16 +35,17 @@ public class SettingsController extends UserController {
      * Fills all fields with user details for the user to update his details more easily.
      */
     public void fillFieldsWithUserDetails() {
-        username.setText(userDatabase.currentUser.username);
-        password.setText(userDatabase.currentUser.password);
+        User currentUser= userDatabase.getCurrentUser();
+        username.setText(currentUser.username);
+        password.setText(currentUser.password);
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate localDate = LocalDate.parse(userDatabase.currentUser.birthdate, formatter);
+        LocalDate localDate = LocalDate.parse(currentUser.birthdate, formatter);
         birthdatePicker.setValue(localDate);
 
-        firstName.setText(userDatabase.currentUser.firstName);
-        lastName.setText(userDatabase.currentUser.lastName);
-        city.setText(userDatabase.currentUser.city);
+        firstName.setText(currentUser.firstName);
+        lastName.setText(currentUser.lastName);
+        city.setText(currentUser.city);
 
         KeyReleased();
     }
@@ -82,7 +83,7 @@ public class SettingsController extends UserController {
      * Username is updated only if the new username is available.
      */
     public void saveChanges() {
-        User user = userDatabase.currentUser;
+        User user = userDatabase.getCurrentUser();
         if (user.username.equals(username.getText())
                 || userDatabase.getUser(username.getText()) == null) {
             if (!user.password.equals(password.getText()))
@@ -98,7 +99,7 @@ public class SettingsController extends UserController {
             if (!user.username.equals(username.getText()))
                 userDatabase.updateUser(user.username,"username",username.getText());
             // update the user pointer in the model to match the saved changes
-            userDatabase.currentUser = userDatabase.getUser(username.getText());
+            userDatabase.setCurrentUser(userDatabase.getUser(username.getText()));
         }
         else {
             comments.setText("Username already exists!");
@@ -109,15 +110,23 @@ public class SettingsController extends UserController {
      * Deletes the user.
      */
     public void deleteUser() {
-
+        userDatabase.deleteUser(userDatabase.getCurrentUser().username);
+        mainMenu();
     }
 
     /**
      * Transitions to the main menu.
      */
     public void mainMenu() {
-        userDatabase.currentUser = null;
+        userDatabase.setCurrentUser(null);
         userView.mainMenu();
         userView.setupController(userDatabase);
     }
+    public void searchUser()
+    {
+        userView.searchUser();
+        userView.setupController(userDatabase);
+    }
+
+
 }

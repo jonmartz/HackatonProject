@@ -2,8 +2,7 @@ package View;
 
 import Controller.SettingsController;
 import Controller.UserController;
-import Model.UserDatabase;
-import Model.User;
+import Model.IModel;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,7 +13,7 @@ import java.io.IOException;
 /**
  * Manages the transitions between the different views associated with user account management.
  */
-public class UserView {
+public class UserView  implements IUserView {
     private Stage stage;
     private FXMLLoader fxmlLoader;
 
@@ -29,7 +28,7 @@ public class UserView {
     /**
      * Gets the controller that was initialized after the fxml was loaded, and sets it's model and view pointers.
      */
-    public void setupController(UserDatabase userDatabase) {
+    public void setupController(IModel userDatabase) {
         UserController controller = fxmlLoader.getController();
         controller.setUserDatabase(userDatabase);
         controller.setUserView(this);
@@ -48,7 +47,20 @@ public class UserView {
             e.printStackTrace();
         }
     }
+    /**
+     * Transitions to the search user screen.
+     */
+    public void searchUser() {
 
+        try {
+            fxmlLoader = new FXMLLoader();
+            Parent root = fxmlLoader.load(getClass().getResource("userSearch.fxml").openStream());
+            stage.setTitle("Search User");
+            stage.setScene(new Scene(root, 500 , 275));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * Transitions to the sign up screen.
      */

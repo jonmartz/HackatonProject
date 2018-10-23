@@ -1,7 +1,8 @@
 package Controller;
 
-import Model.UserDatabase;
+import Model.IModel;
 import Model.User;
+import View.IUserView;
 import View.UserView;
 import javafx.fxml.Initializable;
 
@@ -9,8 +10,8 @@ import javafx.fxml.Initializable;
  * Abstract class for a controller that interacts with user account related views.
  */
 public abstract class UserController implements Initializable {
-    protected UserDatabase userDatabase;
-    protected UserView userView;
+    protected IModel userDatabase;
+    protected IUserView userView;
 
     /**
      * Sets the controller's view
@@ -24,7 +25,7 @@ public abstract class UserController implements Initializable {
      * Sets the controller's model
      * @param userDatabase to set
      */
-    public void setUserDatabase(UserDatabase userDatabase) {
+    public void setUserDatabase(IModel userDatabase) {
         this.userDatabase = userDatabase;
     }
 
