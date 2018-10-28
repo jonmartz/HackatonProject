@@ -75,8 +75,13 @@ public class SettingsController extends UserController{
      * Updates the birthday string, after a date in the date picker has been picked.
      */
     public void birthdatePicked() {
-        birthdate = birthdatePicker.getValue().toString();
-        KeyReleased();
+        if (isAgeLegal(birthdatePicker)) {
+            birthdate = birthdatePicker.getValue().toString();
+            KeyReleased();
+        } else {
+            comments.setText("Age must be over 18 years");
+            birthdatePicker.getEditor().clear();
+        }
     }
 
     /**

@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 /**
@@ -53,8 +54,13 @@ public class SignUpController extends UserController {
      * Updates the birthday string, after a date in the date picker has been picked.
      */
     public void birthdatePicked() {
-        birthdate = birthdatePicker.getValue().toString();
-        KeyReleased();
+        if (isAgeLegal(birthdatePicker)) {
+            birthdate = birthdatePicker.getValue().toString();
+            KeyReleased();
+        } else {
+            comments.setText("Age must be over 18 years");
+            birthdatePicker.getEditor().clear();
+        }
     }
 
     /**

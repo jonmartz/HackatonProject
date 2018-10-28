@@ -14,13 +14,6 @@ public class Main extends Application {
         UserView userView = new UserView(primaryStage);
         userView.mainMenu();
         userView.setupController(userDatabase);
-
-        // Test
-        /*
-        controller.addUser("Jonmartz","1234","1/1/1", "Jon","Martz","Haifa");
-        System.out.println(controller.getUser("Jonmartz").city);
-        */
-
         primaryStage.show();
     }
 
