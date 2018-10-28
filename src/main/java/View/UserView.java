@@ -40,7 +40,7 @@ public class UserView  implements IUserView {
     public void mainMenu() {
         try {
             fxmlLoader = new FXMLLoader();
-            Parent root = fxmlLoader.load(getClass().getResource("mainMenu.fxml").openStream());
+            Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("mainMenu.fxml").openStream());
             stage.setTitle("Welcome");
             stage.setScene(new Scene(root, 300, 275));
         } catch (IOException e) {
@@ -54,7 +54,7 @@ public class UserView  implements IUserView {
 
         try {
             fxmlLoader = new FXMLLoader();
-            Parent root = fxmlLoader.load(getClass().getResource("userSearch.fxml").openStream());
+            Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("userSearch.fxml").openStream());
             stage.setTitle("Search User");
             stage.setScene(new Scene(root, 500 , 275));
         } catch (IOException e) {
@@ -67,7 +67,7 @@ public class UserView  implements IUserView {
     public void signUp() {
         try {
             fxmlLoader = new FXMLLoader();
-            Parent root = fxmlLoader.load(getClass().getResource("signUp.fxml").openStream());
+            Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("signUp.fxml").openStream());
             stage.setTitle("Sign up");
             stage.setScene(new Scene(root, 300, 275));
         } catch (IOException e) {
@@ -81,7 +81,7 @@ public class UserView  implements IUserView {
     public void settings() {
         try {
             fxmlLoader = new FXMLLoader();
-            Parent root = fxmlLoader.load(getClass().getResource("settings.fxml").openStream());
+            Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("settings.fxml").openStream());
             stage.setTitle("User Settings");
             stage.setScene(new Scene(root, 300, 275));
         } catch (IOException e) {
