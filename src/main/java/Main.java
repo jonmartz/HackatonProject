@@ -1,8 +1,7 @@
-package main.java;
 
-import main.java.Model.IModel;
-import main.java.Model.UserDatabase;
-import main.java.View.UserView;
+import Model.IModel;
+import Model.UserDatabase;
+import View.UserView;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

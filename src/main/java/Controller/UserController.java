@@ -1,11 +1,11 @@
-package main.java.Controller;
+package Controller;
 
 import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
-import main.java.Model.IModel;
-import main.java.Model.User;
-import main.java.View.IUserView;
-import main.java.View.UserView;
+import Model.IModel;
+import Model.User;
+import View.IUserView;
+import View.UserView;
 
 import java.time.LocalDate;
 

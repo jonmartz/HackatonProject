@@ -1,4 +1,4 @@
-package main.java.Model;
+package Model;
 
 /**
  * Place holder for a specific user's details.

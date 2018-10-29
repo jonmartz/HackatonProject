@@ -1,6 +1,6 @@
-package main.java.Controller;
+package Controller;
 
-import main.java.Model.User;
+import Model.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;

@@ -1,11 +1,11 @@
-package main.java.Controller;
+package Controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
-import main.java.Model.User;
+import Model.User;
 
 import java.net.URL;
 import java.time.LocalDate;

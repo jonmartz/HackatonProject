@@ -1,6 +1,6 @@
-package main.java.View;
+package View;
 
-import main.java.Model.IModel;
+import Model.IModel;
 
 public interface IUserView {
     void setupController(IModel userDatabase);

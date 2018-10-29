@@ -1,12 +1,12 @@
-package main.java.View;
+package View;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import main.java.Controller.SettingsController;
-import main.java.Controller.UserController;
-import main.java.Model.IModel;
+import Controller.SettingsController;
+import Controller.UserController;
+import Model.IModel;
 
 import java.io.IOException;
 

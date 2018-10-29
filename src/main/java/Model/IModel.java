@@ -1,4 +1,4 @@
-package main.java.Model;
+package Model;
 
 /**
  * Interface for a model object
