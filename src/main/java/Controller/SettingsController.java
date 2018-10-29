@@ -28,7 +28,7 @@ public class SettingsController extends UserController{
     public String birthdate;
     public Text comments; // Problems in user input are shown here
 
-    @Override
+    //@Override
     public void initialize(URL location, ResourceBundle resources) {
     }
 
@@ -126,13 +126,13 @@ public class SettingsController extends UserController{
     public void mainMenu() {
         userDatabase.setCurrentUser(null);
         userView.mainMenu();
-        userView.setupController(userDatabase);
+        userView.setupView(userDatabase);
     }
 
     public void searchUser()
     {
         userView.searchUser();
-        userView.setupController(userDatabase);
+        userView.setupView(userDatabase);
     }
 
 

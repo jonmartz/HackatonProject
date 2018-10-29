@@ -105,7 +105,7 @@ public class UserSearchController extends UserController {
 
     }
 
-    @Override
+    //@Override
     public void initialize(URL location, ResourceBundle resources) {
         username.setVisible(false);
         first_name.setVisible(false);
@@ -123,7 +123,7 @@ public class UserSearchController extends UserController {
     public void goBack()
     {
         userView.settings();
-        userView.setupController(userDatabase);
+        userView.setupView(userDatabase);
         userView.fillFieldsWithUserDetails();
     }
 }

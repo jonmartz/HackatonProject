@@ -13,9 +13,10 @@ import java.io.IOException;
 /**
  * Manages the transitions between the different views associated with user account management.
  */
-public class UserView  implements IUserView {
+public class UserView{
     private Stage stage;
     private FXMLLoader fxmlLoader;
+
 
     /**
      * Constructor
@@ -28,11 +29,12 @@ public class UserView  implements IUserView {
     /**
      * Gets the controller that was initialized after the fxml was loaded, and sets it's model and view pointers.
      */
-    public void setupController(IModel userDatabase) {
-        UserController controller = fxmlLoader.getController();
-        controller.setUserDatabase(userDatabase);
-        controller.setUserView(this);
+    public void setupView(IModel userDatabase) {
+        AbstractView abstractView = fxmlLoader.getController();
+        abstractView.getController().setUserDatabase(userDatabase);
+        abstractView.getController().setUserView(this);
     }
+
 
     /**
      * Transitions to the main menu.

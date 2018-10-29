@@ -12,7 +12,7 @@ public class Main extends Application {
         IModel userDatabase = new UserDatabase();
         UserView userView = new UserView(primaryStage);
         userView.mainMenu();
-        userView.setupController(userDatabase);
+        userView.setupView(userDatabase);
         primaryStage.show();
     }
 

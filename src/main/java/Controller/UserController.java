@@ -1,10 +1,9 @@
 package Controller;
 
-import javafx.fxml.Initializable;
+import View.AbstractView;
 import javafx.scene.control.DatePicker;
 import Model.IModel;
 import Model.User;
-import View.IUserView;
 import View.UserView;
 
 import java.time.LocalDate;
@@ -12,18 +11,24 @@ import java.time.LocalDate;
 /**
  * Abstract class for a controller that interacts with user account related views.
  */
-public abstract class UserController implements Initializable {
+public abstract class UserController {
     protected IModel userDatabase;
-    protected IUserView userView;
+    protected UserView userView;
+    protected AbstractView view;
 
     /**
-     * Sets the controller's view
+     * Sets the controller's UserView
      * @param userView to set
      */
     public void setUserView(UserView userView) {
         this.userView = userView;
     }
 
+    /**
+     * This function will set the view
+     * @param abstractView - The view
+     */
+    public void setView(AbstractView abstractView){this.view = abstractView;};
     /**
      * Sets the controller's model
      * @param userDatabase to set

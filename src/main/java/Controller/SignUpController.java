@@ -27,7 +27,7 @@ public class SignUpController extends UserController {
     public String birthdate;
     public Text comments; // Problems in user input are shown here
 
-    @Override
+//    @Override
     public void initialize(URL location, ResourceBundle resources) { }
 
     /**
@@ -72,7 +72,7 @@ public class SignUpController extends UserController {
             userDatabase.addUser(username.getText(), password.getText(), birthdate, firstName.getText(),
                     lastName.getText(), city.getText());
             userView.mainMenu();
-            userView.setupController(userDatabase);
+            userView.setupView(userDatabase);
         }
         else {
             comments.setText("Username already exists!");
@@ -84,6 +84,6 @@ public class SignUpController extends UserController {
      */
     public void mainMenu() {
         userView.mainMenu();
-        userView.setupController(userDatabase);
+        userView.setupView(userDatabase);
     }
 }
