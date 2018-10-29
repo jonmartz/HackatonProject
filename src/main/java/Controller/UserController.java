@@ -49,8 +49,8 @@ public abstract class UserController {
     /**
      * Updates the birthday string, after a date in the date picker has been picked.
      */
-    public boolean isAgeLegal(DatePicker birthdatePicker) {
-        LocalDate datePicked = birthdatePicker.getValue();
+    public boolean isAgeLegal(LocalDate datePicked) {
+
         if (datePicked != null)
             return !datePicked.isAfter(LocalDate.now().minusYears(8));
         return false;

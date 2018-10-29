@@ -27,8 +27,7 @@ public class SignUpController extends UserController {
     public String birthdate;
     public Text comments; // Problems in user input are shown here
 
-//    @Override
-    public void initialize(URL location, ResourceBundle resources) { }
+
 
     /**
      * Activates after user types in a text field, in order to enable/disable the sign in button
@@ -54,7 +53,7 @@ public class SignUpController extends UserController {
      * Updates the birthday string, after a date in the date picker has been picked.
      */
     public void birthdatePicked() {
-        if (isAgeLegal(birthdatePicker)) {
+        if (isAgeLegal(birthdatePicker.getValue())) {
             birthdate = birthdatePicker.getValue().toString();
             KeyReleased();
         } else {

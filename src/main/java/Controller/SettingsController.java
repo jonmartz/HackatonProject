@@ -1,5 +1,8 @@
 package Controller;
 
+import View.AbstractView;
+import View.SettingsView;
+import View.UserSearchView;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -17,70 +20,49 @@ import java.util.ResourceBundle;
  */
 public class SettingsController extends UserController{
 
-    @FXML
-    public TextField username;
-    public TextField password;
-    public DatePicker birthdatePicker;
-    public TextField firstName;
-    public TextField lastName;
-    public TextField city;
-    public Button saveChanges;
-    public String birthdate;
-    public Text comments; // Problems in user input are shown here
 
-    //@Override
-    public void initialize(URL location, ResourceBundle resources) {
+
+    public void setView(AbstractView abstractView) {
+        if (abstractView instanceof SettingsView)
+            super.setView(abstractView);
+        else {
+            super.setView(null);
+        }
     }
-
     /**
      * Fills all fields with user details for the user to update his details more easily.
      */
     public void fillFieldsWithUserDetails() {
         User currentUser= userDatabase.getCurrentUser();
-        username.setText(currentUser.username);
-        password.setText(currentUser.password);
+        SettingsView settingsView = (SettingsView) view;
+        settingsView.setUsernameText(currentUser.username);
+        settingsView.setPasswordText(currentUser.password);
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate localDate = LocalDate.parse(currentUser.birthdate, formatter);
-        birthdatePicker.setValue(localDate);
+        settingsView.setBirthdayValue(localDate);
 
-        firstName.setText(currentUser.firstName);
-        lastName.setText(currentUser.lastName);
-        city.setText(currentUser.city);
+        settingsView.setFirstNameText(currentUser.firstName);
+        settingsView.setLastNameText(currentUser.lastName);
+        settingsView.setCityText(currentUser.city);
 
-        KeyReleased();
+        settingsView.KeyReleased();
     }
 
-    /**
-     * Activates after user types in a text field, in order to enable/disable the sign in button
-     * and write in the comments field.
-     */
-    public void KeyReleased() {
-        try {
-            if (username.getText().isEmpty() || password.getText().isEmpty() || birthdate.isEmpty()
-                    || firstName.getText().isEmpty() || lastName.getText().isEmpty() || city.getText().isEmpty()) {
-                saveChanges.setDisable(true);
-                comments.setText("Please fill all fields");
-            } else {
-                saveChanges.setDisable(false);
-                comments.setText("");
-            }
-        } catch (Exception e) {
-            saveChanges.setDisable(true);
-            comments.setText("Please fill all fields");
-        }
-    }
+
 
     /**
      * Updates the birthday string, after a date in the date picker has been picked.
      */
     public void birthdatePicked() {
-        if (isAgeLegal(birthdatePicker)) {
-            birthdate = birthdatePicker.getValue().toString();
-            KeyReleased();
+        SettingsView settingsView = (SettingsView) view;
+        LocalDate birthdayDate = settingsView.getBirthdayValue();
+        if (isAgeLegal(birthdayDate)) {
+            settingsView.setBirthdayString(birthdayDate.toString());
+            settingsView.KeyReleased();
         } else {
-            comments.setText("Age must be over 18 years");
-            birthdatePicker.getEditor().clear();
+            settingsView.setComments("Age must be over 18 years");
+            settingsView.clearBirthdayPicker();
         }
     }
 
@@ -90,25 +72,26 @@ public class SettingsController extends UserController{
      */
     public void saveChanges() {
         User user = userDatabase.getCurrentUser();
-        if (user.username.equals(username.getText())
-                || userDatabase.getUser(username.getText()) == null) {
-            if (!user.password.equals(password.getText()))
-                userDatabase.updateUser(user.username,"password",password.getText());
-            if (!user.birthdate.equals(birthdate))
-                userDatabase.updateUser(user.username,"birthdate",birthdate);
-            if (!user.firstName.equals(firstName.getText()))
-                userDatabase.updateUser(user.username,"firstName",firstName.getText());
-            if (!user.lastName.equals(lastName.getText()))
-                userDatabase.updateUser(user.username,"lastName",lastName.getText());
-            if (!user.city.equals(city.getText()))
-                userDatabase.updateUser(user.username,"city",city.getText());
-            if (!user.username.equals(username.getText()))
-                userDatabase.updateUser(user.username,"username",username.getText());
+        SettingsView settingsView = (SettingsView) view;
+        if (user.username.equals(settingsView.getUsernameText())
+                || userDatabase.getUser(settingsView.getUsernameText()) == null) {
+            if (!user.password.equals(settingsView.getPasswordText()))
+                userDatabase.updateUser(user.username,"password",settingsView.getPasswordText());
+            if (!user.birthdate.equals(settingsView.getBirthdayString()))
+                userDatabase.updateUser(user.username,"birthdate",settingsView.getBirthdayString());
+            if (!user.firstName.equals(settingsView.getFirstNameText()))
+                userDatabase.updateUser(user.username,"firstName",settingsView.getFirstNameText());
+            if (!user.lastName.equals(settingsView.getLastNameText()))
+                userDatabase.updateUser(user.username,"lastName",settingsView.getLastNameText());
+            if (!user.city.equals(settingsView.getCityText()))
+                userDatabase.updateUser(user.username,"city",settingsView.getCityText());
+            if (!user.username.equals(settingsView.getUsernameText()))
+                userDatabase.updateUser(user.username,"username",settingsView.getUsernameText());
             // update the user pointer in the model to match the saved changes
-            userDatabase.setCurrentUser(userDatabase.getUser(username.getText()));
+            userDatabase.setCurrentUser(userDatabase.getUser(settingsView.getUsernameText()));
         }
         else {
-            comments.setText("Username already exists!");
+            settingsView.setComments("Username already exists!");
         }
     }
 
