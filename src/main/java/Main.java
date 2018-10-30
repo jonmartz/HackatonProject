@@ -11,7 +11,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         IModel userDatabase = new UserDatabase();//Creating the database
         UserView userView = new UserView(primaryStage);
-        userView.mainMenu();//Moving to the mainMenu window
+        userView.mainMenu();//Moving to the mainMenu window.
         userView.setupView(userDatabase);
         primaryStage.show();
     }
