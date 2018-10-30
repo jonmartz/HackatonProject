@@ -17,13 +17,19 @@ import java.util.ResourceBundle;
 public class MainMenuController extends UserController {
 
 
-
+    /**
+     * The constructor
+     */
     public MainMenuController()
     {
 
     }
 
+
     @Override
+    /**
+     * This function will set the right view for this class
+     */
     public void setView(AbstractView abstractView) {
         if(abstractView instanceof MainMenuView)
             super.setView(abstractView);
@@ -47,8 +53,14 @@ public class MainMenuController extends UserController {
      * Signs the user in, in case he exists and password is correct (right now it only opens user settings).
      */
     public void signIn() {
+
+        //Get the user
         User user = userDatabase.getUser(((MainMenuView)this.view).getUsernameText());
+
+        //If the user does exist
         if (user != null) {
+
+            //If the password matches
             if (((MainMenuView)this.view).getPasswordText().equals(user.password)) {
                 userDatabase.setCurrentUser(user);
                 userView.settings();
@@ -60,6 +72,7 @@ public class MainMenuController extends UserController {
 
             }
         }
+        //If the user does not exist
         else {
             ((MainMenuView)this.view).setComments("Username does not exist!");
 

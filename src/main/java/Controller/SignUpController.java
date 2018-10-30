@@ -1,6 +1,10 @@
 package Controller;
 
 import Model.User;
+import View.AbstractView;
+import View.MainMenuView;
+import View.SettingsView;
+import View.SignUpView;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -16,65 +20,45 @@ import java.util.ResourceBundle;
  */
 public class SignUpController extends UserController {
 
-    @FXML
-    public TextField username;
-    public TextField password;
-    public DatePicker birthdatePicker;
-    public TextField firstName;
-    public TextField lastName;
-    public TextField city;
-    public Button signUp;
-    public String birthdate;
-    public Text comments; // Problems in user input are shown here
-
-
 
     /**
-     * Activates after user types in a text field, in order to enable/disable the sign in button
-     * and write in the comments field.
+     * The constructor
      */
-    public void KeyReleased() {
-        try {
-            if (username.getText().isEmpty() || password.getText().isEmpty() || birthdate.isEmpty()
-                    || firstName.getText().isEmpty() || lastName.getText().isEmpty() || city.getText().isEmpty()) {
-                signUp.setDisable(true);
-                comments.setText("Please fill all fields");
-            } else {
-                signUp.setDisable(false);
-                comments.setText("");
-            }
-        } catch (Exception e) {
-            signUp.setDisable(true);
-            comments.setText("Please fill all fields");
-        }
+    public SignUpController()
+    {
+
     }
 
     /**
      * Updates the birthday string, after a date in the date picker has been picked.
      */
     public void birthdatePicked() {
-        if (isAgeLegal(birthdatePicker.getValue())) {
-            birthdate = birthdatePicker.getValue().toString();
-            KeyReleased();
+        SignUpView signUpView = (SignUpView) view;
+        LocalDate birthdayDate = signUpView.getBirthdayValue();
+        if (isAgeLegal(birthdayDate)) {
+            signUpView.setBirthdayString(birthdayDate.toString());
+            signUpView.KeyReleased();
         } else {
-            comments.setText("Age must be over 18 years");
-            birthdatePicker.getEditor().clear();
+            signUpView.setComments("Age must be over 18 years");
+            signUpView.clearBirthdayPicker();
         }
     }
+
 
     /**
      * Creates the new user's account, in case the username is available.
      */
     public void signUp() {
-        User user = userDatabase.getUser(username.getText());
+        SignUpView signUpView = (SignUpView) view;
+        User user = userDatabase.getUser(signUpView.getUsernameText());
         if (user == null) {
-            userDatabase.addUser(username.getText(), password.getText(), birthdate, firstName.getText(),
-                    lastName.getText(), city.getText());
+            userDatabase.addUser(signUpView.getUsernameText(), signUpView.getPasswordText(), signUpView.getBirthdayString(), signUpView.getFirstNameText(),
+                    signUpView.getLastNameText(), signUpView.getCityText());
             userView.mainMenu();
             userView.setupView(userDatabase);
         }
         else {
-            comments.setText("Username already exists!");
+            signUpView.setComments("Username already exists!");
         }
     }
 
@@ -84,5 +68,19 @@ public class SignUpController extends UserController {
     public void mainMenu() {
         userView.mainMenu();
         userView.setupView(userDatabase);
+    }
+
+    @Override
+    /**
+     * This function will set the right view for this class
+     */
+    public void setView(AbstractView abstractView) {
+
+        if(abstractView instanceof SignUpView)
+            super.setView(abstractView);
+        else
+        {
+            super.setView(null);
+        }
     }
 }

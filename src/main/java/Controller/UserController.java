@@ -12,9 +12,10 @@ import java.time.LocalDate;
  * Abstract class for a controller that interacts with user account related views.
  */
 public abstract class UserController {
-    protected IModel userDatabase;
-    protected UserView userView;
-    protected AbstractView view;
+
+    protected IModel userDatabase; //The model
+    protected UserView userView; //the userView - he class that responsible to display the fxml's
+    protected AbstractView view;// The view assigned to the controller
 
     /**
      * Sets the controller's UserView
@@ -50,9 +51,8 @@ public abstract class UserController {
      * Updates the birthday string, after a date in the date picker has been picked.
      */
     public boolean isAgeLegal(LocalDate datePicked) {
-
         if (datePicked != null)
-            return !datePicked.isAfter(LocalDate.now().minusYears(8));
+            return !datePicked.isAfter(LocalDate.now().minusYears(18));
         return false;
     }
 }

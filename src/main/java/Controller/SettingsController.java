@@ -20,8 +20,10 @@ import java.util.ResourceBundle;
  */
 public class SettingsController extends UserController{
 
-
-
+    @Override
+    /**
+     * This function will set the right view for this class
+     */
     public void setView(AbstractView abstractView) {
         if (abstractView instanceof SettingsView)
             super.setView(abstractView);
@@ -29,11 +31,15 @@ public class SettingsController extends UserController{
             super.setView(null);
         }
     }
+
     /**
      * Fills all fields with user details for the user to update his details more easily.
      */
     public void fillFieldsWithUserDetails() {
+        //Get the current user
         User currentUser= userDatabase.getCurrentUser();
+
+        //Fill the fields with the user's data
         SettingsView settingsView = (SettingsView) view;
         settingsView.setUsernameText(currentUser.username);
         settingsView.setPasswordText(currentUser.password);
@@ -71,10 +77,14 @@ public class SettingsController extends UserController{
      * Username is updated only if the new username is available.
      */
     public void saveChanges() {
+        //Get the current user
         User user = userDatabase.getCurrentUser();
         SettingsView settingsView = (SettingsView) view;
+
+        //Check if we change the current user and not another one
         if (user.username.equals(settingsView.getUsernameText())
                 || userDatabase.getUser(settingsView.getUsernameText()) == null) {
+            //For each field, update if necessary
             if (!user.password.equals(settingsView.getPasswordText()))
                 userDatabase.updateUser(user.username,"password",settingsView.getPasswordText());
             if (!user.birthdate.equals(settingsView.getBirthdayString()))
@@ -112,6 +122,9 @@ public class SettingsController extends UserController{
         userView.setupView(userDatabase);
     }
 
+    /**
+     * Transitions to the user search window
+     */
     public void searchUser()
     {
         userView.searchUser();

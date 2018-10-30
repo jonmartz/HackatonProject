@@ -9,9 +9,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        IModel userDatabase = new UserDatabase();
+        IModel userDatabase = new UserDatabase();//Creating the database
         UserView userView = new UserView(primaryStage);
-        userView.mainMenu();
+        userView.mainMenu();//Moving to the mainMenu window
         userView.setupView(userDatabase);
         primaryStage.show();
     }

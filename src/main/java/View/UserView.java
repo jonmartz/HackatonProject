@@ -95,7 +95,7 @@ public class UserView{
      * Fills the user details in the user settings screen.
      */
     public void fillFieldsWithUserDetails() {
-        SettingsController settingsController = fxmlLoader.getController();
-        settingsController.fillFieldsWithUserDetails();
+        SettingsView settingsView = fxmlLoader.getController();
+        settingsView.fillFieldsWithUserDetails();
     }
 }

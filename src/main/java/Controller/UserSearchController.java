@@ -22,6 +22,9 @@ public class UserSearchController extends UserController {
     private Stage stage;
     private FXMLLoader fxmlLoader;
 
+    /**
+     * This function will set the right view for this class
+     */
     public void setView(AbstractView abstractView) {
         if (abstractView instanceof UserSearchView)
             super.setView(abstractView);
@@ -35,7 +38,8 @@ public class UserSearchController extends UserController {
      */
     public void searchForUser()
     {
-        String username = ((UserSearchView)view).getEnterUsernameTextField().getText();
+        //get the username to look for
+        String username = ((UserSearchView)view).getEnterUsernameTextField();
         if(username.equals(""))
         {
             ((UserSearchView)view).displayError("Must enter username");
@@ -52,12 +56,15 @@ public class UserSearchController extends UserController {
             ((UserSearchView)view).displayError("You are the user!!");
             return;
         }
+        //If the username is valid display it's data
         ((UserSearchView)view).fillFieldsWithUserDetails(selectedUser);
 
     }
 
 
-
+    /**
+     * This function will transit to the setting's window
+     */
     public void goBack()
     {
         userView.settings();
