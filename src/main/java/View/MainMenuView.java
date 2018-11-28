@@ -15,6 +15,8 @@ import java.util.ResourceBundle;
  * This class is the view that is responsible for the Main menu window
  */
 public class MainMenuView extends AbstractView {
+    public Button signIn;
+    public Button signUp;
     public Button vacationAdvertising;
     public Button personalArea;
     public Button searchUser;
@@ -52,6 +54,9 @@ public class MainMenuView extends AbstractView {
         ((MainMenuController)this.getController()).signUp();
     }
 
+    public void setusername(String username)
+       {comments.setText("Hellow" + username + ", Welcome back!");}
+
     public void signIn()
     {
         ((MainMenuController)this.getController()).signIn();
@@ -86,21 +91,22 @@ public class MainMenuView extends AbstractView {
         try{
             if(alreadySignIn) {
                 comments.setText("Hellow, Welcome back!");
+                signUp.setDisable(true);
+                signIn.setDisable(true);
                 personalArea.setDisable(false);
                 vacationAdvertising.setDisable(false);
                 searchUser.setDisable(false);
             }
             else {
                 comments.setText("Hellow visitor, Welcome!");
+                signUp.setDisable(false);
+                signIn.setDisable(false);
                 vacationAdvertising.setDisable(true);
                 personalArea.setDisable(true);
                 searchUser.setDisable(true);
             }
         }
         catch (Exception e) {
-            vacationAdvertising.setDisable(true);
-            personalArea.setDisable(true);
-            searchUser.setDisable(true);
         }
     }
 }

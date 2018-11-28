@@ -21,7 +21,7 @@
    </rowConstraints>
    <children>
       <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="124.0" text="Sign In" onAction="#signIn" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-      <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="127.0" text="Sign Up" onAction="#signIn" GridPane.rowIndex="11" />
+      <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="127.0" text="Sign Up" onAction="#signUp" GridPane.rowIndex="11" />
       <Button disable="true" mnemonicParsing="false" onKeyReleased="#KeyReleased" text="Personal Area" GridPane.rowIndex="10" />
       <Button mnemonicParsing="false" text="Vacation Search" GridPane.columnIndex="1" GridPane.rowIndex="10" />
       <Button disable="true" mnemonicParsing="false" onKeyReleased="#KeyReleased" text="Vacation Advertising" GridPane.rowIndex="9" />
