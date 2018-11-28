@@ -1,6 +1,7 @@
 package View;
 
 import Controller.MainMenuController;
+import Controller.SettingsController;
 import Controller.UserController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -14,7 +15,12 @@ import java.util.ResourceBundle;
  * This class is the view that is responsible for the Main menu window
  */
 public class MainMenuView extends AbstractView {
-
+    public Button vacationAdvertising;
+    public Button personalArea;
+    public Button searchUser;
+    public Text comments;
+    public boolean alreadySignIn;
+    public String currenUser;
     /**
      * Ths functrion will assign the given controller to it self if it's the right one
      * @param controller - The given controller
@@ -28,6 +34,37 @@ public class MainMenuView extends AbstractView {
         }
     }
 
+
+    /**
+     * This function will fill the fields with the user's data
+     */
+    public void fillNameOfUserInMainMenu(){((MainMenuController)this.getController()).fillNameOfUserInMainMenu();}
+
+    public void showUsernameCommend(String username){
+        currenUser = username;
+        alreadySignIn = true;
+        KeyReleased();
+    }
+
+
+    public void signUp()
+    {
+        ((MainMenuController)this.getController()).signUp();
+    }
+
+    public void signIn()
+    {
+        ((MainMenuController)this.getController()).signIn();
+    }
+
+    /**
+     * This function will occur when the "Search For User" button is pressed
+     */
+    public void searchUser()
+    {
+        ((MainMenuController)this.getController()).searchUser();
+    }
+
     @Override
     /**
      * This function will initialize an instance of this class
@@ -37,5 +74,33 @@ public class MainMenuView extends AbstractView {
         MainMenuController mainMenuController= new MainMenuController();
         this.setController(mainMenuController);
         mainMenuController.setView(this);
+        alreadySignIn = false;
+    }
+
+
+    /**
+     * Activates after user types in a text field, in order to enable/disable the sign in button
+     * and write in the comments field.
+     */
+    public void KeyReleased() {
+        try{
+            if(alreadySignIn) {
+                comments.setText("Hellow, Welcome back!");
+                personalArea.setDisable(false);
+                vacationAdvertising.setDisable(false);
+                searchUser.setDisable(false);
+            }
+            else {
+                comments.setText("Hellow visitor, Welcome!");
+                vacationAdvertising.setDisable(true);
+                personalArea.setDisable(true);
+                searchUser.setDisable(true);
+            }
+        }
+        catch (Exception e) {
+            vacationAdvertising.setDisable(true);
+            personalArea.setDisable(true);
+            searchUser.setDisable(true);
+        }
     }
 }

@@ -2,6 +2,7 @@ package Controller;
 
 import View.AbstractView;
 import View.MainMenuView;
+import View.SettingsView;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -23,6 +24,37 @@ public class MainMenuController extends UserController {
     public MainMenuController() {
 
     }
+
+    public void fillNameOfUserInMainMenu() {
+        User currentUser= userDatabase.getCurrentUser();
+        MainMenuView mainMenuView = (MainMenuView) view;
+        mainMenuView.showUsernameCommend(currentUser.username);
+    }
+
+    /**
+     * Transitions to the sign up screen
+     */
+    public void signUp() {
+        userView.signUp();
+        userView.setupView(userDatabase);
+    }
+
+    /**
+     * Transitions to the user search window
+     */
+    public void searchUser()
+    {
+        userView.searchUser();
+        userView.setupView(userDatabase);
+    }
+
+    public void signIn() {
+        userView.signIn();
+        userView.setupView(userDatabase);
+    }
+
+
+
 
 
     @Override

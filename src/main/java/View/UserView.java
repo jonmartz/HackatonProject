@@ -43,7 +43,7 @@ public class UserView{
         try {
             fxmlLoader = new FXMLLoader();
             Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("mainMenu.fxml").openStream());
-            stage.setTitle("Welcome");
+            stage.setTitle("Welcome to Vacation4U");
             stage.setScene(new Scene(root, 300, 275));
         } catch (IOException e) {
             e.printStackTrace();
@@ -77,6 +77,17 @@ public class UserView{
         }
     }
 
+    public void signIn() {
+        try {
+            fxmlLoader = new FXMLLoader();
+            Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("signIn.fxml").openStream());
+            stage.setTitle("Sign In");
+            stage.setScene(new Scene(root, 300, 275));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Transitions to the user settings screen.
      */
@@ -98,4 +109,14 @@ public class UserView{
         SettingsView settingsView = fxmlLoader.getController();
         settingsView.fillFieldsWithUserDetails();
     }
+
+    /**
+     * Fills the user details in the user settings screen.
+     */
+    public void fillNameOfUserInMainMenu() {
+        MainMenuView mainMenuView = fxmlLoader.getController();
+        mainMenuView.fillNameOfUserInMainMenu();
+    }
+
+
 }

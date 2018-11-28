@@ -58,9 +58,9 @@ public class SignInController extends UserController {
             //If the password matches
             if (((SignInView)this.view).getPasswordText().equals(user.password)) {
                 userDatabase.setCurrentUser(user);
-                userView.settings();
+                userView.mainMenu();
                 userView.setupView(userDatabase);
-                userView.fillFieldsWithUserDetails();
+                userView.fillNameOfUserInMainMenu();
             }
             else {
                 ((SignInView)this.view).setComments("Password is incorrect!");

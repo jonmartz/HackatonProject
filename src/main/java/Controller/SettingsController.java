@@ -122,14 +122,7 @@ public class SettingsController extends UserController{
         userView.setupView(userDatabase);
     }
 
-    /**
-     * Transitions to the user search window
-     */
-    public void searchUser()
-    {
-        userView.searchUser();
-        userView.setupView(userDatabase);
-    }
+
 
 
 }

@@ -237,13 +237,6 @@ public class SettingsView extends AbstractView {
         ((SettingsController)this.getController()).mainMenu();
     }
 
-    /**
-     * This function will occur when the "Search For User" button is pressed
-     */
-    public void searchUser()
-    {
-        ((SettingsController)this.getController()).searchUser();
-    }
 
     /**
      * This function will occur when the Delete account button is pressed
