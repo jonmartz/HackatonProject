@@ -1,6 +1,8 @@
 package Model;
 
 import java.sql.*;
+import java.time.LocalDate;
+
 
 /**
  * Manages a user database using SQLite, and holds a current user (user that is currently signed in) field.
@@ -8,21 +10,35 @@ import java.sql.*;
 public class UserDatabase implements IModel {
     private Connection connection;
     private User currentUser;
+    private int vacationID;
 
     /**
      * Constructor. If the userDatabase.db doesn't exist, creates it.
      */
     public UserDatabase() {
+        vacationID=0;
         try {
             openConnection();
-            Statement statement = connection.createStatement();
-            statement.executeUpdate("create table if not exists users (username string, password string," +
+            Statement statement1 = connection.createStatement();
+            statement1.executeUpdate("create table if not exists users (username string, password string," +
                     "birthdate string, firstName string, lastName string, city string)");
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         } finally {
             closeConnection();
         }
+        try {
+            openConnection();
+            Statement statement2 = connection.createStatement();
+            statement2.executeUpdate("create table if not exists vacations (vacationID string, destinetionContryTXT string," +
+                    "NumOfTicketsTXT string, flightCompanyTXT string, baggageTXT string, kindOfVacationTXT string, kindOfSleepingPlaceTXT string," +
+                    "theRateOfTheSleepingPlaceTXT string, toDateTXT string, fromDateTXT string, kindOfTicketTXT string," +
+                    "isTheSleepingCostsIncludesTXT string, isThereReturnFlightTXT string)");
+    } catch (SQLException e) {
+        System.err.println(e.getMessage());
+    } finally {
+        closeConnection();
+    }
     }
 
     /**
@@ -83,6 +99,39 @@ public class UserDatabase implements IModel {
         }
     }
 
+    public void addVacation(String vacationID, String destinetionContryTXT, String NumOfTicketsTXT, String flightCompanyTXT,
+                            String baggageTXT, String kindOfVacationTXT, String kindOfSleepingPlaceTXT, String theRateOfTheSleepingPlaceTXT,
+                            String toDateTXT, String fromDateTXT, String kindOfTicketTXT, String isTheSleepingCostsIncludesTXT, String isThereReturnFlightTXT)
+    {
+        try {
+            openConnection();
+            Statement statement = connection.createStatement();
+            String command = "insert into vacation values(" +
+                    "'" + vacationID + "', " +
+                    "'" + destinetionContryTXT + "', " +
+                    "'" + NumOfTicketsTXT + "', " +
+                    "'" + flightCompanyTXT + "', " +
+                    "'" + baggageTXT + "', " +
+                    "'" + kindOfVacationTXT + "', " +
+                    "'" + kindOfSleepingPlaceTXT + "', " +
+                    "'" + theRateOfTheSleepingPlaceTXT + "', " +
+                    "'" + toDateTXT + "', " +
+                    "'" + fromDateTXT + "', " +
+                    "'" + kindOfTicketTXT + "', " +
+                    "'" + isTheSleepingCostsIncludesTXT + "', " +
+                    "'" + isThereReturnFlightTXT + "'" + ")";
+            statement.executeUpdate(command);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+    }
+
+    public void addVacation(){
+
+    }
+
     @Override
     public void setCurrentUser(User user) {
         this.currentUser = user;
@@ -139,6 +188,37 @@ public class UserDatabase implements IModel {
                 user.lastName = rs.getString("lastName");
                 user.city = rs.getString("city");
                 return user;
+            } else {
+                // Add user not found stuff
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        return null;
+    }
+    public Vacation getVacation(String vacationID) {
+        try {
+            openConnection();
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("select * from vacation where vacationID='" + vacationID + "'");
+            if (rs.next()) {
+                Vacation vacation = new Vacation();
+                vacation.vacationID = rs.getString("vacationID");
+                vacation.destinetionContryTXT = rs.getString("destinetionContryTXT");
+                vacation.NumOfTicketsTXT = rs.getString("NumOfTicketsTXT");
+                vacation.flightCompanyTXT = rs.getString("flightCompanyTXT");
+                vacation.baggageTXT = rs.getString("baggageTXT");
+                vacation.kindOfVacationTXT = rs.getString("kindOfVacationTXT");
+                vacation.kindOfSleepingPlaceTXT = rs.getString("kindOfSleepingPlaceTXT");
+                vacation.theRateOfTheSleepingPlaceTXT = rs.getString("theRateOfTheSleepingPlaceTXT");
+                vacation.toDateTXT = rs.getString("toDateTXT");
+                vacation.fromDateTXT = rs.getString("fromDateTXT");
+                vacation.kindOfTicketTXT = rs.getString("kindOfTicketTXT");
+                vacation.isTheSleepingCostsIncludesTXT = rs.getString("isTheSleepingCostsIncludesTXT");
+                vacation.isThereReturnFlightTXT = rs.getString("isThereReturnFlightTXT");
+                return vacation;
             } else {
                 // Add user not found stuff
             }

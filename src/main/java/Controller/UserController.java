@@ -55,4 +55,12 @@ public abstract class UserController {
             return !datePicked.isAfter(LocalDate.now().minusYears(18));
         return false;
     }
+
+    public boolean isLegalDateForVacation(LocalDate datePicked){
+        if(datePicked.isEqual(LocalDate.now()))
+            return true;
+        if (datePicked != null)
+            return datePicked.isAfter(LocalDate.now());
+        return false;
+    }
 }

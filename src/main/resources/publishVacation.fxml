@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="518.0" prefWidth="601.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.PublishVacationView">
+    <children>
+        <Button id="pubishVacation" layoutX="275.0" layoutY="479.0" mnemonicParsing="false" text="pubish vacation" />
+        <TextField id="destinetionContryTXT" layoutX="413.0" layoutY="56.0" />
+        <Label id="destinetionContry" layoutX="67.0" layoutY="56.0" prefHeight="25.0" prefWidth="129.0" text="destinetion contry">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <TextField id="NumOfTicketsTXT" layoutX="413.0" layoutY="125.0" />
+        <TextField id="flightCompanyTXT" layoutX="413.0" layoutY="196.0" />
+        <TextField id="baggageTXT" layoutX="413.0" layoutY="234.0" />
+        <TextField id="kindOfVacationTXT" layoutX="413.0" layoutY="277.0" />
+        <TextField id="kindOfSleepingPlaceTXT" layoutX="413.0" layoutY="319.0" />
+        <TextField id="theRateOfTheSleepingPlaceTXT" layoutX="413.0" layoutY="400.0" />
+        <Label id="flightCompany" layoutX="67.0" layoutY="196.0" prefHeight="25.0" prefWidth="129.0" text="flight company">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label id="kindOfTicket" layoutX="67.0" layoutY="159.0" prefHeight="25.0" prefWidth="129.0" text="kind of ticket">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label id="numOfTickets" layoutX="67.0" layoutY="125.0" prefHeight="25.0" prefWidth="129.0" text="number of tickets">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label id="fromDate" layoutX="67.0" layoutY="92.0" prefHeight="25.0" prefWidth="129.0" text="from date">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label id="isThereReturnFlight" layoutX="67.0" layoutY="437.0" prefHeight="25.0" prefWidth="129.0" text="is there return flight ">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label id="theRateOfTheSleepingPlace" layoutX="67.0" layoutY="400.0" prefHeight="25.0" prefWidth="188.0" text="the rate of the sleeping place">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label id="isTheSleepingCostsIncludes" layoutX="67.0" layoutY="360.0" prefHeight="25.0" prefWidth="188.0" text="is the sleeping costs includes">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label id="kindOfSleepingPlace" layoutX="67.0" layoutY="319.0" prefHeight="25.0" prefWidth="149.0" text="kind of sleeping place">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label id="kindOfVacation" layoutX="67.0" layoutY="277.0" prefHeight="25.0" prefWidth="129.0" text="kind of vacation">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label id="baggage" layoutX="67.0" layoutY="234.0" prefHeight="25.0" prefWidth="129.0" text="baggage">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <DatePicker id="toDateTXT" layoutX="401.0" layoutY="92.0" />
+        <DatePicker id="fromDateTXT" layoutX="153.0" layoutY="92.0" />
+        <Label id="toDate" layoutX="337.0" layoutY="92.0" prefHeight="25.0" prefWidth="129.0" text="to date">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <ComboBox id="kindOfTicketTXT" layoutX="413.0" layoutY="159.0" prefWidth="150.0" />
+        <ComboBox id="isTheSleepingCostsIncludesTXT" layoutX="412.0" layoutY="360.0" prefWidth="150.0" />
+        <ComboBox id="isThereReturnFlightTXT" layoutX="413.0" layoutY="450.0" prefWidth="150.0" />
+    </children>
+</Pane>
