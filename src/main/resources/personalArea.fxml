@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane alignment="center" hgap="10" prefHeight="389.0" prefWidth="339.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.PersonalAreaView">
+<columnConstraints>
+    <ColumnConstraints maxWidth="195.0" minWidth="70.0" prefWidth="144.0" />
+    <ColumnConstraints maxWidth="230.0" minWidth="10.0" prefWidth="156.0" />
+</columnConstraints>
+<rowConstraints>
+    <RowConstraints />
+    <RowConstraints />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" />
+    <RowConstraints maxHeight="5.0" minHeight="0.0" prefHeight="0.0" />
+    <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="20.0" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" />
+    <RowConstraints />
+    <RowConstraints />
+    <RowConstraints />
+    <RowConstraints />
+    <RowConstraints />
+</rowConstraints>
+<children>
+</children>
+</GridPane>

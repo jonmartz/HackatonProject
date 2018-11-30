@@ -28,7 +28,7 @@ public class MainMenuController extends UserController {
     public void fillNameOfUserInMainMenu() {
         User currentUser= userDatabase.getCurrentUser();
         MainMenuView mainMenuView = (MainMenuView) view;
-        mainMenuView.setusername(currentUser.username);
+        mainMenuView.showUsernameCommend(currentUser.username);
     }
 
     /**

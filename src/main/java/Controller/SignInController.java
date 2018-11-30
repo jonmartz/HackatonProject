@@ -61,7 +61,8 @@ public class SignInController extends UserController {
                 userView.mainMenu();
                 userView.setupView(userDatabase);
                 userView.fillNameOfUserInMainMenu();
-            }
+
+                }
             else {
                 ((SignInView)this.view).setComments("Password is incorrect!");
 

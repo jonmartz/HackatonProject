@@ -3,6 +3,7 @@ package Controller;
 
 import Model.User;
 import View.AbstractView;
+import View.MainMenuView;
 import View.UserSearchView;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -67,8 +68,8 @@ public class UserSearchController extends UserController {
      */
     public void goBack()
     {
-        userView.settings();
+        userView.mainMenu();
         userView.setupView(userDatabase);
-        userView.fillFieldsWithUserDetails();
+        userView.fillNameOfUserInMainMenu();
     }
 }
