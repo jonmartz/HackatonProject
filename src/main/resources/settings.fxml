@@ -17,7 +17,7 @@
       <DatePicker fx:id="birthdatePicker" onAction="#birthdatePicked" promptText="Pick birthdate" GridPane.rowIndex="4" />
       <TextField fx:id="city" layoutX="168.0" layoutY="81.0" onKeyReleased="#KeyReleased" promptText="City" GridPane.columnIndex="1" GridPane.rowIndex="4" />
       <Button fx:id="saveChanges" disable="true" mnemonicParsing="false" onAction="#saveChanges" text="Save changes" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-      <Button layoutX="168.0" layoutY="139.0" mnemonicParsing="false" onAction="#mainMenu" text="Sign out" GridPane.rowIndex="6" />
+      <Button layoutX="168.0" layoutY="139.0" mnemonicParsing="false" onAction="#goBeck" text="goBack" GridPane.rowIndex="6" />
       <Text fx:id="comments" disable="true" fill="#da0e0e" GridPane.columnSpan="2" GridPane.rowIndex="5" />
       <Button mnemonicParsing="false" onAction="#deleteUser" text="Delete account" GridPane.columnIndex="1" GridPane.rowIndex="7" />
    </children>

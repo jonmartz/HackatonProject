@@ -116,13 +116,18 @@ public class SettingsController extends UserController{
     /**
      * Transitions to the main menu.
      */
+    public void goBeck() {
+        userView.personalArea();
+        userView.setupView(userDatabase);
+        userView.fillTextInPersonalArea();
+    }
+
+    /**
+     * Transitions to the main menu.
+     */
     public void mainMenu() {
         userDatabase.setCurrentUser(null);
         userView.mainMenu();
         userView.setupView(userDatabase);
     }
-
-
-
-
 }

@@ -47,6 +47,7 @@ public abstract class UserController {
         return userDatabase.getUser(username);
     }
 
+
     /**
      * Updates the birthday string, after a date in the date picker has been picked.
      */

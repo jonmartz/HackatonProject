@@ -29,6 +29,7 @@ public class SignUpView extends AbstractView {
     public Text comments; // Problems in user input are shown here
     public Button signUp;//The "SignUp" button
 
+    public boolean isFromMenu;
 
     /**
      * Activates after user types in a text field, in order to enable/disable the sign in button

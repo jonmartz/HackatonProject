@@ -54,8 +54,8 @@ public class SignUpController extends UserController {
         if (user == null) {
             userDatabase.addUser(signUpView.getUsernameText(), signUpView.getPasswordText(), signUpView.getBirthdayString(), signUpView.getFirstNameText(),
                     signUpView.getLastNameText(), signUpView.getCityText());
-            userView.mainMenu();
-            userView.setupView(userDatabase);
+                 userView.signIn();
+                 userView.setupView(userDatabase);
         }
         else {
             signUpView.setComments("Username already exists!");

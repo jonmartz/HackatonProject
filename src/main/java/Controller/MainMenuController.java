@@ -1,8 +1,6 @@
 package Controller;
 
-import View.AbstractView;
-import View.MainMenuView;
-import View.SettingsView;
+import View.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -18,17 +16,17 @@ import java.util.ResourceBundle;
 public class MainMenuController extends UserController {
 
 
+
     /**
      * The constructor
      */
-    public MainMenuController() {
-
-    }
+    public MainMenuController() {}
 
     public void fillNameOfUserInMainMenu() {
         User currentUser= userDatabase.getCurrentUser();
         MainMenuView mainMenuView = (MainMenuView) view;
         mainMenuView.showUsernameCommend(currentUser.username);
+
     }
 
     /**
@@ -52,6 +50,16 @@ public class MainMenuController extends UserController {
         userView.signIn();
         userView.setupView(userDatabase);
     }
+
+    /**
+     * Transitions to the sign up screen
+     */
+    public void personalArea() {
+        userView.personalArea();
+        userView.setupView(userDatabase);
+        userView.fillTextInPersonalArea();
+    }
+
 
 
 

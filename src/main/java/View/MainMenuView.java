@@ -22,8 +22,9 @@ public class MainMenuView extends AbstractView {
     public Button personalArea;
     public Button searchUser;
     public Text comments;
+
     private boolean alreadySignIn;
-    private String currenUser;
+    public String currenUser;
 
     @Override
     /**
@@ -108,5 +109,6 @@ public class MainMenuView extends AbstractView {
         ((MainMenuController)this.getController()).searchUser();
     }
 
+    public void personalArea() {((MainMenuController)this.getController()).personalArea();}
 
 }

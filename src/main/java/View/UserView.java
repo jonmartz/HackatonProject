@@ -13,13 +13,14 @@ import java.io.IOException;
 /**
  * Manages the transitions between the different views associated with user account management.
  */
-public class UserView{
+public class UserView {
     private Stage stage;
     private FXMLLoader fxmlLoader;
 
 
     /**
      * Constructor
+     *
      * @param stage of view
      */
     public UserView(Stage stage) {
@@ -49,6 +50,7 @@ public class UserView{
             e.printStackTrace();
         }
     }
+
     /**
      * Transitions to the search user screen.
      */
@@ -58,11 +60,12 @@ public class UserView{
             fxmlLoader = new FXMLLoader();
             Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("userSearch.fxml").openStream());
             stage.setTitle("Search User");
-            stage.setScene(new Scene(root, 500 , 275));
+            stage.setScene(new Scene(root, 500, 275));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     /**
      * Transitions to the sign up screen.
      */
@@ -103,6 +106,20 @@ public class UserView{
     }
 
     /**
+     * Transitions to the user settings screen.
+     */
+    public void textBox() {
+        try {
+            fxmlLoader = new FXMLLoader();
+            Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("textBox.fxml").openStream());
+            stage.setTitle("Text Box");
+            stage.setScene(new Scene(root, 300, 275));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Fills the user details in the user settings screen.
      */
     public void fillFieldsWithUserDetails() {
@@ -118,5 +135,20 @@ public class UserView{
         mainMenuView.fillNameOfUserInMainMenu();
     }
 
+    public void fillTextInPersonalArea() {
+        PersonalAreaView personalAreaView = fxmlLoader.getController();
+        personalAreaView.fillTextsWithUser();
+    }
 
+    public void personalArea() {
+        try {
+            fxmlLoader = new FXMLLoader();
+            Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("personalArea.fxml").openStream());
+            stage.setTitle("Parsonal Area");
+            stage.setScene(new Scene(root, 300, 275));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

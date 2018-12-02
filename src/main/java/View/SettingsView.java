@@ -2,7 +2,6 @@ package View;
 
 import Controller.SettingsController;
 import Controller.UserController;
-import Controller.UserSearchController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -232,9 +231,9 @@ public class SettingsView extends AbstractView {
     /**
      * This function will occur when the "SignOut" button is pressed
      */
-    public void mainMenu()
+    public void goBeck()
     {
-        ((SettingsController)this.getController()).mainMenu();
+        ((SettingsController)this.getController()).goBeck();
     }
 
 
