@@ -88,6 +88,17 @@ public class PublishVacationView extends AbstractView{
        return toReturn;
     }
 
+    /**
+     * This function will clear the text in the datePicker field
+     */
+    public void cleartoDateTXT() {
+        this.toDateTXT.getEditor().clear();
+    }
+
+    public void clearfromDateTXT() {
+        this.fromDateTXT.getEditor().clear();
+    }
+
     public String getDestinetionContryTXT()
     {
       return destinetionContryTXT.getText();
@@ -128,6 +139,10 @@ public class PublishVacationView extends AbstractView{
         return toDateTXT.getValue();
     }
 
+    public String getTodateStr(){return this.todate;}
+
+    public String getFromdateStr(){return this.fromdate;}
+
     public LocalDate getFromDateTXT()
     {
         return fromDateTXT.getValue();
@@ -155,6 +170,24 @@ public class PublishVacationView extends AbstractView{
 
     public void setToDate(String val){
         todate=val;
+    }
+
+    public void setfromDate(String val){
+        fromdate=val;
+    }
+
+    public void activeToDate(){
+        ((PublishController)this.getController()).toDatePicked();;
+    }
+
+    public void activeFromDate(){
+        ((PublishController)this.getController()).fromDatePicked();
+    }
+
+    public
+
+    public void setkindOfTicket(){
+
     }
 
 

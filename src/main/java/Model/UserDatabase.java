@@ -101,7 +101,7 @@ public class UserDatabase implements IModel {
 
     public void addVacation(String vacationID, String destinetionContryTXT, String NumOfTicketsTXT, String flightCompanyTXT,
                             String baggageTXT, String kindOfVacationTXT, String kindOfSleepingPlaceTXT, String theRateOfTheSleepingPlaceTXT,
-                            String toDateTXT, String fromDateTXT, String kindOfTicketTXT, String isTheSleepingCostsIncludesTXT, String isThereReturnFlightTXT)
+                            String toDate, String fromDateTXT, String kindOfTicketTXT, String isTheSleepingCostsIncludesTXT, String isThereReturnFlightTXT)
     {
         try {
             openConnection();
@@ -115,7 +115,7 @@ public class UserDatabase implements IModel {
                     "'" + kindOfVacationTXT + "', " +
                     "'" + kindOfSleepingPlaceTXT + "', " +
                     "'" + theRateOfTheSleepingPlaceTXT + "', " +
-                    "'" + toDateTXT + "', " +
+                    "'" + toDate + "', " +
                     "'" + fromDateTXT + "', " +
                     "'" + kindOfTicketTXT + "', " +
                     "'" + isTheSleepingCostsIncludesTXT + "', " +

@@ -15,6 +15,6 @@ public interface IModel {
     public void deleteUser(String username);
     public void addVacation(String vacationID, String destinetionContryTXT, String NumOfTicketsTXT, String flightCompanyTXT,
                             String baggageTXT, String kindOfVacationTXT, String kindOfSleepingPlaceTXT, String theRateOfTheSleepingPlaceTXT,
-                            LocalDate toDateTXT, LocalDate fromDateTXT, String kindOfTicketTXT, String isTheSleepingCostsIncludesTXT, String isThereReturnFlightTXT);
+                            String toDateTXT, String fromDateTXT, String kindOfTicketTXT, String isTheSleepingCostsIncludesTXT, String isThereReturnFlightTXT);
     public Vacation getVacation(String vacationID);
 }

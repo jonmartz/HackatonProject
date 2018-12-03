@@ -9,17 +9,20 @@ import java.time.LocalDate;
 
 public class PublishController extends UserController {
 
-    /**
-     * The constructor
-     */
-    public PublishController()
+
+    public PublishController(){
+
+    }
+
+
+    public void Publish()
     {
         PublishVacationView publishVacationView = (PublishVacationView) view;
         Vacation vacation = userDatabase.getVacation(publishVacationView.getvacationIDText());
         if (vacation == null) {
             userDatabase.addVacation(publishVacationView.getvacationIDText(), publishVacationView.getDestinetionContryTXT(), publishVacationView.getNumOfTicketsTXT(),
                     publishVacationView.getFlightCompanyTXT(), publishVacationView.getBaggageTXT(), publishVacationView.getKindOfVacationTXT(), publishVacationView.getKindOfSleepingPlaceTXT(),
-                    publishVacationView.getTheRateOfTheSleepingPlaceTXT(), publishVacationView.getToDateTXT(), publishVacationView.getFromDateTXT(),
+                    publishVacationView.getTheRateOfTheSleepingPlaceTXT(), publishVacationView.getTodateStr(), publishVacationView.getFromdateStr(),
                     publishVacationView.getKindOfTicketTXT(), publishVacationView.getIsTheSleepingCostsIncludesTXT(), publishVacationView.getIsThereReturnFlightTXT() );
             userView.mainMenu();
             userView.setupView(userDatabase);
@@ -29,15 +32,27 @@ public class PublishController extends UserController {
         }
     }
 
-    public void birthdatePicked() {
+    public void toDatePicked() {
         PublishVacationView publishVacationView = (PublishVacationView) view;
         LocalDate dateOfVacation = publishVacationView.getToDateTXT();
-        if (isLegalDateForVacation(dateOfVacation.toString())) {
-            publishVacationView.setToDate(.toString());
-            signUpView.KeyReleased();
+        if (isLegalDateForVacation(dateOfVacation)) {
+            publishVacationView.setToDate(dateOfVacation.toString());
+            publishVacationView.KeyReleased();
         } else {
-            signUpView.setComments("Age must be over 18 years");
-            signUpView.clearBirthdayPicker();
+            publishVacationView.setComments("the date of the vacation already passed");
+            publishVacationView.cleartoDateTXT();
+        }
+    }
+
+    public void fromDatePicked() {
+        PublishVacationView publishVacationView = (PublishVacationView) view;
+        LocalDate dateOfVacation = publishVacationView.getFromDateTXT();
+        if (isLegalDateForVacation(dateOfVacation)) {
+            publishVacationView.setfromDate(dateOfVacation.toString());
+            publishVacationView.KeyReleased();
+        } else {
+            publishVacationView.setComments("the date of the vacation already passed");
+            publishVacationView.clearfromDateTXT();
         }
     }
 
