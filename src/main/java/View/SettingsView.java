@@ -1,8 +1,7 @@
 package View;
 
 import Controller.SettingsController;
-import Controller.UserController;
-import Controller.UserSearchController;
+import Controller.AbstractController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -64,7 +63,7 @@ public class SettingsView extends AbstractView {
      * Ths functrion will assign the given controller to it self if it's the right one
      * @param controller - The given controller
      */
-    public void setController(UserController controller) {
+    public void setController(AbstractController controller) {
         if (controller instanceof SettingsController)
             super.setController(controller);
         else {

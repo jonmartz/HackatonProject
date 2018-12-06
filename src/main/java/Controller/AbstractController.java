@@ -1,28 +1,29 @@
 package Controller;
 
+import Model.Database;
+import Model.Vacation;
 import View.AbstractView;
-import javafx.scene.control.DatePicker;
-import Model.IModel;
 import Model.User;
-import View.UserView;
+import View.ViewChanger;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  * Abstract class for a controller that interacts with user account related views.
  */
-public abstract class UserController {
+public abstract class AbstractController {
 
-    protected IModel userDatabase; //The model
-    protected UserView userView; //the userView - he class that responsible to display the fxml's
+    protected Database database; //The model
+    protected ViewChanger viewChanger; //the viewChanger - he class that responsible to display the fxml's
     protected AbstractView view;// The view assigned to the controller
 
     /**
-     * Sets the controller's UserView
-     * @param userView to set
+     * Sets the controller's ViewChanger
+     * @param viewChanger to set
      */
-    public void setUserView(UserView userView) {
-        this.userView = userView;
+    public void setViewChanger(ViewChanger viewChanger) {
+        this.viewChanger = viewChanger;
     }
 
     /**
@@ -32,10 +33,10 @@ public abstract class UserController {
     public void setView(AbstractView abstractView){this.view = abstractView;};
     /**
      * Sets the controller's model
-     * @param userDatabase to set
+     * @param database to set
      */
-    public void setUserDatabase(IModel userDatabase) {
-        this.userDatabase = userDatabase;
+    public void setDatabase(Database database) {
+        this.database = database;
     }
 
     /**
@@ -44,7 +45,7 @@ public abstract class UserController {
      * @return the user, or null if user doesn't exist.
      */
     public User getUser(String username) {
-        return userDatabase.getUser(username);
+        return database.getUser(username);
     }
 
     /**
@@ -55,4 +56,10 @@ public abstract class UserController {
             return !datePicked.isAfter(LocalDate.now().minusYears(18));
         return false;
     }
+
+    /**
+     * Gets all the vacations from database
+     * @return list with all vacations
+     */
+    public ArrayList<Vacation> GetAllVacations() { return database.getAllVacations(); }
 }

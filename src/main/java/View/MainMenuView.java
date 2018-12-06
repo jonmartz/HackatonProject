@@ -1,11 +1,8 @@
 package View;
 
 import Controller.MainMenuController;
-import Controller.SettingsController;
-import Controller.UserController;
-import javafx.fxml.FXML;
+import Controller.AbstractController;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
 import java.net.URL;
@@ -45,7 +42,7 @@ public class MainMenuView extends AbstractView {
     public void KeyReleased() {
         try{
             if(alreadySignIn) {
-                comments.setText("Hellow " + currenUser + ", Welcome back!");
+                comments.setText("Hello " + currenUser + ", Welcome back!");
                 signUp.setDisable(true);
                 signIn.setDisable(true);
                 personalArea.setDisable(false);
@@ -65,7 +62,7 @@ public class MainMenuView extends AbstractView {
      * Ths functrion will assign the given controller to it self if it's the right one
      * @param controller - The given controller
      */
-    public void setController(UserController controller){
+    public void setController(AbstractController controller){
         if(controller instanceof MainMenuController)
             super.setController(controller);
         else
@@ -100,8 +97,9 @@ public class MainMenuView extends AbstractView {
         ((MainMenuController)this.getController()).signIn();
     }
 
+
     /**
-     * This function will occur when the "Search For User" button is pressed
+     * Transitions to the user search window
      */
     public void searchUser()
     {
@@ -109,4 +107,8 @@ public class MainMenuView extends AbstractView {
     }
 
 
+    /**
+     * Transitions to the vacation search window
+     */
+    public void vacationSearch() { ((MainMenuController)this.getController()).vacationSearch();}
 }

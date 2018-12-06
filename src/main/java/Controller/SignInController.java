@@ -1,19 +1,10 @@
 package Controller;
 
 import View.AbstractView;
-import View.MainMenuView;
 import View.SignInView;
-import View.UserSearchView;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 import Model.User;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
-public class SignInController extends UserController {
+public class SignInController extends AbstractController {
 
 
     /**
@@ -40,8 +31,8 @@ public class SignInController extends UserController {
      * Transitions to the sign up screen
      */
     public void signUp() {
-        userView.signUp();
-        userView.setupView(userDatabase);
+        viewChanger.signUp();
+        viewChanger.setupView(database);
     }
 
     /**
@@ -50,17 +41,17 @@ public class SignInController extends UserController {
     public void signIn() {
 
         //Get the user
-        User user = userDatabase.getUser(((SignInView)this.view).getUsernameText());
+        User user = database.getUser(((SignInView)this.view).getUsernameText());
 
         //If the user does exist
         if (user != null) {
 
             //If the password matches
             if (((SignInView)this.view).getPasswordText().equals(user.password)) {
-                userDatabase.setCurrentUser(user);
-                userView.mainMenu();
-                userView.setupView(userDatabase);
-                userView.fillNameOfUserInMainMenu();
+                database.setCurrentUser(user);
+                viewChanger.mainMenu();
+                viewChanger.setupView(database);
+                viewChanger.fillNameOfUserInMainMenu();
 
                 }
             else {

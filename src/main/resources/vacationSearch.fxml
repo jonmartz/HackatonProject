@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<GridPane alignment="center" hgap="10" prefHeight="431.0" prefWidth="789.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.VacationSearchView">
+    <children>
+        <BorderPane prefHeight="543.0" prefWidth="789.0" GridPane.rowIndex="1">
+            <left>
+                <VBox prefHeight="421.0" prefWidth="194.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <GridPane prefHeight="351.0" prefWidth="204.0">
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="203.0" minWidth="10.0" prefWidth="187.0" />
+                        <ColumnConstraints />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="22.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="36.0" minHeight="22.0" prefHeight="36.0" />
+                                <RowConstraints maxHeight="36.0" minHeight="22.0" prefHeight="36.0" />
+                                <RowConstraints maxHeight="36.0" minHeight="22.0" prefHeight="36.0" />
+                                <RowConstraints maxHeight="36.0" minHeight="22.0" prefHeight="25.0" />
+                                <RowConstraints maxHeight="36.0" minHeight="60.0" prefHeight="60.0" />
+                                <RowConstraints />
+                                <RowConstraints />
+                                <RowConstraints maxHeight="25.0" minHeight="0.0" prefHeight="0.0" />
+                                <RowConstraints maxHeight="50.0" minHeight="26.0" prefHeight="38.0" />
+                        <RowConstraints maxHeight="50.0" minHeight="25.0" prefHeight="30.0" />
+                                <RowConstraints maxHeight="50.0" minHeight="6.0" prefHeight="6.0" />
+                            </rowConstraints>
+                            <children>
+                                <Text fill="#646464" strokeType="OUTSIDE" strokeWidth="0.0" text="Fill all fields:">
+                                    <font>
+                                        <Font name="System Bold" size="12.0" />
+                                    </font></Text>
+                                <Button fx:id="searchButton" disable="true" mnemonicParsing="false" onAction="#SearchVacation" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: #2A5058;" text="Search vacation" textFill="WHITE" GridPane.rowIndex="9" />
+                                <TextField fx:id="countryTextBox" onKeyReleased="#CheckCountryText" promptText="Country" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets right="10.0" />
+                           </GridPane.margin></TextField>
+                                <DatePicker fx:id="fromDateDatePicker" onAction="#FromDatePicked" promptText="From date" GridPane.rowIndex="2" />
+                                <DatePicker fx:id="toDateDatePicker" onAction="#ToDatePicked" promptText="To date" GridPane.rowIndex="3" />
+                                <GridPane prefHeight="60.0" prefWidth="184.0" GridPane.rowIndex="5">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="24.0" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="44.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <children>
+                                        <Text fill="#646464" strokeType="OUTSIDE" strokeWidth="0.0" text="Adults:" />
+                                        <Text fill="#646464" strokeType="OUTSIDE" strokeWidth="0.0" text="Kids:" GridPane.columnIndex="1" />
+                                        <Text fill="#646464" strokeType="OUTSIDE" strokeWidth="0.0" text="Babies:" GridPane.columnIndex="2" />
+                                        <TextField fx:id="adultCountTextBox" onKeyReleased="#CheckTicketCountText" promptText="num" GridPane.rowIndex="1">
+                                            <GridPane.margin>
+                                                <Insets right="5.0" />
+                                            </GridPane.margin></TextField>
+                                        <TextField fx:id="kidCountTextBox" onKeyReleased="#CheckTicketCountText" promptText="num" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                            <GridPane.margin>
+                                                <Insets right="5.0" />
+                                            </GridPane.margin>
+                                        </TextField>
+                                        <TextField fx:id="babyCountTextBox" onKeyReleased="#CheckTicketCountText" promptText="num" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                            <GridPane.margin>
+                                                <Insets right="5.0" />
+                                            </GridPane.margin>
+                                        </TextField>
+                                    </children>
+                           <GridPane.margin>
+                              <Insets right="5.0" />
+                           </GridPane.margin>
+                                </GridPane>
+                                <Text fill="#646464" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of tickets:" GridPane.rowIndex="4" />
+                                <Separator prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="11" />
+                        <Text fx:id="commentsText" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Comments" GridPane.rowIndex="10" />
+                            </children>
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </padding>
+                        </GridPane>
+                    </children>
+                </VBox>
+            </left>
+            <center>
+                <TableView fx:id="searchResultsTableView" prefHeight="421.0" prefWidth="524.0" BorderPane.alignment="CENTER">
+                    <columns>
+                        <TableColumn fx:id="countryColumn" editable="false" prefWidth="167.0" text="Country" />
+                        <TableColumn fx:id="fromColumn" editable="false" prefWidth="85.0" text="From" />
+                        <TableColumn fx:id="toColumn" editable="false" minWidth="0.0" text="To" />
+                        <TableColumn fx:id="priceColumn" editable="false" prefWidth="108.0" text="Price" />
+                  <TableColumn fx:id="buttonColumn" editable="false" prefWidth="154.0" />
+                    </columns>
+                </TableView>
+            </center></BorderPane>
+    </children>
+    <columnConstraints>
+        <ColumnConstraints />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints />
+        <RowConstraints />
+    </rowConstraints>
+</GridPane>

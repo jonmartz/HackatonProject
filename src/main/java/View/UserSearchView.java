@@ -1,7 +1,7 @@
 package View;
 
-import Controller.UserController;
-import Controller.UserSearchController;
+import Controller.AbstractController;
+import Controller.AbstractSearchController;
 import Model.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -35,8 +35,8 @@ public class UserSearchView extends AbstractView{
      * Ths functrion will assign the given controller to it self if it's the right one
      * @param controller - The given controller
      */
-    public void setController(UserController controller) {
-        if (controller instanceof UserSearchController)
+    public void setController(AbstractController controller) {
+        if (controller instanceof AbstractSearchController)
             super.setController(controller);
         else {
             super.setController(null);
@@ -109,7 +109,7 @@ public class UserSearchView extends AbstractView{
      */
     public void initialize(URL location, ResourceBundle resources) {
 
-        UserSearchController userSearchController = new UserSearchController();
+        AbstractSearchController userSearchController = new AbstractSearchController();
         this.setController(userSearchController);
         userSearchController.setView(this);
 
@@ -131,7 +131,7 @@ public class UserSearchView extends AbstractView{
      * This function will occur when the "Go Back" button is pressed
      */
     public void goBack(){
-        ((UserSearchController)this.getController()).goBack();
+        ((AbstractSearchController)this.getController()).goBack();
     }
 
     /**
@@ -139,6 +139,6 @@ public class UserSearchView extends AbstractView{
      */
     public void searchForUser()
     {
-        ((UserSearchController)this.getController()).searchForUser();
+        ((AbstractSearchController)this.getController()).searchForUser();
     }
 }

@@ -2,23 +2,15 @@ package Controller;
 
 import View.AbstractView;
 import View.SettingsView;
-import View.UserSearchView;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 import Model.User;
 
-import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ResourceBundle;
 
 /**
  * Controller for the user settings screen, where the user can update account details or delete the account.
  */
-public class SettingsController extends UserController{
+public class SettingsController extends AbstractController {
 
     @Override
     /**
@@ -37,7 +29,7 @@ public class SettingsController extends UserController{
      */
     public void fillFieldsWithUserDetails() {
         //Get the current user
-        User currentUser= userDatabase.getCurrentUser();
+        User currentUser= database.getCurrentUser();
 
         //Fill the fields with the user's data
         SettingsView settingsView = (SettingsView) view;
@@ -78,27 +70,27 @@ public class SettingsController extends UserController{
      */
     public void saveChanges() {
         //Get the current user
-        User user = userDatabase.getCurrentUser();
+        User user = database.getCurrentUser();
         SettingsView settingsView = (SettingsView) view;
 
         //Check if we change the current user and not another one
         if (user.username.equals(settingsView.getUsernameText())
-                || userDatabase.getUser(settingsView.getUsernameText()) == null) {
+                || database.getUser(settingsView.getUsernameText()) == null) {
             //For each field, update if necessary
             if (!user.password.equals(settingsView.getPasswordText()))
-                userDatabase.updateUser(user.username,"password",settingsView.getPasswordText());
+                database.updateUser(user.username,"password",settingsView.getPasswordText());
             if (!user.birthdate.equals(settingsView.getBirthdayString()))
-                userDatabase.updateUser(user.username,"birthdate",settingsView.getBirthdayString());
+                database.updateUser(user.username,"birthdate",settingsView.getBirthdayString());
             if (!user.firstName.equals(settingsView.getFirstNameText()))
-                userDatabase.updateUser(user.username,"firstName",settingsView.getFirstNameText());
+                database.updateUser(user.username,"firstName",settingsView.getFirstNameText());
             if (!user.lastName.equals(settingsView.getLastNameText()))
-                userDatabase.updateUser(user.username,"lastName",settingsView.getLastNameText());
+                database.updateUser(user.username,"lastName",settingsView.getLastNameText());
             if (!user.city.equals(settingsView.getCityText()))
-                userDatabase.updateUser(user.username,"city",settingsView.getCityText());
+                database.updateUser(user.username,"city",settingsView.getCityText());
             if (!user.username.equals(settingsView.getUsernameText()))
-                userDatabase.updateUser(user.username,"username",settingsView.getUsernameText());
+                database.updateUser(user.username,"username",settingsView.getUsernameText());
             // update the user pointer in the model to match the saved changes
-            userDatabase.setCurrentUser(userDatabase.getUser(settingsView.getUsernameText()));
+            database.setCurrentUser(database.getUser(settingsView.getUsernameText()));
         }
         else {
             settingsView.setComments("Username already exists!");
@@ -109,7 +101,7 @@ public class SettingsController extends UserController{
      * Deletes the user.
      */
     public void deleteUser() {
-        userDatabase.deleteUser(userDatabase.getCurrentUser().username);
+        database.deleteUser(database.getCurrentUser().username);
         mainMenu();
     }
 
@@ -117,9 +109,9 @@ public class SettingsController extends UserController{
      * Transitions to the main menu.
      */
     public void mainMenu() {
-        userDatabase.setCurrentUser(null);
-        userView.mainMenu();
-        userView.setupView(userDatabase);
+        database.setCurrentUser(null);
+        viewChanger.mainMenu();
+        viewChanger.setupView(database);
     }
 
 

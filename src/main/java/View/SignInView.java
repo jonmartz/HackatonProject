@@ -1,8 +1,6 @@
 package View;
 
 import Controller.SignInController;
-import Controller.SettingsController;
-import Controller.UserController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;

@@ -1,8 +1,7 @@
 package View;
 
-import Controller.MainMenuController;
 import Controller.SignUpController;
-import Controller.UserController;
+import Controller.AbstractController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -64,7 +63,7 @@ public class SignUpView extends AbstractView {
      * Ths functrion will assign the given controller to it self if it's the right one
      * @param controller - The given controller
      */
-    public void setController(UserController controller) {
+    public void setController(AbstractController controller) {
         if (controller instanceof SignUpController)
             super.setController(controller);
         else {

@@ -2,20 +2,12 @@ package Controller;
 
 import View.AbstractView;
 import View.MainMenuView;
-import View.SettingsView;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 import Model.User;
-
-import java.net.URL;
-import java.util.ResourceBundle;
 
 /**
  * Controller for the main menu, where a new user can sign up or an existing user sign in.
  */
-public class MainMenuController extends UserController {
+public class MainMenuController extends AbstractController {
 
 
     /**
@@ -26,7 +18,7 @@ public class MainMenuController extends UserController {
     }
 
     public void fillNameOfUserInMainMenu() {
-        User currentUser= userDatabase.getCurrentUser();
+        User currentUser= database.getCurrentUser();
         MainMenuView mainMenuView = (MainMenuView) view;
         mainMenuView.showUsernameCommend(currentUser.username);
     }
@@ -35,8 +27,16 @@ public class MainMenuController extends UserController {
      * Transitions to the sign up screen
      */
     public void signUp() {
-        userView.signUp();
-        userView.setupView(userDatabase);
+        viewChanger.signUp();
+        viewChanger.setupView(database);
+    }
+
+    /**
+     * Transitions to the vacation search screen
+     */
+    public void vacationSearch() {
+        viewChanger.searchVacation();
+        viewChanger.setupView(database);
     }
 
     /**
@@ -44,23 +44,19 @@ public class MainMenuController extends UserController {
      */
     public void searchUser()
     {
-        userView.searchUser();
-        userView.setupView(userDatabase);
+        viewChanger.searchUser();
+        viewChanger.setupView(database);
     }
 
     public void signIn() {
-        userView.signIn();
-        userView.setupView(userDatabase);
+        viewChanger.signIn();
+        viewChanger.setupView(database);
     }
 
-
-
-
-
-    @Override
     /**
      * This function will set the right view for this class
      */
+    @Override
     public void setView(AbstractView abstractView) {
         if (abstractView instanceof MainMenuView)
             super.setView(abstractView);

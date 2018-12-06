@@ -1,6 +1,6 @@
 package View;
 
-import Controller.UserController;
+import Controller.AbstractController;
 import javafx.fxml.Initializable;
 
 /**
@@ -8,17 +8,17 @@ import javafx.fxml.Initializable;
  */
 public abstract class AbstractView implements Initializable {
 
-    private UserController userController; //The controller assigned to the view
+    private AbstractController abstractController; //The controller assigned to the view
 
     /**
      * This function will set the controller of the iew
      * @param controller - The given controller
      */
-    public void setController(UserController controller){this.userController = controller;}
+    public void setController(AbstractController controller){this.abstractController = controller;}
 
     /**
      * This function will return the controller
      * @return - The instance of the controller of ths view
      */
-    public UserController getController(){return this.userController;}
+    public AbstractController getController(){return this.abstractController;}
 }

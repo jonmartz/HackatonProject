@@ -3,23 +3,11 @@ package Controller;
 
 import Model.User;
 import View.AbstractView;
-import View.MainMenuView;
 import View.UserSearchView;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import Controller.UserController;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
-public class UserSearchController extends UserController {
+public class AbstractSearchController extends AbstractController {
     private Stage stage;
     private FXMLLoader fxmlLoader;
 
@@ -46,13 +34,13 @@ public class UserSearchController extends UserController {
             ((UserSearchView)view).displayError("Must enter username");
             return;
         }
-        User selectedUser=this.userDatabase.getUser(username);
+        User selectedUser=this.database.getUser(username);
         if(selectedUser==null)
         {
             ((UserSearchView)view).displayError("User does not exist");
             return;
         }
-        if(selectedUser.username.equals(userDatabase.getCurrentUser().username))
+        if(selectedUser.username.equals(database.getCurrentUser().username))
         {
             ((UserSearchView)view).displayError("You are the user!!");
             return;
@@ -68,8 +56,8 @@ public class UserSearchController extends UserController {
      */
     public void goBack()
     {
-        userView.mainMenu();
-        userView.setupView(userDatabase);
-        userView.fillNameOfUserInMainMenu();
+        viewChanger.mainMenu();
+        viewChanger.setupView(database);
+        viewChanger.fillNameOfUserInMainMenu();
     }
 }

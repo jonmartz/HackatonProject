@@ -2,23 +2,14 @@ package Controller;
 
 import Model.User;
 import View.AbstractView;
-import View.MainMenuView;
-import View.SettingsView;
 import View.SignUpView;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 
-import java.net.URL;
 import java.time.LocalDate;
-import java.util.ResourceBundle;
 
 /**
  * Controller for the sign up screen, where a new user can create an account.
  */
-public class SignUpController extends UserController {
+public class SignUpController extends AbstractController {
 
 
     /**
@@ -50,12 +41,12 @@ public class SignUpController extends UserController {
      */
     public void signUp() {
         SignUpView signUpView = (SignUpView) view;
-        User user = userDatabase.getUser(signUpView.getUsernameText());
+        User user = database.getUser(signUpView.getUsernameText());
         if (user == null) {
-            userDatabase.addUser(signUpView.getUsernameText(), signUpView.getPasswordText(), signUpView.getBirthdayString(), signUpView.getFirstNameText(),
+            database.addUser(signUpView.getUsernameText(), signUpView.getPasswordText(), signUpView.getBirthdayString(), signUpView.getFirstNameText(),
                     signUpView.getLastNameText(), signUpView.getCityText());
-            userView.mainMenu();
-            userView.setupView(userDatabase);
+            viewChanger.mainMenu();
+            viewChanger.setupView(database);
         }
         else {
             signUpView.setComments("Username already exists!");
@@ -66,8 +57,8 @@ public class SignUpController extends UserController {
      * Transitions to the main menu.
      */
     public void mainMenu() {
-        userView.mainMenu();
-        userView.setupView(userDatabase);
+        viewChanger.mainMenu();
+        viewChanger.setupView(database);
     }
 
     @Override

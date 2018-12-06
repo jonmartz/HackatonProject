@@ -1,25 +1,34 @@
 package Model;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 
 /**
  * Manages a user database using SQLite, and holds a current user (user that is currently signed in) field.
  */
-public class UserDatabase implements IModel {
+public class Database {
     private Connection connection;
     private User currentUser;
 
     /**
-     * Constructor. If the userDatabase.db doesn't exist, creates it.
+     * Constructor. If the database.db doesn't exist, creates it.
      */
-    public UserDatabase() {
+    public Database() {
         try {
             openConnection();
             Statement statement = connection.createStatement();
+            // Create user table
             statement.executeUpdate("create table if not exists users (username string, password string," +
                     "birthdate string, firstName string, lastName string, city string)");
+            // Create vacations table
+            statement.executeUpdate("create table if not exists vacations (destinetionContryTXT string," +
+                    "NumOfTicketsTXT string, flightCompanyTXT string, baggageTXT string, kindOfVacationTXT string, kindOfSleepingPlaceTXT string," +
+                    "theRateOfTheSleepingPlaceTXT string, toDateTXT string, fromDateTXT string, kindOfTicketTXT string," +
+                    "isTheSleepingCostsIncludesTXT string, isThereReturnFlightTXT string, priceTXT string)");
         } catch (SQLException e) {
-            System.err.println(e.getMessage());
+            e.printStackTrace();
         } finally {
             closeConnection();
         }
@@ -30,7 +39,7 @@ public class UserDatabase implements IModel {
      */
     private void openConnection() {
         try {
-            connection = DriverManager.getConnection("jdbc:sqlite:userDatabase.db");
+            connection = DriverManager.getConnection("jdbc:sqlite:database.db");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -44,7 +53,7 @@ public class UserDatabase implements IModel {
             if (connection != null)
                 connection.close();
         } catch (SQLException e) {
-            System.err.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -83,12 +92,41 @@ public class UserDatabase implements IModel {
         }
     }
 
-    @Override
+    public void addVacation(String destinetionContryTXT, String NumOfTicketsTXT,
+                            String flightCompanyTXT, String baggageTXT, String kindOfVacationTXT,
+                            String kindOfSleepingPlaceTXT, String theRateOfTheSleepingPlaceTXT,
+                            String toDate, String fromDateTXT, String kindOfTicketTXT,
+                            String isTheSleepingCostsIncludesTXT, String isThereReturnFlightTXT, String priceTXT)
+    {
+        try {
+            openConnection();
+            Statement statement = connection.createStatement();
+            String command = "insert into vacations values(" +
+                    "'" + destinetionContryTXT + "', " +
+                    "'" + NumOfTicketsTXT + "', " +
+                    "'" + flightCompanyTXT + "', " +
+                    "'" + baggageTXT + "', " +
+                    "'" + kindOfVacationTXT + "', " +
+                    "'" + kindOfSleepingPlaceTXT + "', " +
+                    "'" + theRateOfTheSleepingPlaceTXT + "', " +
+                    "'" + toDate + "', " +
+                    "'" + fromDateTXT + "', " +
+                    "'" + kindOfTicketTXT + "', " +
+                    "'" + isTheSleepingCostsIncludesTXT + "', " +
+                    "'" + isThereReturnFlightTXT + "', " +
+                    "'" + priceTXT + "'" + ")";
+            statement.executeUpdate(command);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+    }
+
     public void setCurrentUser(User user) {
         this.currentUser = user;
     }
 
-    @Override
     public User getCurrentUser() {
         return this.currentUser;
     }
@@ -151,6 +189,51 @@ public class UserDatabase implements IModel {
     }
 
     /**
+     * Get a single vacation object with the data from database
+     * @param vacationID of vacation
+     * @return vacation object
+     */
+    public Vacation getVacation(String vacationID) {
+        try {
+            openConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("select rowid, * from vacations where rowid='" + vacationID + "'");
+            if (resultSet.next()) {
+                Vacation vacation = new Vacation(resultSet);
+                return vacation;
+            } else {
+                // Add vacation not found
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        return null;
+    }
+
+    /**
+     * Get all vacations from database as a list of vacation objects
+     * @return vacation list
+     */
+    public ArrayList<Vacation> getAllVacations() {
+        try {
+            openConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("select rowid, * from vacations");
+            ArrayList<Vacation> vacations = new ArrayList<>();
+            while (resultSet.next()) vacations.add(new Vacation(resultSet));
+            return vacations;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        return null;
+    }
+
+    /**
      * This function will delete a user from the database
      *
      * @param username - The username of the user
@@ -176,4 +259,3 @@ public class UserDatabase implements IModel {
         }
     }
 }
-

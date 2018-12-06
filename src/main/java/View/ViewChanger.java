@@ -1,19 +1,17 @@
 package View;
 
+import Model.Database;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import Controller.SettingsController;
-import Controller.UserController;
-import Model.IModel;
 
 import java.io.IOException;
 
 /**
  * Manages the transitions between the different views associated with user account management.
  */
-public class UserView{
+public class ViewChanger {
     private Stage stage;
     private FXMLLoader fxmlLoader;
 
@@ -22,17 +20,17 @@ public class UserView{
      * Constructor
      * @param stage of view
      */
-    public UserView(Stage stage) {
+    public ViewChanger(Stage stage) {
         this.stage = stage;
     }
 
     /**
      * Gets the controller that was initialized after the fxml was loaded, and sets it's model and view pointers.
      */
-    public void setupView(IModel userDatabase) {
+    public void setupView(Database database) {
         AbstractView abstractView = fxmlLoader.getController();
-        abstractView.getController().setUserDatabase(userDatabase);
-        abstractView.getController().setUserView(this);
+        abstractView.getController().setDatabase(database);
+        abstractView.getController().setViewChanger(this);
     }
 
 
@@ -119,4 +117,14 @@ public class UserView{
     }
 
 
+    public void searchVacation() {
+        try {
+            fxmlLoader = new FXMLLoader();
+            Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("vacationSearch.fxml").openStream());
+            stage.setTitle("Vacation Search");
+            stage.setScene(new Scene(root, 790, 430));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
