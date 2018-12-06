@@ -18,7 +18,7 @@ public abstract class AbstractView implements Initializable {
 
     /**
      * This function will return the controller
-     * @return - The instance of the controller of ths view
+     * @return - The instance of the controller of this view
      */
     public AbstractController getController(){return this.abstractController;}
 }
