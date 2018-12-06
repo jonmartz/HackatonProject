@@ -35,7 +35,8 @@ public class PublishVacationView extends AbstractView{
     public String todate;
     public String fromdate;
     public String KindOfTicketSTR;
-
+    public String isTheSleepingCostsIncludesSTR;
+    public String isThereReturnFlightSTR;
 
     /**
      * This function will initialize an instance of this class
@@ -60,7 +61,8 @@ public class PublishVacationView extends AbstractView{
         try {
             if (destinetionContryTXT.getText().isEmpty() || NumOfTicketsTXT.getText().isEmpty() || flightCompanyTXT.getText().isEmpty()
                     || baggageTXT.getText().isEmpty() || kindOfVacationTXT.getText().isEmpty() || kindOfSleepingPlaceTXT.getText().isEmpty()
-                    || theRateOfTheSleepingPlaceTXT.getText().isEmpty() || todate.isEmpty() || fromdate.isEmpty()) {
+                    || theRateOfTheSleepingPlaceTXT.getText().isEmpty() || todate.isEmpty() || fromdate.isEmpty()||KindOfTicketSTR.isEmpty()
+                    ||isThereReturnFlightSTR.isEmpty()||isTheSleepingCostsIncludesSTR.isEmpty()) {
                 pubishVacation.setDisable(true);
                 comments.setText("Please fill all fields");
             } else {
@@ -190,9 +192,16 @@ public class PublishVacationView extends AbstractView{
         ((PublishController)this.getController()).KindOfTicketPicked();
     }
 
-    public void setkindOfTicket(){
-
+    public void activeIsTheSleepingCostsIncludes()
+    {
+        ((PublishController)this.getController()).IsTheSleepingCostsIncludesOfTicketPicked();
     }
+
+    public void activeIsThereReturnFlight()
+    {
+        ((PublishController)this.getController()).IsThereReturnFlightPicked();
+    }
+
 
 
 

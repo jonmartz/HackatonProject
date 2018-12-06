@@ -23,7 +23,7 @@ public class PublishController extends UserController {
             userDatabase.addVacation(publishVacationView.getvacationIDText(), publishVacationView.getDestinetionContryTXT(), publishVacationView.getNumOfTicketsTXT(),
                     publishVacationView.getFlightCompanyTXT(), publishVacationView.getBaggageTXT(), publishVacationView.getKindOfVacationTXT(), publishVacationView.getKindOfSleepingPlaceTXT(),
                     publishVacationView.getTheRateOfTheSleepingPlaceTXT(), publishVacationView.getTodateStr(), publishVacationView.getFromdateStr(),
-                    publishVacationView.getKindOfTicketTXT(), publishVacationView.getIsTheSleepingCostsIncludesTXT(), publishVacationView.getIsThereReturnFlightTXT() );
+                    publishVacationView.KindOfTicketSTR, publishVacationView.isTheSleepingCostsIncludesSTR, publishVacationView.isThereReturnFlightSTR );
             userView.mainMenu();
             userView.setupView(userDatabase);
         }
@@ -59,7 +59,21 @@ public class PublishController extends UserController {
     public void KindOfTicketPicked() {
         PublishVacationView publishVacationView = (PublishVacationView) view;
         String dateOfVacation = publishVacationView.getKindOfTicketTXT();
-        publishVacationView.setToDate(publishVacationView.KindOfTicketSTR=);
+        publishVacationView.KindOfTicketSTR=dateOfVacation;
+        publishVacationView.KeyReleased();
+    }
+
+    public void IsTheSleepingCostsIncludesOfTicketPicked() {
+        PublishVacationView publishVacationView = (PublishVacationView) view;
+        String dateOfVacation = publishVacationView.getIsTheSleepingCostsIncludesTXT();
+        publishVacationView.isTheSleepingCostsIncludesSTR=dateOfVacation;
+        publishVacationView.KeyReleased();
+    }
+
+    public void IsThereReturnFlightPicked() {
+        PublishVacationView publishVacationView = (PublishVacationView) view;
+        String dateOfVacation = publishVacationView.getIsThereReturnFlightTXT();
+        publishVacationView.isThereReturnFlightSTR=dateOfVacation;
         publishVacationView.KeyReleased();
     }
 
