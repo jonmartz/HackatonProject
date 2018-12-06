@@ -2,6 +2,7 @@ package View;
 
 import Controller.MainMenuController;
 import Controller.AbstractController;
+import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
@@ -110,5 +111,7 @@ public class MainMenuView extends AbstractView {
     /**
      * Transitions to the vacation search window
      */
-    public void vacationSearch() { ((MainMenuController)this.getController()).vacationSearch();}
+    public void vacationSearch() { ((MainMenuController)this.getController()).vacationSearch(); }
+
+    public void vacationPublish() { ((MainMenuController)this.getController()).vacationPublish(); }
 }

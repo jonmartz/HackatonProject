@@ -39,9 +39,9 @@ public class VacationSearchView extends AbstractView {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        VacationSearchController signUpController = new VacationSearchController();
-        this.setController(signUpController);
-        signUpController.setView(this);
+        VacationSearchController controller = new VacationSearchController();
+        this.setController(controller);
+        controller.setView(this);
         commentsText.setText("");
 
         // Set columns of search results table

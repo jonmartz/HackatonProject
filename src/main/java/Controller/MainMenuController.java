@@ -40,6 +40,14 @@ public class MainMenuController extends AbstractController {
     }
 
     /**
+     * Transitions to the vacation publishing screen
+     */
+    public void vacationPublish() {
+        viewChanger.publishVacation();
+        viewChanger.setupView(database);
+    }
+
+    /**
      * Transitions to the user search window
      */
     public void searchUser()

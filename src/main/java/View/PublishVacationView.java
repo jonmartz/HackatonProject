@@ -1,9 +1,8 @@
 package View;
 
 import Controller.PublishController;
-import Controller.SignUpController;
-import Controller.UserController;
-import Model.UserDatabase;
+import Controller.AbstractController;
+import Model.Database;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -16,7 +15,7 @@ import javafx.scene.control.ComboBox;
 
 public class PublishVacationView extends AbstractView{
 
-
+    @FXML
     private int vacationID;
     public Button pubishVacation;
     public TextField destinetionContryTXT;
@@ -41,6 +40,7 @@ public class PublishVacationView extends AbstractView{
     /**
      * This function will initialize an instance of this class
      */
+    @Override
     public void initialize(URL location, ResourceBundle resources) {
         PublishController publishController = new PublishController();
         this.setController(publishController);
@@ -75,7 +75,7 @@ public class PublishVacationView extends AbstractView{
         }
     }
 
-    public void setController(UserController controller) {
+    public void setController(AbstractController controller) {
         if (controller instanceof PublishController)
             super.setController(controller);
         else {

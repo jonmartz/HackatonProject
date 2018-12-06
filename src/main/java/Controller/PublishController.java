@@ -1,13 +1,13 @@
 package Controller;
 
 import Model.Vacation;
-import Model.UserDatabase;
+import Model.Database;
 import View.AbstractView;
 import View.PublishVacationView;
 
 import java.time.LocalDate;
 
-public class PublishController extends UserController {
+public class PublishController extends AbstractController {
 
 
     public PublishController(){
@@ -18,14 +18,14 @@ public class PublishController extends UserController {
     public void Publish()
     {
         PublishVacationView publishVacationView = (PublishVacationView) view;
-        Vacation vacation = userDatabase.getVacation(publishVacationView.getvacationIDText());
+        Vacation vacation = database.getVacation(publishVacationView.getvacationIDText());
         if (vacation == null) {
-            userDatabase.addVacation(publishVacationView.getvacationIDText(), publishVacationView.getDestinetionContryTXT(), publishVacationView.getNumOfTicketsTXT(),
+            database.addVacation(publishVacationView.getvacationIDText(), publishVacationView.getDestinetionContryTXT(), publishVacationView.getNumOfTicketsTXT(),
                     publishVacationView.getFlightCompanyTXT(), publishVacationView.getBaggageTXT(), publishVacationView.getKindOfVacationTXT(), publishVacationView.getKindOfSleepingPlaceTXT(),
                     publishVacationView.getTheRateOfTheSleepingPlaceTXT(), publishVacationView.getTodateStr(), publishVacationView.getFromdateStr(),
                     publishVacationView.KindOfTicketSTR, publishVacationView.isTheSleepingCostsIncludesSTR, publishVacationView.isThereReturnFlightSTR );
-            userView.mainMenu();
-            userView.setupView(userDatabase);
+            viewChanger.mainMenu();
+            viewChanger.setupView(database);
         }
         else {
             publishVacationView.setComments("Vacation already exists!");
@@ -54,6 +54,14 @@ public class PublishController extends UserController {
             publishVacationView.setComments("the date of the vacation already passed");
             publishVacationView.clearfromDateTXT();
         }
+    }
+
+    public boolean isLegalDateForVacation(LocalDate datePicked){
+        if(datePicked.isEqual(LocalDate.now()))
+            return true;
+        if (datePicked != null)
+            return datePicked.isAfter(LocalDate.now());
+        return false;
     }
 
     public void KindOfTicketPicked() {

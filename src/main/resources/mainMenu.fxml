@@ -25,12 +25,12 @@
       <RowConstraints />
    </rowConstraints>
    <children>
-      <Button fx:id= "signIn" mnemonicParsing="false" disable="false" onAction="#signIn" prefHeight="39.0" prefWidth="124.0" text="Sign In" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-      <Button fx:id= "signUp" mnemonicParsing="false" disable="false" onAction="#signUp" prefHeight="39.0" prefWidth="127.0" text="Sign Up" GridPane.rowIndex="11" />
-      <Button fx:id= "personalArea" disable="true" mnemonicParsing="false" onKeyReleased="#KeyReleased" text="Personal Area" GridPane.rowIndex="10" />
-      <Button fx:id= "vacationSearch" mnemonicParsing="false" text="Vacation Search" onAction="#vacationSearch" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-      <Button fx:id= "vacationAdvertising" disable="true" mnemonicParsing="false" onKeyReleased="#KeyReleased" text="Vacation Advertising" GridPane.rowIndex="9" />
-      <Button fx:id= "searchUser" disable="true" mnemonicParsing="false" onAction="#searchUser" onKeyReleased="#KeyReleased" text="User Search" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-      <Text fx:id= "comments" disable="true" fill="#250ef5" strokeType="OUTSIDE" strokeWidth="0.0" text="   Hellow visitor, Welcome!" wrappingWidth="296.205078125" GridPane.rowIndex="2" />
+      <Button fx:id="signIn" disable="false" mnemonicParsing="false" onAction="#signIn" prefHeight="39.0" prefWidth="124.0" text="Sign In" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+      <Button fx:id="signUp" disable="false" mnemonicParsing="false" onAction="#signUp" prefHeight="39.0" prefWidth="127.0" text="Sign Up" GridPane.rowIndex="11" />
+      <Button fx:id="personalArea" disable="true" mnemonicParsing="false" onKeyReleased="#KeyReleased" text="Personal Area" GridPane.rowIndex="10" />
+      <Button fx:id="vacationSearch" mnemonicParsing="false" onAction="#vacationSearch" text="Vacation Search" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+      <Button fx:id="vacationAdvertising" mnemonicParsing="false" onAction="#vacationPublish" onKeyReleased="#KeyReleased" text="Publish Vacation" GridPane.rowIndex="9" />
+      <Button fx:id="searchUser" disable="true" mnemonicParsing="false" onAction="#searchUser" onKeyReleased="#KeyReleased" text="User Search" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+      <Text fx:id="comments" disable="true" fill="#250ef5" strokeType="OUTSIDE" strokeWidth="0.0" text="   Hello visitor, Welcome!" wrappingWidth="296.205078125" GridPane.rowIndex="2" />
    </children>
 </GridPane>

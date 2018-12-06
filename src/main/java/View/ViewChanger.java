@@ -127,4 +127,15 @@ public class ViewChanger {
             e.printStackTrace();
         }
     }
+
+    public void publishVacation() {
+        try {
+            fxmlLoader = new FXMLLoader();
+            Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("publishVacation.fxml").openStream());
+            stage.setTitle("Vacation Publish");
+            stage.setScene(new Scene(root, 790, 430));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
