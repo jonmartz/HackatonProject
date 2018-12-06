@@ -34,6 +34,7 @@ public class PublishVacationView extends AbstractView{
     public Text comments; // Problems in user input are shown here
     public String todate;
     public String fromdate;
+    public String KindOfTicketSTR;
 
 
     /**
@@ -184,7 +185,10 @@ public class PublishVacationView extends AbstractView{
         ((PublishController)this.getController()).fromDatePicked();
     }
 
-    public
+    public void activeKindOfTicket()
+    {
+        ((PublishController)this.getController()).KindOfTicketPicked();
+    }
 
     public void setkindOfTicket(){
 

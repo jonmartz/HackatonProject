@@ -56,6 +56,13 @@ public class PublishController extends UserController {
         }
     }
 
+    public void KindOfTicketPicked() {
+        PublishVacationView publishVacationView = (PublishVacationView) view;
+        String dateOfVacation = publishVacationView.getKindOfTicketTXT();
+        publishVacationView.setToDate(publishVacationView.KindOfTicketSTR=);
+        publishVacationView.KeyReleased();
+    }
+
     /**
      * This function will set the right view for this class
      */
