@@ -74,27 +74,23 @@ public class VacationSearchController extends AbstractController {
      * @param relevantToDate    to get
      * @return list of relevant countries
      */
-    public ArrayList<Vacation> GetRelevantVacations(String relevantCountry,
-                                                    LocalDate relevantFromDate, LocalDate relevantToDate) {
+    public ArrayList<Vacation> GetRelevantVacations(
+            String relevantCountry,
+            LocalDate relevantFromDate, LocalDate relevantToDate) {
 
         ArrayList<Vacation> vacations = GetAllVacations();
+        ArrayList<Vacation> relevantVacations = new ArrayList<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-        //
-        return vacations; //todo: remove and uncomment
-        //
-
-//        ArrayList<Vacation> relevantVacations = new ArrayList<>();
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-//
-//        for (Vacation vacation : vacations){
-//            String country = vacation.destinationCountryTXT.toLowerCase();
-//            LocalDate fromDate = LocalDate.parse(vacation.fromDateTXT, formatter);
-//            LocalDate toDate = LocalDate.parse(vacation.toDateTXT, formatter);
-//            if (country.equals(relevantCountry.toLowerCase())
-//                    && !(toDate.isBefore(relevantFromDate) || fromDate.isAfter(relevantToDate)))
-//                relevantVacations.add(vacation);
-//        }
-//        return relevantVacations;
+        for (Vacation vacation : vacations){
+            String country = vacation.destinationCountryTXT.toLowerCase();
+            LocalDate fromDate = LocalDate.parse(vacation.fromDateTXT, formatter);
+            LocalDate toDate = LocalDate.parse(vacation.toDateTXT, formatter);
+            if (country.equals(relevantCountry.toLowerCase())
+                    && !(toDate.isBefore(relevantFromDate) || fromDate.isAfter(relevantToDate)))
+                relevantVacations.add(vacation);
+        }
+        return relevantVacations;
     }
 
     @Override

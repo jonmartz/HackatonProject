@@ -33,7 +33,7 @@ public class SignInController extends AbstractController {
     /**
      * Signs the user in, in case he exists and password is correct (right now it only opens user personalArea.fxml).
      */
-    public void signIn() {
+    public void signInUser() {
 
         //Get the user
         User user = database.getUser(((SignInView)this.view).getUsernameText());
@@ -44,7 +44,7 @@ public class SignInController extends AbstractController {
             //If the password matches
             if (((SignInView)this.view).getPasswordText().equals(user.password)) {
                 database.setCurrentUser(user);
-                viewChanger.searchVacation();
+                viewChanger.lastView();
                 viewChanger.setupView(database);
                 }
             else {

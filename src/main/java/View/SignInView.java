@@ -72,14 +72,11 @@ public class SignInView extends AbstractView {
         comments.setText(comment);
     }
 
-
     /**
      * This function will occur the SignIn button will be pressed
      */
-    public void signInUser()
-    {
-        ((SignInController)this.getController()).signIn();
-    }
+    public void signInUser() { ((SignInController)this.getController()).signInUser(); }
+
     /**
      * This function will occur the SignUp button will be pressed
      */

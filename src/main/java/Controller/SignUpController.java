@@ -43,7 +43,8 @@ public class SignUpController extends AbstractController {
         SignUpView signUpView = (SignUpView) view;
         User user = database.getUser(signUpView.getUsernameText());
         if (user == null) {
-            database.addUser(signUpView.getUsernameText(), signUpView.getPasswordText(), signUpView.getBirthdayString(), signUpView.getFirstNameText(),
+            database.addUser(signUpView.getUsernameText(), signUpView.getPasswordText(),
+                    signUpView.getBirthdayString(), signUpView.getFirstNameText(),
                     signUpView.getLastNameText(), signUpView.getCityText());
             database.setCurrentUser(database.getUser(signUpView.getUsernameText()));
             viewChanger.lastView();
