@@ -16,7 +16,6 @@ import java.util.ResourceBundle;
  */
 public class SettingsView extends AbstractView {
 
-
     @FXML
     public TextField username;//The username textfield
     public TextField password;//The password textfield

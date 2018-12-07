@@ -185,7 +185,8 @@ public class VacationSearchView extends AbstractView {
     }
 
     /**
-     * This function will occur when the "VacationSearch" button is pressed
+     * This function will occur when the "VacationSearch" button is pressed. Will get all
+     * relevant vacations from the controller and add them to the table view.
      */
     public void SearchVacation() {
         VacationSearchController controller = (VacationSearchController) getController();
