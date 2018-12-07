@@ -10,6 +10,7 @@ import javafx.scene.control.ButtonType;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * Abstract class for a controller that interacts with user account related views.
@@ -42,10 +43,13 @@ public abstract class AbstractController {
     public void setDatabase(Database database) {
         this.database = database;
         view.updateMainMenuButtons();
-
-        if (this instanceof PersonalAreaController)
-            ((PersonalAreaController) this).fillFieldsWithUserDetails();
+        FillAllData();
     }
+
+    /**
+     * Use the database to fill all necessary data
+     */
+    protected abstract void FillAllData();
 
     /**
      * Gets a user object from database
@@ -71,6 +75,14 @@ public abstract class AbstractController {
      */
     public ArrayList<Vacation> GetAllVacations() {
         return database.getAllVacations();
+    }
+
+    /**
+     * Get a list of all countries in database
+     * @return
+     */
+    public HashSet<String> GetAllCountries() {
+        return database.getAllCountries();
     }
 
     /**

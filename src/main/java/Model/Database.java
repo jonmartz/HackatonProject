@@ -3,6 +3,7 @@ package Model;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 
 /**
@@ -246,6 +247,27 @@ public class Database {
             ArrayList<Vacation> vacations = new ArrayList<>();
             while (resultSet.next()) vacations.add(new Vacation(resultSet));
             return vacations;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        return null;
+    }
+
+    /**
+     * Get all countries in database
+     * @return country list
+     */
+    public HashSet<String> getAllCountries() {
+        try {
+            openConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("select destinetionContryTXT from vacations");
+            HashSet<String> countries = new HashSet<>();
+            while (resultSet.next()) countries.add(resultSet.getString(1).toUpperCase());
+            return countries;
 
         } catch (SQLException e) {
             e.printStackTrace();

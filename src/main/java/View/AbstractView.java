@@ -38,6 +38,7 @@ public abstract class AbstractView implements Initializable {
             // User is signed in
             signIn.setText("Sign out");
             personalArea.setDisable(false);
+            searchUser.setDisable(false);
         }
     }
 

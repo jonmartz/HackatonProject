@@ -6,6 +6,9 @@ import View.VacationSearchView;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 public class VacationSearchController extends AbstractController {
 
@@ -48,25 +51,13 @@ public class VacationSearchController extends AbstractController {
     }
 
     /**
-     * This function will set the right view for this class
-     */
-    @Override
-    public void setView(AbstractView abstractView) {
-
-        if (abstractView instanceof VacationSearchView)
-            super.setView(abstractView);
-        else {
-            super.setView(null);
-        }
-    }
-
-    /**
      * Checks if all the conditions to enable the search button are met, and if they do it enables it
      */
     public void CheckEnableSearchButton() {
         VacationSearchView view = (VacationSearchView) this.view;
         view.setComments("");
-        if (view.countryTextBox.getText().isEmpty()
+        if (view.countryChoiceBox.getValue() == null
+                || view.countryChoiceBox.getValue().toString().isEmpty()
                 || view.fromDateDatePicker.toString().isEmpty()
                 || view.toDateDatePicker.toString().isEmpty()
                 || view.ticketCount == 0) {
@@ -104,5 +95,11 @@ public class VacationSearchController extends AbstractController {
 //                relevantVacations.add(vacation);
 //        }
 //        return relevantVacations;
+    }
+
+    @Override
+    protected void FillAllData() {
+        SortedSet<String> countries = new TreeSet<>(GetAllCountries());
+        ((VacationSearchView)view).countryChoiceBox.getItems().addAll(countries);
     }
 }

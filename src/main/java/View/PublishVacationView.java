@@ -36,6 +36,7 @@ public class PublishVacationView extends AbstractView{
     public String KindOfTicketSTR;
     public String isTheSleepingCostsIncludesSTR;
     public String isThereReturnFlightSTR;
+    public String price;
 
     /**
      * This function will initialize an instance of this class
@@ -201,6 +202,8 @@ public class PublishVacationView extends AbstractView{
     {
         ((PublishController)this.getController()).IsThereReturnFlightPicked();
     }
+
+    public void publish() { ((PublishController)this.getController()).Publish(); }
 
 
 

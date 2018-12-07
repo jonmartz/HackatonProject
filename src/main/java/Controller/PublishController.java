@@ -9,18 +9,12 @@ import java.time.LocalDate;
 
 public class PublishController extends AbstractController {
 
-
-    public PublishController(){
-
-    }
-
-    public void Publish()
-    {
+    public void Publish() {
         PublishVacationView view = (PublishVacationView) this.view;
-        database.addVacation(view.getvacationIDText(), view.getDestinetionContryTXT(), view.getNumOfTicketsTXT(),
+        database.addVacation(view.getDestinetionContryTXT(), view.getNumOfTicketsTXT(),
                 view.getFlightCompanyTXT(), view.getBaggageTXT(), view.getKindOfVacationTXT(), view.getKindOfSleepingPlaceTXT(),
                 view.getTheRateOfTheSleepingPlaceTXT(), view.getTodateStr(), view.getFromdateStr(),
-                view.KindOfTicketSTR, view.isTheSleepingCostsIncludesSTR, view.isThereReturnFlightSTR );
+                view.KindOfTicketSTR, view.isTheSleepingCostsIncludesSTR, view.isThereReturnFlightSTR,"100");
         view.setComments("Vacation published successfully!");
     }
 
@@ -75,5 +69,10 @@ public class PublishController extends AbstractController {
         String dateOfVacation = publishVacationView.getIsThereReturnFlightTXT();
         publishVacationView.isThereReturnFlightSTR=dateOfVacation;
         publishVacationView.KeyReleased();
+    }
+
+    @Override
+    protected void FillAllData() {
+
     }
 }

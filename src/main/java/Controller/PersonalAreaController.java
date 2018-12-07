@@ -92,4 +92,9 @@ public class PersonalAreaController extends AbstractController {
         database.deleteUser(database.getCurrentUser().username);
         signIn();
     }
+
+    @Override
+    protected void FillAllData() {
+        fillFieldsWithUserDetails();
+    }
 }
