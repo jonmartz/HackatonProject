@@ -106,6 +106,7 @@ public abstract class AbstractController {
      * Transitions to the vacation search screen
      */
     public void vacationSearch() {
+        setLastView("searchVacation");
         viewChanger.searchVacation();
         viewChanger.setupView(database);
     }
@@ -114,8 +115,15 @@ public abstract class AbstractController {
      * Transitions to the vacation publishing screen
      */
     public void vacationPublish() {
-        viewChanger.publishVacation();
-        viewChanger.setupView(database);
+        setLastView("publishVacation");
+        if (getCurrentUser() == null){
+            if (view.getResultFromWarning("You must sign in to publish a vacation. Sign in?") == ButtonType.YES)
+                signIn();
+        }
+        else {
+            viewChanger.publishVacation();
+            viewChanger.setupView(database);
+        }
     }
 
     /**
@@ -136,21 +144,18 @@ public abstract class AbstractController {
     }
 
     /**
-     * Show warning and ask for user's confirmation
-     * @param text of warning
-     * @return user's answer
-     */
-    public ButtonType getResultFromWarning(String text){
-        Alert alert = new Alert(Alert.AlertType.WARNING, text, ButtonType.YES, ButtonType.NO);
-        alert.showAndWait();
-        return alert.getResult();
-    }
-
-    /**
      * Returns the current user object
      * @return user object
      */
     public User getCurrentUser(){
         return database.getCurrentUser();
+    }
+
+    /**
+     * Set the last view so after signing up, the user is taken back to the last view he was on
+     * @param lastView to go back to after signing in
+     */
+    public void setLastView(String lastView) {
+        viewChanger.setLastView(lastView);
     }
 }

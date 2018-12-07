@@ -3,7 +3,9 @@ package View;
 import Controller.AbstractController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -73,4 +75,15 @@ public abstract class AbstractView implements Initializable {
 
 
     public void personalArea() { controller.personalArea(); }
+
+    /**
+     * Show warning and ask for user's confirmation
+     * @param text of warning
+     * @return user's answer
+     */
+    public ButtonType getResultFromWarning(String text){
+        Alert alert = new Alert(Alert.AlertType.WARNING, text, ButtonType.YES, ButtonType.NO);
+        alert.showAndWait();
+        return alert.getResult();
+    }
 }

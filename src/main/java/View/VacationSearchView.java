@@ -170,6 +170,7 @@ public class VacationSearchView extends AbstractView {
         searchResultsTableView.setItems(items);
         searchResultsTableView.getSortOrder().add(priceColumn);
         searchResultsTableView.setVisible(true);
+        if (vacations.isEmpty()) setComments("No vacations in your date range!");
     }
 
     public void CountryPicked() {

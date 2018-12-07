@@ -88,7 +88,7 @@ public class PersonalAreaController extends AbstractController {
      * Deletes the user.
      */
     public void deleteUser() {
-        if (getResultFromWarning("Delete your profile?") == ButtonType.NO) return;
+        if (view.getResultFromWarning("Delete your profile?") == ButtonType.NO) return;
         database.deleteUser(database.getCurrentUser().username);
         signIn();
     }
