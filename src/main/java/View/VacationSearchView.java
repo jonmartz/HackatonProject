@@ -173,6 +173,9 @@ public class VacationSearchView extends AbstractView {
         if (vacations.isEmpty()) setComments("No vacations in your date range!");
     }
 
+    /**
+     * Is called when a country is picked from the country choiceBox
+     */
     public void CountryPicked() {
         ((VacationSearchController)getController()).CheckEnableSearchButton();
     }
