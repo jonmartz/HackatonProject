@@ -48,14 +48,6 @@ public class VacationSearchController extends AbstractController {
     }
 
     /**
-     * Transitions to the main menu.
-     */
-    public void mainMenu() {
-        viewChanger.mainMenu();
-        viewChanger.setupView(database);
-    }
-
-    /**
      * This function will set the right view for this class
      */
     @Override
@@ -95,17 +87,22 @@ public class VacationSearchController extends AbstractController {
                                                     LocalDate relevantFromDate, LocalDate relevantToDate) {
 
         ArrayList<Vacation> vacations = GetAllVacations();
-        ArrayList<Vacation> relevantVacations = new ArrayList<>();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-        for (Vacation vacation : vacations){
-            String country = vacation.destinationCountryTXT.toLowerCase();
-            LocalDate fromDate = LocalDate.parse(vacation.fromDateTXT, formatter);
-            LocalDate toDate = LocalDate.parse(vacation.toDateTXT, formatter);
-            if (country.equals(relevantCountry.toLowerCase())
-                    && !(toDate.isBefore(relevantFromDate) || fromDate.isAfter(relevantToDate)))
-                relevantVacations.add(vacation);
-        }
-        return relevantVacations;
+        //
+        return vacations; //todo: remove and uncomment
+        //
+
+//        ArrayList<Vacation> relevantVacations = new ArrayList<>();
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//
+//        for (Vacation vacation : vacations){
+//            String country = vacation.destinationCountryTXT.toLowerCase();
+//            LocalDate fromDate = LocalDate.parse(vacation.fromDateTXT, formatter);
+//            LocalDate toDate = LocalDate.parse(vacation.toDateTXT, formatter);
+//            if (country.equals(relevantCountry.toLowerCase())
+//                    && !(toDate.isBefore(relevantFromDate) || fromDate.isAfter(relevantToDate)))
+//                relevantVacations.add(vacation);
+//        }
+//        return relevantVacations;
     }
 }

@@ -5,6 +5,7 @@ import Controller.AbstractController;
 import Model.Vacation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -88,18 +89,6 @@ public class VacationSearchView extends AbstractView {
         };
     }
 
-    /**
-     * Ths function will assign the given controller to it self if it's the right one
-     * @param controller - The given controller
-     */
-    public void setController(AbstractController controller) {
-        if (controller instanceof VacationSearchController)
-            super.setController(controller);
-        else {
-            super.setController(null);
-        }
-    }
-
     public void ClearToDatePicker() {
         this.toDateDatePicker.getEditor().clear();
     }
@@ -122,13 +111,6 @@ public class VacationSearchView extends AbstractView {
     public void FromDatePicked()
     {
         ((VacationSearchController)this.getController()).FromDatePicked();
-    }
-    /**
-     * This function will occur when the "Go Back" button is pressed
-     */
-    public void mainMenu()
-    {
-        ((VacationSearchController)this.getController()).mainMenu();
     }
 
     /**

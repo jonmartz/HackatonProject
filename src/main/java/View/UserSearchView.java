@@ -1,7 +1,7 @@
 package View;
 
 import Controller.AbstractController;
-import Controller.AbstractSearchController;
+import Controller.UserSearchController;
 import Model.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -36,7 +36,7 @@ public class UserSearchView extends AbstractView{
      * @param controller - The given controller
      */
     public void setController(AbstractController controller) {
-        if (controller instanceof AbstractSearchController)
+        if (controller instanceof UserSearchController)
             super.setController(controller);
         else {
             super.setController(null);
@@ -46,7 +46,7 @@ public class UserSearchView extends AbstractView{
 
 
     /**
-     * Fills the user details in the user settings screen.
+     * Fills the user details in the user personalArea.fxml screen.
      */
     public void fillFieldsWithUserDetails(User user) {
         //Set all fields to "Visible"
@@ -109,7 +109,7 @@ public class UserSearchView extends AbstractView{
      */
     public void initialize(URL location, ResourceBundle resources) {
 
-        AbstractSearchController userSearchController = new AbstractSearchController();
+        UserSearchController userSearchController = new UserSearchController();
         this.setController(userSearchController);
         userSearchController.setView(this);
 
@@ -128,17 +128,10 @@ public class UserSearchView extends AbstractView{
     }
 
     /**
-     * This function will occur when the "Go Back" button is pressed
-     */
-    public void goBack(){
-        ((AbstractSearchController)this.getController()).goBack();
-    }
-
-    /**
      * This function will occur when the "Search" button is pressed
      */
     public void searchForUser()
     {
-        ((AbstractSearchController)this.getController()).searchForUser();
+        ((UserSearchController)this.getController()).searchForUser();
     }
 }

@@ -7,7 +7,7 @@ import View.UserSearchView;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 
-public class AbstractSearchController extends AbstractController {
+public class UserSearchController extends AbstractController {
     private Stage stage;
     private FXMLLoader fxmlLoader;
 
@@ -48,16 +48,5 @@ public class AbstractSearchController extends AbstractController {
         //If the username is valid display it's data
         ((UserSearchView)view).fillFieldsWithUserDetails(selectedUser);
 
-    }
-
-
-    /**
-     * This function will transit to the setting's window
-     */
-    public void goBack()
-    {
-        viewChanger.mainMenu();
-        viewChanger.setupView(database);
-        viewChanger.fillNameOfUserInMainMenu();
     }
 }

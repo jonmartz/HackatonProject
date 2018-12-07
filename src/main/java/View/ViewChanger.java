@@ -1,5 +1,7 @@
 package View;
 
+import Controller.AbstractController;
+import Controller.PersonalAreaController;
 import Model.Database;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,8 +16,7 @@ import java.io.IOException;
 public class ViewChanger {
     private Stage stage;
     private FXMLLoader fxmlLoader;
-
-
+    private String lastView = "";
     /**
      * Constructor
      * @param stage of view
@@ -29,34 +30,20 @@ public class ViewChanger {
      */
     public void setupView(Database database) {
         AbstractView abstractView = fxmlLoader.getController();
-        abstractView.getController().setDatabase(database);
-        abstractView.getController().setViewChanger(this);
+        AbstractController controller = abstractView.getController();
+        controller.setDatabase(database);
+        controller.setViewChanger(this);
     }
 
-
-    /**
-     * Transitions to the main menu.
-     */
-    public void mainMenu() {
-        try {
-            fxmlLoader = new FXMLLoader();
-            Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("mainMenu.fxml").openStream());
-            stage.setTitle("Welcome to Vacation4U");
-            stage.setScene(new Scene(root, 300, 275));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
     /**
      * Transitions to the search user screen.
      */
     public void searchUser() {
-
         try {
             fxmlLoader = new FXMLLoader();
             Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("userSearch.fxml").openStream());
             stage.setTitle("Search User");
-            stage.setScene(new Scene(root, 500 , 275));
+            stage.setScene(new Scene(root, 790 , 450));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -69,7 +56,7 @@ public class ViewChanger {
             fxmlLoader = new FXMLLoader();
             Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("signUp.fxml").openStream());
             stage.setTitle("Sign up");
-            stage.setScene(new Scene(root, 300, 275));
+            stage.setScene(new Scene(root, 790 , 450));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -80,49 +67,33 @@ public class ViewChanger {
             fxmlLoader = new FXMLLoader();
             Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("signIn.fxml").openStream());
             stage.setTitle("Sign In");
-            stage.setScene(new Scene(root, 300, 275));
+            stage.setScene(new Scene(root, 790 , 450));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     /**
-     * Transitions to the user settings screen.
+     * Transitions to the user personalArea.fxml screen.
      */
-    public void settings() {
+    public void personalArea() {
         try {
             fxmlLoader = new FXMLLoader();
-            Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("settings.fxml").openStream());
-            stage.setTitle("User Settings");
-            stage.setScene(new Scene(root, 300, 275));
+            Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("personalArea.fxml").openStream());
+            stage.setTitle("Personal Area");
+            stage.setScene(new Scene(root, 790 , 450));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-    /**
-     * Fills the user details in the user settings screen.
-     */
-    public void fillFieldsWithUserDetails() {
-        SettingsView settingsView = fxmlLoader.getController();
-        settingsView.fillFieldsWithUserDetails();
-    }
-
-    /**
-     * Fills the user details in the user settings screen.
-     */
-    public void fillNameOfUserInMainMenu() {
-        MainMenuView mainMenuView = fxmlLoader.getController();
-        mainMenuView.fillNameOfUserInMainMenu();
-    }
-
 
     public void searchVacation() {
         try {
             fxmlLoader = new FXMLLoader();
             Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("vacationSearch.fxml").openStream());
-            stage.setTitle("Vacation Search");
-            stage.setScene(new Scene(root, 790, 430));
+            stage.setTitle("Search Vacation");
+            stage.setScene(new Scene(root, 790 , 450));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -132,10 +103,16 @@ public class ViewChanger {
         try {
             fxmlLoader = new FXMLLoader();
             Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("publishVacation.fxml").openStream());
-            stage.setTitle("Vacation Publish");
-            stage.setScene(new Scene(root, 790, 430));
+            stage.setTitle("Publish Vacation");
+            stage.setScene(new Scene(root, 790 , 450));
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void lastView() {
+        if (lastView.equals("publishVacation")) publishVacation();
+//        if (lastView.equals("buyVacation")) buyVacation(); // todo: uncomment
+        else searchVacation(); // default window is vacation search
     }
 }

@@ -10,7 +10,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Database database = new Database();//Creating the database
         ViewChanger viewChanger = new ViewChanger(primaryStage);
-        viewChanger.mainMenu();//Moving to the mainMenu window.
+        viewChanger.signIn();//Moving to the mainMenu window.
         viewChanger.setupView(database);
         primaryStage.show();
 

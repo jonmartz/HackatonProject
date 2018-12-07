@@ -36,7 +36,7 @@ public class SignInController extends AbstractController {
     }
 
     /**
-     * Signs the user in, in case he exists and password is correct (right now it only opens user settings).
+     * Signs the user in, in case he exists and password is correct (right now it only opens user personalArea.fxml).
      */
     public void signIn() {
 
@@ -49,20 +49,16 @@ public class SignInController extends AbstractController {
             //If the password matches
             if (((SignInView)this.view).getPasswordText().equals(user.password)) {
                 database.setCurrentUser(user);
-                viewChanger.mainMenu();
+                viewChanger.searchVacation();
                 viewChanger.setupView(database);
-                viewChanger.fillNameOfUserInMainMenu();
-
                 }
             else {
                 ((SignInView)this.view).setComments("Password is incorrect!");
-
             }
         }
         //If the user does not exist
         else {
             ((SignInView)this.view).setComments("Username does not exist!");
-
         }
     }
 }

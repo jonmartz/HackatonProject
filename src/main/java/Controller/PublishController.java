@@ -14,22 +14,14 @@ public class PublishController extends AbstractController {
 
     }
 
-
     public void Publish()
     {
-        PublishVacationView publishVacationView = (PublishVacationView) view;
-        Vacation vacation = database.getVacation(publishVacationView.getvacationIDText());
-        if (vacation == null) {
-            database.addVacation(publishVacationView.getvacationIDText(), publishVacationView.getDestinetionContryTXT(), publishVacationView.getNumOfTicketsTXT(),
-                    publishVacationView.getFlightCompanyTXT(), publishVacationView.getBaggageTXT(), publishVacationView.getKindOfVacationTXT(), publishVacationView.getKindOfSleepingPlaceTXT(),
-                    publishVacationView.getTheRateOfTheSleepingPlaceTXT(), publishVacationView.getTodateStr(), publishVacationView.getFromdateStr(),
-                    publishVacationView.KindOfTicketSTR, publishVacationView.isTheSleepingCostsIncludesSTR, publishVacationView.isThereReturnFlightSTR );
-            viewChanger.mainMenu();
-            viewChanger.setupView(database);
-        }
-        else {
-            publishVacationView.setComments("Vacation already exists!");
-        }
+        PublishVacationView view = (PublishVacationView) this.view;
+        database.addVacation(view.getvacationIDText(), view.getDestinetionContryTXT(), view.getNumOfTicketsTXT(),
+                view.getFlightCompanyTXT(), view.getBaggageTXT(), view.getKindOfVacationTXT(), view.getKindOfSleepingPlaceTXT(),
+                view.getTheRateOfTheSleepingPlaceTXT(), view.getTodateStr(), view.getFromdateStr(),
+                view.KindOfTicketSTR, view.isTheSleepingCostsIncludesSTR, view.isThereReturnFlightSTR );
+        view.setComments("Vacation published successfully!");
     }
 
     public void toDatePicked() {
@@ -83,18 +75,5 @@ public class PublishController extends AbstractController {
         String dateOfVacation = publishVacationView.getIsThereReturnFlightTXT();
         publishVacationView.isThereReturnFlightSTR=dateOfVacation;
         publishVacationView.KeyReleased();
-    }
-
-    /**
-     * This function will set the right view for this class
-     */
-    public void setView(AbstractView abstractView) {
-
-        if(abstractView instanceof PublishVacationView)
-            super.setView(abstractView);
-        else
-        {
-            super.setView(null);
-        }
     }
 }

@@ -45,33 +45,12 @@ public class SignUpController extends AbstractController {
         if (user == null) {
             database.addUser(signUpView.getUsernameText(), signUpView.getPasswordText(), signUpView.getBirthdayString(), signUpView.getFirstNameText(),
                     signUpView.getLastNameText(), signUpView.getCityText());
-            viewChanger.mainMenu();
+            database.setCurrentUser(database.getUser(signUpView.getUsernameText()));
+            viewChanger.lastView();
             viewChanger.setupView(database);
         }
         else {
             signUpView.setComments("Username already exists!");
-        }
-    }
-
-    /**
-     * Transitions to the main menu.
-     */
-    public void mainMenu() {
-        viewChanger.mainMenu();
-        viewChanger.setupView(database);
-    }
-
-    @Override
-    /**
-     * This function will set the right view for this class
-     */
-    public void setView(AbstractView abstractView) {
-
-        if(abstractView instanceof SignUpView)
-            super.setView(abstractView);
-        else
-        {
-            super.setView(null);
         }
     }
 }

@@ -59,6 +59,7 @@ public class SignUpView extends AbstractView {
         this.setController(signUpController);
         signUpController.setView(this);
     }
+
     /**
      * Ths functrion will assign the given controller to it self if it's the right one
      * @param controller - The given controller
@@ -150,14 +151,6 @@ public class SignUpView extends AbstractView {
     public void birthdatePicked()
     {
         ((SignUpController)this.getController()).birthdatePicked();
-    }
-
-    /**
-     * This function will occur when the "Go Back" button is pressed
-     */
-    public void mainMenu()
-    {
-        ((SignUpController)this.getController()).mainMenu();
     }
 
     /**

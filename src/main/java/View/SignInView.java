@@ -15,13 +15,12 @@ public class SignInView extends AbstractView {
     public TextField username; // The username textfield
     public TextField password; // The password textfield
     public Text comments; // Problems in user input are shown here
-    public Button signIn; // The "SignIn" button
+    public Button signInButton; // The "SignIn" button
 
-
-    @Override
     /**
      * This function will initialize an instance of this class
      */
+    @Override
     public void initialize(URL location, ResourceBundle resources) {
         SignInController SignInController = new SignInController();
         this.setController(SignInController);
@@ -35,14 +34,14 @@ public class SignInView extends AbstractView {
     public void KeyReleased() {
         try {
             if (username.getText().isEmpty() || password.getText().isEmpty()) {
-                signIn.setDisable(true);
+                signInButton.setDisable(true);
                 comments.setText("Enter name and password");
             } else {
-                signIn.setDisable(false);
+                signInButton.setDisable(false);
                 comments.setText("");
             }
         } catch (Exception e) {
-            signIn.setDisable(true);
+            signInButton.setDisable(true);
             comments.setText("Enter name and password");
         }
     }
@@ -77,7 +76,7 @@ public class SignInView extends AbstractView {
     /**
      * This function will occur the SignIn button will be pressed
      */
-    public void signIn()
+    public void signInUser()
     {
         ((SignInController)this.getController()).signIn();
     }
