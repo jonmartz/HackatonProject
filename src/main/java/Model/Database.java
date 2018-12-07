@@ -19,14 +19,36 @@ public class Database {
         try {
             openConnection();
             Statement statement = connection.createStatement();
+
             // Create user table
-            statement.executeUpdate("create table if not exists users (username string, password string," +
-                    "birthdate string, firstName string, lastName string, city string)");
+            statement.executeUpdate("create table if not exists users (" +
+                    "username string, " +
+                    "password string, " +
+                    "birthdate string, " +
+                    "firstName string, " +
+                    "lastName string, " +
+                    "city string)");
+
             // Create vacations table
-            statement.executeUpdate("create table if not exists vacations (destinetionContryTXT string," +
-                    "NumOfTicketsTXT string, flightCompanyTXT string, baggageTXT string, kindOfVacationTXT string, kindOfSleepingPlaceTXT string," +
-                    "theRateOfTheSleepingPlaceTXT string, toDateTXT string, fromDateTXT string, kindOfTicketTXT string," +
-                    "isTheSleepingCostsIncludesTXT string, isThereReturnFlightTXT string, priceTXT string)");
+            statement.executeUpdate("create table if not exists vacations (" +
+                    "destinetionContryTXT string, " +
+                    "NumOfTicketsTXT string, " +
+                    "flightCompanyTXT string, " +
+                    "baggageTXT string, " +
+                    "kindOfVacationTXT string, " +
+                    "kindOfSleepingPlaceTXT string," +
+                    "theRateOfTheSleepingPlaceTXT string, " +
+                    "toDateTXT string, " +
+                    "fromDateTXT string, " +
+                    "kindOfTicketTXT string," +
+                    "isTheSleepingCostsIncludesTXT string, " +
+                    "isThereReturnFlightTXT string, " +
+                    "priceTXT string)");
+
+            // Create countries table
+//            statement.executeUpdate("create table if not exists countries (" +
+//                    "countryName string PRIMARY KEY)");
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

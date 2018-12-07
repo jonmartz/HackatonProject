@@ -4,6 +4,7 @@ import Model.Vacation;
 import View.AbstractView;
 import View.VacationSearchView;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class VacationSearchController extends AbstractController {
@@ -81,5 +82,23 @@ public class VacationSearchController extends AbstractController {
         } else {
             view.searchButton.setDisable(false);
         }
+    }
+
+    public ArrayList<Vacation> GetRelevantVacations(String relevantCountry,
+                                                    LocalDate relevantFromDate, LocalDate relevantToDate) {
+
+        ArrayList<Vacation> vacations = GetAllVacations();
+        ArrayList<Vacation> relevantVacations = new ArrayList<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        for (Vacation vacation : vacations){
+            String country = vacation.destinationCountryTXT.toLowerCase();
+            LocalDate fromDate = LocalDate.parse(vacation.fromDateTXT, formatter);
+            LocalDate toDate = LocalDate.parse(vacation.toDateTXT, formatter);
+            if (country.equals(relevantCountry.toLowerCase())
+                    && !(toDate.isBefore(relevantFromDate) || fromDate.isAfter(relevantToDate)))
+                relevantVacations.add(vacation);
+        }
+        return relevantVacations;
     }
 }

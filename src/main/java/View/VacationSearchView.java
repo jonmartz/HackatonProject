@@ -188,7 +188,9 @@ public class VacationSearchView extends AbstractView {
      * This function will occur when the "VacationSearch" button is pressed
      */
     public void SearchVacation() {
-        ArrayList<Vacation> vacations = getController().GetAllVacations();
+        VacationSearchController controller = (VacationSearchController) getController();
+        ArrayList<Vacation> vacations = controller.GetRelevantVacations(countryTextBox.getText(),
+                fromDateDatePicker.getValue(), toDateDatePicker.getValue());
         ObservableList<VacationEntry> items = FXCollections.observableArrayList();
         for (Vacation vacation : vacations){
             items.add(new VacationEntry(vacation.ID, vacation.destinationCountryTXT,

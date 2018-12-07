@@ -61,5 +61,7 @@ public abstract class AbstractController {
      * Gets all the vacations from database
      * @return list with all vacations
      */
-    public ArrayList<Vacation> GetAllVacations() { return database.getAllVacations(); }
+    public ArrayList<Vacation> GetAllVacations() {
+        return database.getAllVacations();
+    }
 }
