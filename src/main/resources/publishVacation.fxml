@@ -8,22 +8,21 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="518.0" prefWidth="601.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.PublishVacationView">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="518.0" prefWidth="601.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.PublishVacationView">
     <children>
-        <Button fx:id="pubishVacation" layoutX="275.0" layoutY="479.0" mnemonicParsing="false" text="pubish vacation" />
-        <TextField fx:id="destinetionContryTXT" layoutX="413.0" layoutY="56.0" />
+        <Button fx:id="pubishVacation" disable="true" layoutX="275.0" layoutY="479.0" mnemonicParsing="false" onAction="#publish" text="pubish vacation" />
+        <TextField fx:id="destinetionContryTXT" layoutX="413.0" layoutY="56.0" onKeyReleased="#KeyReleased" />
         <Label layoutX="67.0" layoutY="56.0" prefHeight="25.0" prefWidth="129.0" text="destinetion contry">
             <font>
                 <Font size="14.0" />
             </font>
         </Label>
-        <TextField fx:id="NumOfTicketsTXT" layoutX="413.0" layoutY="125.0" />
-        <TextField fx:id="flightCompanyTXT" layoutX="413.0" layoutY="196.0" />
-        <TextField fx:id="baggageTXT" layoutX="413.0" layoutY="234.0" />
-        <TextField fx:id="kindOfVacationTXT" layoutX="413.0" layoutY="277.0" />
-        <TextField fx:id="kindOfSleepingPlaceTXT" layoutX="413.0" layoutY="319.0" />
-        <TextField fx:id="theRateOfTheSleepingPlaceTXT" layoutX="413.0" layoutY="400.0" />
+        <TextField fx:id="NumOfTicketsTXT" layoutX="413.0" layoutY="125.0" onKeyReleased="#KeyReleased" />
+        <TextField fx:id="flightCompanyTXT" layoutX="413.0" layoutY="196.0" onKeyReleased="#KeyReleased" />
+        <TextField fx:id="baggageTXT" layoutX="413.0" layoutY="234.0" onKeyReleased="#KeyReleased" />
+        <TextField fx:id="kindOfVacationTXT" layoutX="413.0" layoutY="277.0" onKeyReleased="#KeyReleased" />
+        <TextField fx:id="kindOfSleepingPlaceTXT" layoutX="413.0" layoutY="319.0" onKeyReleased="#KeyReleased" />
+        <TextField fx:id="theRateOfTheSleepingPlaceTXT" layoutX="413.0" layoutY="400.0" onKeyReleased="#KeyReleased" />
         <Label layoutX="67.0" layoutY="196.0" prefHeight="25.0" prefWidth="129.0" text="flight company">
             <font>
                 <Font size="14.0" />
@@ -74,15 +73,15 @@
                 <Font size="14.0" />
             </font>
         </Label>
-        <DatePicker fx:id="toDateTXT" layoutX="401.0" layoutY="92.0" />
-        <DatePicker fx:id="fromDateTXT" layoutX="153.0" layoutY="92.0" />
+        <DatePicker fx:id="toDateTXT" layoutX="401.0" layoutY="92.0" onAction="#activeToDate" />
+        <DatePicker fx:id="fromDateTXT" layoutX="153.0" layoutY="92.0" onAction="#activeFromDate" />
         <Label layoutX="337.0" layoutY="92.0" prefHeight="25.0" prefWidth="129.0" text="to date">
             <font>
                 <Font size="14.0" />
             </font>
         </Label>
-        <ComboBox fx:id="kindOfTicketTXT" layoutX="413.0" layoutY="159.0" prefWidth="150.0" />
-        <ComboBox fx:id="isTheSleepingCostsIncludesTXT" layoutX="412.0" layoutY="360.0" prefWidth="150.0" />
-        <ComboBox fx:id="isThereReturnFlightTXT" layoutX="413.0" layoutY="450.0" prefWidth="150.0" />
+        <ComboBox fx:id="kindOfTicketTXT" layoutX="413.0" layoutY="159.0" onAction="#activeKindOfTicket" prefWidth="150.0" />
+        <ComboBox fx:id="isTheSleepingCostsIncludesTXT" layoutX="412.0" layoutY="360.0" onAction="#activeIsTheSleepingCostsIncludes" prefWidth="150.0" />
+        <ComboBox fx:id="isThereReturnFlightTXT" layoutX="413.0" layoutY="437.0" onAction="#activeIsThereReturnFlight" prefWidth="150.0" />
     </children>
 </Pane>

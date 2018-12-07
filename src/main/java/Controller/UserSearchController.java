@@ -12,17 +12,6 @@ public class UserSearchController extends AbstractController {
     private FXMLLoader fxmlLoader;
 
     /**
-     * This function will set the right view for this class
-     */
-    public void setView(AbstractView abstractView) {
-        if (abstractView instanceof UserSearchView)
-            super.setView(abstractView);
-        else {
-            super.setView(null);
-        }
-    }
-
-    /**
      * This function will activate when the button is pressed
      */
     public void searchForUser()
@@ -47,6 +36,11 @@ public class UserSearchController extends AbstractController {
         }
         //If the username is valid display it's data
         ((UserSearchView)view).fillFieldsWithUserDetails(selectedUser);
+
+    }
+
+    @Override
+    protected void FillAllData() {
 
     }
 }

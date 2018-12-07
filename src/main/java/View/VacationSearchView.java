@@ -20,7 +20,6 @@ public class VacationSearchView extends AbstractView {
 
     @FXML
     public Button searchButton;
-    public TextField countryTextBox;
     public DatePicker fromDateDatePicker;
     public DatePicker toDateDatePicker;
     public TextField adultCountTextBox;
@@ -34,6 +33,7 @@ public class VacationSearchView extends AbstractView {
     public TableColumn buttonColumn;
     public Text commentsText;
     public int ticketCount;
+    public ChoiceBox countryChoiceBox;
 
     /**
      * This function will initialize an instance of this class
@@ -122,18 +122,6 @@ public class VacationSearchView extends AbstractView {
     }
 
     /**
-     * Checks that only alphabetic chars are set in country field
-     */
-    public void CheckCountryText() {
-        String text = countryTextBox.getText();
-        if (!text.matches("[A-Za-z]*")) {
-            countryTextBox.setText(text.replaceAll("[^A-Za-z]", ""));
-//            setComments("only letters allowed in \"country\"");
-        }
-        ((VacationSearchController)getController()).CheckEnableSearchButton();
-    }
-
-    /**
      * Checks that only numbers are set in ticket number fields
      */
     public void CheckTicketCountText() {
@@ -172,7 +160,7 @@ public class VacationSearchView extends AbstractView {
      */
     public void SearchVacation() {
         VacationSearchController controller = (VacationSearchController) getController();
-        ArrayList<Vacation> vacations = controller.GetRelevantVacations(countryTextBox.getText(),
+        ArrayList<Vacation> vacations = controller.GetRelevantVacations(countryChoiceBox.getValue().toString(),
                 fromDateDatePicker.getValue(), toDateDatePicker.getValue());
         ObservableList<VacationEntry> items = FXCollections.observableArrayList();
         for (Vacation vacation : vacations){
@@ -182,6 +170,10 @@ public class VacationSearchView extends AbstractView {
         searchResultsTableView.setItems(items);
         searchResultsTableView.getSortOrder().add(priceColumn);
         searchResultsTableView.setVisible(true);
+    }
+
+    public void CountryPicked() {
+        ((VacationSearchController)getController()).CheckEnableSearchButton();
     }
 
     /**

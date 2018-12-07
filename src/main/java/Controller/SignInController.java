@@ -6,15 +6,6 @@ import Model.User;
 
 public class SignInController extends AbstractController {
 
-
-    /**
-     * The constructor
-     */
-    public SignInController()
-    {
-
-    }
-
     /**
      * This function will set the right view for this class
      */
@@ -26,6 +17,10 @@ public class SignInController extends AbstractController {
         }
     }
 
+    @Override
+    protected void FillAllData() {
+
+    }
 
     /**
      * Transitions to the sign up screen

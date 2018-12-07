@@ -37,6 +37,5 @@
         <Text fx:id="birthday_display" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="4" />
         <Text fx:id="city_display" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="5" />
         <Button fx:id="search_user_button" mnemonicParsing="false" onAction="#searchForUser" text="Search User" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-        <Button mnemonicParsing="false" onAction="#goBack" text="Go Back" GridPane.columnIndex="0" GridPane.rowIndex="7" />
     </children>
 </GridPane>

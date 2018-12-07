@@ -53,4 +53,9 @@ public class SignUpController extends AbstractController {
             signUpView.setComments("Username already exists!");
         }
     }
+
+    @Override
+    protected void FillAllData() {
+
+    }
 }
