@@ -1,6 +1,5 @@
 package Controller;
 
-import View.AbstractView;
 import View.PersonalAreaView;
 import Model.User;
 import javafx.scene.control.ButtonType;
@@ -85,7 +84,7 @@ public class PersonalAreaController extends AbstractController {
     }
 
     /**
-     * Deletes the user.
+     * Deletes the user, if he accepts in the dialogue.
      */
     public void deleteUser() {
         if (view.getResultFromWarning("Delete your profile?") == ButtonType.NO) return;

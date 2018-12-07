@@ -11,7 +11,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * This class represents an abstract view. Holds the main menu functions
+ * This class represents an abstract view. Holds the main menu functions.
  */
 public abstract class AbstractView implements Initializable {
 
@@ -73,7 +73,9 @@ public abstract class AbstractView implements Initializable {
      */
     public void vacationPublish() { controller.vacationPublish(); }
 
-
+    /**
+     * Transitions to the personal area window
+     */
     public void personalArea() { controller.personalArea(); }
 
     /**

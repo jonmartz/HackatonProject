@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * Manages the transitions between the different views associated with user account management.
+ * Manages the transitions between the different views.
  */
 public class ViewChanger {
     private Stage stage;
@@ -48,6 +48,7 @@ public class ViewChanger {
             e.printStackTrace();
         }
     }
+
     /**
      * Transitions to the sign up screen.
      */
@@ -62,6 +63,9 @@ public class ViewChanger {
         }
     }
 
+    /**
+     * Transitions to the sign in screen.
+     */
     public void signIn() {
         try {
             fxmlLoader = new FXMLLoader();
@@ -88,6 +92,9 @@ public class ViewChanger {
         }
     }
 
+    /**
+     * Transitions to the search vacation screen.
+     */
     public void searchVacation() {
         try {
             fxmlLoader = new FXMLLoader();
@@ -99,6 +106,9 @@ public class ViewChanger {
         }
     }
 
+    /**
+     * Transitions to the publish vacation screen.
+     */
     public void publishVacation() {
         try {
             fxmlLoader = new FXMLLoader();
@@ -110,6 +120,9 @@ public class ViewChanger {
         }
     }
 
+    /**
+     * Transitions to the last view
+     */
     public void lastView() {
         if (lastView.equals("publishVacation")) publishVacation();
         else if (lastView.equals("searchVacation")) searchVacation();
@@ -117,6 +130,10 @@ public class ViewChanger {
         else searchVacation(); // default window is vacation search
     }
 
+    /**
+     * setter
+     * @param lastView to set
+     */
     public void setLastView(String lastView) {
         this.lastView = lastView;
     }

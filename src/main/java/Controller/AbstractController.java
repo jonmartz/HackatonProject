@@ -37,7 +37,7 @@ public abstract class AbstractController {
         this.view = abstractView;
     }
     /**
-     * Sets the controller's model
+     * Sets the controller's model and then calls FillAllData that function needs the model to be set
      * @param database to set
      */
     public void setDatabase(Database database) {
@@ -47,7 +47,7 @@ public abstract class AbstractController {
     }
 
     /**
-     * Use the database to fill all necessary data
+     * Use the database to fill all necessary data in the current view
      */
     protected abstract void FillAllData();
 

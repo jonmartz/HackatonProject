@@ -26,7 +26,6 @@ public class Main extends Application {
                 "1000");
     }
 
-
     public static void main(String[] args) {
         launch(args);
     }
