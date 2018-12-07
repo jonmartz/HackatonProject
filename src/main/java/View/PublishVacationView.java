@@ -30,12 +30,13 @@ public class PublishVacationView extends AbstractView{
     public ComboBox kindOfTicketTXT;
     public ComboBox isTheSleepingCostsIncludesTXT;
     public ComboBox isThereReturnFlightTXT;
-    public Text comments; // Problems in user input are shown here
+    //public Text comments; // Problems in user input are shown here
     public String todate;
     public String fromdate;
     public String KindOfTicketSTR;
     public String isTheSleepingCostsIncludesSTR;
     public String isThereReturnFlightSTR;
+    public String price;
 
     /**
      * This function will initialize an instance of this class
@@ -48,9 +49,9 @@ public class PublishVacationView extends AbstractView{
         kindOfTicketTXT.getItems().removeAll(kindOfTicketTXT.getItems());
         kindOfTicketTXT.getItems().addAll("adult", "child", "baby");
         isTheSleepingCostsIncludesTXT.getItems().removeAll(isTheSleepingCostsIncludesTXT.getItems());
-        isTheSleepingCostsIncludesTXT.getItems().addAll("yes,no");
+        isTheSleepingCostsIncludesTXT.getItems().addAll("yes","no");
         isThereReturnFlightTXT.getItems().removeAll(isThereReturnFlightTXT.getItems());
-        isThereReturnFlightTXT.getItems().addAll("yes,no");
+        isThereReturnFlightTXT.getItems().addAll("yes","no");
     }
 
     /**
@@ -64,14 +65,14 @@ public class PublishVacationView extends AbstractView{
                     || theRateOfTheSleepingPlaceTXT.getText().isEmpty() || todate.isEmpty() || fromdate.isEmpty()||KindOfTicketSTR.isEmpty()
                     ||isThereReturnFlightSTR.isEmpty()||isTheSleepingCostsIncludesSTR.isEmpty()) {
                 pubishVacation.setDisable(true);
-                comments.setText("Please fill all fields");
+                //comments.setText("Please fill all fields");
             } else {
                 pubishVacation.setDisable(false);
-                comments.setText("");
+                //comments.setText("");
             }
         } catch (Exception e) {
             pubishVacation.setDisable(true);
-            comments.setText("Please fill all fields");
+            //comments.setText("Please fill all fields");
         }
     }
 
@@ -166,10 +167,10 @@ public class PublishVacationView extends AbstractView{
         return (String) isThereReturnFlightTXT.getValue();
     }
 
-    public void setComments(String comment)
-    {
-        this.comments.setText(comment);
-    }
+    //public void setComments(String comment)
+   // {
+     //   this.comments.setText(comment);
+    //}
 
     public void setToDate(String val){
         todate=val;
@@ -200,6 +201,11 @@ public class PublishVacationView extends AbstractView{
     public void activeIsThereReturnFlight()
     {
         ((PublishController)this.getController()).IsThereReturnFlightPicked();
+    }
+
+    public void publish()
+    {
+        ((PublishController)this.getController()).Publish();
     }
 
 

@@ -20,16 +20,16 @@ public class PublishController extends AbstractController {
         PublishVacationView publishVacationView = (PublishVacationView) view;
         Vacation vacation = database.getVacation(publishVacationView.getvacationIDText());
         if (vacation == null) {
-            database.addVacation(publishVacationView.getvacationIDText(), publishVacationView.getDestinetionContryTXT(), publishVacationView.getNumOfTicketsTXT(),
+            database.addVacation( publishVacationView.getDestinetionContryTXT(), publishVacationView.getNumOfTicketsTXT(),
                     publishVacationView.getFlightCompanyTXT(), publishVacationView.getBaggageTXT(), publishVacationView.getKindOfVacationTXT(), publishVacationView.getKindOfSleepingPlaceTXT(),
                     publishVacationView.getTheRateOfTheSleepingPlaceTXT(), publishVacationView.getTodateStr(), publishVacationView.getFromdateStr(),
-                    publishVacationView.KindOfTicketSTR, publishVacationView.isTheSleepingCostsIncludesSTR, publishVacationView.isThereReturnFlightSTR );
+                    publishVacationView.KindOfTicketSTR, publishVacationView.isTheSleepingCostsIncludesSTR, publishVacationView.isThereReturnFlightSTR,"100" );
             viewChanger.mainMenu();
             viewChanger.setupView(database);
         }
-        else {
-            publishVacationView.setComments("Vacation already exists!");
-        }
+        //else {
+            //publishVacationView.setComments("Vacation already exists!");
+       // }
     }
 
     public void toDatePicked() {
@@ -39,7 +39,7 @@ public class PublishController extends AbstractController {
             publishVacationView.setToDate(dateOfVacation.toString());
             publishVacationView.KeyReleased();
         } else {
-            publishVacationView.setComments("the date of the vacation already passed");
+            //publishVacationView.setComments("the date of the vacation already passed");
             publishVacationView.cleartoDateTXT();
         }
     }
@@ -51,7 +51,7 @@ public class PublishController extends AbstractController {
             publishVacationView.setfromDate(dateOfVacation.toString());
             publishVacationView.KeyReleased();
         } else {
-            publishVacationView.setComments("the date of the vacation already passed");
+            //publishVacationView.setComments("the date of the vacation already passed");
             publishVacationView.clearfromDateTXT();
         }
     }
