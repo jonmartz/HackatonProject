@@ -6,8 +6,12 @@ import Model.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
 /**
@@ -30,20 +34,7 @@ public class UserSearchView extends AbstractView{
 
     public TextField enter_username_textfield;//The textfiled that will contain the username of the user that we want to search
     public Button search_user_button;//The "Search" button
-
-    /**
-     * Ths functrion will assign the given controller to it self if it's the right one
-     * @param controller - The given controller
-     */
-    public void setController(AbstractController controller) {
-        if (controller instanceof UserSearchController)
-            super.setController(controller);
-        else {
-            super.setController(null);
-        }
-    }
-
-
+    public ImageView pictureImageView; // profile picture
 
     /**
      * Fills the user details in the user personalArea.fxml screen.
@@ -60,6 +51,7 @@ public class UserSearchView extends AbstractView{
         last_name_display.setVisible(true);
         birthday_display.setVisible(true);
         city_display.setVisible(true);
+        pictureImageView.setVisible(true);
 
         //Set the textFields's text to be the user's data
         username_display.setText(user.username);
@@ -68,6 +60,9 @@ public class UserSearchView extends AbstractView{
         birthday_display.setText(user.birthdate);
         city_display.setText(user.city);
         error_message.setVisible(false);
+        Image image = getImage(user.pictureFilePath);
+        if (image != null) pictureImageView.setImage(image);
+
         enter_username_textfield.setText("");
     }
 
@@ -87,6 +82,7 @@ public class UserSearchView extends AbstractView{
         last_name_display.setVisible(false);
         birthday_display.setVisible(false);
         city_display.setVisible(false);
+        pictureImageView.setVisible(false);
 
         //Turn the text f the error message to visible
         error_message.setVisible(true);
@@ -133,5 +129,18 @@ public class UserSearchView extends AbstractView{
     public void searchForUser()
     {
         ((UserSearchController)this.getController()).searchForUser();
+    }
+    /**
+     * Get an image from file
+     * @param pictureFilePath of file
+     * @return image object
+     */
+    private Image getImage(String pictureFilePath){
+        Image image = null;
+        try {
+            FileInputStream inputstream = new FileInputStream(pictureFilePath);
+            image = new Image(inputstream);
+        } catch (FileNotFoundException ignored) { }
+        return image;
     }
 }
