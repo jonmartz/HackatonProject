@@ -77,7 +77,7 @@ public class VacationSearchView extends AbstractView {
                         } else {
                             button.setOnAction(event -> {
                                 VacationEntry vacationEntry = getTableView().getItems().get(getIndex());
-                                System.out.println(vacationEntry.ID); //todo: transition to vac details
+                                CheckVacation(vacationEntry.ID); //todo: transition to vac details
                             });
                             setGraphic(button);
                             setText(null);
@@ -89,6 +89,17 @@ public class VacationSearchView extends AbstractView {
         };
     }
 
+    /**
+     * Go to vacation details
+     * @param vacationID id of vacation to check
+     */
+    private void CheckVacation(String vacationID) {
+        ((VacationSearchController)this.getController()).CheckVacation(vacationID);
+    }
+
+    /**
+     * Clear the to date picker text
+     */
     public void ClearToDatePicker() {
         this.toDateDatePicker.getEditor().clear();
     }

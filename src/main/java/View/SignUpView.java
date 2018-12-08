@@ -6,8 +6,16 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -27,6 +35,8 @@ public class SignUpView extends AbstractView {
     public String birthdate; //The birthday value
     public Text comments; // Problems in user input are shown here
     public Button signUp;//The "SignUp" button
+    public ImageView pictureImageView; // to show the profile picture
+    public String pictureFilePath; // path of picture file
 
 
     /**
@@ -161,5 +171,31 @@ public class SignUpView extends AbstractView {
         ((SignUpController)this.getController()).signUp();
     }
 
+    /**
+     * This function is called after clicking on the profile picture field, to add a profile picture.
+     */
+    public void AddPicture() {
+        try {
+            pictureFilePath = getFilePath("Choose profile picture");
+            if (pictureFilePath == null) return;
+            FileInputStream inputstream = new FileInputStream(pictureFilePath);
+            Image image = new Image(inputstream);
+            pictureImageView.setImage(image);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
+    /**
+     * Opens a "browse" window for the user to choose a file.
+     * @param title of browse window
+     * @return path of file chosen
+     */
+    private String getFilePath(String title) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle(title);
+        File file = fileChooser.showOpenDialog(null);
+        if (file != null) return file.getAbsolutePath();
+        return null;
+    }
 }

@@ -12,6 +12,7 @@ import java.util.HashSet;
 public class Database {
     private Connection connection;
     private User currentUser;
+    private Vacation currentVacation;
 
     /**
      * Constructor. If the database.db doesn't exist, creates it.
@@ -28,7 +29,8 @@ public class Database {
                     "birthdate string, " +
                     "firstName string, " +
                     "lastName string, " +
-                    "city string)");
+                    "city string, " +
+                    "picture varbinary)");
 
             // Create vacations table
             statement.executeUpdate("create table if not exists vacations (" +
@@ -81,6 +83,38 @@ public class Database {
     }
 
     /**
+     * Setter
+     * @return user that is currently signed in
+     */
+    public User getCurrentUser() {
+        return this.currentUser;
+    }
+
+    /**
+     * Getter
+     * @param user that is currently signed in
+     */
+    public void setCurrentUser(User user) {
+        this.currentUser = user;
+    }
+
+    /**
+     * Getter
+     * @return vacation that is currently being viewed
+     */
+    public Vacation getCurrentVacation() {
+        return currentVacation;
+    }
+
+    /**
+     * Setter
+     * @param currentVacation that is currently being viewed
+     */
+    public void setCurrentVacation(Vacation currentVacation) {
+        this.currentVacation = currentVacation;
+    }
+
+    /**
      * Adds a user to the database.
      *
      * @param username  of user
@@ -115,6 +149,23 @@ public class Database {
         }
     }
 
+    /**
+     * Add a vacation to database.
+     * @param destinetionContryTXT          of vacation
+     * @param NumOfTicketsTXT               of vacation
+     * @param flightCompanyTXT              of vacation
+     * @param baggageTXT                    of vacation
+     * @param kindOfVacationTXT             of vacation
+     * @param kindOfSleepingPlaceTXT        of vacation
+     * @param theRateOfTheSleepingPlaceTXT  of vacation
+     * @param toDate                        of vacation
+     * @param fromDateTXT                   of vacation
+     * @param kindOfTicketTXT               of vacation
+     * @param isTheSleepingCostsIncludesTXT of vacation
+     * @param isThereReturnFlightTXT        of vacation
+     * @param priceTXT                      of vacation
+     */
+    //todo: add tickets photo and owner fields
     public void addVacation(String destinetionContryTXT, String NumOfTicketsTXT,
                             String flightCompanyTXT, String baggageTXT, String kindOfVacationTXT,
                             String kindOfSleepingPlaceTXT, String theRateOfTheSleepingPlaceTXT,
@@ -144,14 +195,6 @@ public class Database {
         } finally {
             closeConnection();
         }
-    }
-
-    public void setCurrentUser(User user) {
-        this.currentUser = user;
-    }
-
-    public User getCurrentUser() {
-        return this.currentUser;
     }
 
     /**

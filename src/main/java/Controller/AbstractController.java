@@ -70,6 +70,16 @@ public abstract class AbstractController {
     }
 
     /**
+     * Gets a vacation from database
+     * @param vacationID of vacation
+     * @return vacation object
+     */
+    public Vacation GetVacation(String vacationID) {
+        return database.getVacation(vacationID);
+    }
+
+
+    /**
      * Gets all the vacations from database
      * @return list with all vacations
      */
@@ -109,6 +119,16 @@ public abstract class AbstractController {
         setLastView("searchVacation");
         viewChanger.searchVacation();
         viewChanger.setupView(database);
+    }
+
+    /**
+     * Transitions to vacation details
+     * @param vacationID id of vacation to check
+     */
+    public void CheckVacation(String vacationID) {
+        database.setCurrentVacation(GetVacation(vacationID));
+        System.out.println(vacationID);
+        //todo: jump to vacation details screen
     }
 
     /**
