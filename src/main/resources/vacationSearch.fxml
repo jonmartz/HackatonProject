@@ -35,7 +35,7 @@
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             </rowConstraints>
                             <children>
-                                <Button fx:id="vacationSearch" mnemonicParsing="false" onAction="#vacationSearch" prefHeight="37.0" prefWidth="452.0" style="-fx-background-color: #28733e; -fx-border-color: BLACK;" text="Search Vacation" textFill="WHITE">
+                                <Button fx:id="vacationSearch" mnemonicParsing="false" prefHeight="37.0" prefWidth="452.0" style="-fx-background-color: #f4f4f4" textFill="#28733e" text="Search Vacation">
                                     <font>
                                         <Font name="System Bold" size="14.0" />
                                     </font>

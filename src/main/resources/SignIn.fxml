@@ -38,7 +38,7 @@
                                         <Font name="System Bold" size="14.0" />
                                     </font>
                                 </Button>
-                                <Button fx:id="signIn" disable="true" mnemonicParsing="false" onAction="#signIn" prefHeight="37.0" prefWidth="452.0" style="-fx-background-color: #28733e; -fx-border-color: BLACK;" text="Sign In" textFill="WHITE" GridPane.columnIndex="4">
+                                <Button fx:id="signIn" mnemonicParsing="false" prefHeight="37.0" prefWidth="452.0" style="-fx-background-color: #f4f4f4" text="Sign In" textFill="#28733e" GridPane.columnIndex="4">
                                     <font>
                                         <Font name="System Bold" size="14.0" />
                                     </font>

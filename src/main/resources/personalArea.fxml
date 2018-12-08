@@ -45,7 +45,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Button>
-                        <Button fx:id="personalArea" disable="true" mnemonicParsing="false" onAction="#personalArea" prefHeight="37.0" prefWidth="452.0" style="-fx-background-color: #28733e; -fx-border-color: BLACK;" text="Personal Area" textFill="WHITE" GridPane.columnIndex="3">
+                        <Button fx:id="personalArea" disable="true" mnemonicParsing="false" prefHeight="37.0" prefWidth="452.0" style="-fx-background-color: #f4f4f4" textFill="#28733e" text="Personal Area" GridPane.columnIndex="3">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
