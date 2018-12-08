@@ -121,6 +121,20 @@ public class ViewChanger {
     }
 
     /**
+     * Transitions to the vacation details screen.
+     */
+    public void detailsVacation() {
+        try {
+            fxmlLoader = new FXMLLoader();
+            Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("detailsVacation.fxml").openStream());
+            stage.setTitle("Vacation Details");
+            stage.setScene(new Scene(root, 790 , 450));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Transitions to the last view
      */
     public void lastView() {

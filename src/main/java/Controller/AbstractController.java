@@ -5,7 +5,7 @@ import Model.Vacation;
 import View.AbstractView;
 import Model.User;
 import View.ViewChanger;
-import javafx.scene.control.Alert;
+import View.DetailsVacationView;
 import javafx.scene.control.ButtonType;
 
 import java.time.LocalDate;
@@ -127,6 +127,8 @@ public abstract class AbstractController {
     public void CheckVacation(String vacationID) {
         database.setCurrentVacation(GetVacation(vacationID));
         System.out.println(vacationID);
+        viewChanger.detailsVacation();
+        viewChanger.setupView(database);
         //todo: jump to vacation details screen
     }
 
