@@ -57,7 +57,7 @@
                                         <Font name="System Bold" size="14.0" />
                                     </font>
                                 </Button>
-                                <Button fx:id="searchUser" disable="true" mnemonicParsing="false" onAction="#searchUser" prefHeight="37.0" prefWidth="452.0" style="-fx-background-color: #28733e; -fx-border-color: BLACK;" text="Search User" textFill="WHITE" GridPane.columnIndex="2">
+                                <Button fx:id="searchUser" disable="true" mnemonicParsing="false" prefHeight="37.0" prefWidth="452.0" style="-fx-background-color: #f4f4f4" textFill="#28733e" text="Search User" GridPane.columnIndex="2">
                                     <font>
                                         <Font name="System Bold" size="14.0" />
                                     </font>
