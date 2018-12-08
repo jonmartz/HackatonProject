@@ -78,7 +78,6 @@ public abstract class AbstractController {
         return database.getVacation(vacationID);
     }
 
-
     /**
      * Gets all the vacations from database
      * @return list with all vacations

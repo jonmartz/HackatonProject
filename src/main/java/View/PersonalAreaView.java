@@ -6,8 +6,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 
+import java.io.File;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -26,6 +30,8 @@ public class PersonalAreaView extends AbstractView {
     public String birthdate; //The birthday value
     public Text comments; // Problems in user input are shown here
     public Button saveChanges;//The "SaveChanges" button
+    public ImageView pictureImageView;
+    public String pictureFilePath;
 
 
     /**
@@ -59,11 +65,6 @@ public class PersonalAreaView extends AbstractView {
     }
 
     /**
-     * This function will fill the fields with the user's data
-     */
-    public void fillFieldsWithUserDetails(){((PersonalAreaController)this.getController()).fillFieldsWithUserDetails();}
-
-    /**
      * This function will return the birthday value
      * @return - The birthday value
      */
@@ -89,7 +90,11 @@ public class PersonalAreaView extends AbstractView {
     {
         return password.getText();
     }
-
+    /**
+     * Getter for picture file
+     * @return path of file
+     */
+    public String getPictureFilePath() { return pictureFilePath; }
     /**
      * This function will return the text in the username field
      * @return - The text in the username field
@@ -167,7 +172,7 @@ public class PersonalAreaView extends AbstractView {
 
     /**
      * This function will set the value of the string birthday value
-     * @param birthdate
+     * @param birthdate of user
      */
     public void setBirthdayString(String birthdate)
     {
@@ -221,5 +226,23 @@ public class PersonalAreaView extends AbstractView {
     public void deleteUser()
     {
         ((PersonalAreaController)this.getController()).deleteUser();
+    }
+
+    /**
+     * This function is called after clicking on the profile picture field, to add a profile picture.
+     */
+    public void AddPicture() { ((PersonalAreaController)this.getController()).AddPicture(); }
+
+    /**
+     * Opens a "browse" window for the user to choose a file.
+     * @param title of browse window
+     * @return path of file chosen
+     */
+    public String getFilePath(String title) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle(title);
+        File file = fileChooser.showOpenDialog(null);
+        if (file != null) return file.getAbsolutePath();
+        return null;
     }
 }
