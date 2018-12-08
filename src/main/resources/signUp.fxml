@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -62,8 +63,8 @@
          <center>
             <GridPane alignment="center" hgap="10.0" vgap="10.0">
                <children>
-                  <TextField fx:id="username" layoutX="10.0" layoutY="26.0" onKeyReleased="#KeyReleased" prefHeight="5.0" prefWidth="310.0" promptText="Enter username" GridPane.columnSpan="2" GridPane.rowIndex="2" />
-                  <TextField fx:id="password" onKeyReleased="#KeyReleased" prefHeight="31.0" prefWidth="230.0" promptText="Enter password" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+                  <TextField fx:id="username" layoutX="10.0" layoutY="26.0" onKeyReleased="#KeyReleased" prefHeight="5.0" prefWidth="310.0" promptText="Enter username" GridPane.rowIndex="2" />
+                  <TextField fx:id="password" onKeyReleased="#KeyReleased" prefHeight="31.0" prefWidth="230.0" promptText="Enter password" GridPane.rowIndex="3" />
                   <TextField fx:id="firstName" onKeyReleased="#KeyReleased" promptText="First name" GridPane.rowIndex="4" />
                   <TextField fx:id="lastName" layoutX="14.0" layoutY="110.0" onKeyReleased="#KeyReleased" promptText="Last name" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <DatePicker fx:id="birthdatePicker" onAction="#birthdatePicked" promptText="Pick birthdate" GridPane.rowIndex="5" />
@@ -74,6 +75,8 @@
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font></Text>
+                  <TextField editable="false" prefHeight="100.0" prefWidth="156.0" promptText="Select profile picture" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="3" />
+                  <ImageView fx:id="pictureImageView" fitHeight="93.0" fitWidth="156.0" onMouseClicked="#AddPicture" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
                <columnConstraints>
                   <ColumnConstraints maxWidth="195.0" minWidth="70.0" prefWidth="144.0" />

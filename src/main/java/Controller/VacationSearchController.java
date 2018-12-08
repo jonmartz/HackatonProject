@@ -22,20 +22,28 @@ public class VacationSearchController extends AbstractController {
     /**
      * Is called when the fromDate is picked. If dates are illegal clears the fromDate datePicker.
      */
-    public void FromDatePicked() {
-        DatePicked(true);
-    }
+    public void FromDatePicked() { DatePicked(true); }
 
     /**
      * If dates are illegal clears the [dateToClear] date and displays an error message.
-     *
      * @param clearFromDate true to clear fromDate, false to clear toDate
      */
-    public void DatePicked(Boolean clearFromDate) {
+    private void DatePicked(Boolean clearFromDate) {
         VacationSearchView view = (VacationSearchView) this.view;
         LocalDate fromDate = view.fromDateDatePicker.getValue();
         LocalDate toDate = view.toDateDatePicker.getValue();
 
+        // Check that dates are after today
+        if (clearFromDate && fromDate != null && fromDate.isBefore(LocalDate.now())){
+            view.setComments("\"from\" date can't be before today!");
+            view.ClearFromDatePicker();
+            return;
+        }
+        if (!clearFromDate && toDate != null && toDate.isBefore(LocalDate.now())){
+            view.setComments("\"to\" date can't be before today!");
+            view.ClearToDatePicker();
+            return;
+        }
         // If both dates are selected
         if (fromDate != null && toDate != null) {
             if (!fromDate.isAfter(toDate)) {
