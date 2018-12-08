@@ -36,8 +36,19 @@ public class SignUpView extends AbstractView {
     public Text comments; // Problems in user input are shown here
     public Button signUp;//The "SignUp" button
     public ImageView pictureImageView; // to show the profile picture
+
+
     public String pictureFilePath; // path of picture file
 
+    /**
+     * This function will initialize an instance of this class
+     */
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        SignUpController signUpController = new SignUpController();
+        this.setController(signUpController);
+        signUpController.setView(this);
+    }
 
     /**
      * Activates after user types in a text field, in order to enable/disable the sign in button
@@ -45,8 +56,10 @@ public class SignUpView extends AbstractView {
      */
     public void KeyReleased() {
         try {
-            if (username.getText().isEmpty() || password.getText().isEmpty() || birthdate.isEmpty()
-                    || firstName.getText().isEmpty() || lastName.getText().isEmpty() || city.getText().isEmpty()) {
+            if (username.getText().isEmpty() || password.getText().isEmpty()
+                    || birthdate.isEmpty() || firstName.getText().isEmpty()
+                    || lastName.getText().isEmpty() || city.getText().isEmpty()
+                    || pictureFilePath.isEmpty()) {
                 signUp.setDisable(true);
                 comments.setText("Please fill all fields");
             } else {
@@ -57,17 +70,6 @@ public class SignUpView extends AbstractView {
             signUp.setDisable(true);
             comments.setText("Please fill all fields");
         }
-    }
-
-
-    @Override
-    /**
-     * This function will initialize an instance of this class
-     */
-    public void initialize(URL location, ResourceBundle resources) {
-        SignUpController signUpController = new SignUpController();
-        this.setController(signUpController);
-        signUpController.setView(this);
     }
 
     /**
@@ -109,7 +111,11 @@ public class SignUpView extends AbstractView {
     public String getFirstNameText() {
         return firstName.getText();
     }
-
+    /**
+     * Getter for picture file
+     * @return path of file
+     */
+    public String getPictureFilePath() { return pictureFilePath; }
     /**
      * This function will return the text in the lastName field
      * @return - The text in the lastName field
@@ -174,24 +180,14 @@ public class SignUpView extends AbstractView {
     /**
      * This function is called after clicking on the profile picture field, to add a profile picture.
      */
-    public void AddPicture() {
-        try {
-            pictureFilePath = getFilePath("Choose profile picture");
-            if (pictureFilePath == null) return;
-            FileInputStream inputstream = new FileInputStream(pictureFilePath);
-            Image image = new Image(inputstream);
-            pictureImageView.setImage(image);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
+    public void AddPicture() { ((SignUpController)this.getController()).AddPicture(); }
 
     /**
      * Opens a "browse" window for the user to choose a file.
      * @param title of browse window
      * @return path of file chosen
      */
-    private String getFilePath(String title) {
+    public String getFilePath(String title) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle(title);
         File file = fileChooser.showOpenDialog(null);

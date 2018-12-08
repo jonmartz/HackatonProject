@@ -3,23 +3,16 @@ package Controller;
 import Model.User;
 import View.AbstractView;
 import View.SignUpView;
+import javafx.scene.image.Image;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 
 /**
  * Controller for the sign up screen, where a new user can create an account.
  */
 public class SignUpController extends AbstractController {
-
-
-    /**
-     * The constructor
-     */
-    public SignUpController()
-    {
-
-    }
-
     /**
      * Updates the birthday string, after a date in the date picker has been picked.
      */
@@ -45,7 +38,7 @@ public class SignUpController extends AbstractController {
         if (user == null) {
             database.addUser(signUpView.getUsernameText(), signUpView.getPasswordText(),
                     signUpView.getBirthdayString(), signUpView.getFirstNameText(),
-                    signUpView.getLastNameText(), signUpView.getCityText());
+                    signUpView.getLastNameText(), signUpView.getCityText(), signUpView.getPictureFilePath());
             database.setCurrentUser(database.getUser(signUpView.getUsernameText()));
             viewChanger.lastView();
             viewChanger.setupView(database);
@@ -57,6 +50,23 @@ public class SignUpController extends AbstractController {
 
     @Override
     protected void FillAllData() {
+        // Nothing to do here
+    }
 
+    /**
+     * This function is called after clicking on the profile picture field, to add a profile picture.
+     */
+    public void AddPicture() {
+        try {
+            SignUpView signUpView = (SignUpView) this.view;
+            signUpView.pictureFilePath = signUpView.getFilePath("Choose profile picture");
+            if (signUpView.pictureFilePath == null) return;
+            FileInputStream inputstream = new FileInputStream(signUpView.pictureFilePath);
+            Image image = new Image(inputstream);
+            signUpView.pictureImageView.setImage(image);
+            signUpView.KeyReleased();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }

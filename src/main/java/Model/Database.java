@@ -30,7 +30,7 @@ public class Database {
                     "firstName string, " +
                     "lastName string, " +
                     "city string, " +
-                    "picture varbinary)");
+                    "picture string)");
 
             // Create vacations table
             statement.executeUpdate("create table if not exists vacations (" +
@@ -116,16 +116,16 @@ public class Database {
 
     /**
      * Adds a user to the database.
-     *
-     * @param username  of user
-     * @param password  of user
-     * @param birthdate of user
-     * @param firstName of user
-     * @param lastName  of user
-     * @param city      of user
+     *  @param username             of user
+     * @param password              of user
+     * @param birthdate             of user
+     * @param firstName             of user
+     * @param lastName              of user
+     * @param city                  of user
+     * @param picture       of user
      */
     public void addUser(String username, String password, String birthdate, String firstName,
-                        String lastName, String city) {
+                        String lastName, String city, String picture) {
         try {
             openConnection();
             Statement statement = connection.createStatement();
@@ -136,17 +136,19 @@ public class Database {
                         "'" + birthdate + "', " +
                         "'" + firstName + "', " +
                         "'" + lastName + "', " +
-                        "'" + city + "'" + ")";
+                        "'" + city + "', " +
+                        "'" + picture + "'" + ")";
                 statement.executeUpdate(command);
-            } else {
-                // Add user already exists stuff
-                //System.out.println("user already exists");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             closeConnection();
         }
+
+//        Insert Into FEMALE(ID, Image)
+//        Select '1', BulkColumn
+//        from Openrowset (Bulk 'D:\thepathofimage.jpg', Single_Blob) as Image
     }
 
     /**
@@ -212,9 +214,6 @@ public class Database {
                 String command = "UPDATE users SET " + field + " = '" + newValue
                         + "' WHERE username = '" + username + "';";
                 statement.executeUpdate(command);
-            } else {
-                //the user name isn't exists
-                //System.out.println("user isn't exists");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -230,28 +229,27 @@ public class Database {
      * @return user, or null if user doesn't exist.
      */
     public User getUser(String username) {
+        User user = null;
         try {
             openConnection();
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery("select * from users where username='" + username + "'");
             if (rs.next()) {
-                User user = new User();
+                user = new User();
                 user.username = rs.getString("username");
                 user.password = rs.getString("password");
                 user.birthdate = rs.getString("birthdate");
                 user.firstName = rs.getString("firstName");
                 user.lastName = rs.getString("lastName");
                 user.city = rs.getString("city");
-                return user;
-            } else {
-                // Add user not found stuff
+                user.pictureFilePath = rs.getString("picture");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             closeConnection();
         }
-        return null;
+        return user;
     }
 
     /**
@@ -260,22 +258,18 @@ public class Database {
      * @return vacation object
      */
     public Vacation getVacation(String vacationID) {
+        Vacation vacation = null;
         try {
             openConnection();
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("select rowid, * from vacations where rowid='" + vacationID + "'");
-            if (resultSet.next()) {
-                Vacation vacation = new Vacation(resultSet);
-                return vacation;
-            } else {
-                // Add vacation not found
-            }
+            if (resultSet.next()) vacation = new Vacation(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             closeConnection();
         }
-        return null;
+        return vacation;
     }
 
     /**
@@ -283,20 +277,20 @@ public class Database {
      * @return vacation list
      */
     public ArrayList<Vacation> getAllVacations() {
+        ArrayList<Vacation> vacations = null;
         try {
             openConnection();
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("select rowid, * from vacations");
-            ArrayList<Vacation> vacations = new ArrayList<>();
+            vacations = new ArrayList<>();
             while (resultSet.next()) vacations.add(new Vacation(resultSet));
-            return vacations;
 
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             closeConnection();
         }
-        return null;
+        return vacations;
     }
 
     /**
@@ -304,20 +298,20 @@ public class Database {
      * @return country list
      */
     public HashSet<String> getAllCountries() {
+        HashSet<String> countries = null;
         try {
             openConnection();
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("select destinetionContryTXT from vacations");
-            HashSet<String> countries = new HashSet<>();
+            countries = new HashSet<>();
             while (resultSet.next()) countries.add(resultSet.getString(1).toUpperCase());
-            return countries;
 
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             closeConnection();
         }
-        return null;
+        return countries;
     }
 
     /**

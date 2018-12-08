@@ -2,8 +2,12 @@ package Controller;
 
 import View.PersonalAreaView;
 import Model.User;
+import View.SignUpView;
 import javafx.scene.control.ButtonType;
+import javafx.scene.image.Image;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -12,10 +16,9 @@ import java.time.format.DateTimeFormatter;
  */
 public class PersonalAreaController extends AbstractController {
 
-    /**
-     * Fills all fields with user details for the user to update his details more easily.
-     */
-    public void fillFieldsWithUserDetails() {
+    @Override
+    protected void FillAllData(){
+
         //Get the current user
         User currentUser= database.getCurrentUser();
 
@@ -23,14 +26,14 @@ public class PersonalAreaController extends AbstractController {
         PersonalAreaView personalAreaView = (PersonalAreaView) view;
         personalAreaView.setUsernameText(currentUser.username);
         personalAreaView.setPasswordText(currentUser.password);
-
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate localDate = LocalDate.parse(currentUser.birthdate, formatter);
         personalAreaView.setBirthdayValue(localDate);
-
         personalAreaView.setFirstNameText(currentUser.firstName);
         personalAreaView.setLastNameText(currentUser.lastName);
         personalAreaView.setCityText(currentUser.city);
+        Image image = getImage(currentUser.pictureFilePath);
+        if (image != null) personalAreaView.pictureImageView.setImage(image);
 
         personalAreaView.KeyReleased();
     }
@@ -62,6 +65,7 @@ public class PersonalAreaController extends AbstractController {
         //Check if we change the current user and not another one
         if (user.username.equals(personalAreaView.getUsernameText())
                 || database.getUser(personalAreaView.getUsernameText()) == null) {
+
             //For each field, update if necessary
             if (!user.password.equals(personalAreaView.getPasswordText()))
                 database.updateUser(user.username,"password", personalAreaView.getPasswordText());
@@ -75,8 +79,13 @@ public class PersonalAreaController extends AbstractController {
                 database.updateUser(user.username,"city", personalAreaView.getCityText());
             if (!user.username.equals(personalAreaView.getUsernameText()))
                 database.updateUser(user.username,"username", personalAreaView.getUsernameText());
+            if (!user.pictureFilePath.equals(personalAreaView.getPictureFilePath()))
+                database.updateUser(user.username,"picture", personalAreaView.getPictureFilePath());
+
             // update the user pointer in the model to match the saved changes
             database.setCurrentUser(database.getUser(personalAreaView.getUsernameText()));
+
+            personalAreaView.setComments("Changes saved successfully!");
         }
         else {
             personalAreaView.setComments("Username already exists!");
@@ -92,8 +101,29 @@ public class PersonalAreaController extends AbstractController {
         signIn();
     }
 
-    @Override
-    protected void FillAllData() {
-        fillFieldsWithUserDetails();
+    /**
+     * This function is called after clicking on the profile picture field, to add a profile picture.
+     */
+    public void AddPicture() {
+        PersonalAreaView personalAreaView = (PersonalAreaView) this.view;
+        personalAreaView.pictureFilePath = personalAreaView.getFilePath("Choose profile picture");
+        if (personalAreaView.pictureFilePath == null) return;
+        Image image = getImage(personalAreaView.pictureFilePath);
+        if (image != null) personalAreaView.pictureImageView.setImage(image);
+        personalAreaView.KeyReleased();
+    }
+
+    /**
+     * Get an image from file
+     * @param pictureFilePath of file
+     * @return image object
+     */
+    private Image getImage(String pictureFilePath){
+        Image image = null;
+        try {
+            FileInputStream inputstream = new FileInputStream(pictureFilePath);
+            image = new Image(inputstream);
+        } catch (FileNotFoundException ignored) { }
+        return image;
     }
 }
