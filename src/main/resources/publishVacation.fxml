@@ -175,7 +175,7 @@
                             </font>
                         </Text>
                         <TextField fx:id="priceTextField" onKeyReleased="#CheckEnablePublishButton" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                        <Text fx:id="commentsText" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Comments" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+                        <Text fx:id="commentsText" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="3" GridPane.rowIndex="8" />
                         <TextField alignment="CENTER" editable="false" prefHeight="100.0" prefWidth="156.0" promptText="Select tickets picture" GridPane.columnIndex="1" GridPane.rowIndex="8" GridPane.rowSpan="3" />
                         <ImageView fx:id="ticketsImageView" fitHeight="94.0" fitWidth="203.0" onMouseClicked="#AddPicture" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER" />
                         <GridPane prefHeight="60.0" prefWidth="184.0" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.rowSpan="2" GridPane.valignment="BOTTOM">
