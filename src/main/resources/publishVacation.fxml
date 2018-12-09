@@ -165,9 +165,9 @@
                         <TextField fx:id="baggageTXT" onKeyReleased="#CheckEnablePublishButton" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                         <DatePicker fx:id="toDateDatePicker" onAction="#activeToDate" prefHeight="25.0" prefWidth="239.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
                         <ComboBox fx:id="isTheSleepingCostsIncludesTXT" onAction="#CheckEnablePublishButton" prefHeight="25.0" prefWidth="235.0" GridPane.columnIndex="4" GridPane.rowIndex="5" />
-                        <TextField fx:id="theRateOfTheSleepingPlaceTXT" onKeyReleased="#CheckEnablePublishButton" GridPane.columnIndex="4" GridPane.rowIndex="6" />
                         <ComboBox fx:id="kindOfVacationTXT" onAction="#CheckEnablePublishButton" prefHeight="25.0" prefWidth="237.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
                         <ComboBox fx:id="kindOfSleepingPlaceTXT" onAction="#CheckEnablePublishButton" prefHeight="25.0" prefWidth="229.0" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                        <ComboBox fx:id="theRateOfTheSleepingPlaceTXT" onAction="#CheckEnablePublishButton" prefHeight="25.0" prefWidth="289.0" GridPane.columnIndex="4" GridPane.rowIndex="6" />
                         <ComboBox fx:id="isThereReturnFlightTXT" onAction="#CheckEnablePublishButton" prefHeight="25.0" prefWidth="223.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                         <Text fill="#656565" strokeType="OUTSIDE" strokeWidth="0.0" text="Fill all fields:">
                             <font>
