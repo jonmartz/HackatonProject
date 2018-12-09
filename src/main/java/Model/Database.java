@@ -7,7 +7,8 @@ import java.util.HashSet;
 
 
 /**
- * Manages a user database using SQLite, and holds a current user (user that is currently signed in) field.
+ * Manages a user database using SQLite, and holds current object pointers
+ * (signed in user and vacation that he is checking)
  */
 public class Database {
     private Connection connection;
@@ -145,10 +146,6 @@ public class Database {
         } finally {
             closeConnection();
         }
-
-//        Insert Into FEMALE(ID, Image)
-//        Select '1', BulkColumn
-//        from Openrowset (Bulk 'D:\thepathofimage.jpg', Single_Blob) as Image
     }
 
     /**
@@ -320,16 +317,13 @@ public class Database {
      * @param username - The username of the user
      */
     public void deleteUser(String username) {
-        User selectedUser = getUser(username); // Get the user
-        //If the user dose not exist
-        if (selectedUser == null) {
-            // TODO: 10/21/2018 Add a text that says that this user dose not exist
-        } else {
+        User user = getUser(username); // Get the user
+        if (user != null) {
             openConnection();
             try {
                 Statement statement = connection.createStatement();
                 String command = "delete from users where " +
-                        "username='" + selectedUser.username + "'";
+                        "username='" + user.username + "'";
                 statement.executeUpdate(command);
 
             } catch (SQLException e) {

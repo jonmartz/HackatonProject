@@ -3,7 +3,10 @@ package View;
 import Controller.AbstractController;
 import Controller.DetailsVacationController;
 import Controller.UserSearchController;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
 import java.net.URL;
@@ -24,20 +27,10 @@ public class DetailsVacationView extends AbstractView{
     public Text isTheSleepingCostsIncludesTXT;
     public Text isThereReturnFlightTXT;
     public Text price;
-
-
-
-    /**
-     * Ths functrion will assign the given controller to it self if it's the right one
-     * @param controller - The given controller
-     */
-    public void setController(AbstractController controller) {
-        if (controller instanceof DetailsVacationController)
-            super.setController(controller);
-        else {
-            super.setController(null);
-        }
-    }
+    public Text ownerText;
+    public Button buyButton;
+    public ImageView ticketsImageView;
+    //todo: add tickets picture and owner
 
     public void setDestinationCountryTXT(String destinationCountryTXT) {this.destinationCountryTXT.setText(destinationCountryTXT);}
 
@@ -70,6 +63,9 @@ public class DetailsVacationView extends AbstractView{
         DetailsVacationController detailsVacationController = new DetailsVacationController();
         this.setController(detailsVacationController);
         detailsVacationController.setView(this);
+    }
 
+    public void BuyVacation() {
+        //todo: implement
     }
 }
