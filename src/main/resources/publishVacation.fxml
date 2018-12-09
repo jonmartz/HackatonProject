@@ -133,7 +133,7 @@
                                 <Font size="14.0" />
                             </font>
                         </Label>
-                        <Label prefHeight="25.0" prefWidth="188.0" text="the score of the sleeping place" GridPane.columnIndex="3" GridPane.rowIndex="6">
+                        <Label prefHeight="25.0" prefWidth="188.0" text="score of the sleeping place" GridPane.columnIndex="3" GridPane.rowIndex="6">
                             <font>
                                 <Font size="14.0" />
                             </font>

@@ -136,7 +136,7 @@ public abstract class AbstractController {
     public void vacationPublish() {
         setLastView("publishVacation");
         if (getCurrentUser() == null){
-            if (view.getResultFromWarning("You must sign in to publish a vacation. Sign in?") == ButtonType.YES)
+            if (view.getResultFromWarning("You must sign in to publish. Go to sign in screen?") == ButtonType.YES)
                 signIn();
         }
         else {
