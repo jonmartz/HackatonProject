@@ -77,7 +77,7 @@ public class VacationSearchView extends AbstractView {
                         } else {
                             button.setOnAction(event -> {
                                 VacationEntry vacationEntry = getTableView().getItems().get(getIndex());
-                                CheckVacation(vacationEntry.ID); //todo: transition to vac details
+                                CheckVacation(vacationEntry.ID);
                             });
                             setGraphic(button);
                             setText(null);
@@ -164,13 +164,25 @@ public class VacationSearchView extends AbstractView {
     }
 
     /**
-     * This function will occur when the "VacationSearch" button is pressed. Will get all
-     * relevant vacations from the controller and add them to the table view.
+     * This function will occur when the "VacationSearch" button is pressed
      */
-    public void SearchVacation() {
+    public void SearchVacation() { GetVacations(false);}
+
+    /**
+     * Is called by the show all vacations button
+     */
+    public void showAllVacations() { GetVacations(true);}
+
+    /**
+     * Will get all relevant vacations from the controller and add them to the table view.
+     * @param getAll true to get all vacations, false to get only vacations relevant
+     *               according to the search parameters
+     */
+    public void GetVacations(boolean getAll) {
         VacationSearchController controller = (VacationSearchController) getController();
-        ArrayList<Vacation> vacations = controller.GetRelevantVacations(countryChoiceBox.getValue().toString(),
-                fromDateDatePicker.getValue(), toDateDatePicker.getValue());
+        ArrayList<Vacation> vacations;
+        if (getAll) vacations = controller.GetAllVacations();
+        else vacations = controller.GetRelevantVacations();
         ObservableList<VacationEntry> items = FXCollections.observableArrayList();
         for (Vacation vacation : vacations){
             items.add(new VacationEntry(vacation.ID, vacation.destinationCountryTXT,
@@ -179,7 +191,6 @@ public class VacationSearchView extends AbstractView {
         searchResultsTableView.setItems(items);
         searchResultsTableView.getSortOrder().add(priceColumn);
         searchResultsTableView.setVisible(true);
-        if (vacations.isEmpty()) setComments("No vacations in your date range!");
     }
 
     /**
@@ -188,6 +199,7 @@ public class VacationSearchView extends AbstractView {
     public void CountryPicked() {
         ((VacationSearchController)getController()).CheckEnableSearchButton();
     }
+
 
     /**
      * The purpose of this class is only to make the TableView

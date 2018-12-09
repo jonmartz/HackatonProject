@@ -1,6 +1,7 @@
 package Controller;
 
 import View.PublishVacationView;
+import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 
 import java.io.FileInputStream;
@@ -8,6 +9,8 @@ import java.io.FileNotFoundException;
 import java.time.LocalDate;
 
 public class PublishController extends AbstractController {
+
+
 
     public void Publish() {
         PublishVacationView view = (PublishVacationView) this.view;

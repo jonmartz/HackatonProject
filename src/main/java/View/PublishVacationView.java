@@ -18,20 +18,21 @@ public class PublishVacationView extends AbstractView{
     public TextField destinetionContryTXT;
     public TextField flightCompanyTXT;
     public TextField baggageTXT;
-    public ComboBox kindOfVacationTXT;
-    public ComboBox kindOfSleepingPlaceTXT;
-    public ComboBox theRateOfTheSleepingPlaceTXT;
-    public TextField priceTextField;
-    public DatePicker toDateDatePicker;
-    public DatePicker fromDateDatePicker;
-    public ComboBox isTheSleepingCostsIncludesTXT;
-    public ComboBox isThereReturnFlightTXT;
-    public Text commentsText; // Problems in user input are shown here
-    public String ticketPicturePath;
-    public ImageView ticketsImageView;
     public TextField adultCountTextBox;
     public TextField kidCountTextBox;
     public TextField babyCountTextBox;
+    public TextField priceTextField;
+    public ComboBox kindOfVacationTXT;
+    public ComboBox kindOfSleepingPlaceTXT;
+    public ComboBox theRateOfTheSleepingPlaceTXT;
+    public ComboBox isTheSleepingCostsIncludesTXT;
+    public ComboBox isThereReturnFlightTXT;
+    public DatePicker toDateDatePicker;
+    public DatePicker fromDateDatePicker;
+    public Text commentsText; // Problems in user input are shown here
+    public String ticketPicturePath;
+    public ImageView ticketsImageView;
+
     private int ticketCount;
 
     /**
@@ -49,6 +50,15 @@ public class PublishVacationView extends AbstractView{
         kindOfVacationTXT.getItems().addAll("Urban", "Exotic", "Nature");
         kindOfSleepingPlaceTXT.getItems().addAll("Hotel", "Cabin", "Apartment");
         theRateOfTheSleepingPlaceTXT.getItems().addAll("1","2","3","4","5");
+
+        // Add observers to keep text legal
+        addTextListener(destinetionContryTXT, "[A-Za-z]*", "[^A-Za-z]");
+        addTextListener(flightCompanyTXT, "[A-Za-z]*", "[^A-Za-z]");
+        addTextListener(baggageTXT, "\\d*", "[^\\d]");
+        addTextListener(adultCountTextBox, "\\d*", "[^\\d]");
+        addTextListener(kidCountTextBox, "\\d*", "[^\\d]");
+        addTextListener(babyCountTextBox, "\\d*", "[^\\d]");
+        addTextListener(priceTextField, "\\d*", "[^\\d]");
     }
 
     /**
@@ -90,7 +100,7 @@ public class PublishVacationView extends AbstractView{
         String kids = kidCountTextBox.getText();
         String babies = babyCountTextBox.getText();
 
-        // Replace chars if theyre not numbers
+        // Replace chars if theyre not numbers. do apart from listeners to avoid waiting
         if (!adults.matches("\\d*") || !kids.matches("\\d*") || !babies.matches("\\d*")) {
             adultCountTextBox.setText(adults.replaceAll("[^\\d]", ""));
             kidCountTextBox.setText(kids.replaceAll("[^\\d]", ""));

@@ -93,7 +93,7 @@
                         </font>
                     </Label>
                   <Text fx:id="isTheSleepingCostsIncludesTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="4" GridPane.rowIndex="6" />
-                    <Label prefHeight="25.0" prefWidth="188.0" text="the rate of the sleeping place" GridPane.columnIndex="3" GridPane.rowIndex="7">
+                    <Label prefHeight="25.0" prefWidth="188.0" text="the score of the sleeping place" GridPane.columnIndex="3" GridPane.rowIndex="7">
                         <font>
                             <Font size="14.0" />
                         </font>
