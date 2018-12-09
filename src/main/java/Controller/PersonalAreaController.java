@@ -23,19 +23,20 @@ public class PersonalAreaController extends AbstractController {
         User currentUser= database.getCurrentUser();
 
         //Fill the fields with the user's data
-        PersonalAreaView personalAreaView = (PersonalAreaView) view;
-        personalAreaView.setUsernameText(currentUser.username);
-        personalAreaView.setPasswordText(currentUser.password);
+        PersonalAreaView view = (PersonalAreaView) this.view;
+        view.setUsernameText(currentUser.username);
+        view.setPasswordText(currentUser.password);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate localDate = LocalDate.parse(currentUser.birthdate, formatter);
-        personalAreaView.setBirthdayValue(localDate);
-        personalAreaView.setFirstNameText(currentUser.firstName);
-        personalAreaView.setLastNameText(currentUser.lastName);
-        personalAreaView.setCityText(currentUser.city);
-        Image image = view.getImage(currentUser.pictureFilePath);
-        if (image != null) personalAreaView.pictureImageView.setImage(image);
+        view.setBirthdayValue(localDate);
+        view.setFirstNameText(currentUser.firstName);
+        view.setLastNameText(currentUser.lastName);
+        view.setCityText(currentUser.city);
+        view.setPictureFilePath(currentUser.pictureFilePath);
+        Image image = this.view.getImage(currentUser.pictureFilePath);
+        if (image != null) view.pictureImageView.setImage(image);
 
-        personalAreaView.KeyReleased();
+        view.KeyReleased();
     }
 
     /**
