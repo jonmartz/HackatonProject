@@ -20,7 +20,7 @@ public class PublishVacationView extends AbstractView{
     public TextField baggageTXT;
     public ComboBox kindOfVacationTXT;
     public ComboBox kindOfSleepingPlaceTXT;
-    public TextField theRateOfTheSleepingPlaceTXT;
+    public ComboBox theRateOfTheSleepingPlaceTXT;
     public TextField priceTextField;
     public DatePicker toDateDatePicker;
     public DatePicker fromDateDatePicker;
@@ -48,6 +48,7 @@ public class PublishVacationView extends AbstractView{
         isThereReturnFlightTXT.getItems().addAll("yes","no");
         kindOfVacationTXT.getItems().addAll("Urban", "Exotic", "Nature");
         kindOfSleepingPlaceTXT.getItems().addAll("Hotel", "Cabin", "Apartment");
+        theRateOfTheSleepingPlaceTXT.getItems().addAll("1","2","3","4","5");
     }
 
     /**
@@ -62,7 +63,7 @@ public class PublishVacationView extends AbstractView{
                     || baggageTXT.getText().isEmpty()
                     || kindOfVacationTXT.getValue().toString().isEmpty()
                     || kindOfSleepingPlaceTXT.getValue().toString().isEmpty()
-                    || theRateOfTheSleepingPlaceTXT.getText().isEmpty()
+                    || theRateOfTheSleepingPlaceTXT.getValue().toString().isEmpty()
                     || fromDateDatePicker.getValue().toString().isEmpty()
                     || toDateDatePicker.getValue().toString().isEmpty()
                     || isThereReturnFlightTXT.getValue().toString().isEmpty()
@@ -145,7 +146,7 @@ public class PublishVacationView extends AbstractView{
 
     public String getTheRateOfTheSleepingPlaceTXT()
     {
-        return theRateOfTheSleepingPlaceTXT.getText();
+        return theRateOfTheSleepingPlaceTXT.getValue().toString();
     }
 
     public String getTodateStr(){return this.toDateDatePicker.getValue().toString();}
