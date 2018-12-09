@@ -1,20 +1,12 @@
 package View;
 
 import Controller.PersonalAreaController;
-import Controller.AbstractController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
-import javafx.stage.FileChooser;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -235,4 +227,12 @@ public class PersonalAreaView extends AbstractView {
      * This function is called after clicking on the profile picture field, to add a profile picture.
      */
     public void AddPicture() { ((PersonalAreaController)this.getController()).AddPicture(); }
+
+    /**
+     * setter
+     * @param pictureFilePath to set
+     */
+    public void setPictureFilePath(String pictureFilePath) {
+        this.pictureFilePath = pictureFilePath;
+    }
 }
