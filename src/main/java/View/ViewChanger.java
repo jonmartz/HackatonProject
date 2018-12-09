@@ -127,8 +127,11 @@ public class ViewChanger {
         try {
             fxmlLoader = new FXMLLoader();
             Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("detailsVacation.fxml").openStream());
-            stage.setTitle("Vacation Details");
-            stage.setScene(new Scene(root, 790 , 450));
+            // Create new stage
+            Stage secondaryStage = new Stage();
+            secondaryStage.setTitle("Vacation Details");
+            secondaryStage.setScene(new Scene(root, 790 , 450));
+            secondaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
