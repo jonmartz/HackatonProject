@@ -93,9 +93,7 @@ public class VacationSearchView extends AbstractView {
      * Go to vacation details
      * @param vacationID id of vacation to check
      */
-    private void CheckVacation(String vacationID) {
-        ((VacationSearchController)this.getController()).CheckVacation(vacationID);
-    }
+    private void CheckVacation(String vacationID) { this.getController().CheckVacation(vacationID); }
 
     /**
      * Clear the to date picker text

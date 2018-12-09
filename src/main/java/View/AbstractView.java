@@ -6,7 +6,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.image.Image;
+import javafx.stage.FileChooser;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -36,12 +41,14 @@ public abstract class AbstractView implements Initializable {
      * If user is signed in, set main menu accordingly.
      */
     public void updateMainMenuButtons(){
-        if (controller.getCurrentUser() != null){
-            // User is signed in
-            signIn.setText("Sign out");
-            personalArea.setDisable(false);
-            searchUser.setDisable(false);
-        }
+        try {
+            if (controller.getCurrentUser() != null) {
+                // User is signed in
+                signIn.setText("Sign out");
+                personalArea.setDisable(false);
+                searchUser.setDisable(false);
+            } // some views doesnt have main menu, so ignore exceptions
+        } catch (Exception ignored){}
     }
 
     /**
@@ -87,5 +94,32 @@ public abstract class AbstractView implements Initializable {
         Alert alert = new Alert(Alert.AlertType.WARNING, text, ButtonType.YES, ButtonType.NO);
         alert.showAndWait();
         return alert.getResult();
+    }
+
+    /**
+     * Opens a "browse" window for the user to choose a file.
+     * @param title of browse window
+     * @return path of file chosen
+     */
+    public String getFilePath(String title) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle(title);
+        File file = fileChooser.showOpenDialog(null);
+        if (file != null) return file.getAbsolutePath();
+        return null;
+    }
+
+    /**
+     * Get an image from file
+     * @param pictureFilePath of file
+     * @return image object
+     */
+    public Image getImage(String pictureFilePath){
+        Image image = null;
+        try {
+            FileInputStream inputstream = new FileInputStream(pictureFilePath);
+            image = new Image(inputstream);
+        } catch (FileNotFoundException ignored) { }
+        return image;
     }
 }

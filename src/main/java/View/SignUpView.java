@@ -52,7 +52,7 @@ public class SignUpView extends AbstractView {
 
     /**
      * Activates after user types in a text field, in order to enable/disable the sign in button
-     * and write in the comments field.
+     * and write in the commentsText field.
      */
     public void KeyReleased() {
         try {
@@ -181,17 +181,4 @@ public class SignUpView extends AbstractView {
      * This function is called after clicking on the profile picture field, to add a profile picture.
      */
     public void AddPicture() { ((SignUpController)this.getController()).AddPicture(); }
-
-    /**
-     * Opens a "browse" window for the user to choose a file.
-     * @param title of browse window
-     * @return path of file chosen
-     */
-    public String getFilePath(String title) {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle(title);
-        File file = fileChooser.showOpenDialog(null);
-        if (file != null) return file.getAbsolutePath();
-        return null;
-    }
 }
