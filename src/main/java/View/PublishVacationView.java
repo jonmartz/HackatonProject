@@ -1,42 +1,38 @@
 package View;
 
 import Controller.PublishController;
-import Controller.AbstractController;
-import Model.Database;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.scene.control.DatePicker;
-import java.time.LocalDate;
 import javafx.scene.control.ComboBox;
 
 public class PublishVacationView extends AbstractView{
 
     @FXML
-    private int vacationID;
     public Button pubishVacation;
     public TextField destinetionContryTXT;
-    public TextField NumOfTicketsTXT;
     public TextField flightCompanyTXT;
     public TextField baggageTXT;
-    public TextField kindOfVacationTXT;
-    public TextField kindOfSleepingPlaceTXT;
+    public ComboBox kindOfVacationTXT;
+    public ComboBox kindOfSleepingPlaceTXT;
     public TextField theRateOfTheSleepingPlaceTXT;
-    public DatePicker toDateTXT;
-    public DatePicker fromDateTXT;
-    public ComboBox kindOfTicketTXT;
+    public TextField priceTextField;
+    public DatePicker toDateDatePicker;
+    public DatePicker fromDateDatePicker;
     public ComboBox isTheSleepingCostsIncludesTXT;
     public ComboBox isThereReturnFlightTXT;
-    public Text comments; // Problems in user input are shown here
-    public String todate;
-    public String fromdate;
-    public String KindOfTicketSTR;
-    public String isTheSleepingCostsIncludesSTR;
-    public String isThereReturnFlightSTR;
-    public String price;
+    public Text commentsText; // Problems in user input are shown here
+    public String ticketPicturePath;
+    public ImageView ticketsImageView;
+    public TextField adultCountTextBox;
+    public TextField kidCountTextBox;
+    public TextField babyCountTextBox;
+    private int ticketCount;
 
     /**
      * This function will initialize an instance of this class
@@ -46,71 +42,85 @@ public class PublishVacationView extends AbstractView{
         PublishController publishController = new PublishController();
         this.setController(publishController);
         publishController.setView(this);
-        kindOfTicketTXT.getItems().removeAll(kindOfTicketTXT.getItems());
-        kindOfTicketTXT.getItems().addAll("adult", "child", "baby");
         isTheSleepingCostsIncludesTXT.getItems().removeAll(isTheSleepingCostsIncludesTXT.getItems());
-        isTheSleepingCostsIncludesTXT.getItems().addAll("yes,no");
+        isTheSleepingCostsIncludesTXT.getItems().addAll("yes","no");
         isThereReturnFlightTXT.getItems().removeAll(isThereReturnFlightTXT.getItems());
-        isThereReturnFlightTXT.getItems().addAll("yes,no");
+        isThereReturnFlightTXT.getItems().addAll("yes","no");
+        kindOfVacationTXT.getItems().addAll("Urban", "Exotic", "Nature");
+        kindOfSleepingPlaceTXT.getItems().addAll("Hotel", "Cabin", "Apartment");
     }
 
     /**
      * Activates after user types in a text field, in order to enable/disable the publish button
-     * and write in the comments field.
+     * and write in the commentsText field.
      */
-    public void KeyReleased() {
+    public void CheckEnablePublishButton() {
         try {
-            if (destinetionContryTXT.getText().isEmpty() || NumOfTicketsTXT.getText().isEmpty() || flightCompanyTXT.getText().isEmpty()
-                    || baggageTXT.getText().isEmpty() || kindOfVacationTXT.getText().isEmpty() || kindOfSleepingPlaceTXT.getText().isEmpty()
-                    || theRateOfTheSleepingPlaceTXT.getText().isEmpty() || todate.isEmpty() || fromdate.isEmpty()||KindOfTicketSTR.isEmpty()
-                    ||isThereReturnFlightSTR.isEmpty()||isTheSleepingCostsIncludesSTR.isEmpty()) {
+            if (destinetionContryTXT.getText().isEmpty()
+                    || ticketCount == 0
+                    || flightCompanyTXT.getText().isEmpty()
+                    || baggageTXT.getText().isEmpty()
+                    || kindOfVacationTXT.getValue().toString().isEmpty()
+                    || kindOfSleepingPlaceTXT.getValue().toString().isEmpty()
+                    || theRateOfTheSleepingPlaceTXT.getText().isEmpty()
+                    || fromDateDatePicker.getValue().toString().isEmpty()
+                    || toDateDatePicker.getValue().toString().isEmpty()
+                    || isThereReturnFlightTXT.getValue().toString().isEmpty()
+                    || isTheSleepingCostsIncludesTXT.getValue().toString().isEmpty()
+                    || ticketPicturePath.isEmpty()) {
                 pubishVacation.setDisable(true);
-                comments.setText("Please fill all fields");
+                commentsText.setText("Please fill all fields");
             } else {
                 pubishVacation.setDisable(false);
-                comments.setText("");
+                commentsText.setText("");
             }
         } catch (Exception e) {
             pubishVacation.setDisable(true);
-            comments.setText("Please fill all fields");
+            commentsText.setText("Please fill all fields");
         }
     }
 
-    public void setController(AbstractController controller) {
-        if (controller instanceof PublishController)
-            super.setController(controller);
-        else {
-            super.setController(null);
+    /**
+     * Checks that only numbers are set in ticket number fields
+     */
+    public void CheckTicketCountText() {
+
+        String adults = adultCountTextBox.getText();
+        String kids = kidCountTextBox.getText();
+        String babies = babyCountTextBox.getText();
+
+        // Replace chars if theyre not numbers
+        if (!adults.matches("\\d*") || !kids.matches("\\d*") || !babies.matches("\\d*")) {
+            adultCountTextBox.setText(adults.replaceAll("[^\\d]", ""));
+            kidCountTextBox.setText(kids.replaceAll("[^\\d]", ""));
+            babyCountTextBox.setText(babies.replaceAll("[^\\d]", ""));
+//            setComments("only numbers allowed in \"country\"");
+        }
+
+        adults = adultCountTextBox.getText();
+        kids = kidCountTextBox.getText();
+        babies = babyCountTextBox.getText();
+
+        ticketCount = 0;
+        try {
+            if (!adults.isEmpty()) ticketCount += Integer.parseInt(adultCountTextBox.getText());
+            if (!kids.isEmpty()) ticketCount += Integer.parseInt(kidCountTextBox.getText());
+            if (!babies.isEmpty()) ticketCount += Integer.parseInt(babyCountTextBox.getText());
+            CheckEnablePublishButton();
+
+        } catch (NumberFormatException e) {
+            setComments("Woah, too many tickets!!!");
         }
     }
-    /**
-     * This function will return the text in the vacationID field
-     * @return - The text in the vacationID field
-     */
-    public String getvacationIDText() {
-       String toReturn= ""+vacationID;
-       return toReturn;
-    }
 
-    /**
-     * This function will clear the text in the datePicker field
-     */
-    public void cleartoDateTXT() {
-        this.toDateTXT.getEditor().clear();
-    }
-
-    public void clearfromDateTXT() {
-        this.fromDateTXT.getEditor().clear();
+    public void setComments(String comment)
+    {
+        this.commentsText.setText(comment);
     }
 
     public String getDestinetionContryTXT()
     {
       return destinetionContryTXT.getText();
-    }
-
-    public String getNumOfTicketsTXT()
-    {
-        return NumOfTicketsTXT.getText();
     }
 
     public String getFlightCompanyTXT()
@@ -125,12 +135,12 @@ public class PublishVacationView extends AbstractView{
 
     public String getKindOfVacationTXT()
     {
-        return kindOfVacationTXT.getText();
+        return kindOfVacationTXT.getValue().toString();
     }
 
     public String getKindOfSleepingPlaceTXT()
     {
-        return kindOfSleepingPlaceTXT.getText();
+        return kindOfSleepingPlaceTXT.getValue().toString();
     }
 
     public String getTheRateOfTheSleepingPlaceTXT()
@@ -138,79 +148,53 @@ public class PublishVacationView extends AbstractView{
         return theRateOfTheSleepingPlaceTXT.getText();
     }
 
-    public LocalDate getToDateTXT()
-    {
-        return toDateTXT.getValue();
-    }
+    public String getTodateStr(){return this.toDateDatePicker.getValue().toString();}
 
-    public String getTodateStr(){return this.todate;}
+    public String getFromdateStr(){return this.fromDateDatePicker.getValue().toString();}
 
-    public String getFromdateStr(){return this.fromdate;}
-
-    public LocalDate getFromDateTXT()
-    {
-        return fromDateTXT.getValue();
-    }
-
-    public String getKindOfTicketTXT()
-    {
-        return (String) kindOfTicketTXT.getValue();
-    }
-
-    public String getIsTheSleepingCostsIncludesTXT()
-    {
-        return (String) isTheSleepingCostsIncludesTXT.getValue();
-    }
-
-    public String getIsThereReturnFlightTXT()
-    {
-        return (String) isThereReturnFlightTXT.getValue();
-    }
-
-    public void setComments(String comment)
-    {
-        this.comments.setText(comment);
-    }
-
-    public void setToDate(String val){
-        todate=val;
-    }
-
-    public void setfromDate(String val){
-        fromdate=val;
-    }
 
     public void activeToDate(){
-        ((PublishController)this.getController()).toDatePicked();;
+        ((PublishController)this.getController()).ToDatePicked();
     }
 
     public void activeFromDate(){
-        ((PublishController)this.getController()).fromDatePicked();
-    }
-
-    public void activeKindOfTicket()
-    {
-        ((PublishController)this.getController()).KindOfTicketPicked();
-    }
-
-    public void activeIsTheSleepingCostsIncludes()
-    {
-        ((PublishController)this.getController()).IsTheSleepingCostsIncludesOfTicketPicked();
-    }
-
-    public void activeIsThereReturnFlight()
-    {
-        ((PublishController)this.getController()).IsThereReturnFlightPicked();
+        ((PublishController)this.getController()).FromDatePicked();
     }
 
     public void publish() { ((PublishController)this.getController()).Publish(); }
 
+    /**
+     * Clear the to date picker text
+     */
+    public void ClearToDatePicker() {
+        this.toDateDatePicker.getEditor().clear();
+    }
+    /**
+     * This function will clear the text in the datePicker field
+     */
+    public void ClearFromDatePicker() {
+        this.fromDateDatePicker.getEditor().clear();
+    }
 
 
+    /**
+     * This function is called after clicking on the ticket picture field.
+     */
+    public void AddPicture() { ((PublishController)this.getController()).AddPicture(); }
 
+    /**
+     * Getter
+     * @return yes or no
+     */
+    public String getSleepingCostIncluded() {
+        return isTheSleepingCostsIncludesTXT.getValue().toString();
+    }
 
-
-
-
-
+    /**
+     * Getter
+     * @return yes or no
+     */
+    public String getReturnFlight() {
+        return isThereReturnFlightTXT.getValue().toString();
+    }
 }

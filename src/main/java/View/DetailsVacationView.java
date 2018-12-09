@@ -13,9 +13,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class DetailsVacationView extends AbstractView{
+
     @FXML
     public Text destinationCountryTXT;
-    public Text NumOfTickets;
     public Text flightCompanyTXT;
     public Text baggageTXT;
     public Text kindOfVacationTXT;
@@ -23,26 +23,23 @@ public class DetailsVacationView extends AbstractView{
     public Text theRateOfTheSleepingPlaceTXT;
     public Text toDateTXT;
     public Text fromDateTXT;
-    public Text kindOfTicketTXT;
     public Text isTheSleepingCostsIncludesTXT;
     public Text isThereReturnFlightTXT;
     public Text price;
     public Text ownerText;
     public Button buyButton;
     public ImageView ticketsImageView;
-    //todo: add tickets picture and owner
+    public Text adultTicketsText;
+    public Text kidTicketsText;
+    public Text babyTicketsText;
 
     public void setDestinationCountryTXT(String destinationCountryTXT) {this.destinationCountryTXT.setText(destinationCountryTXT);}
-
-    public void setNumOfTickets(String numOfTickets) {NumOfTickets.setText(numOfTickets);}
 
     public void setFromDateTXT(String fromDateTXT) {this.fromDateTXT.setText(fromDateTXT);}
 
     public void setToDateTXT(String toDateTXT) {this.toDateTXT.setText(toDateTXT);}
 
     public void setKindOfVacationTXT(String kindOfVacationTXT) {this.kindOfVacationTXT.setText(kindOfVacationTXT);}
-
-    public void setKindOfTicketTXT(String kindOfTicketTXT) {this.kindOfTicketTXT.setText(kindOfTicketTXT);}
 
     public void setKindOfSleepingPlaceTXT(String kindOfSleepingPlaceTXT) {this.kindOfSleepingPlaceTXT.setText(kindOfSleepingPlaceTXT);}
 

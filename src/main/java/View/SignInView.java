@@ -29,7 +29,7 @@ public class SignInView extends AbstractView {
 
     /**
      * Activates after user types in a text field, in order to enable/disable the sign in button
-     * and write in the comments field.
+     * and write in the commentsText field.
      */
     public void KeyReleased() {
         try {

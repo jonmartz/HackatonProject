@@ -135,12 +135,4 @@ public class UserSearchView extends AbstractView{
      * @param pictureFilePath of file
      * @return image object
      */
-    private Image getImage(String pictureFilePath){
-        Image image = null;
-        try {
-            FileInputStream inputstream = new FileInputStream(pictureFilePath);
-            image = new Image(inputstream);
-        } catch (FileNotFoundException ignored) { }
-        return image;
-    }
 }

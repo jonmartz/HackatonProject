@@ -32,7 +32,7 @@ public class PersonalAreaController extends AbstractController {
         personalAreaView.setFirstNameText(currentUser.firstName);
         personalAreaView.setLastNameText(currentUser.lastName);
         personalAreaView.setCityText(currentUser.city);
-        Image image = getImage(currentUser.pictureFilePath);
+        Image image = view.getImage(currentUser.pictureFilePath);
         if (image != null) personalAreaView.pictureImageView.setImage(image);
 
         personalAreaView.KeyReleased();
@@ -105,25 +105,11 @@ public class PersonalAreaController extends AbstractController {
      * This function is called after clicking on the profile picture field, to add a profile picture.
      */
     public void AddPicture() {
-        PersonalAreaView personalAreaView = (PersonalAreaView) this.view;
-        personalAreaView.pictureFilePath = personalAreaView.getFilePath("Choose profile picture");
-        if (personalAreaView.pictureFilePath == null) return;
-        Image image = getImage(personalAreaView.pictureFilePath);
-        if (image != null) personalAreaView.pictureImageView.setImage(image);
-        personalAreaView.KeyReleased();
-    }
-
-    /**
-     * Get an image from file
-     * @param pictureFilePath of file
-     * @return image object
-     */
-    private Image getImage(String pictureFilePath){
-        Image image = null;
-        try {
-            FileInputStream inputstream = new FileInputStream(pictureFilePath);
-            image = new Image(inputstream);
-        } catch (FileNotFoundException ignored) { }
-        return image;
+        PersonalAreaView view = (PersonalAreaView) this.view;
+        view.pictureFilePath = view.getFilePath("Choose profile picture");
+        if (view.pictureFilePath == null) return;
+        Image image = view.getImage(view.pictureFilePath);
+        if (image != null) view.pictureImageView.setImage(image);
+        view.KeyReleased();
     }
 }

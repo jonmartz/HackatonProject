@@ -1,13 +1,10 @@
 package Controller;
 
-import Model.User;
 import Model.Vacation;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import View.DetailsVacationView;
-import javax.swing.text.View;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class DetailsVacationController extends AbstractController {
     private Stage stage;
@@ -15,23 +12,27 @@ public class DetailsVacationController extends AbstractController {
 
     public void fillFieldsWithVacationDetails() {
         //Get the current user
-        Vacation currentVacation= database.getCurrentVacation();
+        Vacation vacation= database.getCurrentVacation();
 
         //Fill the fields with the vacation's data
-        DetailsVacationView detailsVacationView = (DetailsVacationView) view;
-        detailsVacationView.setDestinationCountryTXT(currentVacation.destinationCountryTXT);
-        detailsVacationView.setFromDateTXT(currentVacation.fromDateTXT);
-        detailsVacationView.setToDateTXT(currentVacation.toDateTXT);
-        detailsVacationView.setNumOfTickets(currentVacation.NumOfTickets);
-        detailsVacationView.setKindOfTicketTXT(currentVacation.kindOfTicketTXT);
-        detailsVacationView.setKindOfVacationTXT(currentVacation.kindOfVacationTXT);
-        detailsVacationView.setFlightCompanyTXT(currentVacation.flightCompanyTXT);
-        detailsVacationView.setBaggageTXT(currentVacation.baggageTXT);
-        detailsVacationView.setKindOfSleepingPlaceTXT(currentVacation.kindOfSleepingPlaceTXT);
-        detailsVacationView.setTheRateOfTheSleepingPlaceTXT(currentVacation.theRateOfTheSleepingPlaceTXT);
-        detailsVacationView.setIsThereReturnFlightTXT(currentVacation.isThereReturnFlightTXT);
-        detailsVacationView.setPrice(currentVacation.price);
-        detailsVacationView.setIsTheSleepingCostsIncludesTXT(currentVacation.isTheSleepingCostsIncludesTXT);
+        DetailsVacationView view = (DetailsVacationView) this.view;
+        view.setDestinationCountryTXT(vacation.destinationCountryTXT);
+        view.setFromDateTXT(vacation.fromDateTXT);
+        view.setToDateTXT(vacation.toDateTXT);
+        view.setKindOfVacationTXT(vacation.kindOfVacationTXT);
+        view.setFlightCompanyTXT(vacation.flightCompanyTXT);
+        view.setBaggageTXT(vacation.baggageTXT);
+        view.setKindOfSleepingPlaceTXT(vacation.kindOfSleepingPlaceTXT);
+        view.setTheRateOfTheSleepingPlaceTXT(vacation.theRateOfTheSleepingPlaceTXT);
+        view.setIsThereReturnFlightTXT(vacation.isThereReturnFlightTXT);
+        view.setPrice(vacation.price);
+        view.setIsTheSleepingCostsIncludesTXT(vacation.isTheSleepingCostsIncludesTXT);
+        view.adultTicketsText.setText(vacation.AdultTickets);
+        view.kidTicketsText.setText(vacation.KidTickets);
+        view.babyTicketsText.setText(vacation.BabyTickets);
+        view.ownerText.setText(vacation.ownerID);
+        Image image = view.getImage(vacation.ticketPicturePath);
+        if (image != null) view.ticketsImageView.setImage(image);
     }
 
     @Override

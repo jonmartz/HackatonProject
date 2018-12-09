@@ -6,12 +6,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -46,7 +49,7 @@ public class PersonalAreaView extends AbstractView {
 
     /**
      * Activates after user types in a text field, in order to enable/disable the sign in button
-     * and write in the comments field.
+     * and write in the commentsText field.
      */
     public void KeyReleased() {
         try {
@@ -232,17 +235,4 @@ public class PersonalAreaView extends AbstractView {
      * This function is called after clicking on the profile picture field, to add a profile picture.
      */
     public void AddPicture() { ((PersonalAreaController)this.getController()).AddPicture(); }
-
-    /**
-     * Opens a "browse" window for the user to choose a file.
-     * @param title of browse window
-     * @return path of file chosen
-     */
-    public String getFilePath(String title) {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle(title);
-        File file = fileChooser.showOpenDialog(null);
-        if (file != null) return file.getAbsolutePath();
-        return null;
-    }
 }

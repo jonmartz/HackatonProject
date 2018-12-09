@@ -36,7 +36,9 @@ public class Database {
             // Create vacations table
             statement.executeUpdate("create table if not exists vacations (" +
                     "destinetionContryTXT string, " +
-                    "NumOfTicketsTXT string, " +
+                    "AdultTicketsTXT string, " +
+                    "KidTicketsTXT string, " +
+                    "BabyTicketsTXT string, " +
                     "flightCompanyTXT string, " +
                     "baggageTXT string, " +
                     "kindOfVacationTXT string, " +
@@ -44,10 +46,11 @@ public class Database {
                     "theRateOfTheSleepingPlaceTXT string, " +
                     "toDateTXT string, " +
                     "fromDateTXT string, " +
-                    "kindOfTicketTXT string," +
                     "isTheSleepingCostsIncludesTXT string, " +
                     "isThereReturnFlightTXT string, " +
-                    "priceTXT string)");
+                    "priceTXT string string, " +
+                    "ownerIDTXT string, " +
+                    "ticketPicture string)");
 
             // Create countries table
 //            statement.executeUpdate("create table if not exists countries (" +
@@ -150,8 +153,10 @@ public class Database {
 
     /**
      * Add a vacation to database.
-     * @param destinetionContryTXT          of vacation
-     * @param NumOfTicketsTXT               of vacation
+     * @param countryTXT          of vacation
+     * @param adultTicketsTXT               of vacation
+     * @param kidTicketsTXT                 of vacation
+     * @param babyTicketsTXT                of vacation
      * @param flightCompanyTXT              of vacation
      * @param baggageTXT                    of vacation
      * @param kindOfVacationTXT             of vacation
@@ -159,24 +164,26 @@ public class Database {
      * @param theRateOfTheSleepingPlaceTXT  of vacation
      * @param toDate                        of vacation
      * @param fromDateTXT                   of vacation
-     * @param kindOfTicketTXT               of vacation
      * @param isTheSleepingCostsIncludesTXT of vacation
      * @param isThereReturnFlightTXT        of vacation
      * @param priceTXT                      of vacation
+     * @param ownerIDTXT                    of vacation
      */
-    //todo: add tickets photo and owner fields
-    public void addVacation(String destinetionContryTXT, String NumOfTicketsTXT,
+    //todo: add tickets photo and ownerID fields
+    public void addVacation(String countryTXT, String adultTicketsTXT, String kidTicketsTXT, String babyTicketsTXT,
                             String flightCompanyTXT, String baggageTXT, String kindOfVacationTXT,
                             String kindOfSleepingPlaceTXT, String theRateOfTheSleepingPlaceTXT,
-                            String toDate, String fromDateTXT, String kindOfTicketTXT,
-                            String isTheSleepingCostsIncludesTXT, String isThereReturnFlightTXT, String priceTXT)
+                            String toDate, String fromDateTXT, String isTheSleepingCostsIncludesTXT,
+                            String isThereReturnFlightTXT, String priceTXT, String ownerIDTXT, String ticketPicturePath)
     {
         try {
             openConnection();
             Statement statement = connection.createStatement();
             String command = "insert into vacations values(" +
-                    "'" + destinetionContryTXT + "', " +
-                    "'" + NumOfTicketsTXT + "', " +
+                    "'" + countryTXT + "', " +
+                    "'" + adultTicketsTXT + "', " +
+                    "'" + kidTicketsTXT + "', " +
+                    "'" + babyTicketsTXT + "', " +
                     "'" + flightCompanyTXT + "', " +
                     "'" + baggageTXT + "', " +
                     "'" + kindOfVacationTXT + "', " +
@@ -184,10 +191,11 @@ public class Database {
                     "'" + theRateOfTheSleepingPlaceTXT + "', " +
                     "'" + toDate + "', " +
                     "'" + fromDateTXT + "', " +
-                    "'" + kindOfTicketTXT + "', " +
                     "'" + isTheSleepingCostsIncludesTXT + "', " +
                     "'" + isThereReturnFlightTXT + "', " +
-                    "'" + priceTXT + "'" + ")";
+                    "'" + priceTXT + "', " +
+                    "'" + ownerIDTXT + "', " +
+                    "'" + ticketPicturePath + "'" + ")";
             statement.executeUpdate(command);
         } catch (SQLException e) {
             e.printStackTrace();
