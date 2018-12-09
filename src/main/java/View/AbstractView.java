@@ -98,6 +98,15 @@ public abstract class AbstractView implements Initializable {
     }
 
     /**
+     * Show pop up to user
+     * @param text to display in pop up
+     */
+    public void ShowPopUp(String text){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, text);
+        alert.showAndWait();
+    }
+
+    /**
      * Opens a "browse" window for the user to choose a file.
      * @param title of browse window
      * @return path of file chosen
