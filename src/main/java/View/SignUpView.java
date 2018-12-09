@@ -48,6 +48,12 @@ public class SignUpView extends AbstractView {
         SignUpController signUpController = new SignUpController();
         this.setController(signUpController);
         signUpController.setView(this);
+
+        // Add listeners
+        addTextListener(firstName, "[A-Za-z]*", "[^A-Za-z]");
+        addTextListener(lastName, "[A-Za-z]*", "[^A-Za-z]");
+        addTextListener(city, "[A-Za-z]*", "[^A-Za-z]");
+        birthdatePicker.setValue(LocalDate.now().minusYears(18));
     }
 
     /**

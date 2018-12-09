@@ -169,7 +169,6 @@ public class Database {
      * @param priceTXT                      of vacation
      * @param ownerIDTXT                    of vacation
      */
-    //todo: add tickets photo and ownerID fields
     public void addVacation(String countryTXT, String adultTicketsTXT, String kidTicketsTXT, String babyTicketsTXT,
                             String flightCompanyTXT, String baggageTXT, String kindOfVacationTXT,
                             String kindOfSleepingPlaceTXT, String theRateOfTheSleepingPlaceTXT,

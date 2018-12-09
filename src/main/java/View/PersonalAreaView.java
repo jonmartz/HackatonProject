@@ -18,10 +18,10 @@ public class PersonalAreaView extends AbstractView {
     @FXML
     public TextField username;//The username textfield
     public TextField password;//The password textfield
-    public DatePicker birthdatePicker;//The birthdatePicker
     public TextField firstName;//The firstName textfield
     public TextField lastName;//The lastName textField
     public TextField city;//The city textfield
+    public DatePicker birthdatePicker;//The birthdatePicker
     public String birthdate; //The birthday value
     public Text comments; // Problems in user input are shown here
     public Button saveChanges;//The "SaveChanges" button
@@ -37,6 +37,11 @@ public class PersonalAreaView extends AbstractView {
         PersonalAreaController personalAreaController = new PersonalAreaController();
         this.setController(personalAreaController);
         personalAreaController.setView(this);
+
+        // Add listeners
+        addTextListener(firstName, "[A-Za-z]*", "[^A-Za-z]");
+        addTextListener(lastName, "[A-Za-z]*", "[^A-Za-z]");
+        addTextListener(city, "[A-Za-z]*", "[^A-Za-z]");
     }
 
     /**

@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 
@@ -121,5 +122,19 @@ public abstract class AbstractView implements Initializable {
             image = new Image(inputstream);
         } catch (FileNotFoundException ignored) { }
         return image;
+    }
+
+
+    /**
+     * Add a listener to text field to keep text legal
+     * @param textField to listen
+     * @param toMatch format the text must have
+     * @param toReplace chars to replace in case text is not in format
+     */
+    public void addTextListener(TextField textField, String toMatch, String toReplace) {
+        textField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches(toMatch))
+                textField.setText(newValue.replaceAll(toReplace, ""));
+        });
     }
 }
