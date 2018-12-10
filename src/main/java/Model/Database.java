@@ -282,11 +282,13 @@ public class Database {
         try {
             openConnection();
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("select * from transactions where vacationID='" + vacationID + "'");
-            if (rs.next()) {
+            ResultSet resultSet = statement.executeQuery("select rowid, * from transactions where vacationID='"
+                    + vacationID + "'");
+            if (resultSet.next()) {
                 transaction = new Transaction();
-                transaction.vacationID = vacationID;
-                transaction.buyerID = rs.getString("username");
+                transaction.ID = resultSet.getString("rowid");
+                transaction.vacationID = resultSet.getString("vacationID");
+                transaction.buyerID = resultSet.getString("buyerID");
             }
         } catch (SQLException e) {
             e.printStackTrace();
