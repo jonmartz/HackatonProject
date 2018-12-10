@@ -52,9 +52,10 @@ public class Database {
                     "ownerIDTXT string, " +
                     "ticketPicture string)");
 
-            // Create countries table
-//            statement.executeUpdate("create table if not exists countries (" +
-//                    "countryName string PRIMARY KEY)");
+            // transaction table
+            statement.executeUpdate("create table if not exists transactions (" +
+                    "vacationID string, " +
+                    "buyerID string)");
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -144,6 +145,26 @@ public class Database {
                         "'" + picture + "'" + ")";
                 statement.executeUpdate(command);
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+    }
+
+    /**
+     * Add transaction to database
+     * @param vacationID of vacation purchased
+     * @param buyerID    of user that purchased
+     */
+    public void addTransaction(String vacationID, String buyerID) {
+        try {
+            openConnection();
+            Statement statement = connection.createStatement();
+                String command = "insert into transactions values(" +
+                        "'" + vacationID + "', " +
+                        "'" + buyerID + "'" + ")";
+                statement.executeUpdate(command);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -256,6 +277,24 @@ public class Database {
         return user;
     }
 
+    public Transaction getTransactionByVacationID(String vacationID) {
+        Transaction transaction = null;
+        try {
+            openConnection();
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("select * from transactions where vacationID='" + vacationID + "'");
+            if (rs.next()) {
+                transaction = new Transaction();
+                transaction.vacationID = vacationID;
+                transaction.buyerID = rs.getString("username");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        return transaction;
+    }
     /**
      * Get a single vacation object with the data from database
      * @param vacationID of vacation
