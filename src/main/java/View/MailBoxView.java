@@ -47,14 +47,6 @@ public class MailBoxView extends AbstractView {
                     @Override
                     protected void updateItem(TableContent item, boolean empty) {
                         if (item==null || item.hasBeenRead) {
-                            try {
-                                System.out.println(item.sender);
-                                System.out.println(item.hasBeenRead);
-                            }
-                            catch (Exception e)
-                            {
-
-                            }
                             setStyle("");
                         } else  {
                                 setStyle("-fx-font-weight: bold");

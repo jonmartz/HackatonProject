@@ -16,7 +16,6 @@ public class Main extends Application {
         viewChanger.signIn();
         viewChanger.setupView(database);
         primaryStage.show();
-        System.out.println("lk;");
 
     }
 
