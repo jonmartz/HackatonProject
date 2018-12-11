@@ -41,8 +41,11 @@ public class DetailsVacationController extends AbstractController {
 
     public void BuyVacation() {
         Vacation vacation = database.getCurrentVacation();
-        RequestMessage requestMessage =new RequestMessage(this.getCurrentUser().username,vacation.ownerID,vacation);
-        this.database.addMessage(requestMessage.getSender(),requestMessage.getReceiver(),vacation.ID,false,requestMessage.getDate(),requestMessage.getTime(),requestMessage.getKind());
+        // TODO: 11/12/2018 Dont allow to send multiple times on the same vacation (use database to see if there is an RequestMessage in the data base about this vacation from this user) 
+        if(!vacation.ownerID.equals(getCurrentUser().username)) {
+            RequestMessage requestMessage = new RequestMessage(this.getCurrentUser().username, vacation.ownerID, vacation);
+            this.database.addMessage(requestMessage.getSender(), requestMessage.getReceiver(), vacation.ID, false, requestMessage.getDate(), requestMessage.getTime(), requestMessage.getKind());
+        }
         viewChanger.closeSecondaryStage();
     }
 }

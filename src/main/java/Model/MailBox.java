@@ -49,7 +49,6 @@ public class MailBox {
     {
         try {
             Message theWantedMessage = this.messages.get(messageIndex);
-            theWantedMessage.markAsRead();
             return theWantedMessage;
         }
         catch (Exception e)
@@ -63,16 +62,16 @@ public class MailBox {
      * @param messageId - The message index in the list
      * @return - The message that was removed
      */
-    public Message removeMessage(int messageId)
+    public void removeMessage(int messageId)
     {
         Message message;
         for(int i=0;i<this.messages.size();i++)
         {
             message = this.messages.get(i);
             if(message.getId()==messageId)
-                return this.messages.remove(messageId);
+                this.messages.remove(message);
         }
-        return null;
+
 
     }
 

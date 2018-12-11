@@ -8,8 +8,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -38,6 +40,30 @@ public class MailBoxView extends AbstractView {
         dateColumn.setCellValueFactory(new PropertyValueFactory<TableContent,String>("date"));
         timeColumn.setCellValueFactory(new PropertyValueFactory<TableContent,String>("time"));
         kindColumn.setCellValueFactory(new PropertyValueFactory<TableContent,String>("kind"));
+        mailBoxTableView.setRowFactory(new Callback<TableView<TableContent>, TableRow<TableContent>>() {
+            @Override
+            public TableRow<TableContent> call(TableView<TableContent> param) {
+                return new TableRow<TableContent>() {
+                    @Override
+                    protected void updateItem(TableContent item, boolean empty) {
+                        if (item==null || item.hasBeenRead) {
+                            try {
+                                System.out.println(item.sender);
+                                System.out.println(item.hasBeenRead);
+                            }
+                            catch (Exception e)
+                            {
+
+                            }
+                            setStyle("");
+                        } else  {
+                                setStyle("-fx-font-weight: bold");
+                        }
+
+                    }
+                };
+            }
+        });
         mailBoxTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 TableContent tableContent=(TableContent)newSelection;
@@ -56,7 +82,7 @@ public class MailBoxView extends AbstractView {
             for(int i=0;i<this.mailBox.size();i++)
             {
                 message = mailBox.getMessage(i);
-                items.add(new TableContent(message.getSender(),message.getDate(),message.getTime(),message.getKind(),message.getId()));
+                items.add(new TableContent(message.getSender(),message.getDate(),message.getTime(),message.getKind(),message.getId(),message.hasbeenRead()));
             }
         }
         this.mailBoxTableView.setItems(items);
@@ -72,9 +98,11 @@ public class MailBoxView extends AbstractView {
         public String time;
         public String kind;
         public int id;
+        public boolean hasBeenRead;
 
-        public TableContent(String sender,String date,String time,String kind,int id)
+        public TableContent(String sender,String date,String time,String kind,int id,boolean hasBeenRead)
         {
+            this.hasBeenRead = hasBeenRead;
             this.sender = sender;
             this.date = date;
             this.time = time;
@@ -120,6 +148,14 @@ public class MailBoxView extends AbstractView {
 
         public void setId(int id) {
             this.id = id;
+        }
+
+        public void setHasBeenRead(boolean hasBeenRead) {
+            this.hasBeenRead = hasBeenRead;
+        }
+
+        public boolean isHasBeenRead() {
+            return hasBeenRead;
         }
     }
 

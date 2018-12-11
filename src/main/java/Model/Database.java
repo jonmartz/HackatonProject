@@ -408,7 +408,6 @@ public class Database {
                         message = new RequestMessage(sender, receiver, date, time, id, hasBeenRead, vacation);
                     }
                 }
-                System.out.println(message);
                 messages.add(message);
             }
         } catch (SQLException e) {
