@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Database;
 import View.PersonalAreaView;
 import Model.User;
 import View.SignUpView;
@@ -112,5 +113,28 @@ public class PersonalAreaController extends AbstractController {
         Image image = view.getImage(view.pictureFilePath);
         if (image != null) view.pictureImageView.setImage(image);
         view.KeyReleased();
+    }
+
+    /**
+     * This function will return the number of unread messages
+     * @return - The number of unread messages
+     */
+    public int getNumberOfUnreadMessages()
+    {
+        try
+        {
+            return getCurrentUser().mailBox.numOfUnreadMesages();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return 0;
+        }
+
+    }
+    @Override
+    public void setDatabase(Database database) {
+        super.setDatabase(database);
+        ((PersonalAreaView)view).setMailBoxText();
     }
 }

@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.List;
+
 /**
  * Place holder for a specific user's details.
  */
@@ -11,7 +13,7 @@ public class User {
     public String lastName;
     public String city;
     public String pictureFilePath;
-
+    public MailBox mailBox;
     /**
      * Constructor
      * @param username of user
@@ -20,9 +22,11 @@ public class User {
      * @param firstName of user
      * @param lastName of user
      * @param city of user
+     * @param pictureFilePath of user
+     * @param mailBox The mailbox of the user
      */
     public User(String username, String password, String birthdate, String firstName,
-                String lastName, String city, String pictureFilePath) {
+                String lastName, String city, String pictureFilePath, List<Message> mailBox) {
         this.username = username;
         this.password = password;
         this.birthdate = birthdate;
@@ -30,6 +34,7 @@ public class User {
         this.lastName = lastName;
         this.city = city;
         this.pictureFilePath = pictureFilePath;
+        this.mailBox=new MailBox(mailBox);
     }
 
     /**

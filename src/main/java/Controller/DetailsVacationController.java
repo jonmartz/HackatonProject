@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.RequestMessage;
 import Model.Vacation;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.image.Image;
@@ -37,4 +38,14 @@ public class DetailsVacationController extends AbstractController {
 
     @Override
     protected void FillAllData() { fillFieldsWithVacationDetails();}
+
+    public void BuyVacation() {
+        Vacation vacation = database.getCurrentVacation();
+        // TODO: 11/12/2018 Dont allow to send multiple times on the same vacation (use database to see if there is an RequestMessage in the data base about this vacation from this user)
+        if(!vacation.ownerID.equals(getCurrentUser().username)) {
+            RequestMessage requestMessage = new RequestMessage(this.getCurrentUser().username, vacation.ownerID, vacation);
+            this.database.addMessage(requestMessage.getSender(), requestMessage.getReceiver(), vacation.ID, false, requestMessage.getDate(), requestMessage.getTime(), requestMessage.getKind());
+        }
+        viewChanger.closeSecondaryStage();
+    }
 }

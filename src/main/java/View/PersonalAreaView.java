@@ -27,6 +27,7 @@ public class PersonalAreaView extends AbstractView {
     public Button saveChanges;//The "SaveChanges" button
     public ImageView pictureImageView;
     public String pictureFilePath;
+    public Button mailBox;
 
 
     /**
@@ -38,12 +39,23 @@ public class PersonalAreaView extends AbstractView {
         this.setController(personalAreaController);
         personalAreaController.setView(this);
 
+
+
         // Add listeners
         addTextListener(firstName, "[A-Za-z]*", "[^A-Za-z]");
         addTextListener(lastName, "[A-Za-z]*", "[^A-Za-z]");
         addTextListener(city, "[A-Za-z]*", "[^A-Za-z]");
     }
-
+    public void setMailBoxText()
+    {
+        int numOfUnreadMessages = ((PersonalAreaController)this.getController()).getNumberOfUnreadMessages();
+        if(numOfUnreadMessages==0)
+            this.mailBox.setText("Mail Box");
+        else
+        {
+            this.mailBox.setText("Mail Box("+numOfUnreadMessages+")");
+        }
+    }
     /**
      * Activates after user types in a text field, in order to enable/disable the sign in button
      * and write in the commentsText field.
@@ -240,4 +252,6 @@ public class PersonalAreaView extends AbstractView {
     public void setPictureFilePath(String pictureFilePath) {
         this.pictureFilePath = pictureFilePath;
     }
+
+
 }

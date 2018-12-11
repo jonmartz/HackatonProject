@@ -78,6 +78,7 @@ public class VacationSearchView extends AbstractView {
                             button.setOnAction(event -> {
                                 VacationEntry vacationEntry = getTableView().getItems().get(getIndex());
                                 CheckVacation(vacationEntry.ID);
+
                             });
                             setGraphic(button);
                             setText(null);

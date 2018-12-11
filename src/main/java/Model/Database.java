@@ -14,6 +14,7 @@ public class Database {
     private Connection connection;
     private User currentUser;
     private Vacation currentVacation;
+    private Message currentMessage;
 
     /**
      * Constructor. If the database.db doesn't exist, creates it.
@@ -32,6 +33,15 @@ public class Database {
                     "lastName string, " +
                     "city string, " +
                     "picture string)");
+            //Create messages table
+            statement.executeUpdate("create table if not exists messages (" +
+                    "sender string, " +
+                    "recipient string, " +
+                    "vacationId string, " +
+                    "hasBeenRead boolean, " +
+                    "creationDate string, " +
+                    "creationTime string, " +
+                    "kind string) ");
 
             // Create vacations table
             statement.executeUpdate("create table if not exists vacations (" +
@@ -95,6 +105,11 @@ public class Database {
         return this.currentUser;
     }
 
+
+    public Message getCurrentMessage() {
+        return this.currentMessage;
+    }
+
     /**
      * Getter
      * @param user that is currently signed in
@@ -103,6 +118,26 @@ public class Database {
         this.currentUser = user;
     }
 
+    public void setCurrentMessage(Message currentMessage)
+    {
+        this.currentMessage = currentMessage;
+        if(currentMessage!=null)
+        {
+            openConnection();
+            Statement statement = null;
+            try {
+                statement = connection.createStatement();
+                currentMessage.markAsRead();
+                String command ="UPDATE messages" +
+                        " SET hasBeenRead = true " +
+                        "WHERE rowid = '"+currentMessage.getId()+"';";
+                statement.executeUpdate(command);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
     /**
      * Getter
      * @return vacation that is currently being viewed
@@ -158,13 +193,46 @@ public class Database {
      * @param buyerID    of user that purchased
      */
     public void addTransaction(String vacationID, String buyerID) {
+
         try {
             openConnection();
             Statement statement = connection.createStatement();
-                String command = "insert into transactions values(" +
-                        "'" + vacationID + "', " +
-                        "'" + buyerID + "'" + ")";
-                statement.executeUpdate(command);
+            String command = "insert into transactions values(" +
+                    "'" + vacationID + "', " +
+                    "'" + buyerID + "'" + ")";
+            statement.executeUpdate(command);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+    }
+
+
+    /**
+     * This function will add a message to the dataBase
+     * @param sender - The sender's id
+     * @param receiver - The receiver's id
+     * @param vacationId - The vacation id
+     * @param hasBeenRead - True if the message has been read
+     * @param creationDate - The creation date
+     * @param creationTime - The creation time
+     * @param kind - The kind of message
+     */
+    public void addMessage(String sender,String receiver,String vacationId,boolean hasBeenRead,String creationDate,String creationTime,String kind) {
+
+        try {
+            openConnection();
+            Statement statement = connection.createStatement();
+            String command = "insert into messages values(" +
+                    "'" + sender + "', " +
+                    "'" + receiver + "', " +
+                    "'" + vacationId + "', " +
+                    "'" + hasBeenRead + "', " +
+                    "'" + creationDate + "', " +
+                    "'" + creationTime + "', " +
+                    "'" + kind + "'" + ")";
+            statement.executeUpdate(command);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -268,6 +336,7 @@ public class Database {
                 user.lastName = rs.getString("lastName");
                 user.city = rs.getString("city");
                 user.pictureFilePath = rs.getString("picture");
+                user.mailBox = new MailBox(this.getAllMessagesByRecieverId(user.username));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -277,6 +346,11 @@ public class Database {
         return user;
     }
 
+    /**
+     * This function will get the Transaction by the vacationId
+     * @param vacationID - The vacation id
+     * @return - A new instance of the transaction
+     */
     public Transaction getTransactionByVacationID(String vacationID) {
         Transaction transaction = null;
         try {
@@ -296,6 +370,53 @@ public class Database {
             closeConnection();
         }
         return transaction;
+    }
+
+    /**
+     * Get all messages of a certain user (as the receiver) from database as a list of vacation objects
+     * @return message list
+     */
+    public ArrayList<Message> getAllMessagesByRecieverId(String receiverId) {
+        ArrayList<Message> messages = new ArrayList<>();
+        try
+        {
+            openConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("select rowid, * from messages where recipient='"
+                    + receiverId + "'");
+            while(resultSet.next()) {
+                String kind = resultSet.getString("kind");
+                int id = resultSet.getInt("rowid");
+                String sender = resultSet.getString("sender");
+                String receiver = resultSet.getString("recipient");
+                String date = resultSet.getString("creationDate");
+                String time = resultSet.getString("creationTime");
+                String vacationId = resultSet.getString("vacationId");
+                boolean hasBeenRead = resultSet.getBoolean("hasBeenRead");
+                Vacation vacation = getVacation(vacationId);
+                Message message;
+                if (kind.equals("Acceptance"))
+                    message = new AcceptanceMessage(sender, receiver, date, time, id, hasBeenRead, vacation);
+                else
+                {
+                    if(kind.equals("Completed")) {
+                        Transaction transaction = getTransactionByVacationID(vacationId);
+                        message = new CompletionMessage(sender, receiver, date, time, id, hasBeenRead,transaction,vacation );
+                    }
+                    else
+                    {
+                        message = new RequestMessage(sender, receiver, date, time, id, hasBeenRead, vacation);
+                    }
+                }
+                messages.add(message);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+
+        return messages;
     }
     /**
      * Get a single vacation object with the data from database
@@ -337,6 +458,8 @@ public class Database {
         }
         return vacations;
     }
+
+
 
     /**
      * Get all countries in database
@@ -381,4 +504,21 @@ public class Database {
             }
         }
     }
+
+    public void deleteMessage(int id) {
+        openConnection();
+        try {
+            Statement statement = connection.createStatement();
+            String command = "delete from messages where " +
+                    "rowid='" + id + "'";
+            statement.executeUpdate(command);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+    }
+
+
 }

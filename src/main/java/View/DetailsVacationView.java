@@ -62,7 +62,8 @@ public class DetailsVacationView extends AbstractView{
         detailsVacationController.setView(this);
     }
 
+
     public void BuyVacation() {
-        //todo: implement
+        ((DetailsVacationController)getController()).BuyVacation();
     }
 }

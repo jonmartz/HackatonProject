@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Database;
+import Model.Message;
 import Model.Vacation;
 import View.AbstractView;
 import Model.User;
@@ -45,6 +46,7 @@ public abstract class AbstractController {
         view.updateMainMenuButtons();
         FillAllData();
     }
+
 
     /**
      * Use the database to fill all necessary data in the current view
@@ -130,6 +132,7 @@ public abstract class AbstractController {
         viewChanger.setupView(database);
     }
 
+
     /**
      * Transitions to the vacation publishing screen
      */
@@ -153,13 +156,35 @@ public abstract class AbstractController {
         viewChanger.searchUser();
         viewChanger.setupView(database);
     }
+    /**
+     * Transitions to the MailBox window
+     */
+    public void mailBox()
+    {
 
+        viewChanger.mailBox();
+        viewChanger.setupView(database);
+
+    }
+
+    /**
+     * Transitions to the MailBox window
+     */
+    public void message(String fxml,String kind)
+    {
+
+        viewChanger.messageView(fxml,kind);
+        viewChanger.setupView(database);
+
+    }
     /**
      * Transitions to the user search window
      */
     public void personalArea() {
+
         viewChanger.personalArea();
         viewChanger.setupView(database);
+
     }
 
     /**
@@ -170,6 +195,13 @@ public abstract class AbstractController {
         return database.getCurrentUser();
     }
 
+    public void setCurrentMessage(Message currentMessage)
+    {
+        this.database.setCurrentMessage(currentMessage);
+    }
+    public Message getCurrentMessage(){
+        return database.getCurrentMessage();
+    }
     /**
      * Set the last view so after signing up, the user is taken back to the last view he was on
      * @param lastView to go back to after signing in

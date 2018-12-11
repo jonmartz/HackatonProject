@@ -15,6 +15,7 @@ import java.io.IOException;
  */
 public class ViewChanger {
     private Stage stage;
+    private Stage secondaryStage;
     private FXMLLoader fxmlLoader;
     private String lastView = "";
     /**
@@ -121,6 +122,40 @@ public class ViewChanger {
     }
 
     /**
+     * Transitions to the MailBox screen.
+     */
+    public void mailBox() {
+        try {
+            fxmlLoader = new FXMLLoader();
+            Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("mailBox.fxml").openStream());
+            stage.setTitle("Mail Box");
+            stage.setScene(new Scene(root, 790 , 450));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Transitions to the view message screen.
+     * @param fxml - The fxml that describes the message
+     * @param kind - The kind of message
+     */
+    public void messageView(String fxml,String kind)
+    {
+        try {
+            fxmlLoader = new FXMLLoader();
+            Parent root = fxmlLoader.load(getClass().getClassLoader().getResource(fxml).openStream());
+            String note = ""+kind.charAt(0);
+            note = note.toUpperCase();
+            kind = note+kind.substring(1);
+            stage.setTitle(kind+" Message");
+            stage.setScene(new Scene(root, 790 , 450));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Transitions to the vacation details screen.
      */
     public void detailsVacation() {
@@ -129,6 +164,7 @@ public class ViewChanger {
             Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("detailsVacation.fxml").openStream());
             // Create new stage
             Stage secondaryStage = new Stage();
+            this.secondaryStage = secondaryStage;
             secondaryStage.setTitle("Vacation Details");
             secondaryStage.setScene(new Scene(root, 790 , 450));
             secondaryStage.show();
@@ -154,4 +190,14 @@ public class ViewChanger {
     public void setLastView(String lastView) {
         this.lastView = lastView;
     }
+
+    public void closeSecondaryStage()
+    {
+        if(secondaryStage!=null)
+        {
+            secondaryStage.close();
+            secondaryStage = null;
+        }
+    }
+
 }
