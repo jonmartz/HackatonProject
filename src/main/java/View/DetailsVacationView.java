@@ -12,9 +12,6 @@ import javafx.scene.text.Text;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-/**
- *
- */
 public class DetailsVacationView extends AbstractView{
 
     @FXML
@@ -64,7 +61,6 @@ public class DetailsVacationView extends AbstractView{
         this.setController(detailsVacationController);
         detailsVacationController.setView(this);
     }
-
 
     public void BuyVacation() {
         ((DetailsVacationController)getController()).BuyVacation();

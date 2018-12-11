@@ -138,7 +138,6 @@ public abstract class AbstractController {
         viewChanger.setupView(database);
     }
 
-
     /**
      * Transitions to the vacation publishing screen
      */

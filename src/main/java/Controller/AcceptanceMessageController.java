@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.*;
+import javafx.scene.control.ButtonType;
 
 import java.util.HashSet;
 
@@ -18,6 +19,9 @@ public class AcceptanceMessageController extends MessageController {
             if (IDs.contains(vacation.ID)) currentMessage.setPayed(true);
         }
         if(!currentMessage.hasPayed()) {
+            if (view.getResultFromWarning("Are you sure you want to pay this vacation?\n") == ButtonType.NO){
+                return;
+            }
             view.getResultFromWarning("Pay with paypal? (If you choose no then you will pay with VISA)");
             view.ShowPopUp("Your payment was executed successfully!");
 
