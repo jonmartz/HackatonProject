@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.RequestMessage;
 import Model.Vacation;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.image.Image;
@@ -37,4 +38,11 @@ public class DetailsVacationController extends AbstractController {
 
     @Override
     protected void FillAllData() { fillFieldsWithVacationDetails();}
+
+    public void BuyVacation() {
+        Vacation vacation = database.getCurrentVacation();
+        RequestMessage requestMessage =new RequestMessage(this.getCurrentUser().username,vacation.ownerID,vacation);
+        this.database.addMessage(requestMessage.getSender(),requestMessage.getReceiver(),vacation.ID,false,requestMessage.getDate(),requestMessage.getTime(),requestMessage.getKind());
+        viewChanger.closeSecondaryStage();
+    }
 }

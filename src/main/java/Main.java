@@ -4,6 +4,9 @@ import View.ViewChanger;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 public class Main extends Application {
 
     @Override
@@ -13,9 +16,13 @@ public class Main extends Application {
         viewChanger.signIn();
         viewChanger.setupView(database);
         primaryStage.show();
+        System.out.println("lk;");
+
     }
 
     public static void main(String[] args) {
         launch(args);
     }
+
+
 }

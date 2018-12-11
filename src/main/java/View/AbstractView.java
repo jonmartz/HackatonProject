@@ -85,7 +85,15 @@ public abstract class AbstractView implements Initializable {
      * Transitions to the personal area window
      */
     public void personalArea() { controller.personalArea(); }
+    /**
+     * Transitions to the personal MailBox window
+     */
+    public void mailBox() { controller.mailBox();}
 
+    /**
+     * Transitions to the personal Message window
+     */
+    public void messageView(String fxml,String kind) { controller.message(fxml,kind);}
     /**
      * Show warning and ask for user's confirmation
      * @param text of warning
