@@ -11,10 +11,10 @@ import java.util.HashSet;
  * (signed in user and vacation that he is checking)
  */
 public class Database {
-    private Connection connection;
-    private User currentUser;
-    private Vacation currentVacation;
-    private Message currentMessage;
+    private Connection connection; // to database
+    private User currentUser; // user that is currently signed in
+    private Vacation currentVacation; // vacation that is currently being viewed
+    private Message currentMessage; // maessage that is currently being viewed
 
     /**
      * Constructor. If the database.db doesn't exist, creates it.
@@ -33,6 +33,7 @@ public class Database {
                     "lastName string, " +
                     "city string, " +
                     "picture string)");
+
             //Create messages table
             statement.executeUpdate("create table if not exists messages (" +
                     "sender string, " +
@@ -90,8 +91,9 @@ public class Database {
      */
     private void closeConnection() {
         try {
-            if (connection != null)
+            if (connection != null) {
                 connection.close();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -105,7 +107,10 @@ public class Database {
         return this.currentUser;
     }
 
-
+    /**
+     * Getter
+     * @return current message
+     */
     public Message getCurrentMessage() {
         return this.currentMessage;
     }
@@ -118,6 +123,10 @@ public class Database {
         this.currentUser = user;
     }
 
+    /**
+     * Setter. Also updates the message as "already read"
+     * @param currentMessage to set
+     */
     public void setCurrentMessage(Message currentMessage)
     {
         this.currentMessage = currentMessage;
@@ -134,10 +143,12 @@ public class Database {
                 statement.executeUpdate(command);
             } catch (SQLException e) {
                 e.printStackTrace();
+            } finally {
+                closeConnection();
             }
-
         }
     }
+
     /**
      * Getter
      * @return vacation that is currently being viewed
@@ -162,7 +173,7 @@ public class Database {
      * @param firstName             of user
      * @param lastName              of user
      * @param city                  of user
-     * @param picture       of user
+     * @param picture               of user
      */
     public void addUser(String username, String password, String birthdate, String firstName,
                         String lastName, String city, String picture) {
@@ -415,9 +426,9 @@ public class Database {
         } finally {
             closeConnection();
         }
-
         return messages;
     }
+
     /**
      * Get a single vacation object with the data from database
      * @param vacationID of vacation
@@ -458,8 +469,6 @@ public class Database {
         }
         return vacations;
     }
-
-
 
     /**
      * Get all countries in database
@@ -505,6 +514,10 @@ public class Database {
         }
     }
 
+    /**
+     * Delete a message from database
+     * @param id of message
+     */
     public void deleteMessage(int id) {
         openConnection();
         try {
@@ -520,5 +533,25 @@ public class Database {
         }
     }
 
-
+    /**
+     * Get the vacation id of all the vacations that have a been accepted in a buy request
+     * @return vacation IDs
+     */
+    public HashSet<String> getAcceptedVacationIDs() {
+        HashSet<String> acceptedVacationIDs = new HashSet<>();
+        try
+        {
+            openConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("select vacationId from messages where kind='Acceptance'");
+            while(resultSet.next()) {
+                acceptedVacationIDs.add(resultSet.getString("vacationId"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        return acceptedVacationIDs;
+    }
 }

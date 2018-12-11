@@ -179,7 +179,6 @@ public class ViewChanger {
     public void lastView() {
         if (lastView.equals("publishVacation")) publishVacation();
         else if (lastView.equals("searchVacation")) searchVacation();
-//        else if (lastView.equals("buyVacation")) buyVacation(); // todo: uncomment
         else searchVacation(); // default window is vacation search
     }
 

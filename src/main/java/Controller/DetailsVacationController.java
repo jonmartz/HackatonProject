@@ -1,11 +1,15 @@
 package Controller;
 
+import Model.Message;
 import Model.RequestMessage;
 import Model.Vacation;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import View.DetailsVacationView;
+
+import java.util.ArrayList;
 
 public class DetailsVacationController extends AbstractController {
     private Stage stage;
@@ -39,13 +43,42 @@ public class DetailsVacationController extends AbstractController {
     @Override
     protected void FillAllData() { fillFieldsWithVacationDetails();}
 
+    /**
+     * Activated by the buyVacation button
+     */
     public void BuyVacation() {
-        Vacation vacation = database.getCurrentVacation();
-        // TODO: 11/12/2018 Dont allow to send multiple times on the same vacation (use database to see if there is an RequestMessage in the data base about this vacation from this user)
-        if(!vacation.ownerID.equals(getCurrentUser().username)) {
-            RequestMessage requestMessage = new RequestMessage(this.getCurrentUser().username, vacation.ownerID, vacation);
-            this.database.addMessage(requestMessage.getSender(), requestMessage.getReceiver(), vacation.ID, false, requestMessage.getDate(), requestMessage.getTime(), requestMessage.getKind());
+        // check if user is signed in
+        if (getCurrentUser() == null){
+            if (view.getResultFromWarning("You must sign in to buy a vacation.\nGo to sign in screen? (this window will stay open)") == ButtonType.YES)
+                signIn();
+            return;
         }
+
+        Vacation currentVacation = database.getCurrentVacation();
+        if(!currentVacation.ownerID.equals(getCurrentUser().username)) {
+
+            // Check if user already sent a buy request for this vacation
+            boolean alreadySent = false;
+            ArrayList<Message> messages = database.getAllMessagesByRecieverId(currentVacation.ownerID);
+            for (Message message : messages){
+                if (message instanceof RequestMessage){
+                    RequestMessage requestMessage = (RequestMessage)message;
+                    if (requestMessage.getVacation().ID.equals(currentVacation.ID)
+                            && requestMessage.getSender().equals(getCurrentUser().username)){
+                        view.ShowPopUp("You already sent a buy request for this vacation!");
+                        alreadySent = true;
+                        break;
+                    }
+                }
+            }
+            if (!alreadySent) { // if this user has no yet sent a request for this vacation
+                view.ShowPopUp("Buy request sent to vacation owner!\nCheck your mailbox for confirmation.");
+                RequestMessage requestMessage = new RequestMessage(this.getCurrentUser().username, currentVacation.ownerID, currentVacation);
+                this.database.addMessage(requestMessage.getSender(), requestMessage.getReceiver(), currentVacation.ID,
+                        false, requestMessage.getDate(), requestMessage.getTime(), requestMessage.getKind());
+            }
+        }
+        else view.ShowPopUp("You are the owner of this vacation!");
         viewChanger.closeSecondaryStage();
     }
 }

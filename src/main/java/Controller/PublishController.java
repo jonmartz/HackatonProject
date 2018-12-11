@@ -14,7 +14,6 @@ public class PublishController extends AbstractController {
 
     public void Publish() {
         PublishVacationView view = (PublishVacationView) this.view;
-
         // Get ticket count
         String adults = view.adultCountTextBox.getText();
         String kids = view.kidCountTextBox.getText();
@@ -29,7 +28,7 @@ public class PublishController extends AbstractController {
                 view.getTodateStr(), view.getFromdateStr(), view.getSleepingCostIncluded(),
                 view.getReturnFlight(), view.priceTextField.getText(),
                 database.getCurrentUser().username, view.ticketPicturePath);
-        view.setComments("Vacation published successfully!");
+        view.ShowPopUp("Vacation was published successfully!");
     }
 
     /**

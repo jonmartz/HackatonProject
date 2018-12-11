@@ -81,11 +81,18 @@ public abstract class AbstractController {
     }
 
     /**
-     * Gets all the vacations from database
+     * Gets all the (where purchase is not accepted) vacations from database
      * @return list with all vacations
      */
     public ArrayList<Vacation> GetAllVacations() {
-        return database.getAllVacations();
+        ArrayList<Vacation> vacations = database.getAllVacations();
+        ArrayList<Vacation> relevantVacations = new ArrayList<>();
+        HashSet acceptedVacationIDs = database.getAcceptedVacationIDs();
+        for (Vacation vacation : vacations){
+            if (!acceptedVacationIDs.contains(vacation.ID))
+                relevantVacations.add(vacation);
+        }
+        return relevantVacations;
     }
 
     /**
@@ -184,7 +191,6 @@ public abstract class AbstractController {
 
         viewChanger.personalArea();
         viewChanger.setupView(database);
-
     }
 
     /**
@@ -195,10 +201,15 @@ public abstract class AbstractController {
         return database.getCurrentUser();
     }
 
+    /**
+     * set the current message in database
+     * @param currentMessage to set
+     */
     public void setCurrentMessage(Message currentMessage)
     {
         this.database.setCurrentMessage(currentMessage);
     }
+
     public Message getCurrentMessage(){
         return database.getCurrentMessage();
     }

@@ -99,11 +99,17 @@ public class VacationSearchController extends AbstractController {
 
         ArrayList<Vacation> vacations = GetAllVacations();
         ArrayList<Vacation> relevantVacations = new ArrayList<>();
+        HashSet acceptedVacationIDs = database.getAcceptedVacationIDs();
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         boolean foundAtLeastOneDate = false;
         boolean foundAtLeastOneTickets = false;
 
         for (Vacation vacation : vacations){
+
+            // If vacation has already been accepted, its not relevant
+            if (acceptedVacationIDs.contains(vacation.ID)) continue;
+
             boolean foundDate = false;
             boolean foundTickets = false;
             String country = vacation.destinationCountryTXT.toLowerCase();

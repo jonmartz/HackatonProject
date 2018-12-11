@@ -38,16 +38,17 @@ public class AcceptanceMessage extends Message {
      * This function will return the kind of message
      * @return - The kind of message
      */
+    @Override
     public String getKind()
     {
         return "Acceptance";
     }
 
-    @Override
     /**
      * This function will return the content of the message
      * @return - The content of the message
      */
+    @Override
     public String getContent()
     {
 
@@ -56,20 +57,20 @@ public class AcceptanceMessage extends Message {
     }
 
 
-    @Override
     /**
      * This function will return the Headline of the message
      * @return - The Headline of the message
      */
+    @Override
     public String getHeadline() {
         return "Hey There!\n" +this.getSender() +" has accepted your request!";
     }
 
-    @Override
     /**
      * This function will return the name of the fxml file that is related to the message
      * @return - The name of the fxml file that is related to the message
      */
+    @Override
     public String getViewName()
     {
         return "acceptanceMessage.fxml";
