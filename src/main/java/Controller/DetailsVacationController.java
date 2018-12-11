@@ -11,12 +11,16 @@ import View.DetailsVacationView;
 
 import java.util.ArrayList;
 
+/**
+ * Controller for the vacation details view
+ */
 public class DetailsVacationController extends AbstractController {
-    private Stage stage;
-    private FXMLLoader fxmlLoader;
 
+    /**
+     * Fill all the vacation details in view
+     */
     public void fillFieldsWithVacationDetails() {
-        //Get the current user
+        //Get the current vacation
         Vacation vacation= database.getCurrentVacation();
 
         //Fill the fields with the vacation's data

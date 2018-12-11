@@ -98,6 +98,7 @@ public class ViewChanger {
      */
     public void searchVacation() {
         try {
+            lastView = "searchVacation";
             fxmlLoader = new FXMLLoader();
             Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("vacationSearch.fxml").openStream());
             stage.setTitle("Search Vacation");
@@ -112,6 +113,7 @@ public class ViewChanger {
      */
     public void publishVacation() {
         try {
+            lastView = "";
             fxmlLoader = new FXMLLoader();
             Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("publishVacation.fxml").openStream());
             stage.setTitle("Publish Vacation");
@@ -179,7 +181,7 @@ public class ViewChanger {
     public void lastView() {
         if (lastView.equals("publishVacation")) publishVacation();
         else if (lastView.equals("searchVacation")) searchVacation();
-        else searchVacation(); // default window is vacation search
+        else personalArea(); // default window is vacation search
     }
 
     /**
@@ -190,6 +192,9 @@ public class ViewChanger {
         this.lastView = lastView;
     }
 
+    /**
+     * close the secondary stage (where vacation details are displayed)
+     */
     public void closeSecondaryStage()
     {
         if(secondaryStage!=null)

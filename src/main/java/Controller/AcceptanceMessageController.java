@@ -2,15 +2,25 @@ package Controller;
 
 import Model.*;
 
+import java.util.HashSet;
+
+/**
+ * Controller for the accepted message view
+ */
 public class AcceptanceMessageController extends MessageController {
 
     public void payment()
     {
         AcceptanceMessage currentMessage = (AcceptanceMessage)this.getCurrentMessage();
+        Vacation vacation = currentMessage.getVacation();
+        if(!currentMessage.hasPayed()){
+            HashSet<String> IDs = database.getVacationIDsFromAllTransactions();
+            if (IDs.contains(vacation.ID)) currentMessage.setPayed(true);
+        }
         if(!currentMessage.hasPayed()) {
             view.getResultFromWarning("Pay with paypal? (If you choose no then you will pay with VISA)");
             view.ShowPopUp("Your payment was executed successfully!");
-            Vacation vacation = currentMessage.getVacation();
+
             Transaction transaction = new Transaction(vacation.ID, currentMessage.getReceiver());
             CompletionMessage completionMessage1 = new CompletionMessage(currentMessage.getReceiver(), currentMessage.getSender(), transaction, vacation);
             CompletionMessage completionMessage2 = new CompletionMessage(currentMessage.getSender(), currentMessage.getReceiver(), transaction, vacation);

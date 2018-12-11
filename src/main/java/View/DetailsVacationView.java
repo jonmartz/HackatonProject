@@ -12,6 +12,9 @@ import javafx.scene.text.Text;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ *
+ */
 public class DetailsVacationView extends AbstractView{
 
     @FXML

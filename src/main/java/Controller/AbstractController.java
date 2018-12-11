@@ -47,7 +47,6 @@ public abstract class AbstractController {
         FillAllData();
     }
 
-
     /**
      * Use the database to fill all necessary data in the current view
      */
@@ -210,9 +209,14 @@ public abstract class AbstractController {
         this.database.setCurrentMessage(currentMessage);
     }
 
+    /**
+     * get the message that is currently being viewed
+     * @return message
+     */
     public Message getCurrentMessage(){
         return database.getCurrentMessage();
     }
+
     /**
      * Set the last view so after signing up, the user is taken back to the last view he was on
      * @param lastView to go back to after signing in

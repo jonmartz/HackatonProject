@@ -142,7 +142,7 @@ public class Database {
                         "WHERE rowid = '"+currentMessage.getId()+"';";
                 statement.executeUpdate(command);
             } catch (SQLException e) {
-                e.printStackTrace();
+//                e.printStackTrace();
             } finally {
                 closeConnection();
             }
@@ -553,5 +553,27 @@ public class Database {
             closeConnection();
         }
         return acceptedVacationIDs;
+    }
+
+    /**
+     * Get the vacation id of all the vacations that have been payed for in a transaction
+     * @return vacation IDs
+     */
+    public HashSet<String> getVacationIDsFromAllTransactions() {
+        HashSet<String> vacationIDs = new HashSet<>();
+        try
+        {
+            openConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("select vacationID from transactions");
+            while(resultSet.next()) {
+                vacationIDs.add(resultSet.getString("vacationID"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        return vacationIDs;
     }
 }

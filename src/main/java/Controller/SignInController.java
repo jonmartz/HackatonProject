@@ -6,20 +6,9 @@ import Model.User;
 
 public class SignInController extends AbstractController {
 
-    /**
-     * This function will set the right view for this class
-     */
-    public void setView(AbstractView abstractView) {
-        if (abstractView instanceof SignInView)
-            super.setView(abstractView);
-        else {
-            super.setView(null);
-        }
-    }
-
     @Override
     protected void FillAllData() {
-
+        // nothing to do here
     }
 
     /**
