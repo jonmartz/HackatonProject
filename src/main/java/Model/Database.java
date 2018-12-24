@@ -14,7 +14,7 @@ public class Database {
     private Connection connection; // to database
     private User currentUser; // user that is currently signed in
     private Vacation currentVacation; // vacation that is currently being viewed
-    private Message currentMessage; // maessage that is currently being viewed
+    private Message currentMessage; // massage that is currently being viewed
 
     /**
      * Constructor. If the database.db doesn't exist, creates it.
