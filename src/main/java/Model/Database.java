@@ -210,7 +210,7 @@ public class Database {
     public void addTransaction(Transaction transaction) {
 
         try {
-            openConnection();
+            openConnection();//
             Statement statement = connection.createStatement();
             String vacationID = transaction.vacationID;
             String buyerID = transaction.buyerID;
