@@ -68,6 +68,11 @@ public class Database {
                     "vacationID string, " +
                     "buyerID string)");
 
+            // Trade transaction table
+            statement.executeUpdate("create table if not exists tradeTransactions (" +
+                    "transactionId string, " +
+                    "vacationID string)");
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -207,26 +212,48 @@ public class Database {
 
     /**
      * Add transaction to database
-     * @param vacationID of vacation purchased
-     * @param buyerID    of user that purchased
+     * @param transaction - The given Transaction
      */
-    public void addTransaction(String vacationID, String buyerID) {
+    public void addTransaction(Transaction transaction) {
 
         try {
-            openConnection();
+            openConnection();//
             Statement statement = connection.createStatement();
+            String vacationID = transaction.vacationID;
+            String buyerID = transaction.buyerID;
             String command = "insert into transactions values(" +
                     "'" + vacationID + "', " +
                     "'" + buyerID + "'" + ")";
             statement.executeUpdate(command);
+
+            if(transaction instanceof TradeTransaction)
+            {
+                //Transaction transactionTemp = this.getTransactionByVacationID(vacationID);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             closeConnection();
         }
+
     }
 
 
+
+    private void addTradeTransaction(String transactionID,TradeTransaction tradeTransaction)
+    {
+        Statement statement = null;
+        try {
+            statement = connection.createStatement();
+            String command = "insert into tradeTransactions values(" +
+                    "'" + transactionID + "', " +
+                    "'" + tradeTransaction.payWithVacationId + "'" + ")";
+            statement.executeUpdate(command);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
     /**
      * This function will add a message to the dataBase
      * @param sender - The sender's id
