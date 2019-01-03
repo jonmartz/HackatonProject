@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-
 /**
  * Manages a user database using SQLite, and holds current object pointers
  * (signed in user and vacation that he is checking)
@@ -14,7 +13,8 @@ public class Database {
     private Connection connection; // to database
     private User currentUser; // user that is currently signed in
     private Vacation currentVacation; // vacation that is currently being viewed
-    private Message currentMessage; // maessage that is currently being viewed
+    private Message currentMessage; // message that is currently being viewed
+    private int connectionStack = 0; // used to not open more than one connection
 
     /**
      * Constructor. If the database.db doesn't exist, creates it.
@@ -80,7 +80,10 @@ public class Database {
      */
     private void openConnection() {
         try {
-            connection = DriverManager.getConnection("jdbc:sqlite:database.db");
+            if (connectionStack == 0) { // if there's no connection. Else, don't open more connections
+                connection = DriverManager.getConnection("jdbc:sqlite:database.db");
+            }
+            connectionStack++;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -92,7 +95,11 @@ public class Database {
     private void closeConnection() {
         try {
             if (connection != null) {
-                connection.close();
+                if (connectionStack == 1) {
+                    // if this function wasn't called from a parent function that opened a connection, and didn't close it yet.
+                    connection.close();
+                }
+                connectionStack--;
             }
         } catch (SQLException e) {
             e.printStackTrace();
