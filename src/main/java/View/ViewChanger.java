@@ -176,6 +176,24 @@ public class ViewChanger {
     }
 
     /**
+     * Transitions to the request vacation screen.
+     */
+    public void requestVacation() {
+        try {
+            fxmlLoader = new FXMLLoader();
+            Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("requestVacation.fxml").openStream());
+            // Create new stage
+            Stage secondaryStage = new Stage();
+            this.secondaryStage = secondaryStage;
+            secondaryStage.setTitle("Request Vacation");
+            secondaryStage.setScene(new Scene(root, 790 , 450));
+            secondaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Transitions to the last view
      */
     public void lastView() {

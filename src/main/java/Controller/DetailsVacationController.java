@@ -50,7 +50,7 @@ public class DetailsVacationController extends AbstractController {
     /**
      * Activated by the buyVacation button
      */
-    public void BuyVacation() {
+    public void RequestVacation() {
         // check if user is signed in
         if (getCurrentUser() == null){
             if (view.getResultFromWarning("You must sign in to buy a vacation.\nGo to sign in screen? (this window will stay open)") == ButtonType.YES)
@@ -76,10 +76,14 @@ public class DetailsVacationController extends AbstractController {
                 }
             }
             if (!alreadySent) { // if this user has no yet sent a request for this vacation
-                view.ShowPopUp("Buy request sent to vacation owner!\nCheck your mailbox for confirmation.");
-                RequestMessage requestMessage = new RequestMessage(this.getCurrentUser().username, currentVacation.ownerID, currentVacation);
-                this.database.addMessage(requestMessage.getSender(), requestMessage.getReceiver(), currentVacation.ID,
-                        false, requestMessage.getDate(), requestMessage.getTime(), requestMessage.getKind());
+                viewChanger.closeSecondaryStage();
+                RequestVacationScreen(currentVacation);
+
+                // todo: this must be in request vacation controller:
+//                view.ShowPopUp("Buy request sent to vacation owner!\nCheck your mailbox for confirmation.");
+//                RequestMessage requestMessage = new RequestMessage(this.getCurrentUser().username, currentVacation.ownerID, currentVacation);
+//                this.database.addMessage(requestMessage.getSender(), requestMessage.getReceiver(), currentVacation.ID,
+//                        false, requestMessage.getDate(), requestMessage.getTime(), requestMessage.getKind());
             }
         }
         else view.ShowPopUp("You are the owner of this vacation!");

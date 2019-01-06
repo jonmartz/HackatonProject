@@ -2,7 +2,7 @@ package Model;
 
 public class CompletionMessage extends Message {
 
-    private Transaction transaction; //The transaction
+    private Payment payment; //The payment
     private Vacation vacation;//the vacation
 
     /**
@@ -10,12 +10,12 @@ public class CompletionMessage extends Message {
      *
      * @param sender      - The user that sent the message
      * @param receiver    - The user that received the message
-     * @param transaction - The transaction that has been made
+     * @param payment - The payment that has been made
      * @param vacation    - The vacation that the receiver requested
      */
-    public CompletionMessage(String sender, String receiver, Transaction transaction, Vacation vacation) {
+    public CompletionMessage(String sender, String receiver, Payment payment, Vacation vacation) {
         super(sender, receiver);
-        this.transaction = transaction;
+        this.payment = payment;
         this.vacation = vacation;
     }
 
@@ -28,12 +28,12 @@ public class CompletionMessage extends Message {
      * @param time        - The time of creation
      * @param myId        - The id of the message
      * @param hasbeenRead - True if the message has been read
-     * @param transaction - The transaction that has been made
+     * @param payment - The payment that has been made
      * @param vacation    - The vacation that the receiver requested
      */
-    protected CompletionMessage(String sender, String receiver, String date, String time, int myId, boolean hasbeenRead, Transaction transaction, Vacation vacation) {
+    protected CompletionMessage(String sender, String receiver, String date, String time, int myId, boolean hasbeenRead, Payment payment, Vacation vacation) {
         super(sender, receiver, date, time, myId, hasbeenRead);
-        this.transaction = transaction;
+        this.payment = payment;
         this.vacation = vacation;
 
     }
@@ -53,7 +53,7 @@ public class CompletionMessage extends Message {
      * @return - The content of the message
      */
     public String getContent() {
-        return "The payment has been completed successfully!\nThe flight to " + this.vacation.destinationCountryTXT + " will take place on " + this.vacation.fromDateTXT + " until the " + vacation.toDateTXT + ".\n" + "The transaction id is " + this.transaction.getTransactionId() + ".\n Hoping too see you again!";
+        return "The payment has been completed successfully!\nThe flight to " + this.vacation.destinationCountryTXT + " will take place on " + this.vacation.fromDateTXT + " until the " + vacation.toDateTXT + ".\n" + "The payment id is " + this.payment.getTransactionId() + ".\n Hoping too see you again!";
     }
 
 

@@ -1,7 +1,6 @@
 package Model;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -211,24 +210,24 @@ public class Database {
     }
 
     /**
-     * Add transaction to database
-     * @param transaction - The given Transaction
+     * Add payment to database
+     * @param payment - The given Payment
      */
-    public void addTransaction(Transaction transaction) {
+    public void addTransaction(Payment payment) {
 
         try {
             openConnection();//
             Statement statement = connection.createStatement();
-            String vacationID = transaction.vacationID;
-            String buyerID = transaction.buyerID;
+            String vacationID = payment.vacationID;
+            String buyerID = payment.buyerID;
             String command = "insert into transactions values(" +
                     "'" + vacationID + "', " +
                     "'" + buyerID + "'" + ")";
             statement.executeUpdate(command);
 
-            if(transaction instanceof TradeTransaction)
+            if(payment instanceof TradePayment)
             {
-                //Transaction transactionTemp = this.getTransactionByVacationID(vacationID);
+                //Payment transactionTemp = this.getTransactionByVacationID(vacationID);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -240,14 +239,14 @@ public class Database {
 
 
 
-    private void addTradeTransaction(String transactionID,TradeTransaction tradeTransaction)
+    private void addTradeTransaction(String transactionID, TradePayment tradePayment)
     {
         Statement statement = null;
         try {
             statement = connection.createStatement();
             String command = "insert into tradeTransactions values(" +
                     "'" + transactionID + "', " +
-                    "'" + tradeTransaction.payWithVacationId + "'" + ")";
+                    "'" + tradePayment.payWithVacationId + "'" + ")";
             statement.executeUpdate(command);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -392,29 +391,29 @@ public class Database {
     }
 
     /**
-     * This function will get the Transaction by the vacationId
+     * This function will get the Payment by the vacationId
      * @param vacationID - The vacation id
      * @return - A new instance of the transaction
      */
-    public Transaction getTransactionByVacationID(String vacationID) {
-        Transaction transaction = null;
+    public Payment getTransactionByVacationID(String vacationID) {
+        Payment payment = null;
         try {
             openConnection();
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("select rowid, * from transactions where vacationID='"
                     + vacationID + "'");
             if (resultSet.next()) {
-                transaction = new Transaction();
-                transaction.ID = resultSet.getString("rowid");
-                transaction.vacationID = resultSet.getString("vacationID");
-                transaction.buyerID = resultSet.getString("buyerID");
+                payment = new Payment();
+                payment.ID = resultSet.getString("rowid");
+                payment.vacationID = resultSet.getString("vacationID");
+                payment.buyerID = resultSet.getString("buyerID");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             closeConnection();
         }
-        return transaction;
+        return payment;
     }
 
     /**
@@ -445,8 +444,8 @@ public class Database {
                 else
                 {
                     if(kind.equals("Completed")) {
-                        Transaction transaction = getTransactionByVacationID(vacationId);
-                        message = new CompletionMessage(sender, receiver, date, time, id, hasBeenRead,transaction,vacation );
+                        Payment payment = getTransactionByVacationID(vacationId);
+                        message = new CompletionMessage(sender, receiver, date, time, id, hasBeenRead, payment,vacation );
                     }
                     else
                     {

@@ -1,9 +1,6 @@
 package View;
 
-import Controller.AbstractController;
 import Controller.DetailsVacationController;
-import Controller.UserSearchController;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
@@ -62,7 +59,7 @@ public class DetailsVacationView extends AbstractView{
         detailsVacationController.setView(this);
     }
 
-    public void BuyVacation() {
-        ((DetailsVacationController)getController()).BuyVacation();
+    public void RequestVacation() {
+        ((DetailsVacationController)getController()).RequestVacation();
     }
 }

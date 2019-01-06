@@ -95,6 +95,21 @@ public abstract class AbstractController {
     }
 
     /**
+     * Gets all the vacations that current user is owner of
+     * @return list with all vacations
+     */
+    public ArrayList<Vacation> GetAllVacationsOfCurrentUser() {
+        ArrayList<Vacation> vacations = database.getAllVacations();
+        String currentUserID = database.getCurrentUser().username;
+        ArrayList<Vacation> usersVacations = new ArrayList<>();
+        for (Vacation vacation : vacations){
+            if (vacation.ownerID.equals(currentUserID))
+                usersVacations.add(vacation);
+        }
+        return usersVacations;
+    }
+
+    /**
      * Get a list of all countries in database
      * @return
      */
@@ -135,6 +150,16 @@ public abstract class AbstractController {
     public void CheckVacation(String vacationID) {
         database.setCurrentVacation(GetVacation(vacationID));
         viewChanger.detailsVacation();
+        viewChanger.setupView(database);
+    }
+
+    /**
+     * Transitions to vacation request screen
+     * @param vacation vacation to check
+     */
+    public void RequestVacationScreen(Vacation vacation) {
+        database.setCurrentVacation(vacation);
+        viewChanger.requestVacation();
         viewChanger.setupView(database);
     }
 

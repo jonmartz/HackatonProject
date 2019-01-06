@@ -25,11 +25,11 @@ public class AcceptanceMessageController extends MessageController {
             view.getResultFromWarning("Pay with paypal? (If you choose no then you will pay with VISA)");
             view.ShowPopUp("Your payment was executed successfully!");
 
-            Transaction transaction = new Transaction(vacation.ID, currentMessage.getReceiver());
-            CompletionMessage completionMessage1 = new CompletionMessage(currentMessage.getReceiver(), currentMessage.getSender(), transaction, vacation);
-            CompletionMessage completionMessage2 = new CompletionMessage(currentMessage.getSender(), currentMessage.getReceiver(), transaction, vacation);
+            Payment payment = new Payment(vacation.ID, currentMessage.getReceiver());
+            CompletionMessage completionMessage1 = new CompletionMessage(currentMessage.getReceiver(), currentMessage.getSender(), payment, vacation);
+            CompletionMessage completionMessage2 = new CompletionMessage(currentMessage.getSender(), currentMessage.getReceiver(), payment, vacation);
 
-            this.database.addTransaction(transaction);
+            this.database.addTransaction(payment);
             this.database.addMessage(completionMessage1.getSender(), completionMessage1.getReceiver(), vacation.ID, false, completionMessage1.getDate(), completionMessage1.getTime(), completionMessage1.getKind());
             this.database.addMessage(completionMessage2.getSender(), completionMessage2.getReceiver(), vacation.ID, false, completionMessage2.getDate(), completionMessage2.getTime(), completionMessage2.getKind());
             currentMessage.setPayed(true);

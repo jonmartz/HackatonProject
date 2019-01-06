@@ -117,7 +117,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Button fx:id="buyButton" mnemonicParsing="false" onAction="#BuyVacation" prefHeight="36.0" prefWidth="238.0" style="-fx-background-color: #28733e; -fx-border-color: BLACK;" text="Buy this vacation!" textFill="WHITE" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                  <Button fx:id="buyButton" mnemonicParsing="false" onAction="#RequestVacation" prefHeight="36.0" prefWidth="238.0" style="-fx-background-color: #28733e; -fx-border-color: BLACK;" text="Request this vacation!" textFill="WHITE" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>

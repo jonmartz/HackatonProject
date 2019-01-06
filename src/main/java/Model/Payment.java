@@ -3,7 +3,7 @@ package Model;
 /**
  * This class represents a single transaction
  */
-public class Transaction {
+public class Payment {
     public String ID;
     public String vacationID;
     public String buyerID;
@@ -14,7 +14,7 @@ public class Transaction {
      * @param vacationID - The vacation id
      * @param buyerID - The buyer's id
      */
-    public Transaction(String vacationID,String buyerID)
+    public Payment(String vacationID, String buyerID)
     {
         this.vacationID = vacationID;
         this.buyerID = buyerID;
@@ -25,7 +25,7 @@ public class Transaction {
     /**
      * This is the empty constructor
      */
-    public Transaction()
+    public Payment()
     {
 
     }

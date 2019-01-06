@@ -1,10 +1,10 @@
 package Model;
 
 /**
- * This class represents a Trade Transaction
+ * This class represents a Trade Payment
  * A trade transaction is a trade between two vacations as a way of payment
  */
-public class TradeTransaction extends Transaction {
+public class TradePayment extends Payment {
 
     public String payWithVacationId;//The id of the vacation that the buyer used to buy the other vacation
 
@@ -14,7 +14,7 @@ public class TradeTransaction extends Transaction {
      * @param buyerID - The buyer ID
      * @param payWithVacationId - The id of the vacation that the buyer used to buy the other vacation
      */
-    public TradeTransaction(String vacationID,String buyerID,String payWithVacationId)
+    public TradePayment(String vacationID, String buyerID, String payWithVacationId)
     {
         super(vacationID,buyerID);
         this.payWithVacationId = payWithVacationId;
@@ -23,7 +23,7 @@ public class TradeTransaction extends Transaction {
     /**
      * This is the empty constructor
      */
-    public TradeTransaction()
+    public TradePayment()
     {
         super();
     }
