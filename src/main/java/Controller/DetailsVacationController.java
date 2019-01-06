@@ -71,6 +71,7 @@ public class DetailsVacationController extends AbstractController {
                             && requestMessage.getSender().equals(getCurrentUser().username)){
                         view.ShowPopUp("You already sent a buy request for this vacation!");
                         alreadySent = true;
+                        viewChanger.closeSecondaryStage();
                         break;
                     }
                 }
@@ -78,15 +79,11 @@ public class DetailsVacationController extends AbstractController {
             if (!alreadySent) { // if this user has no yet sent a request for this vacation
                 viewChanger.closeSecondaryStage();
                 RequestVacationScreen(currentVacation);
-
-                // todo: this must be in request vacation controller:
-//                view.ShowPopUp("Buy request sent to vacation owner!\nCheck your mailbox for confirmation.");
-//                RequestMessage requestMessage = new RequestMessage(this.getCurrentUser().username, currentVacation.ownerID, currentVacation);
-//                this.database.addMessage(requestMessage.getSender(), requestMessage.getReceiver(), currentVacation.ID,
-//                        false, requestMessage.getDate(), requestMessage.getTime(), requestMessage.getKind());
             }
         }
-        else view.ShowPopUp("You are the owner of this vacation!");
-        viewChanger.closeSecondaryStage();
+        else {
+            view.ShowPopUp("You are the owner of this vacation!");
+            viewChanger.closeSecondaryStage();
+        }
     }
 }

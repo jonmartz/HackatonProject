@@ -48,7 +48,7 @@ public class RequestVacationView extends AbstractView{
             public TableCell call(final TableColumn<VacationSearchView.VacationEntry, String> param) {
                 final TableCell<VacationSearchView.VacationEntry, String> cell = new TableCell<VacationSearchView.VacationEntry, String>() {
 
-                    final Button button = new Button("Check this vacation");
+                    final Button button = new Button("Offer this vacation");
 
                     @Override
                     public void updateItem(String item, boolean empty) {
