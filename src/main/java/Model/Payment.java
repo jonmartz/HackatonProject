@@ -7,16 +7,19 @@ public class Payment {
     public String ID;
     public String vacationID;
     public String buyerID;
+    public String sellerID;
 
 
     /**
      * This is the constructor of the class
      * @param vacationID - The vacation id
      * @param buyerID - The buyer's id
+     * @param sellerID - The seller's id
      */
-    public Payment(String vacationID, String buyerID)
+    public Payment(String vacationID, String buyerID, String sellerID)
     {
         this.vacationID = vacationID;
+        this.sellerID = sellerID;
         this.buyerID = buyerID;
         this.ID = "";
 

@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane alignment="center" prefHeight="450.0" prefWidth="790.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.AcceptanceMessageView">
+<GridPane alignment="center" prefHeight="450.0" prefWidth="790.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.AcceptanceMessageView">
     <children>
         <BorderPane prefHeight="521.0" prefWidth="789.0" GridPane.rowIndex="1">
             <top>
@@ -139,17 +139,12 @@
             <bottom>
                 <HBox prefHeight="48.0" prefWidth="789.0" BorderPane.alignment="CENTER">
                     <children>
-                        <Button onAction="#goBack" mnemonicParsing="false" prefHeight="39.0" prefWidth="144.0" style="-fx-background-color: #28733e;" text="Go Back" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#goBack" prefHeight="39.0" prefWidth="144.0" style="-fx-background-color: #28733e;" text="Go Back" textFill="WHITE">
                             <HBox.margin>
                                 <Insets left="120.0" />
                             </HBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#payment" prefHeight="39.0" prefWidth="220.0" style="-fx-background-color: #6495ED;" text="Payment" textFill="WHITE">
-                            <HBox.margin>
-                                <Insets left="25.0" />
-                            </HBox.margin>
-                        </Button>
-                        <Button onAction="#deleteMessage" mnemonicParsing="false" prefHeight="39.0" prefWidth="144.0" style="-fx-background-color: #d7261d;" text="Delete Message" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#deleteMessage" prefHeight="39.0" prefWidth="144.0" style="-fx-background-color: #d7261d;" text="Delete Message" textFill="WHITE">
                             <HBox.margin>
                                 <Insets left="25.0" />
                             </HBox.margin>

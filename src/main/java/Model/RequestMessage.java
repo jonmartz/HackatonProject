@@ -3,7 +3,9 @@ package Model;
 public class RequestMessage extends Message {
 
     private Vacation vacation;//the vacation
-    private boolean accepted;//True if the user accepted
+    public Vacation offeredVacation;// vacation offered in trade request
+    private boolean acceptedBySeller;//True if the user accepted
+    private boolean hasConfirmed;
     /**
      * This is the constructor of the class
      *
@@ -11,9 +13,11 @@ public class RequestMessage extends Message {
      * @param receiver - The user that received the message
      * @param vacation - The vacation that the sender requested
      */
-    public RequestMessage(String sender, String receiver,Vacation vacation) {
+    public RequestMessage(String sender, String receiver,Vacation vacation, Vacation offeredVacation) {
         super(sender, receiver);
         this.vacation = vacation;
+        this.offeredVacation = offeredVacation;
+        this.hasConfirmed = false;
     }
 
     /**
@@ -25,48 +29,64 @@ public class RequestMessage extends Message {
      * @param myId - The id of the message
      * @param hasbeenRead - True if the message has been read
      * @param vacation - The vacation that the receiver requested
+     * @param offeredVacation - The vacation that the receiver offered for trade
      */
-    protected RequestMessage(String sender,String receiver, String date,String time,int myId, boolean hasbeenRead,Vacation vacation) {
+    protected RequestMessage(String sender,String receiver, String date,String time,int myId, boolean hasbeenRead,
+                             Vacation vacation, Vacation offeredVacation) {
         super(sender,receiver,date,time,myId,hasbeenRead);
         this.vacation =vacation;
-        this.accepted = false;
+        this.offeredVacation = offeredVacation;
+        this.acceptedBySeller = false;
     }
-    @Override
+
     /**
      * This function will return the kind of message
      * @return - The kind of message
      */
+    @Override
     public String getKind()
     {
         return "Request";
     }
 
-    @Override
     /**
-     * This function will return the content of the message
+     * This function will return the content of the message, adapted to cash or trade requests.
      * @return - The content of the message
      */
+    @Override
     public String getContent()
     {
-
-        return this.getSender()+" wants to buy your vacation to "+vacation.destinationCountryTXT +" from "+vacation.fromDateTXT +" to "+vacation.toDateTXT+ ".\nWould you like to sell the vacation to him? ";
+        if (offeredVacation == null) { // cash
+            return this.getSender() + " wants to buy your vacation to " + vacation.destinationCountryTXT + " from " +
+                    vacation.fromDateTXT + " to " + vacation.toDateTXT + "," +
+                    "\nAnd pay by cash. Would you like to sell the vacation to him? ";
+        }
+        else{ // trade
+            return this.getSender() + " wants to trade your vacation to " + vacation.destinationCountryTXT + " from " +
+                    vacation.fromDateTXT + " to " + vacation.toDateTXT + "" +
+                    "\nFor one of his vacations. Would you like to trade the vacation with him? ";
+        }
     }
 
 
-    @Override
     /**
      * This function will return the Headline of the message
      * @return - The Headline of the message
      */
+    @Override
     public String getHeadline() {
-        return "Hey There!\n" +this.getSender() +" wants to buy your vacation!";
+        if (offeredVacation == null) { // cash
+            return "Hey There!\n" + this.getSender() + " wants to buy your vacation!";
+        }else{ // trade
+            return "Hey There!\n" + this.getSender() + " wants to trade your vacation!";
+        }
     }
 
-    @Override
     /**
      * This function will return the name of the fxml file that is related to the message
      * @return - The name of the fxml file that is related to the message
      */
+    @Override
     public String getViewName()
     {
         return "requestMessage.fxml";
@@ -78,10 +98,18 @@ public class RequestMessage extends Message {
     public Vacation getVacation(){return this.vacation;}
 
     public boolean isAccepted() {
-        return accepted;
+        return acceptedBySeller;
     }
 
     public void setAccepted(boolean accepted) {
-        this.accepted = accepted;
+        this.acceptedBySeller = accepted;
+    }
+
+    public boolean hasConfirmed() {
+        return hasConfirmed;
+    }
+
+    public void setConfirmed(boolean hasConfirmed) {
+        this.hasConfirmed = hasConfirmed;
     }
 }

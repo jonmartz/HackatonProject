@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane alignment="center" prefHeight="450.0" prefWidth="790.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.PersonalAreaView">
+<GridPane alignment="center" prefHeight="450.0" prefWidth="790.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.PersonalAreaView">
    <children>
       <BorderPane prefHeight="521.0" prefWidth="789.0" GridPane.rowIndex="1">
          <top>
@@ -77,9 +77,10 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Text>
-                  <Button fx:id="mailBox" onAction="#mailBox" alignment="CENTER" mnemonicParsing="false" prefHeight="39.0" prefWidth="310.0" style="-fx-background-color: #6495ED;" text="Mail box" textFill="WHITE" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="8" />
+                  <Button fx:id="mailBox" alignment="CENTER" mnemonicParsing="false" onAction="#mailBox" prefHeight="39.0" prefWidth="310.0" style="-fx-background-color: #6495ED;" text="Mail box" textFill="WHITE" GridPane.columnIndex="0" GridPane.rowIndex="8" />
                   <TextField editable="false" prefHeight="100.0" prefWidth="156.0" promptText="Select profile picture" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="3" />
                   <ImageView fx:id="pictureImageView" fitHeight="103.0" fitWidth="155.0" onMouseClicked="#AddPicture" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="3" />
+                  <Button fx:id="myVacationsButton" alignment="CENTER" mnemonicParsing="false" onAction="#myVacations" prefHeight="39.0" prefWidth="310.0" style="-fx-background-color: #6495ED;" text="My vacations" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                </children>
                <columnConstraints>
                   <ColumnConstraints maxWidth="195.0" minWidth="70.0" prefWidth="144.0" />

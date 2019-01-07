@@ -32,6 +32,9 @@ public class PublishVacationView extends AbstractView{
     public Text commentsText; // Problems in user input are shown here
     public String ticketPicturePath;
     public ImageView ticketsImageView;
+    public TextField fromCountryTXT;
+    public TextField fromCityTXT;
+    public TextField destinetionCityTXT;
 
     private int ticketCount;
 
@@ -53,6 +56,9 @@ public class PublishVacationView extends AbstractView{
 
         // Add observers to keep text legal
         addTextListener(destinetionContryTXT, "[A-Za-z]*", "[^A-Za-z]");
+        addTextListener(destinetionCityTXT, "[A-Za-z]*", "[^A-Za-z]");
+        addTextListener(fromCountryTXT, "[A-Za-z]*", "[^A-Za-z]");
+        addTextListener(fromCityTXT, "[A-Za-z]*", "[^A-Za-z]");
         addTextListener(flightCompanyTXT, "[A-Za-z]*", "[^A-Za-z]");
         addTextListener(baggageTXT, "\\d*", "[^\\d]");
         addTextListener(adultCountTextBox, "\\d*", "[^\\d]");
@@ -68,6 +74,9 @@ public class PublishVacationView extends AbstractView{
     public void CheckEnablePublishButton() {
         try {
             if (destinetionContryTXT.getText().isEmpty()
+                    || destinetionCityTXT.getText().isEmpty()
+                    || fromCountryTXT.getText().isEmpty()
+                    || fromCityTXT.getText().isEmpty()
                     || ticketCount == 0
                     || flightCompanyTXT.getText().isEmpty()
                     || baggageTXT.getText().isEmpty()

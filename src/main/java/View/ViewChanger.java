@@ -168,11 +168,17 @@ public class ViewChanger {
             Stage secondaryStage = new Stage();
             this.secondaryStage = secondaryStage;
             secondaryStage.setTitle("Vacation Details");
-            secondaryStage.setScene(new Scene(root, 790 , 450));
-            secondaryStage.show();
+            showSecondaryStage(root, secondaryStage);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void showSecondaryStage(Parent root, Stage secondaryStage) {
+        secondaryStage.setScene(new Scene(root, 790 , 450));
+        secondaryStage.show();
+        secondaryStage.setX(secondaryStage.getX()+20);
+        secondaryStage.setY(secondaryStage.getY()+30);
     }
 
     /**
@@ -186,8 +192,24 @@ public class ViewChanger {
             Stage secondaryStage = new Stage();
             this.secondaryStage = secondaryStage;
             secondaryStage.setTitle("Request Vacation");
-            secondaryStage.setScene(new Scene(root, 790 , 450));
-            secondaryStage.show();
+            showSecondaryStage(root, secondaryStage);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Opens a window with the user's vacations
+     */
+    public void myVacations() {
+        try {
+            fxmlLoader = new FXMLLoader();
+            Parent root = fxmlLoader.load(getClass().getClassLoader().getResource("myVacations.fxml").openStream());
+            // Create new stage
+            Stage secondaryStage = new Stage();
+            this.secondaryStage = secondaryStage;
+            secondaryStage.setTitle("My Vacations");
+            showSecondaryStage(root, secondaryStage);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -221,5 +243,4 @@ public class ViewChanger {
             secondaryStage = null;
         }
     }
-
 }

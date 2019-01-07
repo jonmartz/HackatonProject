@@ -28,6 +28,7 @@ public class SignUpController extends AbstractController {
         }
     }
 
+    //todo: check that pass > 7
 
     /**
      * Creates the new user's account, in case the username is available.

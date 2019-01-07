@@ -1,5 +1,7 @@
 package Model;
 
+import javafx.scene.control.TextField;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -15,8 +17,10 @@ public class Database {
     private Message currentMessage; // message that is currently being viewed
     private int connectionStack = 0; // used to not open more than one connection
 
+    public boolean requestButtonVisible = true; // for changing to vacation details view without the request button
+
     /**
-     * Constructor. If the database.db doesn't exist, creates it.
+     * Constructor. If the database.db doesn't exist, openConnection() creates it.
      */
     public Database() {
         try {
@@ -41,7 +45,15 @@ public class Database {
                     "hasBeenRead boolean, " +
                     "creationDate string, " +
                     "creationTime string, " +
-                    "kind string) ");
+                    "kind string, " +
+                    "offeredVacationID string, " +
+                    "confirmed string)");
+
+            // todo: maybe add to avoid nulls
+            //Create offered vacation from trade requests table
+//            statement.executeUpdate("create table if not exists offeredVacations (" +
+//                    "messageID string, " +
+//                    "offeredVacationID string) ");
 
             // Create vacations table
             statement.executeUpdate("create table if not exists vacations (" +
@@ -60,17 +72,22 @@ public class Database {
                     "isThereReturnFlightTXT string, " +
                     "priceTXT string string, " +
                     "ownerIDTXT string, " +
-                    "ticketPicture string)");
+                    "ticketPicture string, " +
+                    "fromCountryTXT string, " +
+                    "fromCityTXT string, " +
+                    "destinetionCityTXT string)");
 
             // transaction table
-            statement.executeUpdate("create table if not exists transactions (" +
+            statement.executeUpdate("create table if not exists payments (" +
                     "vacationID string, " +
-                    "buyerID string)");
+                    "buyerID string, " +
+                    "sellerID string, " +
+                    "offeredVacationID string)");
 
             // Trade transaction table
-            statement.executeUpdate("create table if not exists tradeTransactions (" +
-                    "transactionId string, " +
-                    "vacationID string)");
+//            statement.executeUpdate("create table if not exists tradeTransactions (" +
+//                    "transactionId string, " +
+//                    "vacationID string)");
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -150,10 +167,10 @@ public class Database {
                 currentMessage.markAsRead();
                 String command ="UPDATE messages" +
                         " SET hasBeenRead = true " +
-                        "WHERE rowid = '"+currentMessage.getId()+"';";
+                        "WHERE rowid = '"+ currentMessage.getId()+"';";
                 statement.executeUpdate(command);
             } catch (SQLException e) {
-//                e.printStackTrace();
+                e.printStackTrace();
             } finally {
                 closeConnection();
             }
@@ -210,25 +227,22 @@ public class Database {
     }
 
     /**
-     * Add payment to database
+     * Add payment to database. In case of TradePayment also adds the offered vacation to the entry.
      * @param payment - The given Payment
      */
-    public void addTransaction(Payment payment) {
+    public void addPayment(Payment payment) {
 
         try {
             openConnection();//
             Statement statement = connection.createStatement();
-            String vacationID = payment.vacationID;
-            String buyerID = payment.buyerID;
-            String command = "insert into transactions values(" +
-                    "'" + vacationID + "', " +
-                    "'" + buyerID + "'" + ")";
+            String offeredVacationID = "";
+            if (payment instanceof TradePayment) offeredVacationID = ((TradePayment) payment).offeredVacationID;
+            String command = "insert into payments values(" +
+                    "'" + payment.vacationID + "', " +
+                    "'" + payment.buyerID + "', " +
+                    "'" + payment.sellerID + "', " +
+                    "'" + offeredVacationID + "'" + ")";
             statement.executeUpdate(command);
-
-            if(payment instanceof TradePayment)
-            {
-                //Payment transactionTemp = this.getTransactionByVacationID(vacationID);
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -237,22 +251,21 @@ public class Database {
 
     }
 
+//    private void addTradeTransaction(String transactionID, TradePayment tradePayment)
+//    {
+//        Statement statement = null;
+//        try {
+//            statement = connection.createStatement();
+//            String command = "insert into tradeTransactions values(" +
+//                    "'" + transactionID + "', " +
+//                    "'" + tradePayment.payWithVacationId + "'" + ")";
+//            statement.executeUpdate(command);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
 
-
-    private void addTradeTransaction(String transactionID, TradePayment tradePayment)
-    {
-        Statement statement = null;
-        try {
-            statement = connection.createStatement();
-            String command = "insert into tradeTransactions values(" +
-                    "'" + transactionID + "', " +
-                    "'" + tradePayment.payWithVacationId + "'" + ")";
-            statement.executeUpdate(command);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-    }
     /**
      * This function will add a message to the dataBase
      * @param sender - The sender's id
@@ -262,8 +275,11 @@ public class Database {
      * @param creationDate - The creation date
      * @param creationTime - The creation time
      * @param kind - The kind of message
+     * @param offeredVacationID - id of the offered vacation in case of trade request message
      */
-    public void addMessage(String sender,String receiver,String vacationId,boolean hasBeenRead,String creationDate,String creationTime,String kind) {
+    public void addMessage(String sender,String receiver,String vacationId,
+                           boolean hasBeenRead,String creationDate,String creationTime,
+                           String kind, String offeredVacationID) {
 
         try {
             openConnection();
@@ -275,8 +291,20 @@ public class Database {
                     "'" + hasBeenRead + "', " +
                     "'" + creationDate + "', " +
                     "'" + creationTime + "', " +
-                    "'" + kind + "'" + ")";
+                    "'" + kind + "', " +
+                    "'" + offeredVacationID + "', " +
+                    "'false'" + ")"; // not yet confirmed
             statement.executeUpdate(command);
+
+            // todo: maybe add this feature to avoid nulls
+            // add trade data
+//            if (!offeredVacationID.isEmpty()){
+//                command = "insert into offeredVacations values(" +
+//                        "'" + messageID + "', " +
+//                        "'" + offeredVacationID + "'" + ")";
+//                statement.executeUpdate(command);
+//            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -301,12 +329,16 @@ public class Database {
      * @param isThereReturnFlightTXT        of vacation
      * @param priceTXT                      of vacation
      * @param ownerIDTXT                    of vacation
+     * @param fromCountryTXT                of vacation
+     * @param fromCityTXT                   of vacation
+     * @param destinetionCityTXT            of vacation
      */
     public void addVacation(String countryTXT, String adultTicketsTXT, String kidTicketsTXT, String babyTicketsTXT,
                             String flightCompanyTXT, String baggageTXT, String kindOfVacationTXT,
                             String kindOfSleepingPlaceTXT, String theRateOfTheSleepingPlaceTXT,
                             String toDate, String fromDateTXT, String isTheSleepingCostsIncludesTXT,
-                            String isThereReturnFlightTXT, String priceTXT, String ownerIDTXT, String ticketPicturePath)
+                            String isThereReturnFlightTXT, String priceTXT, String ownerIDTXT, String ticketPicturePath,
+                            String fromCountryTXT, String fromCityTXT, String destinetionCityTXT)
     {
         try {
             openConnection();
@@ -327,7 +359,10 @@ public class Database {
                     "'" + isThereReturnFlightTXT + "', " +
                     "'" + priceTXT + "', " +
                     "'" + ownerIDTXT + "', " +
-                    "'" + ticketPicturePath + "'" + ")";
+                    "'" + ticketPicturePath + "', " +
+                    "'" + fromCountryTXT + "', " +
+                    "'" + fromCityTXT + "', " +
+                    "'" + destinetionCityTXT + "'" + ")";
             statement.executeUpdate(command);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -390,31 +425,31 @@ public class Database {
         return user;
     }
 
-    /**
-     * This function will get the Payment by the vacationId
-     * @param vacationID - The vacation id
-     * @return - A new instance of the transaction
-     */
-    public Payment getTransactionByVacationID(String vacationID) {
-        Payment payment = null;
-        try {
-            openConnection();
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("select rowid, * from transactions where vacationID='"
-                    + vacationID + "'");
-            if (resultSet.next()) {
-                payment = new Payment();
-                payment.ID = resultSet.getString("rowid");
-                payment.vacationID = resultSet.getString("vacationID");
-                payment.buyerID = resultSet.getString("buyerID");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            closeConnection();
-        }
-        return payment;
-    }
+//    /**
+//     * This function will get the Payment by the vacationId
+//     * @param vacationID - The vacation id
+//     * @return - A new instance of the transaction
+//     */
+//    public Payment getPaymentByVacationID(String vacationID) {
+//        Payment payment = null;
+//        try {
+//            openConnection();
+//            Statement statement = connection.createStatement();
+//            ResultSet resultSet = statement.executeQuery("select rowid, * from payments where vacationID='"
+//                    + vacationID + "'");
+//            if (resultSet.next()) {
+//                payment = new Payment();
+//                payment.ID = resultSet.getString("rowid");
+//                payment.vacationID = resultSet.getString("vacationID");
+//                payment.buyerID = resultSet.getString("buyerID");
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } finally {
+//            closeConnection();
+//        }
+//        return payment;
+//    }
 
     /**
      * Get all messages of a certain user (as the receiver) from database as a list of vacation objects
@@ -436,20 +471,25 @@ public class Database {
                 String date = resultSet.getString("creationDate");
                 String time = resultSet.getString("creationTime");
                 String vacationId = resultSet.getString("vacationId");
+                String offeredVacationID = resultSet.getString("offeredVacationID");
                 boolean hasBeenRead = resultSet.getBoolean("hasBeenRead");
                 Vacation vacation = getVacation(vacationId);
+                Vacation offeredVacation = null;
+                if (!offeredVacationID.isEmpty()) offeredVacation = getVacation(offeredVacationID);
                 Message message;
                 if (kind.equals("Acceptance"))
-                    message = new AcceptanceMessage(sender, receiver, date, time, id, hasBeenRead, vacation);
+                    message = new AcceptanceMessage(sender, receiver, date, time, id, hasBeenRead, vacation, offeredVacation);
                 else
                 {
-                    if(kind.equals("Completed")) {
-                        Payment payment = getTransactionByVacationID(vacationId);
-                        message = new CompletionMessage(sender, receiver, date, time, id, hasBeenRead, payment,vacation );
+                    if (kind.equals("Completed")) {
+                        // todo: for now payment is commented out
+//                        Payment payment = getPaymentByVacationID(vacationId);
+//                        message = new CompletionMessage(sender, receiver, date, time, id, hasBeenRead, payment,vacation);
+                        message = new CompletionMessage(sender, receiver, date, time, id, hasBeenRead, vacation, offeredVacation);
                     }
                     else
                     {
-                        message = new RequestMessage(sender, receiver, date, time, id, hasBeenRead, vacation);
+                        message = new RequestMessage(sender, receiver, date, time, id, hasBeenRead, vacation, offeredVacation);
                     }
                 }
                 messages.add(message);
@@ -567,18 +607,21 @@ public class Database {
     }
 
     /**
-     * Get the vacation id of all the vacations that have a been accepted in a buy request
+     * Get the vacation id of all the vacations that are part of an acceptance or completion message
      * @return vacation IDs
      */
-    public HashSet<String> getAcceptedVacationIDs() {
+    public HashSet<String> getUnavailableVacationIDs() {
         HashSet<String> acceptedVacationIDs = new HashSet<>();
         try
         {
             openConnection();
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("select vacationId from messages where kind='Acceptance'");
+            ResultSet resultSet = statement.executeQuery("select vacationId, offeredVacationID from messages" +
+                    " where kind in ('Acceptance','Completed')");
             while(resultSet.next()) {
                 acceptedVacationIDs.add(resultSet.getString("vacationId"));
+                String offeredVacationID = resultSet.getString("offeredVacationID");
+                if (!offeredVacationID.isEmpty()) acceptedVacationIDs.add(offeredVacationID);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -588,25 +631,85 @@ public class Database {
         return acceptedVacationIDs;
     }
 
+//    /**
+//     * Get the vacation id of all the vacations that have been payed for in a transaction
+//     * @return vacation IDs
+//     */
+//    public HashSet<String> getVacationIDsFromAllPayments() {
+//        HashSet<String> vacationIDs = new HashSet<>();
+//        try
+//        {
+//            openConnection();
+//            Statement statement = connection.createStatement();
+//            ResultSet resultSet = statement.executeQuery("select vacationID from payments");
+//            while(resultSet.next()) {
+//                vacationIDs.add(resultSet.getString("vacationID"));
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } finally {
+//            closeConnection();
+//        }
+//        return vacationIDs;
+//    }
+
     /**
-     * Get the vacation id of all the vacations that have been payed for in a transaction
-     * @return vacation IDs
+     * Change the vacation's owner
+     * @param vacationID to change owner of
+     * @param ownerID to set to vacation
      */
-    public HashSet<String> getVacationIDsFromAllTransactions() {
-        HashSet<String> vacationIDs = new HashSet<>();
-        try
-        {
+    public void setVacationOwner(String vacationID, String ownerID) {
+        try {
             openConnection();
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("select vacationID from transactions");
-            while(resultSet.next()) {
-                vacationIDs.add(resultSet.getString("vacationID"));
+            String command = "UPDATE vacations SET ownerIDTXT='" + ownerID
+                    + "' WHERE rowid='" + vacationID + "';";
+            statement.executeUpdate(command);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+    }
+
+    /**
+     * Check if the message has been confirmed, to not confirm a cash payment or trade twice
+     * @param messageID to check
+     * @return true if confirmed, else return false
+     */
+    public boolean isMessageConfirmed(String messageID) {
+        boolean confirmed = false;
+        try {
+            openConnection();
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("select confirmed from messages where rowid='" + messageID + "'");
+            if (rs.next()) {
+                String confirmedString = rs.getString("confirmed");
+                if (confirmedString.equals("true")) confirmed = true;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             closeConnection();
         }
-        return vacationIDs;
+        return confirmed;
+    }
+
+    /**
+     * Set the message as confirmed
+     * @param messageID to confirm
+     */
+    public void confirmMessage(String messageID) {
+        try {
+            openConnection();
+            Statement statement = connection.createStatement();
+            String command = "UPDATE messages SET confirmed='true'"
+                    + " WHERE rowid='" + messageID + "';";
+            statement.executeUpdate(command);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
     }
 }

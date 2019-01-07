@@ -91,6 +91,13 @@ public abstract class AbstractView implements Initializable {
     public void mailBox() { controller.mailBox();}
 
     /**
+     * Opens a window with the user's vacations
+     */
+    public void myVacations() {
+        controller.myVacations();
+    }
+
+    /**
      * Transitions to the personal Message window
      */
     public void messageView(String fxml,String kind) { controller.message(fxml,kind);}

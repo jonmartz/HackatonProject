@@ -27,7 +27,8 @@ public class PublishController extends AbstractController {
                 view.getKindOfSleepingPlaceTXT(), view.getTheRateOfTheSleepingPlaceTXT(),
                 view.getTodateStr(), view.getFromdateStr(), view.getSleepingCostIncluded(),
                 view.getReturnFlight(), view.priceTextField.getText(),
-                database.getCurrentUser().username, view.ticketPicturePath);
+                database.getCurrentUser().username, view.ticketPicturePath,
+                view.fromCountryTXT.getText(), view.fromCityTXT.getText(), view.destinetionCityTXT.getText());
         view.ShowPopUp("Vacation was published successfully!");
     }
 

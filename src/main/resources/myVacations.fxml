@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -11,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane prefHeight="450.0" prefWidth="790.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.RequestVacationView">
+<Pane prefHeight="450.0" prefWidth="790.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyVacationsView">
     <children>
       <BorderPane prefHeight="450.0" prefWidth="790.0">
          <center>
@@ -24,19 +23,13 @@
               </columnConstraints>
               <rowConstraints>
                   <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints />
               </rowConstraints>
                <children>
-                  <Button fx:id="offerCashButton" mnemonicParsing="false" onAction="#RequestVacationCash" prefHeight="36.0" prefWidth="169.0" style="-fx-background-color: #28733e; -fx-border-color: BLACK;" text="Offer Cash Payment" textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Button>
-                  <TableView fx:id="vacationsTable" prefHeight="421.0" prefWidth="524.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3">
+                  <TableView fx:id="vacationsTable" prefHeight="421.0" prefWidth="524.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
                      <columns>
                         <TableColumn fx:id="countryColumn" editable="false" prefWidth="167.0" text="Destination Country" />
                         <TableColumn fx:id="fromColumn" editable="false" prefWidth="85.0" text="From" />
@@ -50,7 +43,7 @@
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text fx:id="offerTradeText" strokeType="OUTSIDE" strokeWidth="0.0" text="Or offer to trade it with one of your vacations:" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Text fx:id="offerTradeText" strokeType="OUTSIDE" strokeWidth="0.0" text="Your vacations:" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <font>
                         <Font size="14.0" />
                      </font>

@@ -1,6 +1,7 @@
 package View;
 
 import Controller.PersonalAreaController;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -28,6 +29,7 @@ public class PersonalAreaView extends AbstractView {
     public ImageView pictureImageView;
     public String pictureFilePath;
     public Button mailBox;
+    public Button myVacationsButton;
 
 
     /**
@@ -252,6 +254,4 @@ public class PersonalAreaView extends AbstractView {
     public void setPictureFilePath(String pictureFilePath) {
         this.pictureFilePath = pictureFilePath;
     }
-
-
 }

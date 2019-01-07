@@ -34,10 +34,7 @@ public class RequestVacationController extends AbstractController {
      * Activated by the offer vacation button from the vacations table
      */
     public void RequestVacationTrade(String offeredVacationID) {
-        submitRequestForVacation();
-        Vacation offeredVacation = database.getVacation(offeredVacationID);
-        // todo: add the trade message to database
-
+        submitRequestForVacation(offeredVacationID);
         viewChanger.closeSecondaryStage();
     }
 
@@ -45,15 +42,19 @@ public class RequestVacationController extends AbstractController {
      * Activated by the requestVacation button
      */
     public void RequestVacationCash() {
-        submitRequestForVacation();
+        submitRequestForVacation("");
         viewChanger.closeSecondaryStage();
     }
 
-    public void submitRequestForVacation(){
+    public void submitRequestForVacation(String offeredVacationID){
         Vacation requestedVacation = database.getCurrentVacation();
+        Vacation offeredVacation = null;
+        if (!offeredVacationID.isEmpty()) offeredVacation = database.getVacation(offeredVacationID);
         view.ShowPopUp("Buy request sent to vacation owner!\nCheck your mailbox for confirmation.");
-        RequestMessage requestMessage = new RequestMessage(this.getCurrentUser().username, requestedVacation.ownerID, requestedVacation);
+        RequestMessage requestMessage = new RequestMessage(this.getCurrentUser().username, requestedVacation.ownerID,
+                requestedVacation, offeredVacation);
         this.database.addMessage(requestMessage.getSender(), requestMessage.getReceiver(), requestedVacation.ID,
-                false, requestMessage.getDate(), requestMessage.getTime(), requestMessage.getKind());
+                false, requestMessage.getDate(), requestMessage.getTime(),
+                requestMessage.getKind(), offeredVacationID);
     }
 }

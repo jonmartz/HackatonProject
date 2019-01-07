@@ -33,7 +33,8 @@ public class VacationSearchView extends AbstractView {
     public TableColumn buttonColumn;
     public Text commentsText;
     public int ticketCount;
-    public ChoiceBox countryChoiceBox;
+    public ChoiceBox destinationCountryChoiceBox;
+    public ChoiceBox fromCountryChoiceBox;
 
     /**
      * This function will initialize an instance of this class
@@ -94,7 +95,7 @@ public class VacationSearchView extends AbstractView {
      * Go to vacation details
      * @param vacationID id of vacation to check
      */
-    private void CheckVacation(String vacationID) { this.getController().CheckVacation(vacationID); }
+    private void CheckVacation(String vacationID) { this.getController().CheckVacation(vacationID, true); }
 
     /**
      * Clear the to date picker text

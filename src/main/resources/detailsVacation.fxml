@@ -15,150 +15,169 @@
 
 <Pane prefHeight="450.0" prefWidth="790.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.DetailsVacationView">
     <children>
-      <BorderPane prefHeight="450.0" prefWidth="790.0">
-         <center>
-            <GridPane prefHeight="437.0" prefWidth="780.0" BorderPane.alignment="CENTER">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="214.0" minWidth="10.0" prefWidth="130.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="339.0" minWidth="10.0" prefWidth="192.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="339.0" minWidth="0.0" prefWidth="28.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="406.0" minWidth="10.0" prefWidth="199.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="344.0" minWidth="10.0" prefWidth="210.0" />
-              </columnConstraints>
-              <rowConstraints>
-                  <RowConstraints maxHeight="32.0" minHeight="10.0" prefHeight="16.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <BorderPane prefHeight="450.0" prefWidth="790.0">
+            <center>
+                <GridPane prefHeight="437.0" prefWidth="780.0" BorderPane.alignment="CENTER">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="214.0" minWidth="10.0" prefWidth="130.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="339.0" minWidth="10.0" prefWidth="192.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="339.0" minWidth="0.0" prefWidth="28.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="406.0" minWidth="10.0" prefWidth="199.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="344.0" minWidth="10.0" prefWidth="210.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="32.0" minHeight="10.0" prefHeight="16.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                    <Label prefHeight="25.0" prefWidth="129.0" text="country" GridPane.rowIndex="2">
-                        <font>
-                            <Font size="14.0" />
-                        </font>
-                    </Label>
-                  <Text fx:id="destinationCountryTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                    <Label prefHeight="25.0" prefWidth="129.0" text="from date" GridPane.rowIndex="3">
-                        <font>
-                            <Font size="14.0" />
-                        </font>
-                    </Label>
-                  <Text fx:id="fromDateTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                    <Label prefHeight="25.0" prefWidth="129.0" text="number of tickets" GridPane.rowIndex="4">
-                        <font>
-                            <Font size="14.0" />
-                        </font>
-                    </Label>
-                    <Label prefHeight="25.0" prefWidth="129.0" text="flight company" GridPane.rowIndex="6">
-                        <font>
-                            <Font size="14.0" />
-                        </font>
-                    </Label>
-                  <Text fx:id="flightCompanyTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                    <Label prefHeight="25.0" prefWidth="129.0" text="baggage" GridPane.rowIndex="7">
-                        <font>
-                            <Font size="14.0" />
-                        </font>
-                    </Label>
-                  <Text fx:id="baggageTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                    <Label prefHeight="25.0" prefWidth="129.0" text="kind of vacation" GridPane.columnIndex="3" GridPane.rowIndex="4">
-                        <font>
-                            <Font size="14.0" />
-                        </font>
-                    </Label>
-                  <Text fx:id="kindOfVacationTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="4" GridPane.rowIndex="4" />
-                    <Label prefHeight="25.0" prefWidth="129.0" text="to date" GridPane.columnIndex="3" GridPane.rowIndex="3">
-                        <font>
-                            <Font size="14.0" />
-                        </font>
-                    </Label>
-                  <Text fx:id="toDateTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                    <Label prefHeight="25.0" prefWidth="149.0" text="kind of sleeping place" GridPane.columnIndex="3" GridPane.rowIndex="5">
-                        <font>
-                            <Font size="14.0" />
-                        </font>
-                    </Label>
-                  <Text fx:id="kindOfSleepingPlaceTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="4" GridPane.rowIndex="5" />
-                    <Label prefHeight="25.0" prefWidth="188.0" text="sleeping place cost included" GridPane.columnIndex="3" GridPane.rowIndex="6">
-                        <font>
-                            <Font size="14.0" />
-                        </font>
-                    </Label>
-                  <Text fx:id="isTheSleepingCostsIncludesTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="4" GridPane.rowIndex="6" />
-                    <Label prefHeight="25.0" prefWidth="188.0" text="the score of the sleeping place" GridPane.columnIndex="3" GridPane.rowIndex="7">
-                        <font>
-                            <Font size="14.0" />
-                        </font>
-                    </Label>
-                  <Text fx:id="theRateOfTheSleepingPlaceTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="4" GridPane.rowIndex="7" />
-                    <Label prefHeight="25.0" prefWidth="129.0" text="has return flight" GridPane.rowIndex="8">
-                        <font>
-                            <Font size="14.0" />
-                        </font>
-                    </Label>
-                  <Text fx:id="isThereReturnFlightTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                    <Label prefHeight="25.0" prefWidth="129.0" text="price" textFill="#28733e" GridPane.columnIndex="3" GridPane.rowIndex="2">
-                        <font>
-                            <Font size="14.0" />
-                        </font>
-                    </Label>
-                  <Text fx:id="price" fill="#28733e" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                  <Separator orientation="VERTICAL" prefHeight="200.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.rowSpan="7" />
-                  <Label prefHeight="25.0" prefWidth="188.0" text="owner" GridPane.columnIndex="3" GridPane.rowIndex="8">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <Button fx:id="buyButton" mnemonicParsing="false" onAction="#RequestVacation" prefHeight="36.0" prefWidth="238.0" style="-fx-background-color: #28733e; -fx-border-color: BLACK;" text="Request this vacation!" textFill="WHITE" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Button>
-                  <ImageView fx:id="ticketsImageView" fitHeight="94.0" fitWidth="203.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="10" GridPane.valignment="CENTER" />
-                  <Label text="picture of tickets" GridPane.rowIndex="10">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <Text fx:id="ownerText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="4" GridPane.rowIndex="8" />
-                  <Text fill="#5b5b5b" strokeType="OUTSIDE" strokeWidth="0.0" text="(or close this window to go back)" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Text>
-                  <GridPane prefHeight="60.0" prefWidth="184.0" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.rowSpan="2">
-                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="44.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                     <children>
-                        <Text fill="#646464" strokeType="OUTSIDE" strokeWidth="0.0" text="Adults:" />
-                        <Text fill="#646464" strokeType="OUTSIDE" strokeWidth="0.0" text="Kids:" GridPane.columnIndex="1" />
-                        <Text fill="#646464" strokeType="OUTSIDE" strokeWidth="0.0" text="Babies:" GridPane.columnIndex="2" />
-                        <Text fx:id="adultTicketsText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.rowIndex="1" />
-                        <Text fx:id="kidTicketsText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Text fx:id="babyTicketsText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                     </children>
-                  </GridPane>
-               </children>
-               <BorderPane.margin>
-                  <Insets left="20.0" right="10.0" />
-               </BorderPane.margin>
-            </GridPane>
-         </center>
-      </BorderPane>
+                    </rowConstraints>
+                    <children>
+                        <Label prefHeight="25.0" prefWidth="129.0" text="to country" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Text fx:id="destinationCountryTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                        <Label prefHeight="25.0" prefWidth="129.0" text="from date" GridPane.columnIndex="3" GridPane.rowIndex="5">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Text fx:id="fromDateTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+                        <Label prefHeight="25.0" prefWidth="129.0" text="number of tickets" GridPane.rowIndex="4">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Label prefHeight="25.0" prefWidth="129.0" text="flight company" GridPane.rowIndex="6">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Text fx:id="flightCompanyTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <Label prefHeight="25.0" prefWidth="129.0" text="baggage" GridPane.rowIndex="7">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Text fx:id="baggageTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <Label prefHeight="25.0" prefWidth="129.0" text="kind of vacation" GridPane.columnIndex="3" GridPane.rowIndex="7">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Text fx:id="kindOfVacationTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="4" GridPane.rowIndex="7" />
+                        <Label prefHeight="25.0" prefWidth="129.0" text="to date" GridPane.columnIndex="3" GridPane.rowIndex="6">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Text fx:id="toDateTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="32.13671875" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+                        <Label prefHeight="25.0" prefWidth="149.0" text="kind of sleeping place" GridPane.columnIndex="3" GridPane.rowIndex="8">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Text fx:id="kindOfSleepingPlaceTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="4" GridPane.rowIndex="8" />
+                        <Label prefHeight="25.0" prefWidth="188.0" text="sleeping place cost included" GridPane.columnIndex="3" GridPane.rowIndex="9">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Text fx:id="isTheSleepingCostsIncludesTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="4" GridPane.rowIndex="9" />
+                        <Label prefHeight="25.0" prefWidth="188.0" text="the score of the sleeping place" GridPane.columnIndex="3" GridPane.rowIndex="10">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Text fx:id="theRateOfTheSleepingPlaceTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="4" GridPane.rowIndex="10" />
+                        <Label prefHeight="25.0" prefWidth="129.0" text="has return flight" GridPane.rowIndex="8">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Text fx:id="isThereReturnFlightTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                        <Label prefHeight="25.0" prefWidth="129.0" text="price" textFill="#28733e" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Text fx:id="price" fill="#28733e" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                        <Separator orientation="VERTICAL" prefHeight="200.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.rowSpan="10" />
+                        <Label prefHeight="25.0" prefWidth="188.0" text="owner" GridPane.columnIndex="3" GridPane.rowIndex="11">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Button fx:id="requestButton" mnemonicParsing="false" onAction="#RequestVacation" prefHeight="36.0" prefWidth="238.0" style="-fx-background-color: #28733e; -fx-border-color: BLACK;" text="Request this vacation!" textFill="WHITE" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Button>
+                        <ImageView fx:id="ticketsImageView" fitHeight="94.0" fitWidth="203.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="10" GridPane.valignment="CENTER" />
+                        <Label text="picture of tickets" GridPane.rowIndex="10">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Text fx:id="ownerText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="4" GridPane.rowIndex="11" />
+                        <Text fill="#5b5b5b" strokeType="OUTSIDE" strokeWidth="0.0" text="(close this window to go back)" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Text>
+                        <GridPane prefHeight="60.0" prefWidth="184.0" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.rowSpan="2">
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="44.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
+                            </rowConstraints>
+                            <children>
+                                <Text fill="#646464" strokeType="OUTSIDE" strokeWidth="0.0" text="Adults:" />
+                                <Text fill="#646464" strokeType="OUTSIDE" strokeWidth="0.0" text="Kids:" GridPane.columnIndex="1" />
+                                <Text fill="#646464" strokeType="OUTSIDE" strokeWidth="0.0" text="Babies:" GridPane.columnIndex="2" />
+                                <Text fx:id="adultTicketsText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.rowIndex="1" />
+                                <Text fx:id="kidTicketsText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                <Text fx:id="babyTicketsText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                            </children>
+                        </GridPane>
+                        <Label prefHeight="25.0" prefWidth="129.0" text="to city" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Label prefHeight="25.0" prefWidth="129.0" text="from country" GridPane.rowIndex="2">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Label prefHeight="25.0" prefWidth="129.0" text="from city" GridPane.rowIndex="3">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Text fx:id="destinationCityTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                        <Text fx:id="fromCountryTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Text fx:id="fromCityTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                    </children>
+                    <BorderPane.margin>
+                        <Insets left="20.0" right="10.0" />
+                    </BorderPane.margin>
+                </GridPane>
+            </center>
+        </BorderPane>
     </children>
 </Pane>

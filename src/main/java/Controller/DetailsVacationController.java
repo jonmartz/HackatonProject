@@ -40,8 +40,17 @@ public class DetailsVacationController extends AbstractController {
         view.kidTicketsText.setText(vacation.KidTickets);
         view.babyTicketsText.setText(vacation.BabyTickets);
         view.ownerText.setText(vacation.ownerID);
+        view.fromCountryTXT.setText(vacation.fromCountryTXT);
+        view.fromCityTXT.setText(vacation.fromCityTXT);
+        view.destinationCityTXT.setText(vacation.destinationCityTXT);
         Image image = view.getImage(vacation.ticketPicturePath);
         if (image != null) view.ticketsImageView.setImage(image);
+
+        // in case of checking from a request message
+        if (!database.requestButtonVisible){
+            view.requestButton.setVisible(false);
+            database.requestButtonVisible = true;
+        }
     }
 
     @Override

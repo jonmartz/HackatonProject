@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane alignment="center" prefHeight="450.0" prefWidth="790.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.RequestMessageView">
+<GridPane alignment="center" prefHeight="450.0" prefWidth="790.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.RequestMessageView">
     <children>
         <BorderPane prefHeight="521.0" prefWidth="789.0" GridPane.rowIndex="1">
             <top>
@@ -59,38 +59,38 @@
                     </children>
                 </HBox>
             </top>
-         <left>
-            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-               <children>
-                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="From">
-                       <font>
-                           <Font name="System Bold" size="14.0" />
-                       </font>
-                     <VBox.margin>
-                        <Insets left="60.0" top="40.0" />
-                     </VBox.margin>
-                   </Text>
-                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date">
-                       <font>
-                           <Font name="System Bold" size="14.0" />
-                       </font>
-                     <VBox.margin>
-                        <Insets left="60.0" top="15.0" />
-                     </VBox.margin>
-                   </Text>
-                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Time">
-                       <font>
-                           <Font name="System Bold" size="14.0" />
-                       </font>
-                     <VBox.margin>
-                        <Insets left="60.0" top="15.0" />
-                     </VBox.margin>
-                   </Text>
-               </children>
-            </VBox>
-         </left>
+            <left>
+                <VBox maxHeight="330.0" minHeight="330.0" prefHeight="330.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="From">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets left="60.0" top="40.0" />
+                            </VBox.margin>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets left="60.0" top="15.0" />
+                            </VBox.margin>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Time">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets left="60.0" top="15.0" />
+                            </VBox.margin>
+                        </Text>
+                    </children>
+                </VBox>
+            </left>
             <center>
-                <VBox prefHeight="342.0" prefWidth="689.0" BorderPane.alignment="CENTER">
+                <VBox maxHeight="330.0" minHeight="330.0" prefHeight="330.0" BorderPane.alignment="CENTER">
                     <children>
                         <Text fx:id="senderText" strokeType="OUTSIDE" strokeWidth="0.0" text="given sender">
                             <font>
@@ -133,30 +133,43 @@
                                 <Insets left="20.0" top="30.0" />
                             </VBox.margin>
                         </Text>
+                        <Button fx:id="offeredVacationButton" mnemonicParsing="false" onAction="#checkOfferedVacation" prefHeight="32.0" prefWidth="187.0" style="-fx-background-color: #28733e;" text="Check the offered vacation" textFill="WHITE">
+                            <VBox.margin>
+                                <Insets left="20.0" top="10.0" />
+                            </VBox.margin>
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font></Button>
                     </children>
+               <padding>
+                  <Insets bottom="20.0" />
+               </padding>
                 </VBox>
             </center>
-         <bottom>
-            <HBox prefHeight="48.0" prefWidth="789.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#goBack" prefHeight="39.0" prefWidth="144.0" style="-fx-background-color: #28733e;" text="Go Back" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets left="120.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button mnemonicParsing="false" onAction="#acceptRequest" prefHeight="39.0" prefWidth="220.0" style="-fx-background-color: #6495ED;" text="Accept Request" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets left="25.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button mnemonicParsing="false" onAction="#deleteMessage" prefHeight="39.0" prefWidth="144.0" style="-fx-background-color: #d7261d;" text="Delete Message" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets left="25.0" />
-                     </HBox.margin>
-                  </Button>
-               </children>
-            </HBox>
-         </bottom>
+            <bottom>
+                <GridPane>
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#goBack" prefHeight="39.0" prefWidth="144.0" style="-fx-background-color: #28733e;" text="Go Back" textFill="WHITE" />
+                        <Button fx:id="acceptRequestButton" mnemonicParsing="false" onAction="#acceptRequest" prefHeight="30.0" prefWidth="146.0" style="-fx-background-color: #28733e;" text="Accept Request" textFill="WHITE" GridPane.columnIndex="1" />
+                        <Button mnemonicParsing="false" onAction="#deleteMessage" prefHeight="39.0" prefWidth="144.0" style="-fx-background-color: #d7261d;" text="Delete Message" textFill="WHITE" GridPane.columnIndex="2" />
+                  <Button fx:id="confirmPaymentButton" mnemonicParsing="false" onAction="#confirmPayment" prefHeight="30.0" prefWidth="146.0" style="-fx-background-color: #6495ED;" text="Confirm Payment" textFill="WHITE" visible="false" GridPane.columnIndex="1" />
+                    </children>
+               <padding>
+                  <Insets left="120.0" right="120.0" />
+               </padding>
+                </GridPane>
+            </bottom>
+         <GridPane.margin>
+            <Insets bottom="20.0" />
+         </GridPane.margin>
         </BorderPane>
     </children>
     <columnConstraints>

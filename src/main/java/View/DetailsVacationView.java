@@ -24,11 +24,14 @@ public class DetailsVacationView extends AbstractView{
     public Text isThereReturnFlightTXT;
     public Text price;
     public Text ownerText;
-    public Button buyButton;
+    public Button requestButton;
     public ImageView ticketsImageView;
     public Text adultTicketsText;
     public Text kidTicketsText;
     public Text babyTicketsText;
+    public Text destinationCityTXT;
+    public Text fromCountryTXT;
+    public Text fromCityTXT;
 
     public void setDestinationCountryTXT(String destinationCountryTXT) {this.destinationCountryTXT.setText(destinationCountryTXT);}
 

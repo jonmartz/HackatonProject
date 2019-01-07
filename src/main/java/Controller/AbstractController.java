@@ -7,7 +7,6 @@ import View.AbstractView;
 import Model.User;
 import View.ViewChanger;
 import javafx.scene.control.ButtonType;
-import javafx.scene.image.Image;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -86,7 +85,7 @@ public abstract class AbstractController {
     public ArrayList<Vacation> GetAllVacations() {
         ArrayList<Vacation> vacations = database.getAllVacations();
         ArrayList<Vacation> relevantVacations = new ArrayList<>();
-        HashSet acceptedVacationIDs = database.getAcceptedVacationIDs();
+        HashSet acceptedVacationIDs = database.getUnavailableVacationIDs();
         for (Vacation vacation : vacations){
             if (!acceptedVacationIDs.contains(vacation.ID))
                 relevantVacations.add(vacation);
@@ -147,8 +146,9 @@ public abstract class AbstractController {
      * Transitions to vacation details
      * @param vacationID id of vacation to check
      */
-    public void CheckVacation(String vacationID) {
+    public void CheckVacation(String vacationID, boolean requestButtonVisible) {
         database.setCurrentVacation(GetVacation(vacationID));
+        database.requestButtonVisible = requestButtonVisible;
         viewChanger.detailsVacation();
         viewChanger.setupView(database);
     }
@@ -213,6 +213,14 @@ public abstract class AbstractController {
     public void personalArea() {
 
         viewChanger.personalArea();
+        viewChanger.setupView(database);
+    }
+
+    /**
+     * Opens a window with the user's vacations
+     */
+    public void myVacations() {
+        viewChanger.myVacations();
         viewChanger.setupView(database);
     }
 

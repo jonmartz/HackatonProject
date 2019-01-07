@@ -5,9 +5,9 @@ import View.MailBoxView;
 import View.MessageView;
 
 public class MessageController extends AbstractController {
+
     @Override
     protected void FillAllData() {
-
     }
 
     public void goBack()

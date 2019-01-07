@@ -88,12 +88,12 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <Label prefHeight="25.0" prefWidth="129.0" text="country" GridPane.rowIndex="1">
+                        <Label prefHeight="25.0" prefWidth="129.0" text="to country" GridPane.columnIndex="3" GridPane.rowIndex="1">
                             <font>
                                 <Font size="14.0" />
                             </font>
                         </Label>
-                        <Label prefHeight="25.0" prefWidth="129.0" text="from date" GridPane.rowIndex="2">
+                        <Label prefHeight="25.0" prefWidth="129.0" text="from date" GridPane.columnIndex="3" GridPane.rowIndex="4">
                             <font>
                                 <Font size="14.0" />
                             </font>
@@ -113,27 +113,27 @@
                                 <Font size="14.0" />
                             </font>
                         </Label>
-                        <Label prefHeight="25.0" prefWidth="129.0" text="kind of vacation" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                        <Label prefHeight="25.0" prefWidth="129.0" text="kind of vacation" GridPane.columnIndex="3" GridPane.rowIndex="6">
                             <font>
                                 <Font size="14.0" />
                             </font>
                         </Label>
-                        <Label prefHeight="25.0" prefWidth="129.0" text="to date" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                        <Label prefHeight="25.0" prefWidth="129.0" text="to date" GridPane.columnIndex="3" GridPane.rowIndex="5">
                             <font>
                                 <Font size="14.0" />
                             </font>
                         </Label>
-                        <Label prefHeight="25.0" prefWidth="149.0" text="kind of sleeping place" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                        <Label prefHeight="25.0" prefWidth="149.0" text="kind of sleeping place" GridPane.columnIndex="3" GridPane.rowIndex="7">
                             <font>
                                 <Font size="14.0" />
                             </font>
                         </Label>
-                        <Label prefHeight="25.0" prefWidth="188.0" text="sleeping place cost included" GridPane.columnIndex="3" GridPane.rowIndex="5">
+                        <Label prefHeight="25.0" prefWidth="188.0" text="sleeping place cost included" GridPane.columnIndex="3" GridPane.rowIndex="8">
                             <font>
                                 <Font size="14.0" />
                             </font>
                         </Label>
-                        <Label prefHeight="25.0" prefWidth="188.0" text="score of the sleeping place" GridPane.columnIndex="3" GridPane.rowIndex="6">
+                        <Label prefHeight="25.0" prefWidth="188.0" text="score of the sleeping place" GridPane.columnIndex="3" GridPane.rowIndex="9">
                             <font>
                                 <Font size="14.0" />
                             </font>
@@ -143,13 +143,13 @@
                                 <Font size="14.0" />
                             </font>
                         </Label>
-                        <Label prefHeight="25.0" prefWidth="129.0" text="price" textFill="#28733e" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                        <Label prefHeight="25.0" prefWidth="129.0" text="price" textFill="#28733e" GridPane.columnIndex="3" GridPane.rowIndex="3">
                             <font>
                                 <Font size="14.0" />
                             </font>
                         </Label>
                         <Separator orientation="VERTICAL" prefHeight="200.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.rowSpan="7" />
-                        <Button fx:id="pubishVacation" disable="true" layoutX="275.0" layoutY="479.0" mnemonicParsing="false" onAction="#publish" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #28733e;" text="Pubish Vacation" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="9">
+                        <Button fx:id="pubishVacation" disable="true" layoutX="275.0" layoutY="479.0" mnemonicParsing="false" onAction="#publish" prefHeight="30.0" prefWidth="181.0" style="-fx-background-color: #28733e;" text="Pubish Vacation" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="10">
                             <font>
                                 <Font name="System Bold" size="14.0" />
                             </font>
@@ -159,23 +159,23 @@
                                 <Font size="14.0" />
                             </font>
                         </Label>
-                        <TextField fx:id="destinetionContryTXT" onKeyReleased="#CheckEnablePublishButton" promptText="alphabetic" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <DatePicker fx:id="fromDateDatePicker" onAction="#activeFromDate" prefHeight="25.0" prefWidth="225.0" promptText="cannot be before today" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="destinetionContryTXT" onKeyReleased="#CheckEnablePublishButton" promptText="alphabetic" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                        <DatePicker fx:id="fromDateDatePicker" onAction="#activeFromDate" prefHeight="25.0" prefWidth="225.0" promptText="cannot be before today" GridPane.columnIndex="4" GridPane.rowIndex="4" />
                         <TextField fx:id="flightCompanyTXT" onKeyReleased="#CheckEnablePublishButton" promptText="alphabetic" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                         <TextField fx:id="baggageTXT" onKeyReleased="#CheckEnablePublishButton" promptText="num" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                        <DatePicker fx:id="toDateDatePicker" onAction="#activeToDate" prefHeight="25.0" prefWidth="239.0" promptText="cannot be before &quot;from&quot; date" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                        <ComboBox fx:id="isTheSleepingCostsIncludesTXT" onAction="#CheckEnablePublishButton" prefHeight="25.0" prefWidth="235.0" GridPane.columnIndex="4" GridPane.rowIndex="5" />
-                        <ComboBox fx:id="kindOfVacationTXT" onAction="#CheckEnablePublishButton" prefHeight="25.0" prefWidth="237.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                        <ComboBox fx:id="kindOfSleepingPlaceTXT" onAction="#CheckEnablePublishButton" prefHeight="25.0" prefWidth="229.0" GridPane.columnIndex="4" GridPane.rowIndex="4" />
-                        <ComboBox fx:id="theRateOfTheSleepingPlaceTXT" onAction="#CheckEnablePublishButton" prefHeight="25.0" prefWidth="289.0" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+                        <DatePicker fx:id="toDateDatePicker" onAction="#activeToDate" prefHeight="25.0" prefWidth="239.0" promptText="cannot be before &quot;from&quot; date" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+                        <ComboBox fx:id="isTheSleepingCostsIncludesTXT" onAction="#CheckEnablePublishButton" prefHeight="25.0" prefWidth="235.0" GridPane.columnIndex="4" GridPane.rowIndex="8" />
+                        <ComboBox fx:id="kindOfVacationTXT" onAction="#CheckEnablePublishButton" prefHeight="25.0" prefWidth="237.0" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+                        <ComboBox fx:id="kindOfSleepingPlaceTXT" onAction="#CheckEnablePublishButton" prefHeight="25.0" prefWidth="229.0" GridPane.columnIndex="4" GridPane.rowIndex="7" />
+                        <ComboBox fx:id="theRateOfTheSleepingPlaceTXT" onAction="#CheckEnablePublishButton" prefHeight="25.0" prefWidth="289.0" GridPane.columnIndex="4" GridPane.rowIndex="9" />
                         <ComboBox fx:id="isThereReturnFlightTXT" onAction="#CheckEnablePublishButton" prefHeight="25.0" prefWidth="223.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                         <Text fill="#656565" strokeType="OUTSIDE" strokeWidth="0.0" text="Fill all fields:">
                             <font>
                                 <Font name="System Bold" size="14.0" />
                             </font>
                         </Text>
-                        <TextField fx:id="priceTextField" onKeyReleased="#CheckEnablePublishButton" promptText="num" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                        <Text fx:id="commentsText" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+                        <TextField fx:id="priceTextField" onKeyReleased="#CheckEnablePublishButton" promptText="number" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                        <Text fx:id="commentsText" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Please fill all fields" GridPane.columnIndex="4" GridPane.rowIndex="10" />
                         <TextField alignment="CENTER" editable="false" prefHeight="100.0" prefWidth="156.0" promptText="Select tickets picture" GridPane.columnIndex="1" GridPane.rowIndex="8" GridPane.rowSpan="3" />
                         <ImageView fx:id="ticketsImageView" fitHeight="94.0" fitWidth="203.0" onMouseClicked="#AddPicture" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER" />
                         <GridPane prefHeight="60.0" prefWidth="184.0" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.rowSpan="2" GridPane.valignment="BOTTOM">
@@ -209,6 +209,24 @@
                                 </TextField>
                             </children>
                         </GridPane>
+                  <Label prefHeight="25.0" prefWidth="129.0" text="from country" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="25.0" prefWidth="129.0" text="from city" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="25.0" prefWidth="129.0" text="to city" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="fromCountryTXT" onKeyReleased="#CheckEnablePublishButton" promptText="alphabetic" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="fromCityTXT" onKeyReleased="#CheckEnablePublishButton" promptText="alphabetic" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="destinetionCityTXT" onKeyReleased="#CheckEnablePublishButton" promptText="alphabetic" GridPane.columnIndex="4" GridPane.rowIndex="2" />
                     </children>
                     <padding>
                         <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />

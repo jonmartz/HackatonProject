@@ -13,9 +13,9 @@ public class CashPayment extends Payment {
      * @param buyerID - The buyer ID
      * @param amount - to pay
      */
-    public CashPayment(String vacationID, String buyerID, String amount)
+    public CashPayment(String vacationID, String buyerID, String sellerID, String amount)
     {
-        super(vacationID,buyerID);
+        super(vacationID,buyerID, sellerID);
         this.amount = amount;
     }
 

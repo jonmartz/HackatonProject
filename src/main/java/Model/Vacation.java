@@ -9,6 +9,9 @@ public class Vacation {
     public String BabyTickets;
     public String ID;
     public String destinationCountryTXT;
+    public String fromCountryTXT;
+    public String fromCityTXT;
+    public String destinationCityTXT;
     public String flightCompanyTXT;
     public String baggageTXT;
     public String kindOfVacationTXT;
@@ -49,6 +52,9 @@ public class Vacation {
         try {
             this.ID = resultSet.getString("rowid");
             this.destinationCountryTXT = resultSet.getString("destinetionContryTXT");
+            this.destinationCityTXT = resultSet.getString("destinetionCityTXT");
+            this.fromCountryTXT = resultSet.getString("fromCountryTXT");
+            this.fromCityTXT = resultSet.getString("fromCityTXT");
             this.AdultTickets = resultSet.getString("AdultTicketsTXT");
             this.KidTickets = resultSet.getString("KidTicketsTXT");
             this.BabyTickets = resultSet.getString("BabyTicketsTXT");

@@ -6,18 +6,19 @@ package Model;
  */
 public class TradePayment extends Payment {
 
-    public String payWithVacationId;//The id of the vacation that the buyer used to buy the other vacation
+    public String offeredVacationID;
 
     /**
-     * This is the constructor
-     * @param vacationID - The Id of the vacation that the buyer wants to buy
-     * @param buyerID - The buyer ID
-     * @param payWithVacationId - The id of the vacation that the buyer used to buy the other vacation
+     * This is the constructor of the class
+     * @param vacationID - The vacation id
+     * @param buyerID - The buyer's id
+     * @param sellerID - The seller's id
+     * @param offeredVacationID - id of the vacation traded, or null in case of cash payment
      */
-    public TradePayment(String vacationID, String buyerID, String payWithVacationId)
+    public TradePayment(String vacationID, String buyerID, String sellerID, String offeredVacationID)
     {
-        super(vacationID,buyerID);
-        this.payWithVacationId = payWithVacationId;
+        super(vacationID, buyerID, sellerID);
+        this.offeredVacationID = offeredVacationID;
     }
 
     /**

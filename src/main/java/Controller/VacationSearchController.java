@@ -1,12 +1,9 @@
 package Controller;
 
 import Model.Vacation;
-import View.AbstractView;
 import View.VacationSearchView;
 
-import java.awt.*;
 import java.time.LocalDate;
-import java.time.chrono.ChronoLocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -67,8 +64,9 @@ public class VacationSearchController extends AbstractController {
     public void CheckEnableSearchButton() {
         VacationSearchView view = (VacationSearchView) this.view;
         view.setComments("");
-        if (view.countryChoiceBox.getValue() == null
-                || view.countryChoiceBox.getValue().toString().isEmpty()
+        if (view.destinationCountryChoiceBox.getValue() == null
+                || view.fromCountryChoiceBox.getValue() == null
+                || view.destinationCountryChoiceBox.getValue().toString().isEmpty()
                 || view.fromDateDatePicker.toString().isEmpty()
                 || view.toDateDatePicker.toString().isEmpty()
                 || view.ticketCount == 0) {
@@ -85,7 +83,8 @@ public class VacationSearchController extends AbstractController {
     public ArrayList<Vacation> GetRelevantVacations() {
 
         VacationSearchView view = (VacationSearchView)this.view;
-        String relevantCountry = view.countryChoiceBox.getValue().toString();
+        String relevantFromCountry = view.fromCountryChoiceBox.getValue().toString();
+        String relevantDestCountry = view.destinationCountryChoiceBox.getValue().toString();
         LocalDate relevantFromDate = view.fromDateDatePicker.getValue();
         LocalDate relevantToDate = view.toDateDatePicker.getValue();
 
@@ -99,7 +98,7 @@ public class VacationSearchController extends AbstractController {
 
         ArrayList<Vacation> vacations = GetAllVacations();
         ArrayList<Vacation> relevantVacations = new ArrayList<>();
-        HashSet acceptedVacationIDs = database.getAcceptedVacationIDs();
+        HashSet acceptedVacationIDs = database.getUnavailableVacationIDs();
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         boolean foundAtLeastOneDate = false;
@@ -107,17 +106,20 @@ public class VacationSearchController extends AbstractController {
 
         for (Vacation vacation : vacations){
 
+            // todo: change to completed
             // If vacation has already been accepted, its not relevant
             if (acceptedVacationIDs.contains(vacation.ID)) continue;
 
             boolean foundDate = false;
             boolean foundTickets = false;
-            String country = vacation.destinationCountryTXT.toLowerCase();
+            String fromCountry = vacation.fromCountryTXT.toLowerCase();
+            String destCountry = vacation.destinationCountryTXT.toLowerCase();
             LocalDate fromDate = LocalDate.parse(vacation.fromDateTXT, formatter);
             LocalDate toDate = LocalDate.parse(vacation.toDateTXT, formatter);
 
-            // Check that dates are in range
-            if (country.equals(relevantCountry.toLowerCase())
+            // Check that countries and dates are adequate
+            if (destCountry.equals(relevantDestCountry.toLowerCase())
+                    && fromCountry.equals(relevantFromCountry.toLowerCase())
                     && !(toDate.isBefore(relevantFromDate) || fromDate.isAfter(relevantToDate))) {
                 foundDate = true;
                 foundAtLeastOneDate = true;
@@ -147,6 +149,7 @@ public class VacationSearchController extends AbstractController {
     @Override
     protected void FillAllData() {
         SortedSet<String> countries = new TreeSet<>(GetAllCountries());
-        ((VacationSearchView)view).countryChoiceBox.getItems().addAll(countries);
+        ((VacationSearchView)view).destinationCountryChoiceBox.getItems().addAll(countries);
+        ((VacationSearchView)view).fromCountryChoiceBox.getItems().addAll(countries);
     }
 }
