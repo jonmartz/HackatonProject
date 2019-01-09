@@ -12,6 +12,9 @@ import javafx.util.Callback;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * View for the request vacation screen
+ */
 public class RequestVacationView extends AbstractView{
 
     @FXML
@@ -72,10 +75,17 @@ public class RequestVacationView extends AbstractView{
         };
     }
 
+    /**
+     * Request the vacation by trade
+     * @param vacationID of vacation offered in trade
+     */
     public void RequestVacationTrade(String vacationID) {
         ((RequestVacationController)getController()).RequestVacationTrade(vacationID);
     }
 
+    /**
+     * Request the vacation by cash payment
+     */
     public void RequestVacationCash() {
         ((RequestVacationController)getController()).RequestVacationCash();
     }

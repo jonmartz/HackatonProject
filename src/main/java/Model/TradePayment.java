@@ -6,7 +6,7 @@ package Model;
  */
 public class TradePayment extends Payment {
 
-    public String offeredVacationID;
+    public String offeredVacationID; // id of offered vacation
 
     /**
      * This is the constructor of the class

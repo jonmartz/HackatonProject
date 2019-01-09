@@ -8,10 +8,14 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 
+/**
+ * Controller for the vacation publish view
+ */
 public class PublishController extends AbstractController {
 
-
-
+    /**
+     * Publish vacation
+     */
     public void Publish() {
         PublishVacationView view = (PublishVacationView) this.view;
         // Get ticket count
@@ -89,8 +93,9 @@ public class PublishController extends AbstractController {
     public void AddPicture() {
         try {
             PublishVacationView view = (PublishVacationView) this.view;
-            view.ticketPicturePath = view.getFilePath("Choose profile picture");
-            if (view.ticketPicturePath == null) return;
+            String ticketPicturePath = view.getFilePath("Choose profile picture");
+            if (ticketPicturePath == null) return;
+            view.ticketPicturePath = ticketPicturePath;
             FileInputStream inputstream = new FileInputStream(view.ticketPicturePath);
             Image image = new Image(inputstream);
             view.ticketsImageView.setImage(image);

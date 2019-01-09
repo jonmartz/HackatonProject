@@ -1,11 +1,14 @@
 package Model;
 
+/**
+ * Represents a request for vacation message
+ */
 public class RequestMessage extends Message {
 
     private Vacation vacation;//the vacation
     public Vacation offeredVacation;// vacation offered in trade request
     private boolean acceptedBySeller;//True if the user accepted
-    private boolean hasConfirmed;
+    private boolean hasConfirmed; // true if owner has confirmed the payment / trade
     /**
      * This is the constructor of the class
      *
@@ -97,18 +100,34 @@ public class RequestMessage extends Message {
      */
     public Vacation getVacation(){return this.vacation;}
 
+    /**
+     * Check if the request was accepted
+     * @return true if accepted
+     */
     public boolean isAccepted() {
         return acceptedBySeller;
     }
 
+    /**
+     * set the accepted status
+     * @param accepted to set
+     */
     public void setAccepted(boolean accepted) {
         this.acceptedBySeller = accepted;
     }
 
+    /**
+     * Check if the payment or trade has been confirmed by the vacation owner
+     * @return true if confirmed
+     */
     public boolean hasConfirmed() {
         return hasConfirmed;
     }
 
+    /**
+     * Set the payment or trade as confirmed by the vacation owner
+     * @param hasConfirmed to set
+     */
     public void setConfirmed(boolean hasConfirmed) {
         this.hasConfirmed = hasConfirmed;
     }

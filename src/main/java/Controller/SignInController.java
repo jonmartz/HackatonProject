@@ -4,6 +4,9 @@ import View.AbstractView;
 import View.SignInView;
 import Model.User;
 
+/**
+ * Controller for the sign in view
+ */
 public class SignInController extends AbstractController {
 
     @Override

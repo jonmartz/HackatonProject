@@ -10,6 +10,9 @@ import java.util.HashSet;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+/**
+ * Controller for the vacation search view
+ */
 public class VacationSearchController extends AbstractController {
 
     /**
@@ -106,8 +109,6 @@ public class VacationSearchController extends AbstractController {
 
         for (Vacation vacation : vacations){
 
-            // todo: change to completed
-            // If vacation has already been accepted, its not relevant
             if (acceptedVacationIDs.contains(vacation.ID)) continue;
 
             boolean foundDate = false;

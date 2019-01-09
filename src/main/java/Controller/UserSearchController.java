@@ -7,9 +7,10 @@ import View.UserSearchView;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 
+/**
+ * Controller for the user search view
+ */
 public class UserSearchController extends AbstractController {
-    private Stage stage;
-    private FXMLLoader fxmlLoader;
 
     /**
      * This function will activate when the button is pressed

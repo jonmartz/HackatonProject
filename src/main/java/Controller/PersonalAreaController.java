@@ -108,8 +108,9 @@ public class PersonalAreaController extends AbstractController {
      */
     public void AddPicture() {
         PersonalAreaView view = (PersonalAreaView) this.view;
-        view.pictureFilePath = view.getFilePath("Choose profile picture");
-        if (view.pictureFilePath == null) return;
+        String pictureFilePath = view.getFilePath("Choose profile picture");
+        if (pictureFilePath == null) return;
+        view.pictureFilePath = pictureFilePath;
         Image image = view.getImage(view.pictureFilePath);
         if (image != null) view.pictureImageView.setImage(image);
         view.KeyReleased();

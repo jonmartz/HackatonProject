@@ -11,6 +11,9 @@ import java.util.ResourceBundle;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ComboBox;
 
+/**
+ * View for the vacation publish screen
+ */
 public class PublishVacationView extends AbstractView{
 
     @FXML
@@ -35,7 +38,6 @@ public class PublishVacationView extends AbstractView{
     public TextField fromCountryTXT;
     public TextField fromCityTXT;
     public TextField destinetionCityTXT;
-
     private int ticketCount;
 
     /**
@@ -133,54 +135,82 @@ public class PublishVacationView extends AbstractView{
         }
     }
 
+    /**
+     * Set a text in comments section
+     * @param comment to set
+     */
     public void setComments(String comment)
     {
         this.commentsText.setText(comment);
     }
 
+    /**
+     * getter
+     */
     public String getDestinetionContryTXT()
     {
       return destinetionContryTXT.getText();
     }
-
+    /**
+     * getter
+     */
     public String getFlightCompanyTXT()
     {
         return flightCompanyTXT.getText();
     }
-
+    /**
+     * getter
+     */
     public String getBaggageTXT()
     {
         return baggageTXT.getText();
     }
-
+    /**
+     * getter
+     */
     public String getKindOfVacationTXT()
     {
         return kindOfVacationTXT.getValue().toString();
     }
-
+    /**
+     * getter
+     */
     public String getKindOfSleepingPlaceTXT()
     {
         return kindOfSleepingPlaceTXT.getValue().toString();
     }
-
+    /**
+     * getter
+     */
     public String getTheRateOfTheSleepingPlaceTXT()
     {
         return theRateOfTheSleepingPlaceTXT.getValue().toString();
     }
-
+    /**
+     * getter
+     */
     public String getTodateStr(){return this.toDateDatePicker.getValue().toString();}
-
+    /**
+     * getter
+     */
     public String getFromdateStr(){return this.fromDateDatePicker.getValue().toString();}
 
-
+    /**
+     * getter
+     */
     public void activeToDate(){
         ((PublishController)this.getController()).ToDatePicked();
     }
-
+    /**
+     * getter
+     */
     public void activeFromDate(){
         ((PublishController)this.getController()).FromDatePicked();
     }
 
+    /**
+     * Publish vacation
+     */
     public void publish() { ((PublishController)this.getController()).Publish(); }
 
     /**

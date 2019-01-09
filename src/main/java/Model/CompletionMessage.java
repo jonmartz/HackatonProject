@@ -1,8 +1,10 @@
 package Model;
 
+/**
+ * Represents a completion message, which indicates a successful purchase / trade
+ */
 public class CompletionMessage extends Message {
 
-//    private Payment payment; //The payment
     private Vacation vacation;//the vacation
     public Vacation offeredVacation;// vacation traded in trade completion
 
@@ -13,10 +15,8 @@ public class CompletionMessage extends Message {
      * @param receiver    - The user that received the message
      * @param vacation    - The vacation that the receiver requested
      */
-//    public CompletionMessage(String sender, String receiver, Payment payment, Vacation vacation) {
     public CompletionMessage(String sender, String receiver, Vacation vacation, Vacation offeredVacation) {
         super(sender, receiver);
-//        this.payment = payment;
         this.vacation = vacation;
         this.offeredVacation = offeredVacation;
     }
@@ -34,13 +34,10 @@ public class CompletionMessage extends Message {
      */
     protected CompletionMessage(String sender, String receiver, String date, String time,
                                 int myId, boolean hasbeenRead, Vacation vacation, Vacation offeredVacation) {
-//                                int myId, boolean hasbeenRead, Payment payment, Vacation vacation) {
         super(sender, receiver, date, time, myId, hasbeenRead);
-//        this.payment = payment;
         this.vacation = vacation;
         this.offeredVacation = offeredVacation;
     }
-
 
     /**
      * This function will return the kind of message
@@ -60,8 +57,6 @@ public class CompletionMessage extends Message {
         return "The payment has been completed successfully!\nThe flight to " + this.vacation.destinationCountryTXT +
                 " will take place on " + this.vacation.fromDateTXT + " until the " + vacation.toDateTXT + ".\n" +
                 ".\n Hoping too see you again!";
-//                "The payment id is " + this.payment.getTransactionId() + ".\n Hoping too see you again!";
-        // todo: check what to do with payment id. for now is commented out
     }
 
     /**

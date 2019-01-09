@@ -46,6 +46,10 @@ public class RequestVacationController extends AbstractController {
         viewChanger.closeSecondaryStage();
     }
 
+    /**
+     * Send a request to get vacation, either by cash or trade
+     * @param offeredVacationID of vacation to offer in trade
+     */
     public void submitRequestForVacation(String offeredVacationID){
         Vacation requestedVacation = database.getCurrentVacation();
         Vacation offeredVacation = null;

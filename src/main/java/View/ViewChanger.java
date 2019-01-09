@@ -174,6 +174,11 @@ public class ViewChanger {
         }
     }
 
+    /**
+     * Display a secondary window
+     * @param root to set scene
+     * @param secondaryStage to show
+     */
     public void showSecondaryStage(Parent root, Stage secondaryStage) {
         secondaryStage.setScene(new Scene(root, 790 , 450));
         secondaryStage.show();

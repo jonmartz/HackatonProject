@@ -5,12 +5,14 @@ import View.RequestMessageView;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 
+import java.util.List;
+
 /**
  * Controller for the message request view
  */
 public class RequestMessageController extends MessageController {
 
-    boolean isTrade = false;
+    private boolean isTrade = false;
 
     @Override
     protected void FillAllData() {
@@ -114,6 +116,10 @@ public class RequestMessageController extends MessageController {
             // change vacation's owner
             database.setVacationOwner(requestedVacation.ID, buyerID);
             database.setVacationOwner(offeredVacation.ID, sellerID);
+
+            User currentUser = database.getCurrentUser();
+            List<Message> messages = database.getAllMessagesByRecieverId(currentUser.username);
+            currentUser.mailBox = new MailBox(messages);
         }
         else{
             view.ShowPopUp("You already confirmed the trade for this vacation!");
@@ -151,18 +157,11 @@ public class RequestMessageController extends MessageController {
             Payment payment = new Payment(vacation.ID, currentMessage.getReceiver(), currentMessage.getSender());
             this.database.addPayment(payment);
 
-            // todo: for now sent completion only to buyer in case of cash
-            // send completion messages to both parties
             CompletionMessage completionMessage1 = new CompletionMessage(currentMessage.getReceiver(),
                     currentMessage.getSender(), vacation, null);
-//            CompletionMessage completionMessage2 = new CompletionMessage(currentMessage.getSender(),
-//                    currentMessage.getReceiver(), vacation, null);
             this.database.addMessage(completionMessage1.getSender(), completionMessage1.getReceiver(), vacation.ID,
                     false, completionMessage1.getDate(), completionMessage1.getTime(),
                     completionMessage1.getKind(), "");
-//            this.database.addMessage(completionMessage2.getSender(), completionMessage2.getReceiver(), vacation.ID,
-//                    false, completionMessage2.getDate(), completionMessage2.getTime(),
-//                    completionMessage2.getKind(), "");
             currentMessage.setConfirmed(true);
             database.confirmMessage(String.valueOf(currentMessage.getId()));
 

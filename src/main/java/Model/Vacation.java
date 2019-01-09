@@ -3,6 +3,9 @@ package Model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Represents a vacation object
+ */
 public class Vacation {
     public String AdultTickets;
     public String KidTickets;
@@ -25,29 +28,15 @@ public class Vacation {
     public String ownerID;
     public String ticketPicturePath;
 
+    /**
+     * Constructor
+     */
     public Vacation(){ }
-    
-//    public Vacation(String destinationCountryTXT, String NumOfTickets, String flightCompanyTXT,
-//                    String baggageTXT, String kindOfVacationTXT, String kindOfSleepingPlaceTXT,
-//                    String theRateOfTheSleepingPlaceTXT, String toDateDatePicker, String fromDateDatePicker,
-//                    String kindOfTicketTXT, String isTheSleepingCostsIncludesTXT,
-//                    String isThereReturnFlightTXT, String price)
-//    {
-//        this.baggageTXT= baggageTXT;
-//        this.destinationCountryTXT = destinationCountryTXT;
-//        this.flightCompanyTXT= flightCompanyTXT;
-//        this.fromDateDatePicker= fromDateDatePicker;
-//        this.isThereReturnFlightTXT= isThereReturnFlightTXT;
-//        this.isTheSleepingCostsIncludesTXT= isTheSleepingCostsIncludesTXT;
-//        this.kindOfSleepingPlaceTXT= kindOfSleepingPlaceTXT;
-//        this.kindOfTicketTXT= kindOfTicketTXT;
-//        this.NumOfTickets = NumOfTickets;
-//        this.toDateDatePicker= toDateDatePicker;
-//        this.theRateOfTheSleepingPlaceTXT= theRateOfTheSleepingPlaceTXT;
-//        this.kindOfVacationTXT= kindOfVacationTXT;
-//        this.price = price;
-//    }
 
+    /**
+     * Constructor
+     * @param resultSet from SQL statement, to get all fields
+     */
     public Vacation(ResultSet resultSet){
         try {
             this.ID = resultSet.getString("rowid");

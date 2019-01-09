@@ -60,8 +60,9 @@ public class SignUpController extends AbstractController {
     public void AddPicture() {
         try {
             SignUpView signUpView = (SignUpView) this.view;
-            signUpView.pictureFilePath = signUpView.getFilePath("Choose profile picture");
-            if (signUpView.pictureFilePath == null) return;
+            String pictureFilePath = signUpView.getFilePath("Choose profile picture");
+            if (pictureFilePath == null) return;
+            signUpView.pictureFilePath = pictureFilePath;
             FileInputStream inputstream = new FileInputStream(signUpView.pictureFilePath);
             Image image = new Image(inputstream);
             signUpView.pictureImageView.setImage(image);

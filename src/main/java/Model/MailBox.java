@@ -1,6 +1,9 @@
 package Model;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -8,7 +11,7 @@ import java.util.List;
  */
 public class MailBox {
 
-    private List<Message> messages;//the list of messages
+    private LinkedList<Message> messages;//the list of messages
 
     /**
      * The constructor of the class
@@ -16,10 +19,9 @@ public class MailBox {
      */
     public MailBox(List<Message> messages)
     {
-
-        this.messages = messages;
+        this.messages = new LinkedList<>();
+        this.messages.addAll(messages);
         this.messages.sort(new MessageComperator());
-
     }
 
     /**
@@ -55,8 +57,8 @@ public class MailBox {
         {
             return null;
         }
-
     }
+
     /**
      * This function will remove a message from the mailbox
      * @param messageId - The message index in the list
@@ -110,44 +112,32 @@ public class MailBox {
         }
         return null;
     }
+
     /**
-     * This class is the Comparator of messages
+     * This class is the Comparator of messages, to sort the according to relevance / date
      */
     class MessageComperator implements Comparator<Message>
     {
 
         /**
-         * If positive than message1 > message2, If negative than message1 < message2, 0 means equal
+         * If message x has not been read and message y has, then x < y.
+         * Else, if date and time of x < date and time of y then x > y.
          * @param message1 - The first message
          * @param message2 - The second message
-         * @return
+         * @return the comparing number
          */
         @Override
         public int compare(Message message1, Message message2) {
-
-            if(!message1.hasbeenRead() && message2.hasbeenRead())
-                return -1;
-            if(message1.hasbeenRead() && !message2.hasbeenRead())
-                return 1;
-            return dateComp(message1.getDate(),message2.getDate());
-        }
-        private int dateComp(String date1,String date2)
-        {
-            int index1 = date1.lastIndexOf('-');
-            int index2 = date2.lastIndexOf('-');
-            int comp =date1.substring(index1).compareTo(date2.substring(index2));
-            if(comp!=0)
-                return comp;
-            int index3 = date1.indexOf('-');
-            int index4 = date2.indexOf('-');
-            comp =date1.substring(index3+1,index1).compareTo(date2.substring(index4+1,index2));
-            if(comp!=0)
-                return comp;
-            return date1.substring(0,index3).compareTo(date2.substring(0,index4));
-
-
+            if(!message1.hasbeenRead() && message2.hasbeenRead()) return -1;
+            if(message1.hasbeenRead() && !message2.hasbeenRead()) return 1;
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate date1 = LocalDate.parse(message1.getDate(), formatter);
+            LocalDate date2 = LocalDate.parse(message2.getDate(), formatter);
+            if (date1.isBefore(date2)) return 1;
+            if (date2.isBefore(date1)) return -1;
+            String time1 = message1.getTime();
+            String time2 = message2.getTime();
+            return  time2.compareTo(time1);
         }
     }
-
-
 }

@@ -11,6 +11,7 @@ import javafx.scene.text.Text;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
+
 /**
  * This class is the view that is responsible for the Settings window
  */
@@ -41,13 +42,15 @@ public class PersonalAreaView extends AbstractView {
         this.setController(personalAreaController);
         personalAreaController.setView(this);
 
-
-
         // Add listeners
         addTextListener(firstName, "[A-Za-z]*", "[^A-Za-z]");
         addTextListener(lastName, "[A-Za-z]*", "[^A-Za-z]");
         addTextListener(city, "[A-Za-z]*", "[^A-Za-z]");
     }
+
+    /**
+     * Set the text of the mailbox, for displaying the number of unread messages
+     */
     public void setMailBoxText()
     {
         int numOfUnreadMessages = ((PersonalAreaController)this.getController()).getNumberOfUnreadMessages();

@@ -49,12 +49,6 @@ public class Database {
                     "offeredVacationID string, " +
                     "confirmed string)");
 
-            // todo: maybe add to avoid nulls
-            //Create offered vacation from trade requests table
-//            statement.executeUpdate("create table if not exists offeredVacations (" +
-//                    "messageID string, " +
-//                    "offeredVacationID string) ");
-
             // Create vacations table
             statement.executeUpdate("create table if not exists vacations (" +
                     "destinetionContryTXT string, " +
@@ -83,11 +77,6 @@ public class Database {
                     "buyerID string, " +
                     "sellerID string, " +
                     "offeredVacationID string)");
-
-            // Trade transaction table
-//            statement.executeUpdate("create table if not exists tradeTransactions (" +
-//                    "transactionId string, " +
-//                    "vacationID string)");
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -251,21 +240,6 @@ public class Database {
 
     }
 
-//    private void addTradeTransaction(String transactionID, TradePayment tradePayment)
-//    {
-//        Statement statement = null;
-//        try {
-//            statement = connection.createStatement();
-//            String command = "insert into tradeTransactions values(" +
-//                    "'" + transactionID + "', " +
-//                    "'" + tradePayment.payWithVacationId + "'" + ")";
-//            statement.executeUpdate(command);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
-
     /**
      * This function will add a message to the dataBase
      * @param sender - The sender's id
@@ -425,32 +399,6 @@ public class Database {
         return user;
     }
 
-//    /**
-//     * This function will get the Payment by the vacationId
-//     * @param vacationID - The vacation id
-//     * @return - A new instance of the transaction
-//     */
-//    public Payment getPaymentByVacationID(String vacationID) {
-//        Payment payment = null;
-//        try {
-//            openConnection();
-//            Statement statement = connection.createStatement();
-//            ResultSet resultSet = statement.executeQuery("select rowid, * from payments where vacationID='"
-//                    + vacationID + "'");
-//            if (resultSet.next()) {
-//                payment = new Payment();
-//                payment.ID = resultSet.getString("rowid");
-//                payment.vacationID = resultSet.getString("vacationID");
-//                payment.buyerID = resultSet.getString("buyerID");
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        } finally {
-//            closeConnection();
-//        }
-//        return payment;
-//    }
-
     /**
      * Get all messages of a certain user (as the receiver) from database as a list of vacation objects
      * @return message list
@@ -482,9 +430,6 @@ public class Database {
                 else
                 {
                     if (kind.equals("Completed")) {
-                        // todo: for now payment is commented out
-//                        Payment payment = getPaymentByVacationID(vacationId);
-//                        message = new CompletionMessage(sender, receiver, date, time, id, hasBeenRead, payment,vacation);
                         message = new CompletionMessage(sender, receiver, date, time, id, hasBeenRead, vacation, offeredVacation);
                     }
                     else
@@ -630,28 +575,6 @@ public class Database {
         }
         return acceptedVacationIDs;
     }
-
-//    /**
-//     * Get the vacation id of all the vacations that have been payed for in a transaction
-//     * @return vacation IDs
-//     */
-//    public HashSet<String> getVacationIDsFromAllPayments() {
-//        HashSet<String> vacationIDs = new HashSet<>();
-//        try
-//        {
-//            openConnection();
-//            Statement statement = connection.createStatement();
-//            ResultSet resultSet = statement.executeQuery("select vacationID from payments");
-//            while(resultSet.next()) {
-//                vacationIDs.add(resultSet.getString("vacationID"));
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        } finally {
-//            closeConnection();
-//        }
-//        return vacationIDs;
-//    }
 
     /**
      * Change the vacation's owner

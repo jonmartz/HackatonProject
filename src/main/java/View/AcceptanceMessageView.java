@@ -6,8 +6,10 @@ import javafx.scene.control.Button;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * View for the acceptance message screen
+ */
 public class AcceptanceMessageView extends MessageView {
-//    public Button confirmTradeButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -15,9 +17,4 @@ public class AcceptanceMessageView extends MessageView {
         this.setController(acceptanceMessageController);
         acceptanceMessageController.setView(this);
     }
-
-//    public void confirmTrade()
-//    {
-//        ((AcceptanceMessageController)this.getController()).confirmTrade();
-//    }
 }

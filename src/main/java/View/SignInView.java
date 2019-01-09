@@ -9,6 +9,9 @@ import javafx.scene.text.Text;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * View for the sign in screen
+ */
 public class SignInView extends AbstractView {
 
     @FXML

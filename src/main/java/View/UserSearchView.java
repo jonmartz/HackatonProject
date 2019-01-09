@@ -14,6 +14,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
 /**
  * This class is the view that is responsible for the Settings window
  */
@@ -99,10 +100,10 @@ public class UserSearchView extends AbstractView{
         return enter_username_textfield.getText();
     }
 
-    @Override
     /**
      * This function will initialize an instance of this class
      */
+    @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         UserSearchController userSearchController = new UserSearchController();
@@ -130,9 +131,4 @@ public class UserSearchView extends AbstractView{
     {
         ((UserSearchController)this.getController()).searchForUser();
     }
-    /**
-     * Get an image from file
-     * @param pictureFilePath of file
-     * @return image object
-     */
 }
