@@ -64,7 +64,7 @@
             <GridPane alignment="center" hgap="10" prefHeight="413.0" prefWidth="794.0" vgap="10">
                <children>
                   <TextField fx:id="username" layoutX="10.0" layoutY="26.0" onKeyReleased="#KeyReleased" prefHeight="5.0" prefWidth="310.0" promptText="Enter username" GridPane.rowIndex="2" />
-                  <TextField fx:id="password" onKeyReleased="#KeyReleased" prefHeight="31.0" prefWidth="230.0" promptText="Enter password" GridPane.rowIndex="3" />
+                  <TextField fx:id="password" onKeyReleased="#passwordTyped" prefHeight="31.0" prefWidth="230.0" promptText="Enter password &gt;= 8" GridPane.rowIndex="3" />
                   <TextField fx:id="firstName" onKeyReleased="#KeyReleased" promptText="First name" GridPane.rowIndex="4" />
                   <TextField fx:id="lastName" layoutX="14.0" layoutY="110.0" onKeyReleased="#KeyReleased" promptText="Last name" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <DatePicker fx:id="birthdatePicker" onAction="#birthdatePicked" promptText="Pick birthdate" GridPane.rowIndex="5" />

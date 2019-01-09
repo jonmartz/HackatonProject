@@ -67,8 +67,10 @@ public class PersonalAreaView extends AbstractView {
      */
     public void KeyReleased() {
         try {
-            if (username.getText().isEmpty() || password.getText().isEmpty() || birthdate.isEmpty()
-                    || firstName.getText().isEmpty() || lastName.getText().isEmpty() || city.getText().isEmpty()) {
+            if (username.getText().isEmpty()
+                    || password.getText().isEmpty() || password.getText().length() < 8
+                    || birthdate.isEmpty() || firstName.getText().isEmpty()
+                    || lastName.getText().isEmpty() || city.getText().isEmpty()) {
                 saveChanges.setDisable(true);
                 comments.setText("Please fill all fields");
             } else {
@@ -78,6 +80,17 @@ public class PersonalAreaView extends AbstractView {
         } catch (Exception e) {
             saveChanges.setDisable(true);
             comments.setText("Please fill all fields");
+        }
+    }
+
+    /**
+     * Check if password >= 8
+     */
+    public void passwordTyped(){
+        KeyReleased();
+        String passwordString = password.getText();
+        if (passwordString.isEmpty() || passwordString.length() < 8){
+            comments.setText("Password must be at least 8 chars");
         }
     }
 

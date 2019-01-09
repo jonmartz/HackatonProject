@@ -36,7 +36,6 @@ public class RequestMessageController extends MessageController {
             Button confirmPaymentButton = ((RequestMessageView) view).confirmPaymentButton;
             confirmPaymentButton.setText("Confirm Trade");
             confirmPaymentButton.setVisible(true);
-            //todo: change requirements
         }
     }
 

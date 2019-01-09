@@ -62,7 +62,8 @@ public class SignUpView extends AbstractView {
      */
     public void KeyReleased() {
         try {
-            if (username.getText().isEmpty() || password.getText().isEmpty()
+            if (username.getText().isEmpty()
+                    || password.getText().isEmpty() || password.getText().length() < 8
                     || birthdate.isEmpty() || firstName.getText().isEmpty()
                     || lastName.getText().isEmpty() || city.getText().isEmpty()
                     || pictureFilePath.isEmpty()) {
@@ -75,6 +76,17 @@ public class SignUpView extends AbstractView {
         } catch (Exception e) {
             signUp.setDisable(true);
             comments.setText("Please fill all fields");
+        }
+    }
+
+    /**
+     * Check if password >= 8
+     */
+    public void passwordTyped(){
+        KeyReleased();
+        String passwordString = password.getText();
+        if (passwordString.isEmpty() || passwordString.length() < 8){
+            comments.setText("Password must be at least 8 chars");
         }
     }
 
@@ -141,7 +153,7 @@ public class SignUpView extends AbstractView {
 
     /**
      * This function will set the value of the string birthday value
-     * @param birthdate
+     * @param birthdate to set
      */
     public void setBirthdayString(String birthdate) {
         this.birthdate = birthdate;
