@@ -5,10 +5,7 @@ import View.VacationSearchView;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * Controller for the vacation search view
@@ -80,17 +77,13 @@ public class VacationSearchController extends AbstractController {
      * Get the relevant vacations according to the fields in the view
      * @return list of relevant countries
      */
-    public HashSet<String> GetRelevantPartners() {
+    public List<String> GetRelevantPartners() {
 
         VacationSearchView view = (VacationSearchView)this.view;
         String relevantCourse = view.CourseIDChoiceBox.getValue().toString();
         String relevantsemester = view.SemesterChoiceBox.getValue().toString();
         String relevantYear = view.YearChoiceBox.getValue().toString();
-
-        HashSet<String> relevantPartners = new HashSet<>();
-
-
-        return relevantPartners;
+        return learningUsers( relevantCourse, relevantsemester, relevantYear);
     }
 
     @Override

@@ -11,6 +11,7 @@ import javafx.scene.control.ButtonType;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 /**
  * Abstract class for a controller that interacts with user account related views.
@@ -169,6 +170,10 @@ public abstract class AbstractController {
             viewChanger.publishVacation();
             viewChanger.setupView(database);
         }
+    }
+
+    public List<String> learningUsers(String course_id, String semester, String year ){
+        return database.learningUsers( course_id, semester, year);
     }
 
     /**
