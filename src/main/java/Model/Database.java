@@ -5,6 +5,7 @@ import javafx.scene.control.TextField;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 /**
  * Manages a user database using SQLite, and holds current object pointers
@@ -527,7 +528,24 @@ public class Database {
         }
         return confirmed;
     }
-
+    public List<String> learningUsers(String course_id, String semester, String year ) {
+        List<String> ans = new ArrayList<>();
+        try {
+            openConnection();
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("select username from learns where course_id='"
+                    + course_id + "' AND semester='" + semester+"' AND year='" + year
+                    + "' AND available='T'");
+            while (rs.next()) {
+                ans.add(rs.getString("username"));;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        return ans;
+    }
     /**
      * Set the message as confirmed
      *
