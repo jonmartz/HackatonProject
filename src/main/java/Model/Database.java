@@ -61,6 +61,10 @@ public class Database {
                     "available string, " +
                     "year string) " );
 
+            //Create courses table
+            statement.executeUpdate("create table if not exists courses (" +
+                    "course_id string, " +
+                    "name string) " );
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -150,9 +154,24 @@ public class Database {
         }
     }
 
-
-    public void addUser(String username, String password, String birthdate, String firstName,
-                        String lastName, String city, String picture) {
+    public void addCourse (String course_id, String name){
+        try {
+            openConnection();
+            Statement statement = connection.createStatement();
+            if (getcourse(course_id) == null) {
+                String command = "insert into users values(" +
+                        "'" + course_id + "', " +
+                        "'" + name + "'" + ")";
+                statement.executeUpdate(command);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+    }
+    public void addUser(String username, String password, String birthdate, String firstName, String lastName,
+                        String city, String phoneNumber, String description, String picture) {
         try {
             openConnection();
             Statement statement = connection.createStatement();
@@ -164,6 +183,8 @@ public class Database {
                         "'" + firstName + "', " +
                         "'" + lastName + "', " +
                         "'" + city + "', " +
+                        "'" + phoneNumber + "', " +
+                        "'" + description + "', " +
                         "'" + picture + "'" + ")";
                 statement.executeUpdate(command);
             }
@@ -291,6 +312,8 @@ public class Database {
                 user.firstName = rs.getString("firstName");
                 user.lastName = rs.getString("lastName");
                 user.city = rs.getString("city");
+                user.phoneNumber = rs.getString("phoneNumber")
+                user.description = rs.getString("description")
                 user.pictureFilePath = rs.getString("picture");
                 user.mailBox = new MailBox(this.getAllMessagesByRecieverId(user.username));
             }
@@ -300,6 +323,24 @@ public class Database {
             closeConnection();
         }
         return user;
+    }
+    public Course getcourse(String course_id) {
+        Course course = null;
+        try {
+            openConnection();
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("select * from courses where course_id='" + course_id + "'");
+            if (rs.next()) {
+                course = new Course();
+                course.course_id = rs.getString("course_id");
+                course.name = rs.getString("name");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        return course;
     }
 
     /**
