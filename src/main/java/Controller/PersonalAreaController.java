@@ -32,7 +32,9 @@ public class PersonalAreaController extends AbstractController {
         view.setBirthdayValue(localDate);
         view.setFirstNameText(currentUser.firstName);
         view.setLastNameText(currentUser.lastName);
-        view.setCityText(currentUser.city);
+        view.description.setText(CurrentU);
+        view.setCityText(currentUser.description);
+        view.setCityText(currentUser.phoneNumber);
         view.setPictureFilePath(currentUser.pictureFilePath);
         Image image = this.view.getImage(currentUser.pictureFilePath);
         if (image != null) view.pictureImageView.setImage(image);
@@ -83,6 +85,12 @@ public class PersonalAreaController extends AbstractController {
                 database.updateUser(user.username,"username", personalAreaView.getUsernameText());
             if (!user.pictureFilePath.equals(personalAreaView.getPictureFilePath()))
                 database.updateUser(user.username,"picture", personalAreaView.getPictureFilePath());
+            if (!user.phoneNumber.equals(personalAreaView.phone.getText()))
+                database.updateUser(user.username,"phoneNumber", personalAreaView.phone.getText());
+            if (!user.description.equals(personalAreaView.description.getText()))
+                database.updateUser(user.username,"description", personalAreaView.description.getText());
+
+
 
             // update the user pointer in the model to match the saved changes
             database.setCurrentUser(database.getUser(personalAreaView.getUsernameText()));

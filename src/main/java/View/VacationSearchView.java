@@ -177,8 +177,8 @@ public class VacationSearchView extends AbstractView {
     public void GetVacations(boolean getAll) {
         VacationSearchController controller = (VacationSearchController) getController();
         ArrayList<Vacation> vacations;
-        if (getAll) vacations = controller.GetAllVacations();
-        else vacations = controller.GetRelevantVacations();
+        if (getAll) vacations = controller.GetAllCourses();
+        else vacations = controller.GetRelevantPartners();
         ObservableList<VacationEntry> items = FXCollections.observableArrayList();
         for (Vacation vacation : vacations){
             items.add(new VacationEntry(vacation.ID, vacation.destinationCountryTXT,

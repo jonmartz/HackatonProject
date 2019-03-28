@@ -11,6 +11,7 @@ import javafx.scene.control.ButtonType;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 /**
  * Abstract class for a controller that interacts with user account related views.
@@ -69,52 +70,45 @@ public abstract class AbstractController {
         return false;
     }
 
-    /**
-     * Gets a vacation from database
-     * @param vacationID of vacation
-     * @return vacation object
-     */
-    public Vacation GetVacation(String vacationID) {
-        return database.getVacation(vacationID);
-    }
+//    /**
+//     * Gets a vacation from database
+//     * @param vacationID of vacation
+//     * @return vacation object
+//     */
+//    public Vacation GetVacation(String vacationID) {
+//        return database.getVacation(vacationID);
+//    }
 
     /**
      * Gets all the (where purchase is not accepted) vacations from database
      * @return list with all vacations
      */
-    public ArrayList<Vacation> GetAllVacations() {
-        ArrayList<Vacation> vacations = database.getAllVacations();
-        ArrayList<Vacation> relevantVacations = new ArrayList<>();
-        HashSet acceptedVacationIDs = database.getUnavailableVacationIDs();
-        for (Vacation vacation : vacations){
-            if (!acceptedVacationIDs.contains(vacation.ID))
-                relevantVacations.add(vacation);
-        }
-        return relevantVacations;
+    public HashSet<String> GetAllCourses() {
+        return database.getAllCourses();
     }
 
-    /**
-     * Gets all the vacations that current user is owner of
-     * @return list with all vacations
-     */
-    public ArrayList<Vacation> GetAllVacationsOfCurrentUser() {
-        ArrayList<Vacation> vacations = database.getAllVacations();
-        String currentUserID = database.getCurrentUser().username;
-        ArrayList<Vacation> usersVacations = new ArrayList<>();
-        for (Vacation vacation : vacations){
-            if (vacation.ownerID.equals(currentUserID))
-                usersVacations.add(vacation);
-        }
-        return usersVacations;
-    }
+//    /**
+//     * Gets all the vacations that current user is owner of
+//     * @return list with all vacations
+//     */
+//    public ArrayList<Vacation> GetAllVacationsOfCurrentUser() {
+//        ArrayList<Vacation> vacations = database.getAllVacations();
+//        String currentUserID = database.getCurrentUser().username;
+//        ArrayList<Vacation> usersVacations = new ArrayList<>();
+//        for (Vacation vacation : vacations){
+//            if (vacation.ownerID.equals(currentUserID))
+//                usersVacations.add(vacation);
+//        }
+//        return usersVacations;
+//    }
 
-    /**
-     * Get a list of all countries in database
-     * @return
-     */
-    public HashSet<String> GetAllCountries() {
-        return database.getAllCountries();
-    }
+//    /**
+//     * Get a list of all countries in database
+//     * @return
+//     */
+//    public HashSet<String> GetAllCountries() {
+//        return database.getAllCountries();
+//    }
 
     /**
      * Transitions to the sign up screen
@@ -142,26 +136,26 @@ public abstract class AbstractController {
         viewChanger.setupView(database);
     }
 
-    /**
-     * Transitions to vacation details
-     * @param vacationID id of vacation to check
-     */
-    public void CheckVacation(String vacationID, boolean requestButtonVisible) {
-        database.setCurrentVacation(GetVacation(vacationID));
-        database.requestButtonVisible = requestButtonVisible;
-        viewChanger.detailsVacation();
-        viewChanger.setupView(database);
-    }
+//    /**
+//     * Transitions to vacation details
+//     * @param vacationID id of vacation to check
+//     */
+//    public void CheckVacation(String vacationID, boolean requestButtonVisible) {
+//        database.setCurrentVacation(GetVacation(vacationID));
+//        database.requestButtonVisible = requestButtonVisible;
+//        viewChanger.detailsVacation();
+//        viewChanger.setupView(database);
+//    }
 
-    /**
-     * Transitions to vacation request screen
-     * @param vacation vacation to check
-     */
-    public void RequestVacationScreen(Vacation vacation) {
-        database.setCurrentVacation(vacation);
-        viewChanger.requestVacation();
-        viewChanger.setupView(database);
-    }
+//    /**
+//     * Transitions to vacation request screen
+//     * @param vacation vacation to check
+//     */
+//    public void RequestVacationScreen(Vacation vacation) {
+//        database.setCurrentVacation(vacation);
+//        viewChanger.requestVacation();
+//        viewChanger.setupView(database);
+//    }
 
     /**
      * Transitions to the vacation publishing screen
@@ -176,6 +170,10 @@ public abstract class AbstractController {
             viewChanger.publishVacation();
             viewChanger.setupView(database);
         }
+    }
+
+    public List<String> learningUsers(String course_id, String semester, String year ){
+        return database.learningUsers( course_id, semester, year);
     }
 
     /**
