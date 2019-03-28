@@ -13,6 +13,7 @@ public abstract class Message {
     private String time;//The time the message was sent
     private int myId;
     private boolean hasbeenRead;
+    private String text;
 
 
     /**
@@ -137,4 +138,10 @@ public abstract class Message {
         return hasbeenRead;
 
     }
+
+    protected void setText(String text)
+    {
+        this.text = text;
+    }
+
 }

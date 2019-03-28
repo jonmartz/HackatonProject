@@ -2,20 +2,21 @@ package Model;
 
 public class AcceptanceMessage extends Message {
 
-    private Vacation vacation;//the vacation
-    public Vacation offeredVacation;// vacation accepted in trade acceptance
+    private String course;
+    private String year;
+    private String semester;
     private boolean hasConfirmed;
     /**
      * This is the constructor of the class
      *
      * @param sender   - The user that sent the message
      * @param receiver - The user that received the message
-     * @param vacation - The vacation that the receiver requested
      */
-    public AcceptanceMessage(String sender, String receiver,Vacation vacation, Vacation offeredVacation) {
+    public AcceptanceMessage(String sender, String receiver,String course, String year, String semester) {
         super(sender, receiver);
-        this.vacation = vacation;
-        this.offeredVacation = offeredVacation;
+        this.course = course;
+        this.year = year;
+        this.semester = semester;
         this.hasConfirmed = false;
     }
 
@@ -27,13 +28,13 @@ public class AcceptanceMessage extends Message {
      * @param time - The time of creation
      * @param myId - The id of the message
      * @param hasbeenRead - True if the message has been read
-     * @param vacation - The vacation that the receiver requested
      */
     protected AcceptanceMessage(String sender,String receiver, String date,String time,int myId, boolean hasbeenRead,
-                                Vacation vacation, Vacation offeredVacation) {
+                                String course, String year, String semester) {
         super(sender,receiver,date,time,myId,hasbeenRead);
-        this.vacation =vacation;
-        this.offeredVacation = offeredVacation;
+        this.course = course;
+        this.year = year;
+        this.semester = semester;
     }
 
     /**
@@ -52,14 +53,8 @@ public class AcceptanceMessage extends Message {
      */
     @Override
     public String getContent() {
-//        if (offeredVacation == null) { // cash
-            return this.getSender() + " has accepted your request to buy the vacation to " + vacation.destinationCountryTXT
-                    + " from " + vacation.fromDateTXT + " to " + vacation.toDateTXT + ".\nPlease send the cash to " +
-                    this.getSender() + " and wait for confirmation.";
-//        }else{ // trade
-//            return this.getSender() + " has accepted your request to trade the vacation to " + vacation.destinationCountryTXT
-//                    + " from " + vacation.fromDateTXT + " to " + vacation.toDateTXT + ".\nPress the button below to confirm the trade.";
-//        }
+        return "The connection has been completed successfully!\n Yoe and " + getReceiver() + "are mates now in the course "
+                + course;
     }
 
 
@@ -82,11 +77,11 @@ public class AcceptanceMessage extends Message {
         return "acceptanceMessage.fxml";
     }
 
-    /**
-     * This function will return the vacation
-     * @return - The vacation
-     */
-    public Vacation getVacation(){return this.vacation;}
+//    /**
+//     * This function will return the vacation
+//     * @return - The vacation
+//     */
+//    public Vacation getVacation(){return this.vacation;}
 
     /**
      * Check if the message has been confirmed

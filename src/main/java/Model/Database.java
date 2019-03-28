@@ -59,7 +59,7 @@ public class Database {
                     "course_id string, " +
                     "semester string, " +
                     "available string, " +
-                    "year string) " );
+                    "year string) ");
 
             //Create courses table
             statement.executeUpdate("create table if not exists courses (" +
@@ -106,6 +106,7 @@ public class Database {
 
     /**
      * Setter
+     *
      * @return user that is currently signed in
      */
     public User getCurrentUser() {
@@ -114,6 +115,7 @@ public class Database {
 
     /**
      * Getter
+     *
      * @return current message
      */
     public Message getCurrentMessage() {
@@ -122,6 +124,7 @@ public class Database {
 
     /**
      * Getter
+     *
      * @param user that is currently signed in
      */
     public void setCurrentUser(User user) {
@@ -130,21 +133,20 @@ public class Database {
 
     /**
      * Setter. Also updates the message as "already read"
+     *
      * @param currentMessage to set
      */
-    public void setCurrentMessage(Message currentMessage)
-    {
+    public void setCurrentMessage(Message currentMessage) {
         this.currentMessage = currentMessage;
-        if(currentMessage!=null)
-        {
+        if (currentMessage != null) {
             openConnection();
             Statement statement = null;
             try {
                 statement = connection.createStatement();
                 currentMessage.markAsRead();
-                String command ="UPDATE messages" +
+                String command = "UPDATE messages" +
                         " SET hasBeenRead = true " +
-                        "WHERE rowid = '"+ currentMessage.getId()+"';";
+                        "WHERE rowid = '" + currentMessage.getId() + "';";
                 statement.executeUpdate(command);
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -203,17 +205,18 @@ public class Database {
 
     /**
      * This function will add a message to the dataBase
-     * @param sender - The sender's id
-     * @param receiver - The receiver's id
-     * @param vacationId - The vacation id
-     * @param hasBeenRead - True if the message has been read
-     * @param creationDate - The creation date
-     * @param creationTime - The creation time
-     * @param kind - The kind of message
+     *
+     * @param sender            - The sender's id
+     * @param receiver          - The receiver's id
+     * @param vacationId        - The vacation id
+     * @param hasBeenRead       - True if the message has been read
+     * @param creationDate      - The creation date
+     * @param creationTime      - The creation time
+     * @param kind              - The kind of message
      * @param offeredVacationID - id of the offered vacation in case of trade request message
      */
-    public void addMessage(String sender,String receiver,String vacationId,
-                           boolean hasBeenRead,String creationDate,String creationTime,
+    public void addMessage(String sender, String receiver, String vacationId,
+                           boolean hasBeenRead, String creationDate, String creationTime,
                            String kind, String offeredVacationID) {
 
         try {
@@ -375,45 +378,38 @@ public class Database {
     }
     /**
      * Get all messages of a certain user (as the receiver) from database as a list of vacation objects
+     *
      * @return message list
      */
     public ArrayList<Message> getAllMessagesByRecieverId(String receiverId) {
         ArrayList<Message> messages = new ArrayList<>();
-        try
-        {
+        try {
             openConnection();
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("select rowid, * from messages where recipient='"
                     + receiverId + "'");
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 String kind = resultSet.getString("kind");
                 int id = resultSet.getInt("rowid");
                 String sender = resultSet.getString("sender");
                 String receiver = resultSet.getString("recipient");
                 String date = resultSet.getString("creationDate");
                 String time = resultSet.getString("creationTime");
-                String vacationId = resultSet.getString("vacationId");
-                String offeredVacationID = resultSet.getString("offeredVacationID");
                 boolean hasBeenRead = resultSet.getBoolean("hasBeenRead");
-                Vacation vacation = getVacation(vacationId);
-                Vacation offeredVacation = null;
-                if (!offeredVacationID.isEmpty()) offeredVacation = getVacation(offeredVacationID);
+                String course = resultSet.getString("course_id");
+                String year = resultSet.getString("year");
+                String semester = resultSet.getString("semester");
                 Message message;
                 if (kind.equals("Acceptance"))
-                    message = new AcceptanceMessage(sender, receiver, date, time, id, hasBeenRead, vacation, offeredVacation);
-                else
-                {
-                    if (kind.equals("Completed")) {
-                        message = new CompletionMessage(sender, receiver, date, time, id, hasBeenRead, vacation, offeredVacation);
-                    }
-                    else
-                    {
-                        message = new RequestMessage(sender, receiver, date, time, id, hasBeenRead, vacation, offeredVacation);
-                    }
+                    message = new AcceptanceMessage(sender, receiver, date, time, id, hasBeenRead, course, year, semester);
+                else {
+                    message = new RequestMessage(sender, receiver, date, time, id, hasBeenRead, course, year, semester);
                 }
                 messages.add(message);
             }
-        } catch (SQLException e) {
+
+        } catch (
+                SQLException e) {
             e.printStackTrace();
         } finally {
             closeConnection();
@@ -446,6 +442,7 @@ public class Database {
 
     /**
      * Delete a message from database
+     *
      * @param id of message
      */
     public void deleteMessage(int id) {
@@ -465,17 +462,17 @@ public class Database {
 
     /**
      * Get the vacation id of all the vacations that are part of an acceptance or completion message
+     *
      * @return vacation IDs
      */
     public HashSet<String> getUnavailableVacationIDs() {
         HashSet<String> acceptedVacationIDs = new HashSet<>();
-        try
-        {
+        try {
             openConnection();
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("select vacationId, offeredVacationID from messages" +
                     " where kind in ('Acceptance','Completed')");
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 acceptedVacationIDs.add(resultSet.getString("vacationId"));
                 String offeredVacationID = resultSet.getString("offeredVacationID");
                 if (!offeredVacationID.isEmpty()) acceptedVacationIDs.add(offeredVacationID);
@@ -489,9 +486,9 @@ public class Database {
     }
 
 
-
     /**
      * Check if the message has been confirmed, to not confirm a cash payment or trade twice
+     *
      * @param messageID to check
      * @return true if confirmed, else return false
      */
@@ -515,6 +512,7 @@ public class Database {
 
     /**
      * Set the message as confirmed
+     *
      * @param messageID to confirm
      */
     public void confirmMessage(String messageID) {
