@@ -88,7 +88,7 @@ public class VacationSearchController extends AbstractController {
         String relevantYear = view.YearChoiceBox.getValue().toString();
 
         HashSet<String> relevantPartners = new HashSet<>();
-        
+
 
         return relevantPartners;
     }

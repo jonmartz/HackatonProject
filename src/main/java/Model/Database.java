@@ -330,8 +330,8 @@ public class Database {
                 user.firstName = rs.getString("firstName");
                 user.lastName = rs.getString("lastName");
                 user.city = rs.getString("city");
-                user.phoneNumber = rs.getString("phoneNumber")
-                user.description = rs.getString("description")
+                user.phoneNumber = rs.getString("phoneNumber");
+                user.description = rs.getString("description");
                 user.pictureFilePath = rs.getString("picture");
                 user.mailBox = new MailBox(this.getAllMessagesByRecieverId(user.username));
             }
