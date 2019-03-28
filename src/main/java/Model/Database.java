@@ -291,6 +291,21 @@ public class Database {
             closeConnection();
         }
     }
+    public void updatelearnsAvialble(String username, String course_id, String semester, String year, String Val) {
+        try {
+            openConnection();
+            Statement statement = connection.createStatement();
+            String command = "UPDATE learns SET available='" + Val
+                    + "' WHERE username = '" + username + "' AND course_id ='"+course_id+"' AND semester ='" + semester
+                    + "' AND year ='" + year + "';";
+            statement.executeUpdate(command);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+    }
 
     /**
      * Returns a user object from the data in the database.
@@ -342,7 +357,22 @@ public class Database {
         }
         return course;
     }
-
+    public HashSet<String> getAllCourses(){
+        HashSet<String> ans = new HashSet<>();
+        try {
+            openConnection();
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("select * from courses");
+            if (rs.next()) {
+                ans.add(rs.getString("course_id") + "-" + rs.getString("name"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        return ans;
+    }
     /**
      * Get all messages of a certain user (as the receiver) from database as a list of vacation objects
      * @return message list
