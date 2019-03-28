@@ -136,16 +136,15 @@ public abstract class AbstractController {
         viewChanger.setupView(database);
     }
 
-//    /**
-//     * Transitions to vacation details
-//     * @param vacationID id of vacation to check
-//     */
-//    public void CheckVacation(String vacationID, boolean requestButtonVisible) {
+    /**
+     * Transitions to vacation details
+     * @param vacationID id of vacation to check
+     */
+    public void CheckUser(String vacationID) {
 //        database.setCurrentVacation(GetVacation(vacationID));
-//        database.requestButtonVisible = requestButtonVisible;
-//        viewChanger.detailsVacation();
-//        viewChanger.setupView(database);
-//    }
+        viewChanger.detailsVacation();
+        viewChanger.setupView(database);
+    }
 
 //    /**
 //     * Transitions to vacation request screen

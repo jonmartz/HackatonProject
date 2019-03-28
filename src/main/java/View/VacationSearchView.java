@@ -12,6 +12,7 @@ import javafx.util.Callback;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class VacationSearchView extends AbstractView {
@@ -72,7 +73,7 @@ public class VacationSearchView extends AbstractView {
                         } else {
                             button.setOnAction(event -> {
                                 VacationEntry vacationEntry = getTableView().getItems().get(getIndex());
-                                CheckVacation(vacationEntry.ID);
+                                getController().CheckUser(vacationEntry.ID);
 
                             });
                             setGraphic(button);
@@ -89,7 +90,7 @@ public class VacationSearchView extends AbstractView {
      * Go to vacation details
      * @param vacationID id of vacation to check
      */
-    private void CheckVacation(String vacationID) { this.getController().CheckVacation(vacationID, true); }
+//    private void CheckUser(String vacationID) { this.getController().CheckUser(vacationID, true); }
 
     /**
      * Clear the to date picker text
@@ -102,20 +103,6 @@ public class VacationSearchView extends AbstractView {
      */
     public void ClearFromDatePicker() {
         this.fromDateDatePicker.getEditor().clear();
-    }
-    /**
-     * Ths function will occur when the user pick a date in the datePicker
-     */
-    public void ToDatePicked()
-    {
-        ((VacationSearchController)this.getController()).ToDatePicked();
-    }
-    /**
-     * Ths function will occur when the user pick a date in the datePicker
-     */
-    public void FromDatePicked()
-    {
-        ((VacationSearchController)this.getController()).FromDatePicked();
     }
 
     /**
@@ -176,16 +163,13 @@ public class VacationSearchView extends AbstractView {
      */
     public void GetVacations(boolean getAll) {
         VacationSearchController controller = (VacationSearchController) getController();
-        ArrayList<Vacation> vacations;
-        if (getAll) vacations = controller.GetAllCourses();
-        else vacations = controller.GetRelevantPartners();
+        List<String> partners = controller.GetRelevantPartners();
         ObservableList<VacationEntry> items = FXCollections.observableArrayList();
-        for (Vacation vacation : vacations){
-            items.add(new VacationEntry(vacation.ID, vacation.destinationCountryTXT,
-                    vacation.fromDateTXT, vacation.toDateTXT, vacation.price));
+        for (String partner : partners){
+            items.add(new VacationEntry(partner, null,
+                    null,null, null));
         }
         searchResultsTableView.setItems(items);
-        searchResultsTableView.getSortOrder().add(priceColumn);
         searchResultsTableView.setVisible(true);
     }
 

@@ -131,7 +131,7 @@ public class RequestMessageController extends MessageController {
 //    public void checkOfferedVacation() {
 //        RequestMessage currentMessage = (RequestMessage) this.getCurrentMessage();
 //        Vacation offeredVacation = currentMessage.offeredVacation;
-//        CheckVacation(offeredVacation.ID, false);
+//        CheckUser(offeredVacation.ID, false);
 //    }
 
     /**

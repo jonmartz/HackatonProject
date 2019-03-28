@@ -1,9 +1,7 @@
 package Controller;
 
-import Model.RequestMessage;
 import Model.Vacation;
 import View.MyVacationsView;
-import View.RequestVacationView;
 import View.VacationSearchView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -35,6 +33,6 @@ public class MyVacationsController extends AbstractController {
      * Display a window with the vacation details
      */
     public void viewVacationDetails(String vacationID) {
-        CheckVacation(vacationID, false);
+        CheckUser(vacationID, false);
     }
 }
