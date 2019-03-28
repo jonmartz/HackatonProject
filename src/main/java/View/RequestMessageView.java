@@ -33,17 +33,17 @@ public class RequestMessageView  extends MessageView  {
         ((RequestMessageController)this.getController()).acceptRequest();
     }
 
-    /**
-     * View the details of the offered vacation in trade
-     */
-    public void checkOfferedVacation() {
-        ((RequestMessageController)this.getController()).checkOfferedVacation();
-    }
+//    /**
+//     * View the details of the offered vacation in trade
+//     */
+//    public void checkOfferedVacation() {
+//        ((RequestMessageController)this.getController()).checkOfferedVacation();
+//    }
 
-    /**
-     * Confirm the payment / trade
-     */
-    public void confirmPayment() {
-        ((RequestMessageController)this.getController()).confirm();
-    }
+//    /**
+//     * Confirm the payment / trade
+//     */
+//    public void confirmPayment() {
+//        ((RequestMessageController)this.getController()).confirm();
+//    }
 }

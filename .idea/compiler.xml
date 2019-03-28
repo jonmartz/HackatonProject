@@ -17,12 +17,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Ass 1" />
-        <module name="Vacation4U" />
+        <module name="Hackaton" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Ass 1" target="1.8" />
-      <module name="Vacation4U" target="1.8" />
+      <module name="Hackaton" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

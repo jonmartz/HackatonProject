@@ -32,9 +32,8 @@ public class PersonalAreaController extends AbstractController {
         view.setBirthdayValue(localDate);
         view.setFirstNameText(currentUser.firstName);
         view.setLastNameText(currentUser.lastName);
-        view.description.setText(CurrentU);
-        view.setCityText(currentUser.description);
-        view.setCityText(currentUser.phoneNumber);
+        view.description.setText(currentUser.description);
+        view.setCityText(currentUser.city);
         view.setPictureFilePath(currentUser.pictureFilePath);
         Image image = this.view.getImage(currentUser.pictureFilePath);
         if (image != null) view.pictureImageView.setImage(image);
