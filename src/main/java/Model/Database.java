@@ -208,16 +208,14 @@ public class Database {
      *
      * @param sender            - The sender's id
      * @param receiver          - The receiver's id
-     * @param vacationId        - The vacation id
      * @param hasBeenRead       - True if the message has been read
      * @param creationDate      - The creation date
      * @param creationTime      - The creation time
      * @param kind              - The kind of message
-     * @param offeredVacationID - id of the offered vacation in case of trade request message
      */
-    public void addMessage(String sender, String receiver, String vacationId,
+    public void addMessage(String sender, String receiver, String course_id,String semester,String year,
                            boolean hasBeenRead, String creationDate, String creationTime,
-                           String kind, String offeredVacationID) {
+                           String kind, String text) {
 
         try {
             openConnection();
@@ -225,12 +223,14 @@ public class Database {
             String command = "insert into messages values(" +
                     "'" + sender + "', " +
                     "'" + receiver + "', " +
-                    "'" + vacationId + "', " +
+                    "'" + course_id + "', " +
+                    "'" + semester + "', " +
+                    "'" + year + "', " +
                     "'" + hasBeenRead + "', " +
                     "'" + creationDate + "', " +
                     "'" + creationTime + "', " +
                     "'" + kind + "', " +
-                    "'" + offeredVacationID + "', " +
+                    "'" + text + "', " +
                     "'false'" + ")"; // not yet confirmed
             statement.executeUpdate(command);
 
@@ -330,8 +330,8 @@ public class Database {
                 user.firstName = rs.getString("firstName");
                 user.lastName = rs.getString("lastName");
                 user.city = rs.getString("city");
-                user.phoneNumber = rs.getString("phoneNumber")
-                user.description = rs.getString("description")
+                user.phoneNumber = rs.getString("phoneNumber");
+                user.description = rs.getString("description");
                 user.pictureFilePath = rs.getString("picture");
                 user.mailBox = new MailBox(this.getAllMessagesByRecieverId(user.username));
             }

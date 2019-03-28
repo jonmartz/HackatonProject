@@ -14,7 +14,24 @@ public abstract class Message {
     private int myId;
     private boolean hasbeenRead;
     private String text;
+    private String course;
+    private String year;
+    private String semester;
 
+    public String getCourse() {
+        return course;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public String getSemester() {
+        return semester;
+    }
+    public String getText(){
+        return text;
+    }
 
     /**
      * This is the constructor of the class
@@ -143,5 +160,7 @@ public abstract class Message {
     {
         this.text = text;
     }
+
+
 
 }
