@@ -1,11 +1,9 @@
 package View;
 
 import Controller.VacationSearchController;
-import Controller.AbstractController;
 import Model.Vacation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -26,15 +24,14 @@ public class VacationSearchView extends AbstractView {
     public TextField kidCountTextBox;
     public TextField babyCountTextBox;
     public TableView searchResultsTableView;
-    public TableColumn countryColumn;
-    public TableColumn fromColumn;
-    public TableColumn toColumn;
+    public TableColumn userColumn;
     public TableColumn priceColumn;
     public TableColumn buttonColumn;
     public Text commentsText;
     public int ticketCount;
-    public ChoiceBox destinationCountryChoiceBox;
-    public ChoiceBox fromCountryChoiceBox;
+    public ChoiceBox YearChoiceBox;
+    public ChoiceBox SemesterChoiceBox;
+    public ChoiceBox CourseIDChoiceBox;
 
     /**
      * This function will initialize an instance of this class
@@ -47,10 +44,7 @@ public class VacationSearchView extends AbstractView {
         commentsText.setText("");
 
         // Set columns of search results table
-        countryColumn.setCellValueFactory(new PropertyValueFactory<VacationEntry, String>("country"));
-        fromColumn.setCellValueFactory(new PropertyValueFactory<VacationEntry, String>("from"));
-        toColumn.setCellValueFactory(new PropertyValueFactory<VacationEntry, String>("to"));
-        priceColumn.setCellValueFactory(new PropertyValueFactory<VacationEntry, String>("price"));
+        userColumn.setCellValueFactory(new PropertyValueFactory<VacationEntry, String>("country"));
         buttonColumn.setCellValueFactory(new PropertyValueFactory<>("null")); // just for setting up buttons
         buttonColumn.setCellFactory(getButtonCallback());
 
@@ -67,7 +61,7 @@ public class VacationSearchView extends AbstractView {
             public TableCell call(final TableColumn<VacationEntry, String> param) {
                 final TableCell<VacationEntry, String> cell = new TableCell<VacationEntry, String>() {
 
-                    final Button button = new Button("Check this vacation");
+                    final Button button = new Button("View this partner");
 
                     @Override
                     public void updateItem(String item, boolean empty) {

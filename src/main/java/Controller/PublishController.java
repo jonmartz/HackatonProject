@@ -1,7 +1,6 @@
 package Controller;
 
 import View.PublishVacationView;
-import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 
 import java.io.FileInputStream;
@@ -26,8 +25,8 @@ public class PublishController extends AbstractController {
         if (kids.isEmpty()) kids = "0";
         if (babies.isEmpty()) babies = "0";
 
-        database.addVacation(view.getDestinetionContryTXT(), adults, kids, babies,
-                view.getFlightCompanyTXT(), view.getBaggageTXT(), view.getKindOfVacationTXT(),
+        database.addVacation(view.getSemesterTextField(), adults, kids, babies,
+                view.getYearTextField(), view.getBaggageTXT(), view.getCourseTextBox(),
                 view.getKindOfSleepingPlaceTXT(), view.getTheRateOfTheSleepingPlaceTXT(),
                 view.getTodateStr(), view.getFromdateStr(), view.getSleepingCostIncluded(),
                 view.getReturnFlight(), view.priceTextField.getText(),

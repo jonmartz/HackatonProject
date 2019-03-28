@@ -28,12 +28,12 @@
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             </rowConstraints>
                             <children>
-                                <Button fx:id="vacationSearch" mnemonicParsing="false" onAction="#vacationSearch" prefHeight="37.0" prefWidth="452.0" style="-fx-background-color: #28733e; -fx-border-color: BLACK;" text="Search Vacation" textFill="WHITE">
+                                <Button fx:id="vacationSearch" mnemonicParsing="false" onAction="#vacationSearch" prefHeight="37.0" prefWidth="452.0" style="-fx-background-color: #28733e; -fx-border-color: BLACK;" text="Search Partners" textFill="WHITE">
                                     <font>
                                         <Font name="System Bold" size="14.0" />
                                     </font>
                                 </Button>
-                                <Button fx:id="vacationAdvertising" mnemonicParsing="false" onAction="#vacationPublish" prefHeight="37.0" prefWidth="452.0" style="-fx-background-color: #28733e; -fx-border-color: BLACK;" text="Publish Vacation" textFill="WHITE" GridPane.columnIndex="1">
+                                <Button fx:id="vacationAdvertising" mnemonicParsing="false" onAction="#vacationPublish" prefHeight="37.0" prefWidth="452.0" style="-fx-background-color: #28733e; -fx-border-color: BLACK;" text="Add Courses" textFill="WHITE" GridPane.columnIndex="1">
                                     <font>
                                         <Font name="System Bold" size="14.0" />
                                     </font>

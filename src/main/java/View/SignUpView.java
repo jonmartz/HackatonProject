@@ -36,7 +36,8 @@ public class SignUpView extends AbstractView {
     public Text comments; // Problems in user input are shown here
     public Button signUp;//The "SignUp" button
     public ImageView pictureImageView; // to show the profile picture
-
+    public TextField phone;
+    public TextField description;
 
     public String pictureFilePath; // path of picture file
 

@@ -31,6 +31,8 @@ public class PersonalAreaView extends AbstractView {
     public String pictureFilePath;
     public Button mailBox;
     public Button myVacationsButton;
+    public TextField phone;
+    public TextField description;
 
 
     /**

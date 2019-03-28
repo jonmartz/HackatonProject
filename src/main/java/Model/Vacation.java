@@ -40,16 +40,16 @@ public class Vacation {
     public Vacation(ResultSet resultSet){
         try {
             this.ID = resultSet.getString("rowid");
-            this.destinationCountryTXT = resultSet.getString("destinetionContryTXT");
+            this.destinationCountryTXT = resultSet.getString("semesterTextField");
             this.destinationCityTXT = resultSet.getString("destinetionCityTXT");
             this.fromCountryTXT = resultSet.getString("fromCountryTXT");
             this.fromCityTXT = resultSet.getString("fromCityTXT");
             this.AdultTickets = resultSet.getString("AdultTicketsTXT");
             this.KidTickets = resultSet.getString("KidTicketsTXT");
             this.BabyTickets = resultSet.getString("BabyTicketsTXT");
-            this.flightCompanyTXT = resultSet.getString("flightCompanyTXT");
+            this.flightCompanyTXT = resultSet.getString("yearTextField");
             this.baggageTXT = resultSet.getString("baggageTXT");
-            this.kindOfVacationTXT = resultSet.getString("kindOfVacationTXT");
+            this.kindOfVacationTXT = resultSet.getString("courseTextBox");
             this.kindOfSleepingPlaceTXT = resultSet.getString("kindOfSleepingPlaceTXT");
             this.theRateOfTheSleepingPlaceTXT = resultSet.getString("theRateOfTheSleepingPlaceTXT");
             this.toDateTXT = resultSet.getString("toDateTXT");

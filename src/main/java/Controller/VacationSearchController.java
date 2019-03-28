@@ -67,12 +67,9 @@ public class VacationSearchController extends AbstractController {
     public void CheckEnableSearchButton() {
         VacationSearchView view = (VacationSearchView) this.view;
         view.setComments("");
-        if (view.destinationCountryChoiceBox.getValue() == null
-                || view.fromCountryChoiceBox.getValue() == null
-                || view.destinationCountryChoiceBox.getValue().toString().isEmpty()
-                || view.fromDateDatePicker.toString().isEmpty()
-                || view.toDateDatePicker.toString().isEmpty()
-                || view.ticketCount == 0) {
+        if (view.YearChoiceBox.getValue() == null
+                || view.SemesterChoiceBox.getValue() == null
+                || view.CourseIDChoiceBox.getValue() == null) {
             view.searchButton.setDisable(true);
         } else {
             view.searchButton.setDisable(false);
@@ -86,18 +83,9 @@ public class VacationSearchController extends AbstractController {
     public ArrayList<Vacation> GetRelevantVacations() {
 
         VacationSearchView view = (VacationSearchView)this.view;
-        String relevantFromCountry = view.fromCountryChoiceBox.getValue().toString();
-        String relevantDestCountry = view.destinationCountryChoiceBox.getValue().toString();
-        LocalDate relevantFromDate = view.fromDateDatePicker.getValue();
-        LocalDate relevantToDate = view.toDateDatePicker.getValue();
-
-        // get ticket amount that is needed
-        int adultsNeeded = 0;
-        int kidsNeeded = 0;
-        int babiesNeeded = 0;
-        try { adultsNeeded = Integer.parseInt(view.adultCountTextBox.getText()); } catch (Exception ignored) {}
-        try { kidsNeeded = Integer.parseInt(view.kidCountTextBox.getText()); } catch (Exception ignored) {}
-        try { babiesNeeded = Integer.parseInt(view.babyCountTextBox.getText()); } catch (Exception ignored) {}
+        String relevantCourse = view.CourseIDChoiceBox.getValue().toString();
+        String relevantsemester = view.SemesterChoiceBox.getValue().toString();
+        String relevantYear = view.YearChoiceBox.getValue().toString();
 
         ArrayList<Vacation> vacations = GetAllVacations();
         ArrayList<Vacation> relevantVacations = new ArrayList<>();
@@ -120,7 +108,7 @@ public class VacationSearchController extends AbstractController {
 
             // Check that countries and dates are adequate
             if (destCountry.equals(relevantDestCountry.toLowerCase())
-                    && fromCountry.equals(relevantFromCountry.toLowerCase())
+                    && fromCountry.equals(relevantYear.toLowerCase())
                     && !(toDate.isBefore(relevantFromDate) || fromDate.isAfter(relevantToDate))) {
                 foundDate = true;
                 foundAtLeastOneDate = true;
@@ -151,6 +139,6 @@ public class VacationSearchController extends AbstractController {
     protected void FillAllData() {
         SortedSet<String> countries = new TreeSet<>(GetAllCountries());
         ((VacationSearchView)view).destinationCountryChoiceBox.getItems().addAll(countries);
-        ((VacationSearchView)view).fromCountryChoiceBox.getItems().addAll(countries);
+        ((VacationSearchView)view).CourseIDChoiceBox.getItems().addAll(countries);
     }
 }

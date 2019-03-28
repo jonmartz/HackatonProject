@@ -30,12 +30,12 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Button fx:id="vacationSearch" mnemonicParsing="false" onAction="#vacationSearch" prefHeight="37.0" prefWidth="452.0" style="-fx-background-color: #28733e; -fx-border-color: BLACK;" text="Search Vacation" textFill="WHITE">
+                        <Button fx:id="vacationSearch" mnemonicParsing="false" onAction="#vacationSearch" prefHeight="37.0" prefWidth="452.0" style="-fx-background-color: #28733e; -fx-border-color: BLACK;" text="Search Partners" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Button>
-                        <Button fx:id="vacationAdvertising" mnemonicParsing="false" onAction="#vacationPublish" prefHeight="37.0" prefWidth="452.0" style="-fx-background-color: #28733e; -fx-border-color: BLACK;" text="Publish Vacation" textFill="WHITE" GridPane.columnIndex="1">
+                        <Button fx:id="vacationAdvertising" mnemonicParsing="false" onAction="#vacationPublish" prefHeight="37.0" prefWidth="452.0" style="-fx-background-color: #28733e; -fx-border-color: BLACK;" text="Add Partners" textFill="WHITE" GridPane.columnIndex="1">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -66,9 +66,9 @@
                   <TextField fx:id="username" layoutX="10.0" layoutY="26.0" onKeyReleased="#KeyReleased" prefHeight="5.0" prefWidth="310.0" promptText="Enter username" GridPane.rowIndex="2" />
                   <TextField fx:id="password" onKeyReleased="#passwordTyped" prefHeight="31.0" prefWidth="230.0" promptText="Enter password &gt;= 8" GridPane.rowIndex="3" />
                   <TextField fx:id="firstName" onKeyReleased="#KeyReleased" promptText="First name" GridPane.rowIndex="4" />
-                  <TextField fx:id="lastName" layoutX="14.0" layoutY="110.0" onKeyReleased="#KeyReleased" promptText="Last name" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField fx:id="lastName" layoutX="14.0" layoutY="110.0" onKeyReleased="#KeyReleased" promptText="Last name" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                   <DatePicker fx:id="birthdatePicker" onAction="#birthdatePicked" promptText="Pick birthdate" GridPane.rowIndex="5" />
-                  <TextField fx:id="city" layoutX="168.0" layoutY="81.0" onKeyReleased="#KeyReleased" promptText="City" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextField fx:id="city" layoutX="168.0" layoutY="81.0" onKeyReleased="#KeyReleased" promptText="City" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                   <Button fx:id="saveChanges" alignment="CENTER" disable="true" mnemonicParsing="false" onAction="#saveChanges" prefHeight="39.0" prefWidth="144.0" style="-fx-background-color: #28733e;" text="Save changes" textFill="WHITE" GridPane.rowIndex="7" />
                   <Text fx:id="comments" disable="true" fill="#da0e0e" GridPane.columnSpan="2" GridPane.rowIndex="6" />
                   <Button alignment="CENTER" mnemonicParsing="false" onAction="#deleteUser" prefHeight="30.0" prefWidth="103.0" style="-fx-background-color: #d7261d;" text="Delete account" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="7" />
@@ -78,12 +78,14 @@
                      </font>
                   </Text>
                   <Button fx:id="mailBox" alignment="CENTER" mnemonicParsing="false" onAction="#mailBox" prefHeight="39.0" prefWidth="310.0" style="-fx-background-color: #6495ED;" text="Mail box" textFill="WHITE" GridPane.columnIndex="0" GridPane.rowIndex="8" />
-                  <TextField editable="false" prefHeight="100.0" prefWidth="156.0" promptText="Select profile picture" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="3" />
-                  <ImageView fx:id="pictureImageView" fitHeight="103.0" fitWidth="155.0" onMouseClicked="#AddPicture" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="3" />
-                  <Button fx:id="myVacationsButton" alignment="CENTER" mnemonicParsing="false" onAction="#myVacations" prefHeight="39.0" prefWidth="310.0" style="-fx-background-color: #6495ED;" text="My vacations" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                  <TextField editable="false" prefHeight="100.0" prefWidth="156.0" promptText="Select profile picture" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.rowSpan="3" />
+                  <ImageView fx:id="pictureImageView" fitHeight="103.0" fitWidth="155.0" onMouseClicked="#AddPicture" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.rowSpan="3" />
+                  <TextField fx:id="phone" onKeyReleased="#KeyReleased" promptText="Phone number" GridPane.rowIndex="6" />
+                  <TextField fx:id="description" onKeyReleased="#KeyReleased" prefHeight="182.0" prefWidth="156.0" promptText="Description" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.rowSpan="5" />
                </children>
                <columnConstraints>
                   <ColumnConstraints maxWidth="195.0" minWidth="70.0" prefWidth="144.0" />
+                  <ColumnConstraints maxWidth="230.0" minWidth="10.0" prefWidth="156.0" />
                   <ColumnConstraints maxWidth="230.0" minWidth="10.0" prefWidth="156.0" />
                </columnConstraints>
                <rowConstraints>
